@@ -64,10 +64,14 @@ const NAV: NavItem[] = [
           to: "/experiencias/eventos",
           description: "Ambientes que reagem à presença do público.",
         },
+        {
+          label: "Parceiros",
+          to: "/parceiros",
+          description: "Braço tecnológico de agências, produtoras e cenografia.",
+        },
       ],
     },
   },
-  { label: "Parceiros", to: "/parceiros" },
   { label: "Tecnologia", to: "/tecnologia" },
 ];
 

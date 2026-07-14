@@ -53,6 +53,14 @@ const TERRITORIES = [
     to: "/experiencias/eventos",
     alt: "Pessoas em instalação de luz durante evento imersivo",
   },
+  {
+    idx: "04",
+    title: "Parceiros",
+    desc: "Braço tecnológico para agências, produtoras, cenógrafos e equipes criativas.",
+    img: labAsset.url,
+    to: "/parceiros",
+    alt: "Equipe multidisciplinar em laboratório desenvolvendo experiência tecnológica",
+  },
 ];
 
 const METHOD = [
