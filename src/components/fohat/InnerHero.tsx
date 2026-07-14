@@ -31,7 +31,13 @@ export function InnerHero({
   actions,
 }: InnerHeroProps) {
   return (
-    <section className="fohat-inner-hero relative pt-36 pb-20 lg:pt-44 lg:pb-28">
+    <section
+      className="relative overflow-hidden pt-36 pb-20 text-white lg:pt-44 lg:pb-28"
+      style={{
+        background:
+          "radial-gradient(ellipse 90% 60% at 15% 0%, oklch(0.46 0.055 253 / 0.25), transparent 60%), radial-gradient(ellipse 70% 60% at 100% 100%, oklch(0.85 0.055 245 / 0.18), transparent 60%), linear-gradient(180deg, oklch(0.22 0.023 250) 0%, oklch(0.26 0.028 250) 100%)",
+      }}
+    >
       <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg-dark" />
       <div aria-hidden className="fohat-scanline" style={{ top: "10%" }} />
       <div aria-hidden className="fohat-scanline" style={{ top: "40%", animationDelay: "5s" }} />
