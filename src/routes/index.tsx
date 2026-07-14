@@ -188,12 +188,13 @@ function Home() {
         {/* MANIFESTO */}
         <section className="relative overflow-hidden bg-navy py-28 text-white lg:py-32">
           <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-70" />
-          <img
-            src={markAsset.url}
-            alt=""
+          <div
             aria-hidden
-            className="pointer-events-none absolute -bottom-32 -right-24 w-[520px] opacity-[0.065]"
-            style={{ filter: "grayscale(1) brightness(4)" }}
+            className="pointer-events-none absolute -bottom-32 -right-24 h-[520px] w-[520px] rounded-full opacity-[0.10]"
+            style={{
+              background:
+                "radial-gradient(closest-side, var(--color-cyan), transparent 70%)",
+            }}
           />
           <div className="fohat-shell relative grid items-start gap-12 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
             <Reveal>
@@ -294,7 +295,7 @@ function Home() {
               </p>
             </Reveal>
 
-            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
               {TERRITORIES.map((t, i) => (
                 <Reveal
                   key={t.title}
