@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TecnologiaRouteImport } from './routes/tecnologia'
 import { Route as ParceirosRouteImport } from './routes/parceiros'
+import { Route as ExperienciasRouteImport } from './routes/experiencias'
 import { Route as EngenhariaDePresencaRouteImport } from './routes/engenharia-de-presenca'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExperienciasIndexRouteImport } from './routes/experiencias.index'
@@ -28,6 +29,11 @@ const ParceirosRoute = ParceirosRouteImport.update({
   path: '/parceiros',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExperienciasRoute = ExperienciasRouteImport.update({
+  id: '/experiencias',
+  path: '/experiencias',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EngenhariaDePresencaRoute = EngenhariaDePresencaRouteImport.update({
   id: '/engenharia-de-presenca',
   path: '/engenharia-de-presenca',
@@ -39,29 +45,30 @@ const IndexRoute = IndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExperienciasIndexRoute = ExperienciasIndexRouteImport.update({
-  id: '/experiencias/',
-  path: '/experiencias/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => ExperienciasRoute,
 } as any)
 const ExperienciasMarcasRoute = ExperienciasMarcasRouteImport.update({
-  id: '/experiencias/marcas',
-  path: '/experiencias/marcas',
-  getParentRoute: () => rootRouteImport,
+  id: '/marcas',
+  path: '/marcas',
+  getParentRoute: () => ExperienciasRoute,
 } as any)
 const ExperienciasEventosRoute = ExperienciasEventosRouteImport.update({
-  id: '/experiencias/eventos',
-  path: '/experiencias/eventos',
-  getParentRoute: () => rootRouteImport,
+  id: '/eventos',
+  path: '/eventos',
+  getParentRoute: () => ExperienciasRoute,
 } as any)
 const ExperienciasCulturaRoute = ExperienciasCulturaRouteImport.update({
-  id: '/experiencias/cultura',
-  path: '/experiencias/cultura',
-  getParentRoute: () => rootRouteImport,
+  id: '/cultura',
+  path: '/cultura',
+  getParentRoute: () => ExperienciasRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/engenharia-de-presenca': typeof EngenhariaDePresencaRoute
+  '/experiencias': typeof ExperienciasRouteWithChildren
   '/parceiros': typeof ParceirosRoute
   '/tecnologia': typeof TecnologiaRoute
   '/experiencias/cultura': typeof ExperienciasCulturaRoute
@@ -83,6 +90,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/engenharia-de-presenca': typeof EngenhariaDePresencaRoute
+  '/experiencias': typeof ExperienciasRouteWithChildren
   '/parceiros': typeof ParceirosRoute
   '/tecnologia': typeof TecnologiaRoute
   '/experiencias/cultura': typeof ExperienciasCulturaRoute
@@ -95,6 +103,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/engenharia-de-presenca'
+    | '/experiencias'
     | '/parceiros'
     | '/tecnologia'
     | '/experiencias/cultura'
@@ -115,6 +124,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/engenharia-de-presenca'
+    | '/experiencias'
     | '/parceiros'
     | '/tecnologia'
     | '/experiencias/cultura'
@@ -126,12 +136,9 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EngenhariaDePresencaRoute: typeof EngenhariaDePresencaRoute
+  ExperienciasRoute: typeof ExperienciasRouteWithChildren
   ParceirosRoute: typeof ParceirosRoute
   TecnologiaRoute: typeof TecnologiaRoute
-  ExperienciasCulturaRoute: typeof ExperienciasCulturaRoute
-  ExperienciasEventosRoute: typeof ExperienciasEventosRoute
-  ExperienciasMarcasRoute: typeof ExperienciasMarcasRoute
-  ExperienciasIndexRoute: typeof ExperienciasIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -150,6 +157,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ParceirosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/experiencias': {
+      id: '/experiencias'
+      path: '/experiencias'
+      fullPath: '/experiencias'
+      preLoaderRoute: typeof ExperienciasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/engenharia-de-presenca': {
       id: '/engenharia-de-presenca'
       path: '/engenharia-de-presenca'
@@ -166,44 +180,59 @@ declare module '@tanstack/react-router' {
     }
     '/experiencias/': {
       id: '/experiencias/'
-      path: '/experiencias'
+      path: '/'
       fullPath: '/experiencias/'
       preLoaderRoute: typeof ExperienciasIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ExperienciasRoute
     }
     '/experiencias/marcas': {
       id: '/experiencias/marcas'
-      path: '/experiencias/marcas'
+      path: '/marcas'
       fullPath: '/experiencias/marcas'
       preLoaderRoute: typeof ExperienciasMarcasRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ExperienciasRoute
     }
     '/experiencias/eventos': {
       id: '/experiencias/eventos'
-      path: '/experiencias/eventos'
+      path: '/eventos'
       fullPath: '/experiencias/eventos'
       preLoaderRoute: typeof ExperienciasEventosRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ExperienciasRoute
     }
     '/experiencias/cultura': {
       id: '/experiencias/cultura'
-      path: '/experiencias/cultura'
+      path: '/cultura'
       fullPath: '/experiencias/cultura'
       preLoaderRoute: typeof ExperienciasCulturaRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ExperienciasRoute
     }
   }
 }
 
-const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  EngenhariaDePresencaRoute: EngenhariaDePresencaRoute,
-  ParceirosRoute: ParceirosRoute,
-  TecnologiaRoute: TecnologiaRoute,
+interface ExperienciasRouteChildren {
+  ExperienciasCulturaRoute: typeof ExperienciasCulturaRoute
+  ExperienciasEventosRoute: typeof ExperienciasEventosRoute
+  ExperienciasMarcasRoute: typeof ExperienciasMarcasRoute
+  ExperienciasIndexRoute: typeof ExperienciasIndexRoute
+}
+
+const ExperienciasRouteChildren: ExperienciasRouteChildren = {
   ExperienciasCulturaRoute: ExperienciasCulturaRoute,
   ExperienciasEventosRoute: ExperienciasEventosRoute,
   ExperienciasMarcasRoute: ExperienciasMarcasRoute,
   ExperienciasIndexRoute: ExperienciasIndexRoute,
+}
+
+const ExperienciasRouteWithChildren = ExperienciasRoute._addFileChildren(
+  ExperienciasRouteChildren,
+)
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  EngenhariaDePresencaRoute: EngenhariaDePresencaRoute,
+  ExperienciasRoute: ExperienciasRouteWithChildren,
+  ParceirosRoute: ParceirosRoute,
+  TecnologiaRoute: TecnologiaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
