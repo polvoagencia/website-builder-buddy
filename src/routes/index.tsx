@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 
 import heroAsset from "@/assets/hero.jpg.asset.json";
@@ -13,6 +13,9 @@ import { Header } from "@/components/fohat/Header";
 import { Footer } from "@/components/fohat/Footer";
 import { ContactDialog } from "@/components/fohat/ContactDialog";
 import { Reveal } from "@/components/fohat/Reveal";
+import { Parallax } from "@/components/fohat/Parallax";
+import { ScrollProgress } from "@/components/fohat/ScrollProgress";
+import { Marquee } from "@/components/fohat/Subpage";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -31,6 +34,7 @@ const TERRITORIES = [
     title: "Marcas",
     desc: "Experiências que transformam comunicação em participação.",
     img: marcasAsset.url,
+    to: "/experiencias/marcas",
     alt: "Público interagindo com painéis digitais em uma ativação de marca",
   },
   {
@@ -38,6 +42,7 @@ const TERRITORIES = [
     title: "Cultura",
     desc: "Tecnologia que aproxima pessoas de histórias, identidades e patrimônios.",
     img: culturaAsset.url,
+    to: "/experiencias/cultura",
     alt: "Visitante interagindo com uma narrativa cultural em tela sensível ao toque",
   },
   {
@@ -45,6 +50,7 @@ const TERRITORIES = [
     title: "Eventos e espaços",
     desc: "Ambientes que deixam de ser apenas ocupados e passam a ser vividos.",
     img: eventosAsset.url,
+    to: "/experiencias/eventos",
     alt: "Pessoas em instalação de luz durante evento imersivo",
   },
 ];
@@ -72,9 +78,21 @@ const PRINCIPLES = [
   { n: "05", title: "Memória como resultado", desc: "O projeto termina quando a interação acaba. Seu valor começa quando a experiência permanece." },
 ];
 
+const MARQUEE_WORDS = [
+  "Inteligência Artificial",
+  "Visão computacional",
+  "Projeção mapeada",
+  "IoT sensorial",
+  "Interfaces multitoque",
+  "Realidade estendida",
+  "Áudio espacial",
+  "Fabricação em tempo real",
+];
+
 function Home() {
   return (
     <div className="min-h-screen bg-mist text-navy">
+      <ScrollProgress />
       <Header />
 
       <main>
@@ -122,12 +140,14 @@ function Home() {
                 style={{ borderRadius: "40% 60% 50% 45%" }}
               />
               <div className="fohat-image-frame absolute inset-x-0 bottom-5 top-0 lg:left-10">
-                <img
-                  src={heroAsset.url}
-                  alt="Pessoas vivendo uma experiência imersiva em ambiente de projeção"
-                  className="h-full w-full object-cover"
-                  style={{ filter: "saturate(0.78) contrast(1.06)" }}
-                />
+                <Parallax strength={30} className="h-full w-full">
+                  <img
+                    src={heroAsset.url}
+                    alt="Pessoas vivendo uma experiência imersiva em ambiente de projeção"
+                    className="h-full w-full object-cover"
+                    style={{ filter: "saturate(0.78) contrast(1.06)" }}
+                  />
+                </Parallax>
                 <div
                   aria-hidden
                   className="absolute inset-0"
@@ -149,13 +169,16 @@ function Home() {
             </Reveal>
           </div>
 
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-[11px] uppercase tracking-[0.18em] text-steel">
+          <div className="fohat-mono absolute bottom-6 left-1/2 -translate-x-1/2 text-[11px] uppercase tracking-[0.24em] text-steel">
             Explore a experiência ↓
           </div>
         </section>
 
+        <Marquee items={MARQUEE_WORDS} />
+
         {/* MANIFESTO */}
         <section className="relative overflow-hidden bg-navy py-28 text-white lg:py-32">
+          <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-70" />
           <img
             src={markAsset.url}
             alt=""
@@ -182,15 +205,17 @@ function Home() {
           </div>
         </section>
 
-        {/* PRESENÇA */}
+        {/* PRESENÇA — teaser com CTA "saber mais" para a subpágina dedicada */}
         <section id="presenca" className="bg-white py-24 lg:py-32">
           <div className="fohat-shell grid items-center gap-16 lg:grid-cols-2 lg:gap-[70px]">
             <Reveal className="relative h-[440px] overflow-hidden rounded-[var(--radius)] shadow-[var(--shadow-elegant)] lg:h-[600px]">
-              <img
-                src={portalAsset.url}
-                alt="Visitantes atravessando uma instalação tecnológica imersiva"
-                className="h-full w-full object-cover"
-              />
+              <Parallax strength={45}>
+                <img
+                  src={portalAsset.url}
+                  alt="Visitantes atravessando uma instalação tecnológica imersiva"
+                  className="h-full w-full object-cover"
+                />
+              </Parallax>
               <div
                 aria-hidden
                 className="absolute inset-0"
@@ -218,12 +243,21 @@ function Home() {
                     key={f.label}
                     className="rounded-2xl border border-line bg-mist p-5 font-semibold"
                   >
-                    <span className="mb-1.5 block text-xs uppercase tracking-[0.12em] text-blue">
+                    <span className="fohat-mono mb-1.5 block text-[10px] uppercase tracking-[0.18em] text-blue">
                       {f.label}
                     </span>
                     {f.value}
                   </div>
                 ))}
+              </div>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  to="/engenharia-de-presenca"
+                  className="group inline-flex h-14 items-center gap-3 rounded-full bg-navy px-7 text-sm font-bold text-primary-foreground shadow-[var(--shadow-cta)] transition-all hover:-translate-y-0.5 hover:bg-blue"
+                >
+                  Saber mais
+                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </Link>
               </div>
             </Reveal>
           </div>
@@ -232,13 +266,14 @@ function Home() {
         {/* TERRITÓRIOS */}
         <section
           id="experiencias"
-          className="py-24 lg:py-32"
+          className="relative overflow-hidden py-24 lg:py-32"
           style={{
             background:
               "linear-gradient(180deg, oklch(0.97 0.008 250), oklch(0.93 0.015 250))",
           }}
         >
-          <div className="fohat-shell">
+          <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg opacity-70" />
+          <div className="fohat-shell relative">
             <Reveal className="mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
               <div>
                 <span className="fohat-eyebrow">Territórios de atuação</span>
@@ -258,12 +293,13 @@ function Home() {
                   delay={i * 100}
                   className="group relative min-h-[430px] overflow-hidden rounded-[28px] bg-navy shadow-[var(--shadow-card)] transition-all duration-500 hover:-translate-y-2 lg:min-h-[520px]"
                 >
+                  <Link to={t.to} className="absolute inset-0 z-20" aria-label={t.title} />
                   <img
                     src={t.img}
                     alt={t.alt}
                     className="h-full w-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-[1.035]"
                   />
-                  <span className="absolute left-6 top-6 z-10 rounded-full border border-white/45 px-3 py-1.5 text-xs text-white">
+                  <span className="fohat-mono absolute left-6 top-6 z-10 rounded-full border border-white/45 px-3 py-1.5 text-[10px] uppercase tracking-[0.18em] text-white">
                     {t.idx}
                   </span>
                   <div
@@ -284,6 +320,21 @@ function Home() {
                   </div>
                 </Reveal>
               ))}
+            </div>
+
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Link
+                to="/experiencias"
+                className="inline-flex h-12 items-center gap-2 rounded-full border border-navy/15 bg-white px-6 text-sm font-bold text-navy transition-all hover:border-blue hover:text-blue"
+              >
+                Explore todos os caminhos <ArrowUpRight className="h-4 w-4" />
+              </Link>
+              <Link
+                to="/tecnologia"
+                className="inline-flex h-12 items-center gap-2 rounded-full border border-navy/15 bg-white px-6 text-sm font-bold text-navy transition-all hover:border-blue hover:text-blue"
+              >
+                Nossa capacidade tecnológica <ArrowUpRight className="h-4 w-4" />
+              </Link>
             </div>
           </div>
         </section>
@@ -307,7 +358,7 @@ function Home() {
                 <Reveal
                   key={s.letter}
                   delay={i * 80}
-                  className="relative min-h-[280px] overflow-hidden rounded-3xl border border-blue/12 p-6"
+                  className="relative min-h-[280px] overflow-hidden rounded-3xl border border-blue/12 p-6 transition-all hover:-translate-y-1 hover:border-blue/40"
                   style={{
                     background:
                       "linear-gradient(180deg, oklch(0.98 0.006 250), oklch(0.93 0.015 250))",
@@ -329,14 +380,17 @@ function Home() {
         </section>
 
         {/* PROJETO / BASTIDORES */}
-        <section id="projetos" className="bg-navy py-24 text-white lg:py-32">
-          <div className="fohat-shell grid items-center gap-16 lg:grid-cols-[1.05fr_.95fr] lg:gap-[70px]">
+        <section id="projetos" className="relative overflow-hidden bg-navy py-24 text-white lg:py-32">
+          <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-60" />
+          <div className="fohat-shell relative grid items-center gap-16 lg:grid-cols-[1.05fr_.95fr] lg:gap-[70px]">
             <Reveal className="h-[440px] overflow-hidden rounded-[var(--radius)] shadow-[0_32px_80px_oklch(0_0_0_/_0.24)] lg:h-[620px]">
-              <img
-                src={labAsset.url}
-                alt="Equipe multidisciplinar desenvolvendo uma experiência tecnológica"
-                className="h-full w-full object-cover"
-              />
+              <Parallax strength={50}>
+                <img
+                  src={labAsset.url}
+                  alt="Equipe multidisciplinar desenvolvendo uma experiência tecnológica"
+                  className="h-full w-full object-cover"
+                />
+              </Parallax>
             </Reveal>
             <Reveal delay={120}>
               <span className="fohat-eyebrow" style={{ color: "var(--color-cyan)" }}>
@@ -352,7 +406,7 @@ function Home() {
               <div className="my-8 grid gap-3 sm:grid-cols-2">
                 {PROJECT_META.map((m) => (
                   <div key={m.label} className="border-t border-white/20 pt-3.5">
-                    <span className="mb-1.5 block text-[11px] uppercase tracking-[0.12em] text-[oklch(0.72_0.03_250)]">
+                    <span className="fohat-mono mb-1.5 block text-[10px] uppercase tracking-[0.18em] text-[oklch(0.72_0.03_250)]">
                       {m.label}
                     </span>
                     <span className="font-semibold">{m.value}</span>
