@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import marcasAsset from "@/assets/marcas.jpg.asset.json";
-import culturaAsset from "@/assets/cultura.jpg.asset.json";
+import heroAsset from "@/assets/hero.jpg.asset.json";
 
 import { SubpageShell } from "@/components/fohat/SubpageShell";
 import { InnerHero, InnerCTA } from "@/components/fohat/InnerHero";
@@ -86,7 +86,7 @@ function Marcas() {
           "Memória de marca",
         ]}
         image={{
-          src: culturaAsset.url,
+          src: heroAsset.url,
           alt: "Interação em evento de marca premium",
           caption:
             "A marca deixa de falar sozinha e começa a construir a experiência com as pessoas.",
