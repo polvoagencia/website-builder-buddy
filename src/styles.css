@@ -232,12 +232,113 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  .fohat-reveal {
+/* Tech mono for eyebrows / breadcrumbs / code-like labels */
+@utility fohat-mono {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-feature-settings: "ss01", "cv11";
+  letter-spacing: 0.06em;
+}
+
+/* Subtle blueprint grid — sits behind sections for tech feel */
+@utility fohat-grid-bg {
+  background-image:
+    linear-gradient(oklch(0.46 0.055 253 / 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(0.46 0.055 253 / 0.08) 1px, transparent 1px);
+  background-size: 64px 64px;
+  background-position: -1px -1px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 78%);
+}
+
+@utility fohat-grid-bg-dark {
+  background-image:
+    linear-gradient(oklch(1 0 0 / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(1 0 0 / 0.05) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+}
+
+/* Inner-hero for subpages — visually distinct from home hero */
+@utility fohat-inner-hero {
+  background:
+    radial-gradient(ellipse 90% 60% at 15% 0%, oklch(0.46 0.055 253 / 0.25), transparent 60%),
+    radial-gradient(ellipse 70% 60% at 100% 100%, oklch(0.85 0.055 245 / 0.18), transparent 60%),
+    linear-gradient(180deg, oklch(0.22 0.023 250) 0%, oklch(0.26 0.028 250) 100%);
+  color: oklch(0.98 0 0);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Scan line for tech vibe */
+@keyframes fohat-scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(2400%); }
+}
+
+@utility fohat-scanline {
+  position: absolute;
+  inset-inline: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, oklch(0.85 0.055 245 / 0.4), transparent);
+  animation: fohat-scan 14s linear infinite;
+  pointer-events: none;
+}
+
+/* Marquee band */
+@keyframes fohat-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@utility fohat-marquee {
+  animation: fohat-marquee 38s linear infinite;
+}
+
+/* Blur-in reveal variant (used by parallax layers) */
+@utility fohat-reveal-blur {
+  opacity: 0;
+  filter: blur(14px);
+  transform: translateY(28px);
+  transition: opacity 0.9s ease, filter 0.9s ease, transform 0.9s ease;
+  &.is-visible {
     opacity: 1;
+    filter: blur(0);
     transform: none;
   }
+}
+
+/* Scroll progress bar — fixed at top */
+@utility fohat-progress {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  height: 2px;
+  background: transparent;
+  z-index: 90;
+  pointer-events: none;
+}
+@utility fohat-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-blue), var(--color-cyan));
+  transform-origin: left center;
+  transform: scaleX(var(--fohat-progress, 0));
+  transition: transform 0.05s linear;
+}
+
+/* Small floating chevron for CTA arrows to feel more mechanical */
+@utility fohat-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  background: var(--color-ice);
+  color: var(--color-blue);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fohat-reveal, .fohat-reveal-blur { opacity: 1; transform: none; filter: none; }
+  .fohat-marquee, .fohat-scanline { animation: none; }
 }

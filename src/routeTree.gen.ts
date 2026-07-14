@@ -9,38 +9,168 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TecnologiaRouteImport } from './routes/tecnologia'
+import { Route as ParceirosRouteImport } from './routes/parceiros'
+import { Route as ExperienciasRouteImport } from './routes/experiencias'
+import { Route as EngenhariaDePresencaRouteImport } from './routes/engenharia-de-presenca'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ExperienciasIndexRouteImport } from './routes/experiencias.index'
+import { Route as ExperienciasMarcasRouteImport } from './routes/experiencias.marcas'
+import { Route as ExperienciasEventosRouteImport } from './routes/experiencias.eventos'
+import { Route as ExperienciasCulturaRouteImport } from './routes/experiencias.cultura'
 
+const TecnologiaRoute = TecnologiaRouteImport.update({
+  id: '/tecnologia',
+  path: '/tecnologia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParceirosRoute = ParceirosRouteImport.update({
+  id: '/parceiros',
+  path: '/parceiros',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExperienciasRoute = ExperienciasRouteImport.update({
+  id: '/experiencias',
+  path: '/experiencias',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EngenhariaDePresencaRoute = EngenhariaDePresencaRouteImport.update({
+  id: '/engenharia-de-presenca',
+  path: '/engenharia-de-presenca',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExperienciasIndexRoute = ExperienciasIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ExperienciasRoute,
+} as any)
+const ExperienciasMarcasRoute = ExperienciasMarcasRouteImport.update({
+  id: '/marcas',
+  path: '/marcas',
+  getParentRoute: () => ExperienciasRoute,
+} as any)
+const ExperienciasEventosRoute = ExperienciasEventosRouteImport.update({
+  id: '/eventos',
+  path: '/eventos',
+  getParentRoute: () => ExperienciasRoute,
+} as any)
+const ExperienciasCulturaRoute = ExperienciasCulturaRouteImport.update({
+  id: '/cultura',
+  path: '/cultura',
+  getParentRoute: () => ExperienciasRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/engenharia-de-presenca': typeof EngenhariaDePresencaRoute
+  '/experiencias': typeof ExperienciasRouteWithChildren
+  '/parceiros': typeof ParceirosRoute
+  '/tecnologia': typeof TecnologiaRoute
+  '/experiencias/cultura': typeof ExperienciasCulturaRoute
+  '/experiencias/eventos': typeof ExperienciasEventosRoute
+  '/experiencias/marcas': typeof ExperienciasMarcasRoute
+  '/experiencias/': typeof ExperienciasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/engenharia-de-presenca': typeof EngenhariaDePresencaRoute
+  '/parceiros': typeof ParceirosRoute
+  '/tecnologia': typeof TecnologiaRoute
+  '/experiencias/cultura': typeof ExperienciasCulturaRoute
+  '/experiencias/eventos': typeof ExperienciasEventosRoute
+  '/experiencias/marcas': typeof ExperienciasMarcasRoute
+  '/experiencias': typeof ExperienciasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/engenharia-de-presenca': typeof EngenhariaDePresencaRoute
+  '/experiencias': typeof ExperienciasRouteWithChildren
+  '/parceiros': typeof ParceirosRoute
+  '/tecnologia': typeof TecnologiaRoute
+  '/experiencias/cultura': typeof ExperienciasCulturaRoute
+  '/experiencias/eventos': typeof ExperienciasEventosRoute
+  '/experiencias/marcas': typeof ExperienciasMarcasRoute
+  '/experiencias/': typeof ExperienciasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/engenharia-de-presenca'
+    | '/experiencias'
+    | '/parceiros'
+    | '/tecnologia'
+    | '/experiencias/cultura'
+    | '/experiencias/eventos'
+    | '/experiencias/marcas'
+    | '/experiencias/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/engenharia-de-presenca'
+    | '/parceiros'
+    | '/tecnologia'
+    | '/experiencias/cultura'
+    | '/experiencias/eventos'
+    | '/experiencias/marcas'
+    | '/experiencias'
+  id:
+    | '__root__'
+    | '/'
+    | '/engenharia-de-presenca'
+    | '/experiencias'
+    | '/parceiros'
+    | '/tecnologia'
+    | '/experiencias/cultura'
+    | '/experiencias/eventos'
+    | '/experiencias/marcas'
+    | '/experiencias/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EngenhariaDePresencaRoute: typeof EngenhariaDePresencaRoute
+  ExperienciasRoute: typeof ExperienciasRouteWithChildren
+  ParceirosRoute: typeof ParceirosRoute
+  TecnologiaRoute: typeof TecnologiaRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/tecnologia': {
+      id: '/tecnologia'
+      path: '/tecnologia'
+      fullPath: '/tecnologia'
+      preLoaderRoute: typeof TecnologiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parceiros': {
+      id: '/parceiros'
+      path: '/parceiros'
+      fullPath: '/parceiros'
+      preLoaderRoute: typeof ParceirosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/experiencias': {
+      id: '/experiencias'
+      path: '/experiencias'
+      fullPath: '/experiencias'
+      preLoaderRoute: typeof ExperienciasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/engenharia-de-presenca': {
+      id: '/engenharia-de-presenca'
+      path: '/engenharia-de-presenca'
+      fullPath: '/engenharia-de-presenca'
+      preLoaderRoute: typeof EngenhariaDePresencaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +178,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/experiencias/': {
+      id: '/experiencias/'
+      path: '/'
+      fullPath: '/experiencias/'
+      preLoaderRoute: typeof ExperienciasIndexRouteImport
+      parentRoute: typeof ExperienciasRoute
+    }
+    '/experiencias/marcas': {
+      id: '/experiencias/marcas'
+      path: '/marcas'
+      fullPath: '/experiencias/marcas'
+      preLoaderRoute: typeof ExperienciasMarcasRouteImport
+      parentRoute: typeof ExperienciasRoute
+    }
+    '/experiencias/eventos': {
+      id: '/experiencias/eventos'
+      path: '/eventos'
+      fullPath: '/experiencias/eventos'
+      preLoaderRoute: typeof ExperienciasEventosRouteImport
+      parentRoute: typeof ExperienciasRoute
+    }
+    '/experiencias/cultura': {
+      id: '/experiencias/cultura'
+      path: '/cultura'
+      fullPath: '/experiencias/cultura'
+      preLoaderRoute: typeof ExperienciasCulturaRouteImport
+      parentRoute: typeof ExperienciasRoute
+    }
   }
 }
 
+interface ExperienciasRouteChildren {
+  ExperienciasCulturaRoute: typeof ExperienciasCulturaRoute
+  ExperienciasEventosRoute: typeof ExperienciasEventosRoute
+  ExperienciasMarcasRoute: typeof ExperienciasMarcasRoute
+  ExperienciasIndexRoute: typeof ExperienciasIndexRoute
+}
+
+const ExperienciasRouteChildren: ExperienciasRouteChildren = {
+  ExperienciasCulturaRoute: ExperienciasCulturaRoute,
+  ExperienciasEventosRoute: ExperienciasEventosRoute,
+  ExperienciasMarcasRoute: ExperienciasMarcasRoute,
+  ExperienciasIndexRoute: ExperienciasIndexRoute,
+}
+
+const ExperienciasRouteWithChildren = ExperienciasRoute._addFileChildren(
+  ExperienciasRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EngenhariaDePresencaRoute: EngenhariaDePresencaRoute,
+  ExperienciasRoute: ExperienciasRouteWithChildren,
+  ParceirosRoute: ParceirosRoute,
+  TecnologiaRoute: TecnologiaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
