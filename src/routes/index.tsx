@@ -7,6 +7,7 @@ import labAsset from "@/assets/lab.jpg.asset.json";
 import marcasAsset from "@/assets/marcas.jpg.asset.json";
 import culturaAsset from "@/assets/cultura.jpg.asset.json";
 import eventosAsset from "@/assets/eventos.jpg.asset.json";
+import parceirosImg from "@/assets/parceiros.jpg";
 import markAsset from "@/assets/mark-fohat.png.asset.json";
 
 import { Header } from "@/components/fohat/Header";
@@ -57,7 +58,7 @@ const TERRITORIES = [
     idx: "04",
     title: "Parceiros",
     desc: "Braço tecnológico para agências, produtoras, cenógrafos e equipes criativas.",
-    img: labAsset.url,
+    img: parceirosImg,
     to: "/parceiros",
     alt: "Equipe multidisciplinar em laboratório desenvolvendo experiência tecnológica",
   },
