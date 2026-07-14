@@ -12,7 +12,7 @@ import { InnerHero, InnerCTA } from "@/components/fohat/InnerHero";
 import { Reveal } from "@/components/fohat/Reveal";
 import { SubpageCTA, Marquee } from "@/components/fohat/Subpage";
 
-export const Route = createFileRoute("/experiencias")({
+export const Route = createFileRoute("/experiencias/")({
   head: () => ({
     meta: [
       { title: "Experiências FOHAT — Marcas, Cultura, Eventos e Parceiros" },
