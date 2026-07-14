@@ -5,20 +5,16 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design system definition.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ * FOHAT — Engenharia de Presença
+ * Design system. All tokens live here.
+ * Palette: navy #15202c, blue #43618c, blue-2 #6887ad, steel #7d8fa6,
+ *          ice #dce5ee, mist #f5f8fb, cyan #a9d2f5
  */
 
 @theme inline {
+  --font-sans: "Inter", "Noto Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Inter", "Noto Sans", ui-sans-serif, system-ui, sans-serif;
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -26,6 +22,7 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -46,6 +43,17 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
+
+  /* FOHAT brand tokens */
+  --color-navy: var(--navy);
+  --color-blue: var(--blue);
+  --color-blue-2: var(--blue-2);
+  --color-steel: var(--steel);
+  --color-ice: var(--ice);
+  --color-mist: var(--mist);
+  --color-cyan: var(--cyan);
+  --color-line: var(--line);
+
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -59,77 +67,79 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  --shadow-elegant: 0 30px 80px oklch(0.22 0.03 250 / 0.14);
+  --shadow-card: 0 20px 55px oklch(0.22 0.03 250 / 0.13);
+  --shadow-cta: 0 14px 40px oklch(0.22 0.03 250 / 0.2);
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --radius: 1.5rem;
+
+  /* Brand palette in oklch (mapped from source hex) */
+  --navy: oklch(0.22 0.023 250);        /* #15202c */
+  --blue: oklch(0.46 0.055 253);        /* #43618c */
+  --blue-2: oklch(0.58 0.048 253);      /* #6887ad */
+  --steel: oklch(0.63 0.03 250);        /* #7d8fa6 */
+  --ice: oklch(0.9 0.02 250);           /* #dce5ee */
+  --mist: oklch(0.97 0.008 250);        /* #f5f8fb */
+  --cyan: oklch(0.85 0.055 245);        /* #a9d2f5 */
+  --line: oklch(0.46 0.055 253 / 0.2);
+
+  /* Semantic (FOHAT light theme is default) */
+  --background: var(--mist);
+  --foreground: var(--navy);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
+  --card-foreground: var(--navy);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
+  --popover-foreground: var(--navy);
+  --primary: var(--navy);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: var(--ice);
+  --secondary-foreground: var(--navy);
+  --muted: oklch(0.96 0.008 250);
+  --muted-foreground: oklch(0.42 0.02 250);
+  --accent: var(--cyan);
+  --accent-foreground: var(--navy);
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: var(--line);
+  --input: oklch(0.9 0.02 250);
+  --ring: var(--blue);
+
+  --chart-1: var(--blue);
+  --chart-2: var(--blue-2);
+  --chart-3: var(--cyan);
+  --chart-4: var(--steel);
+  --chart-5: var(--navy);
+  --sidebar: var(--navy);
+  --sidebar-foreground: oklch(0.98 0 0);
+  --sidebar-primary: var(--cyan);
+  --sidebar-primary-foreground: var(--navy);
+  --sidebar-accent: oklch(0.3 0.03 250);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: var(--blue);
 }
 
 .dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --background: var(--navy);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.28 0.023 250);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.28 0.023 250);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.98 0 0);
+  --primary-foreground: var(--navy);
+  --secondary: oklch(0.3 0.023 250);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.3 0.023 250);
+  --muted-foreground: oklch(0.72 0.02 250);
+  --accent: var(--cyan);
+  --accent-foreground: var(--navy);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+  --ring: var(--blue-2);
 }
 
 @layer base {
@@ -137,8 +147,97 @@
     border-color: var(--color-border);
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.045em;
+  }
+}
+
+@utility fohat-shell {
+  width: min(calc(100% - 3rem), 1240px);
+  margin-inline: auto;
+}
+
+@utility fohat-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-blue);
+
+  &::before {
+    content: "";
+    width: 1.625rem;
+    height: 1px;
+    background: currentColor;
+  }
+}
+
+@utility fohat-h1 {
+  font-size: clamp(2.75rem, 6.3vw, 5.75rem);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+  font-weight: 700;
+}
+
+@utility fohat-h2 {
+  font-size: clamp(2.25rem, 4.6vw, 4.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  font-weight: 700;
+}
+
+@utility fohat-lead {
+  font-size: clamp(1.125rem, 1.8vw, 1.5rem);
+  color: oklch(0.42 0.02 250);
+  line-height: 1.5;
+}
+
+@utility fohat-hero-bg {
+  background:
+    radial-gradient(circle at 20% 5%, oklch(0.85 0.055 245 / 0.34), transparent 35%),
+    linear-gradient(135deg, oklch(0.98 0.006 250) 0%, oklch(0.92 0.014 250) 68%, oklch(0.88 0.018 250) 100%);
+}
+
+@utility fohat-image-frame {
+  border-radius: 7.5rem 1.75rem 7.5rem 1.75rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-elegant);
+  background: var(--color-navy);
+}
+
+@utility fohat-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .fohat-reveal {
+    opacity: 1;
+    transform: none;
   }
 }
