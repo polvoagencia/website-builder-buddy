@@ -44,19 +44,19 @@ const ExperienciasIndexRoute = ExperienciasIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExperienciasMarcasRoute = ExperienciasMarcasRouteImport.update({
-  id: '/marcas',
-  path: '/marcas',
-  getParentRoute: () => ExperienciasRoute,
+  id: '/experiencias/marcas',
+  path: '/experiencias/marcas',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ExperienciasEventosRoute = ExperienciasEventosRouteImport.update({
-  id: '/eventos',
-  path: '/eventos',
-  getParentRoute: () => ExperienciasRoute,
+  id: '/experiencias/eventos',
+  path: '/experiencias/eventos',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ExperienciasCulturaRoute = ExperienciasCulturaRouteImport.update({
-  id: '/cultura',
-  path: '/cultura',
-  getParentRoute: () => ExperienciasRoute,
+  id: '/experiencias/cultura',
+  path: '/experiencias/cultura',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -128,6 +128,9 @@ export interface RootRouteChildren {
   EngenhariaDePresencaRoute: typeof EngenhariaDePresencaRoute
   ParceirosRoute: typeof ParceirosRoute
   TecnologiaRoute: typeof TecnologiaRoute
+  ExperienciasCulturaRoute: typeof ExperienciasCulturaRoute
+  ExperienciasEventosRoute: typeof ExperienciasEventosRoute
+  ExperienciasMarcasRoute: typeof ExperienciasMarcasRoute
   ExperienciasIndexRoute: typeof ExperienciasIndexRoute
 }
 
@@ -170,24 +173,24 @@ declare module '@tanstack/react-router' {
     }
     '/experiencias/marcas': {
       id: '/experiencias/marcas'
-      path: '/marcas'
+      path: '/experiencias/marcas'
       fullPath: '/experiencias/marcas'
       preLoaderRoute: typeof ExperienciasMarcasRouteImport
-      parentRoute: typeof ExperienciasRoute
+      parentRoute: typeof rootRouteImport
     }
     '/experiencias/eventos': {
       id: '/experiencias/eventos'
-      path: '/eventos'
+      path: '/experiencias/eventos'
       fullPath: '/experiencias/eventos'
       preLoaderRoute: typeof ExperienciasEventosRouteImport
-      parentRoute: typeof ExperienciasRoute
+      parentRoute: typeof rootRouteImport
     }
     '/experiencias/cultura': {
       id: '/experiencias/cultura'
-      path: '/cultura'
+      path: '/experiencias/cultura'
       fullPath: '/experiencias/cultura'
       preLoaderRoute: typeof ExperienciasCulturaRouteImport
-      parentRoute: typeof ExperienciasRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -197,18 +200,11 @@ const rootRouteChildren: RootRouteChildren = {
   EngenhariaDePresencaRoute: EngenhariaDePresencaRoute,
   ParceirosRoute: ParceirosRoute,
   TecnologiaRoute: TecnologiaRoute,
+  ExperienciasCulturaRoute: ExperienciasCulturaRoute,
+  ExperienciasEventosRoute: ExperienciasEventosRoute,
+  ExperienciasMarcasRoute: ExperienciasMarcasRoute,
   ExperienciasIndexRoute: ExperienciasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
