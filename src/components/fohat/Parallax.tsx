@@ -45,7 +45,10 @@ export function Parallax({ children, strength = 60, className }: ParallaxProps) 
   }, [strength]);
 
   return (
-    <div ref={ref} className={cn("will-change-transform", className)}>
+    <div
+      ref={ref}
+      className={cn("h-full w-full will-change-transform", className)}
+    >
       {children}
     </div>
   );
