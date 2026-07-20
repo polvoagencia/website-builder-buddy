@@ -14,7 +14,9 @@ import { Route as ParceirosRouteImport } from './routes/parceiros'
 import { Route as ExperienciasRouteImport } from './routes/experiencias'
 import { Route as EngenhariaDePresencaRouteImport } from './routes/engenharia-de-presenca'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProjetosIndexRouteImport } from './routes/projetos.index'
 import { Route as ExperienciasIndexRouteImport } from './routes/experiencias.index'
+import { Route as ProjetosSlugRouteImport } from './routes/projetos.$slug'
 import { Route as ExperienciasMarcasRouteImport } from './routes/experiencias.marcas'
 import { Route as ExperienciasEventosRouteImport } from './routes/experiencias.eventos'
 import { Route as ExperienciasCulturaRouteImport } from './routes/experiencias.cultura'
@@ -44,10 +46,20 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProjetosIndexRoute = ProjetosIndexRouteImport.update({
+  id: '/projetos/',
+  path: '/projetos/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ExperienciasIndexRoute = ExperienciasIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => ExperienciasRoute,
+} as any)
+const ProjetosSlugRoute = ProjetosSlugRouteImport.update({
+  id: '/projetos/$slug',
+  path: '/projetos/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ExperienciasMarcasRoute = ExperienciasMarcasRouteImport.update({
   id: '/marcas',
@@ -74,7 +86,9 @@ export interface FileRoutesByFullPath {
   '/experiencias/cultura': typeof ExperienciasCulturaRoute
   '/experiencias/eventos': typeof ExperienciasEventosRoute
   '/experiencias/marcas': typeof ExperienciasMarcasRoute
+  '/projetos/$slug': typeof ProjetosSlugRoute
   '/experiencias/': typeof ExperienciasIndexRoute
+  '/projetos/': typeof ProjetosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -84,7 +98,9 @@ export interface FileRoutesByTo {
   '/experiencias/cultura': typeof ExperienciasCulturaRoute
   '/experiencias/eventos': typeof ExperienciasEventosRoute
   '/experiencias/marcas': typeof ExperienciasMarcasRoute
+  '/projetos/$slug': typeof ProjetosSlugRoute
   '/experiencias': typeof ExperienciasIndexRoute
+  '/projetos': typeof ProjetosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -96,7 +112,9 @@ export interface FileRoutesById {
   '/experiencias/cultura': typeof ExperienciasCulturaRoute
   '/experiencias/eventos': typeof ExperienciasEventosRoute
   '/experiencias/marcas': typeof ExperienciasMarcasRoute
+  '/projetos/$slug': typeof ProjetosSlugRoute
   '/experiencias/': typeof ExperienciasIndexRoute
+  '/projetos/': typeof ProjetosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -109,7 +127,9 @@ export interface FileRouteTypes {
     | '/experiencias/cultura'
     | '/experiencias/eventos'
     | '/experiencias/marcas'
+    | '/projetos/$slug'
     | '/experiencias/'
+    | '/projetos/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -119,7 +139,9 @@ export interface FileRouteTypes {
     | '/experiencias/cultura'
     | '/experiencias/eventos'
     | '/experiencias/marcas'
+    | '/projetos/$slug'
     | '/experiencias'
+    | '/projetos'
   id:
     | '__root__'
     | '/'
@@ -130,7 +152,9 @@ export interface FileRouteTypes {
     | '/experiencias/cultura'
     | '/experiencias/eventos'
     | '/experiencias/marcas'
+    | '/projetos/$slug'
     | '/experiencias/'
+    | '/projetos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -139,6 +163,8 @@ export interface RootRouteChildren {
   ExperienciasRoute: typeof ExperienciasRouteWithChildren
   ParceirosRoute: typeof ParceirosRoute
   TecnologiaRoute: typeof TecnologiaRoute
+  ProjetosSlugRoute: typeof ProjetosSlugRoute
+  ProjetosIndexRoute: typeof ProjetosIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -178,12 +204,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/projetos/': {
+      id: '/projetos/'
+      path: '/projetos'
+      fullPath: '/projetos/'
+      preLoaderRoute: typeof ProjetosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/experiencias/': {
       id: '/experiencias/'
       path: '/'
       fullPath: '/experiencias/'
       preLoaderRoute: typeof ExperienciasIndexRouteImport
       parentRoute: typeof ExperienciasRoute
+    }
+    '/projetos/$slug': {
+      id: '/projetos/$slug'
+      path: '/projetos/$slug'
+      fullPath: '/projetos/$slug'
+      preLoaderRoute: typeof ProjetosSlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/experiencias/marcas': {
       id: '/experiencias/marcas'
@@ -233,17 +273,9 @@ const rootRouteChildren: RootRouteChildren = {
   ExperienciasRoute: ExperienciasRouteWithChildren,
   ParceirosRoute: ParceirosRoute,
   TecnologiaRoute: TecnologiaRoute,
+  ProjetosSlugRoute: ProjetosSlugRoute,
+  ProjetosIndexRoute: ProjetosIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
