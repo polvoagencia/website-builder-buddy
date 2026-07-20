@@ -135,6 +135,11 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  useEffect(() => {
+    // Capture UTMs from the current URL into sessionStorage so they persist across navigation.
+    import("../lib/lead-tracking").then((m) => m.captureUtmsFromLocation());
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
