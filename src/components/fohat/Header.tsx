@@ -72,6 +72,7 @@ const NAV: NavItem[] = [
       ],
     },
   },
+  { label: "Projetos", to: "/projetos" },
   { label: "Tecnologia", to: "/tecnologia" },
 ];
 
