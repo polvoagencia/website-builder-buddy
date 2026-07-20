@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 interface RevealProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   delay?: number;
-  as?: "div" | "article" | "section" | "span";
+  as?: "div" | "article" | "section" | "span" | "li" | "ol" | "ul";
 }
 
 export function Reveal({ children, delay = 0, as = "div", className, style, ...rest }: RevealProps) {
