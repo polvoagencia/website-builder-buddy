@@ -36,11 +36,11 @@ const rentalSchema = z.object({
   startDate: z.string().trim().max(20).optional().or(z.literal("")),
   endDate: z.string().trim().max(20).optional().or(z.literal("")),
   projectType: z.string().trim().max(160).optional().or(z.literal("")),
-  equipment: z.array(z.string()).default([]),
+  equipment: z.array(z.string()).optional(),
   quantity: z.string().trim().max(80).optional().or(z.literal("")),
-  needsDelivery: z.boolean().default(false),
-  needsInstall: z.boolean().default(false),
-  needsSupport: z.boolean().default(false),
+  needsDelivery: z.boolean().optional(),
+  needsInstall: z.boolean().optional(),
+  needsSupport: z.boolean().optional(),
   description: z
     .string()
     .trim()
