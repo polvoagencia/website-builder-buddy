@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TecnologiaRouteImport } from './routes/tecnologia'
 import { Route as ParceirosRouteImport } from './routes/parceiros'
+import { Route as LocacaoDeEquipamentosRouteImport } from './routes/locacao-de-equipamentos'
 import { Route as ExperienciasRouteImport } from './routes/experiencias'
 import { Route as EngenhariaDePresencaRouteImport } from './routes/engenharia-de-presenca'
 import { Route as IndexRouteImport } from './routes/index'
@@ -29,6 +30,11 @@ const TecnologiaRoute = TecnologiaRouteImport.update({
 const ParceirosRoute = ParceirosRouteImport.update({
   id: '/parceiros',
   path: '/parceiros',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LocacaoDeEquipamentosRoute = LocacaoDeEquipamentosRouteImport.update({
+  id: '/locacao-de-equipamentos',
+  path: '/locacao-de-equipamentos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExperienciasRoute = ExperienciasRouteImport.update({
@@ -81,6 +87,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/engenharia-de-presenca': typeof EngenhariaDePresencaRoute
   '/experiencias': typeof ExperienciasRouteWithChildren
+  '/locacao-de-equipamentos': typeof LocacaoDeEquipamentosRoute
   '/parceiros': typeof ParceirosRoute
   '/tecnologia': typeof TecnologiaRoute
   '/experiencias/cultura': typeof ExperienciasCulturaRoute
@@ -93,6 +100,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/engenharia-de-presenca': typeof EngenhariaDePresencaRoute
+  '/locacao-de-equipamentos': typeof LocacaoDeEquipamentosRoute
   '/parceiros': typeof ParceirosRoute
   '/tecnologia': typeof TecnologiaRoute
   '/experiencias/cultura': typeof ExperienciasCulturaRoute
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/engenharia-de-presenca': typeof EngenhariaDePresencaRoute
   '/experiencias': typeof ExperienciasRouteWithChildren
+  '/locacao-de-equipamentos': typeof LocacaoDeEquipamentosRoute
   '/parceiros': typeof ParceirosRoute
   '/tecnologia': typeof TecnologiaRoute
   '/experiencias/cultura': typeof ExperienciasCulturaRoute
@@ -122,6 +131,7 @@ export interface FileRouteTypes {
     | '/'
     | '/engenharia-de-presenca'
     | '/experiencias'
+    | '/locacao-de-equipamentos'
     | '/parceiros'
     | '/tecnologia'
     | '/experiencias/cultura'
@@ -134,6 +144,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/engenharia-de-presenca'
+    | '/locacao-de-equipamentos'
     | '/parceiros'
     | '/tecnologia'
     | '/experiencias/cultura'
@@ -147,6 +158,7 @@ export interface FileRouteTypes {
     | '/'
     | '/engenharia-de-presenca'
     | '/experiencias'
+    | '/locacao-de-equipamentos'
     | '/parceiros'
     | '/tecnologia'
     | '/experiencias/cultura'
@@ -161,6 +173,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EngenhariaDePresencaRoute: typeof EngenhariaDePresencaRoute
   ExperienciasRoute: typeof ExperienciasRouteWithChildren
+  LocacaoDeEquipamentosRoute: typeof LocacaoDeEquipamentosRoute
   ParceirosRoute: typeof ParceirosRoute
   TecnologiaRoute: typeof TecnologiaRoute
   ProjetosSlugRoute: typeof ProjetosSlugRoute
@@ -181,6 +194,13 @@ declare module '@tanstack/react-router' {
       path: '/parceiros'
       fullPath: '/parceiros'
       preLoaderRoute: typeof ParceirosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/locacao-de-equipamentos': {
+      id: '/locacao-de-equipamentos'
+      path: '/locacao-de-equipamentos'
+      fullPath: '/locacao-de-equipamentos'
+      preLoaderRoute: typeof LocacaoDeEquipamentosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/experiencias': {
@@ -271,6 +291,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EngenhariaDePresencaRoute: EngenhariaDePresencaRoute,
   ExperienciasRoute: ExperienciasRouteWithChildren,
+  LocacaoDeEquipamentosRoute: LocacaoDeEquipamentosRoute,
   ParceirosRoute: ParceirosRoute,
   TecnologiaRoute: TecnologiaRoute,
   ProjetosSlugRoute: ProjetosSlugRoute,
