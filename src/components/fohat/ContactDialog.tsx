@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -15,6 +15,12 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { supabase } from "@/integrations/supabase/client";
+import {
+  canSubmit,
+  getPageContext,
+  getStoredUtms,
+} from "@/lib/lead-tracking";
 
 const contactSchema = z.object({
   name: z
@@ -39,10 +45,17 @@ type ContactFormValues = z.infer<typeof contactSchema>;
 
 interface ContactDialogProps {
   children: ReactNode;
+  sourcePage?: string;
+  sourceCta?: string;
 }
 
-export function ContactDialog({ children }: ContactDialogProps) {
+export function ContactDialog({
+  children,
+  sourcePage,
+  sourceCta,
+}: ContactDialogProps) {
   const [open, setOpen] = useState(false);
+  const triggerRef = useRef<HTMLSpanElement | null>(null);
 
   const {
     register,
@@ -54,11 +67,47 @@ export function ContactDialog({ children }: ContactDialogProps) {
     defaultValues: { name: "", email: "", whatsapp: "" },
   });
 
-  const onSubmit = async (data: ContactFormValues) => {
-    // Simula envio; integração com WhatsApp / backend será conectada depois.
-    await new Promise((r) => setTimeout(r, 600));
-    toast.success("Recebemos sua mensagem", {
-      description: `Em breve entraremos em contato, ${data.name.split(" ")[0]}.`,
+  const onSubmit = async (data: ContactFormValues, event?: React.BaseSyntheticEvent) => {
+    // Honeypot: bots fill hidden field.
+    const form = event?.target as HTMLFormElement | undefined;
+    const honeypot = form?.querySelector<HTMLInputElement>('input[name="company_website"]');
+    if (honeypot?.value) return;
+
+    if (!canSubmit("contato")) {
+      toast.error("Aguarde alguns instantes antes de reenviar.");
+      return;
+    }
+
+    const ctx = getPageContext();
+    const utms = getStoredUtms();
+    const triggerText = triggerRef.current?.innerText?.trim().slice(0, 120) ?? "";
+
+    const { error } = await supabase.from("fohat_leads").insert({
+      lead_type: "contato",
+      name: data.name,
+      email: data.email,
+      phone: data.whatsapp,
+      source_page: sourcePage ?? ctx.source_page,
+      source_cta: sourceCta ?? triggerText,
+      page_url: ctx.page_url,
+      utm_source: utms.utm_source,
+      utm_medium: utms.utm_medium,
+      utm_campaign: utms.utm_campaign,
+      utm_content: utms.utm_content,
+      utm_term: utms.utm_term,
+      status: "novo",
+    });
+
+    if (error) {
+      if (import.meta.env.DEV) console.error("[fohat_leads:contato]", error);
+      toast.error("Não foi possível enviar agora.", {
+        description: "Seus dados foram mantidos. Tente novamente em instantes.",
+      });
+      return;
+    }
+
+    toast.success("Recebemos sua mensagem.", {
+      description: "Em breve entraremos em contato.",
     });
     reset();
     setOpen(false);
@@ -66,7 +115,9 @@ export function ContactDialog({ children }: ContactDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogTrigger asChild>
+        <span ref={triggerRef} className="contents">{children}</span>
+      </DialogTrigger>
       <DialogContent className="sm:max-w-lg rounded-3xl border-line bg-card p-8 sm:p-10">
         <DialogHeader className="space-y-3 text-left">
           <span className="fohat-eyebrow">Conte sua ideia</span>
@@ -80,6 +131,16 @@ export function ContactDialog({ children }: ContactDialogProps) {
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-5" noValidate>
+          {/* Honeypot */}
+          <input
+            type="text"
+            name="company_website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="absolute left-[-9999px] h-0 w-0 opacity-0"
+          />
+
           <div className="space-y-2">
             <Label htmlFor="fohat-name" className="text-xs uppercase tracking-[0.14em] text-blue">
               Nome

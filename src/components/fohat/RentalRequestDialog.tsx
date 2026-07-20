@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -18,8 +18,25 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RENTAL_EQUIPMENT_OPTIONS } from "@/data/rental-equipment";
+import { supabase } from "@/integrations/supabase/client";
+import {
+  attachmentPath,
+  canSubmit,
+  getPageContext,
+  getStoredUtms,
+} from "@/lib/lead-tracking";
 
 const MAX_FILE_MB = 10;
+const ACCEPTED_MIME = new Set([
+  "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "image/png",
+  "image/jpeg",
+  "image/jpg",
+  "image/webp",
+]);
+const ACCEPTED_EXT = /\.(pdf|doc|docx|png|jpg|jpeg|webp)$/i;
 
 const rentalSchema = z.object({
   name: z.string().trim().min(2, "Informe seu nome.").max(100),
@@ -59,16 +76,21 @@ type RentalFormValues = z.infer<typeof rentalSchema>;
 
 interface RentalRequestDialogProps {
   children: ReactNode;
-  /** Pré-seleciona uma categoria (ex.: quando aberto a partir de um card de categoria). */
   defaultEquipment?: string;
+  sourcePage?: string;
+  sourceCta?: string;
 }
 
 export function RentalRequestDialog({
   children,
   defaultEquipment,
+  sourcePage,
+  sourceCta,
 }: RentalRequestDialogProps) {
   const [open, setOpen] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
+  const triggerRef = useRef<HTMLSpanElement | null>(null);
 
   const {
     register,
@@ -109,36 +131,126 @@ export function RentalRequestDialog({
   };
 
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) {
+    const f = e.target.files?.[0];
+    if (!f) {
+      setFile(null);
       setFileName(null);
       return;
     }
-    if (file.size > MAX_FILE_MB * 1024 * 1024) {
+    const validType = ACCEPTED_MIME.has(f.type) || ACCEPTED_EXT.test(f.name);
+    if (!validType) {
+      toast.error("Formato inválido", {
+        description: "Envie PDF, DOC, DOCX, PNG, JPG, JPEG ou WEBP.",
+      });
+      e.target.value = "";
+      setFile(null);
+      setFileName(null);
+      return;
+    }
+    if (f.size > MAX_FILE_MB * 1024 * 1024) {
       toast.error("Arquivo grande demais", {
         description: `Anexe um documento de até ${MAX_FILE_MB} MB.`,
       });
       e.target.value = "";
+      setFile(null);
       setFileName(null);
       return;
     }
-    setFileName(file.name);
+    setFile(f);
+    setFileName(f.name);
   };
 
-  const onSubmit = async (data: RentalFormValues) => {
-    // Integração com backend / WhatsApp será conectada posteriormente.
-    await new Promise((r) => setTimeout(r, 700));
-    toast.success("Solicitação recebida", {
-      description: `Retornaremos em breve, ${data.name.split(" ")[0]}.`,
+  const onSubmit = async (data: RentalFormValues, event?: React.BaseSyntheticEvent) => {
+    const form = event?.target as HTMLFormElement | undefined;
+    const honeypot = form?.querySelector<HTMLInputElement>('input[name="company_website"]');
+    if (honeypot?.value) return;
+
+    if (!canSubmit("locacao")) {
+      toast.error("Aguarde alguns instantes antes de reenviar.");
+      return;
+    }
+
+    const ctx = getPageContext();
+    const utms = getStoredUtms();
+    const triggerText = triggerRef.current?.innerText?.trim().slice(0, 120) ?? "";
+    const leadId =
+      typeof crypto !== "undefined" && "randomUUID" in crypto
+        ? crypto.randomUUID()
+        : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
+    let attachment_url: string | null = null;
+    if (file) {
+      const path = attachmentPath(leadId, file.name);
+      const { error: uploadError } = await supabase.storage
+        .from("fohat-lead-attachments")
+        .upload(path, file, {
+          contentType: file.type || "application/octet-stream",
+          upsert: false,
+        });
+      if (uploadError) {
+        if (import.meta.env.DEV) console.error("[fohat_leads:upload]", uploadError);
+        toast.error("Não foi possível enviar o anexo.", {
+          description: "Seus dados foram mantidos. Tente novamente em instantes.",
+        });
+        return;
+      }
+      attachment_url = path;
+    }
+
+    const { error } = await supabase.from("fohat_leads").insert({
+      id: leadId,
+      lead_type: "locacao",
+      name: data.name,
+      company: data.company || null,
+      email: data.email,
+      phone: data.phone,
+      city: data.city || null,
+      event_location: data.eventLocation || null,
+      start_date: data.startDate || null,
+      end_date: data.endDate || null,
+      project_type: data.projectType || null,
+      equipment: data.equipment && data.equipment.length ? data.equipment : null,
+      quantity: data.quantity || null,
+      needs_delivery: !!data.needsDelivery,
+      needs_install: !!data.needsInstall,
+      needs_support: !!data.needsSupport,
+      description: data.description || null,
+      equipment_details: data.equipmentDetails || null,
+      attachment_url,
+      source_page: sourcePage ?? ctx.source_page,
+      source_cta: sourceCta ?? triggerText,
+      page_url: ctx.page_url,
+      utm_source: utms.utm_source,
+      utm_medium: utms.utm_medium,
+      utm_campaign: utms.utm_campaign,
+      utm_content: utms.utm_content,
+      utm_term: utms.utm_term,
+      status: "novo",
+    });
+
+    if (error) {
+      if (import.meta.env.DEV) console.error("[fohat_leads:locacao]", error);
+      toast.error("Não foi possível enviar agora.", {
+        description: "Seus dados foram mantidos. Tente novamente em instantes.",
+      });
+      return;
+    }
+
+    toast.success("Recebemos sua solicitação.", {
+      description:
+        "Nossa equipe verificará disponibilidade, configuração e logística.",
     });
     reset();
+    setFile(null);
     setFileName(null);
     setOpen(false);
   };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogTrigger asChild>
+        <span ref={triggerRef} className="contents">{children}</span>
+      </DialogTrigger>
       <DialogContent className="max-h-[92vh] overflow-y-auto rounded-3xl border-line bg-card p-6 sm:max-w-2xl sm:p-10">
         <DialogHeader className="space-y-3 text-left">
           <span className="fohat-eyebrow">Locação de equipamentos</span>
@@ -157,6 +269,16 @@ export function RentalRequestDialog({
           className="mt-6 space-y-6"
           noValidate
         >
+          {/* Honeypot */}
+          <input
+            type="text"
+            name="company_website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="absolute left-[-9999px] h-0 w-0 opacity-0"
+          />
+
           {/* Contato */}
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label="Nome" htmlFor="rent-name" error={errors.name?.message}>
@@ -380,7 +502,7 @@ export function RentalRequestDialog({
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="h-4 w-4 animate-spin" /> Enviando…
+                <Loader2 className="h-4 w-4 animate-spin" /> Registrando solicitação…
               </>
             ) : (
               <>
