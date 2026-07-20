@@ -14,7 +14,102 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      fohat_leads: {
+        Row: {
+          attachment_url: string | null
+          city: string | null
+          company: string | null
+          created_at: string
+          description: string | null
+          email: string | null
+          end_date: string | null
+          equipment: Json | null
+          equipment_details: string | null
+          event_location: string | null
+          id: string
+          lead_type: string
+          name: string | null
+          needs_delivery: boolean | null
+          needs_install: boolean | null
+          needs_support: boolean | null
+          page_url: string | null
+          phone: string | null
+          project_type: string | null
+          quantity: string | null
+          source_cta: string | null
+          source_page: string | null
+          start_date: string | null
+          status: string
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          attachment_url?: string | null
+          city?: string | null
+          company?: string | null
+          created_at?: string
+          description?: string | null
+          email?: string | null
+          end_date?: string | null
+          equipment?: Json | null
+          equipment_details?: string | null
+          event_location?: string | null
+          id?: string
+          lead_type: string
+          name?: string | null
+          needs_delivery?: boolean | null
+          needs_install?: boolean | null
+          needs_support?: boolean | null
+          page_url?: string | null
+          phone?: string | null
+          project_type?: string | null
+          quantity?: string | null
+          source_cta?: string | null
+          source_page?: string | null
+          start_date?: string | null
+          status?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          attachment_url?: string | null
+          city?: string | null
+          company?: string | null
+          created_at?: string
+          description?: string | null
+          email?: string | null
+          end_date?: string | null
+          equipment?: Json | null
+          equipment_details?: string | null
+          event_location?: string | null
+          id?: string
+          lead_type?: string
+          name?: string | null
+          needs_delivery?: boolean | null
+          needs_install?: boolean | null
+          needs_support?: boolean | null
+          page_url?: string | null
+          phone?: string | null
+          project_type?: string | null
+          quantity?: string | null
+          source_cta?: string | null
+          source_page?: string | null
+          start_date?: string | null
+          status?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
