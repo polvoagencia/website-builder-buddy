@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { SubpageShell } from "@/components/fohat/SubpageShell";
-import { ProgressRail } from "@/components/fohat/motion/ProgressRail";
+
 
 import { EVENTS } from "@/data/presence-territories-content";
 import { TerritoryMethodReference } from "@/components/fohat/territories/shared/TerritoryMethodReference";
@@ -40,7 +40,7 @@ export const Route = createFileRoute("/engenharia-de-presenca/eventos-e-espacos"
 function Eventos() {
   return (
     <SubpageShell>
-      <ProgressRail chapters={[...EVENTS.rail]} contextLabel="Eventos e Espaços" />
+      
       <EventsHero />
       <TerritoryMethodReference />
       <ResponsiveSpace />

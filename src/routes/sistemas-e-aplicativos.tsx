@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { SubpageShell } from "@/components/fohat/SubpageShell";
-import { ProgressRail } from "@/components/fohat/motion/ProgressRail";
+
 import { SubpageCTA } from "@/components/fohat/Subpage";
 
 import { SystemsHero } from "@/components/fohat/systems/SystemsHero";
@@ -40,18 +40,6 @@ export const Route = createFileRoute("/sistemas-e-aplicativos")({
 function SistemasEAplicativos() {
   return (
     <SubpageShell>
-      <ProgressRail
-        contextLabel="Sistemas · FOHAT"
-        chapters={[
-          { id: "visao-geral", label: "Visão geral" },
-          { id: "arquitetura", label: "Arquitetura" },
-          { id: "capacidades", label: "Capacidades" },
-          { id: "interfaces", label: "Superfícies" },
-          { id: "processo", label: "Processo" },
-          { id: "formas", label: "Formas" },
-          { id: "contato", label: "Contato" },
-        ]}
-      />
 
       <SystemsHero />
       <SystemsArchitecture />

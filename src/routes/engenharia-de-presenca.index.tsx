@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { SubpageShell } from "@/components/fohat/SubpageShell";
-import { ProgressRail } from "@/components/fohat/motion/ProgressRail";
+
 import { SubpageCTA } from "@/components/fohat/Subpage";
 
 import { PresenceHero } from "@/components/fohat/engineering/PresenceHero";
@@ -39,19 +39,6 @@ export const Route = createFileRoute("/engenharia-de-presenca/")({
 function EngenhariaDePresenca() {
   return (
     <SubpageShell>
-      <ProgressRail
-        contextLabel="Engenharia · FOHAT"
-        chapters={[
-          { id: "visao-geral", label: "Visão geral" },
-          { id: "formula", label: "Fórmula" },
-          { id: "metodo", label: "Método" },
-          { id: "jornada", label: "Jornada" },
-          { id: "pilares", label: "Pilares" },
-          { id: "territorios", label: "Territórios" },
-          { id: "projetos", label: "Projetos" },
-          { id: "contato", label: "Contato" },
-        ]}
-      />
 
       <PresenceHero />
       <PresenceDefinition />
