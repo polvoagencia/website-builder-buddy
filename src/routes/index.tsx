@@ -17,6 +17,9 @@ import { Reveal } from "@/components/fohat/Reveal";
 import { Parallax } from "@/components/fohat/Parallax";
 import { ScrollProgress } from "@/components/fohat/ScrollProgress";
 import { Marquee } from "@/components/fohat/Subpage";
+import { RentalEquipmentCard } from "@/components/fohat/RentalEquipmentCard";
+import { RentalRequestDialog } from "@/components/fohat/RentalRequestDialog";
+import { RENTAL_CATALOG_ITEMS } from "@/data/rental-equipment";
 
 export const Route = createFileRoute("/")({
   component: Home,
