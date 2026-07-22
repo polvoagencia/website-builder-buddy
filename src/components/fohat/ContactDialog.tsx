@@ -41,6 +41,11 @@ const contactSchema = z.object({
     .min(10, { message: "WhatsApp inválido." })
     .max(20, { message: "WhatsApp inválido." })
     .regex(/^[\d\s()+-]+$/, { message: "Use apenas números e ( ) + -." }),
+  description: z
+    .string()
+    .trim()
+    .min(10, { message: "Conte um pouco mais — pelo menos 10 caracteres." })
+    .max(2000, { message: "Máximo de 2000 caracteres." }),
 });
 
 type ContactFormValues = z.infer<typeof contactSchema>;
@@ -63,11 +68,15 @@ export function ContactDialog({
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
-    defaultValues: { name: "", email: "", whatsapp: "" },
+    defaultValues: { name: "", email: "", whatsapp: "", description: "" },
   });
+
+  const descriptionValue = watch("description") ?? "";
+
 
   const onSubmit = async (data: ContactFormValues, event?: React.BaseSyntheticEvent) => {
     // Honeypot: bots fill hidden field.
