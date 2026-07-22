@@ -74,6 +74,7 @@ interface RentalRequestDialogProps {
   defaultEquipment?: string;
   sourcePage?: string;
   sourceCta?: string;
+  onOpenChange?: (open: boolean) => void;
 }
 
 export function RentalRequestDialog({
@@ -81,11 +82,17 @@ export function RentalRequestDialog({
   defaultEquipment,
   sourcePage,
   sourceCta,
+  onOpenChange,
 }: RentalRequestDialogProps) {
   const [open, setOpen] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
   const triggerRef = useRef<HTMLSpanElement | null>(null);
+
+  const updateOpen = (next: boolean) => {
+    setOpen(next);
+    onOpenChange?.(next);
+  };
 
   const {
     register,
@@ -248,10 +255,11 @@ export function RentalRequestDialog({
     setFile(null);
     setFileName(null);
     setOpen(false);
+    onOpenChange?.(false);
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={updateOpen}>
       <DialogTrigger asChild>
         <span ref={triggerRef} className="contents">
           {children}

@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Check } from "lucide-react";
 
 import { Reveal } from "@/components/fohat/Reveal";
 import { RENTAL_MODES } from "@/data/rental-content";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+
+const PANEL_ID = "rental-modes-panel";
 
 /**
  * Cinco formatos de contratação, consolidados em uma única seção.
@@ -17,6 +19,12 @@ export function RentalModes() {
   const [active, setActive] = useState(0);
   const reduced = useReducedMotion();
   const current = RENTAL_MODES[active];
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+
+  const focusTab = (index: number) => {
+    setActive(index);
+    tabRefs.current[index]?.focus();
+  };
 
   return (
     <section id="formatos" className="bg-white py-20 lg:py-28">
@@ -45,28 +53,31 @@ export function RentalModes() {
               return (
                 <button
                   key={m.slug}
+                  ref={(el) => {
+                    tabRefs.current[i] = el;
+                  }}
                   type="button"
                   role="tab"
                   id={`mode-tab-${m.slug}`}
                   aria-selected={isActive}
-                  aria-controls={`mode-panel-${m.slug}`}
+                  aria-controls={PANEL_ID}
                   tabIndex={isActive ? 0 : -1}
                   onClick={() => setActive(i)}
                   onKeyDown={(e) => {
                     if (e.key === "ArrowDown" || e.key === "ArrowRight") {
                       e.preventDefault();
-                      setActive((i + 1) % RENTAL_MODES.length);
+                      focusTab((i + 1) % RENTAL_MODES.length);
                     } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
                       e.preventDefault();
-                      setActive(
+                      focusTab(
                         (i - 1 + RENTAL_MODES.length) % RENTAL_MODES.length,
                       );
                     } else if (e.key === "Home") {
                       e.preventDefault();
-                      setActive(0);
+                      focusTab(0);
                     } else if (e.key === "End") {
                       e.preventDefault();
-                      setActive(RENTAL_MODES.length - 1);
+                      focusTab(RENTAL_MODES.length - 1);
                     }
                   }}
                   className={`group flex items-start gap-4 px-5 py-4 text-left transition-colors focus:outline-none focus-visible:bg-white ${
@@ -106,7 +117,7 @@ export function RentalModes() {
           {/* Painel */}
           <div
             role="tabpanel"
-            id={`mode-panel-${current.slug}`}
+            id={PANEL_ID}
             aria-labelledby={`mode-tab-${current.slug}`}
             className="relative min-h-[280px] rounded-2xl border border-line bg-mist p-8 sm:p-10"
           >
