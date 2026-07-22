@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { EVENTS } from "@/data/presence-territories-content";
 import { SectionReveal } from "@/components/fohat/motion/SectionReveal";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { cn } from "@/lib/utils";
 
 /**
