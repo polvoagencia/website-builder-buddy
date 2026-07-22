@@ -87,9 +87,8 @@ export function Header() {
   const mobileBaseId = useId();
 
   // Track route changes to auto-close menus on navigation.
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const searchStr = useRouterState({ select: (s) => s.location.searchStr });
-  const hash = useRouterState({ select: (s) => s.location.hash });
+  const locationHref = useRouterState({ select: (s) => s.location.href });
+
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
