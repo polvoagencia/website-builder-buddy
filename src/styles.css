@@ -466,5 +466,28 @@
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
+  .fohat-mega-enter { animation: none !important; }
+}
+
+/* Mega menu entrance — mask + lift */
+@keyframes fohat-mega-in {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -6px);
+    clip-path: inset(0 0 100% 0 round 24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+    clip-path: inset(0 0 0 0 round 24px);
   }
 }
+@utility fohat-mega-enter {
+  animation: fohat-mega-in var(--motion-base) var(--ease-reveal) both;
+}
+
+/* Header active-route indicator dot */
+.fohat-header nav a[data-status="active"] {
+  position: relative;
+}
+
