@@ -144,7 +144,12 @@ export function FohatMethodStory() {
             {/* Painel sticky visível apenas em desktop */}
             <div className="hidden lg:block">
               <div className="sticky top-32">
-                <div className="relative overflow-hidden rounded-[28px] border border-line bg-mist p-10 min-h-[420px]">
+                <div
+                  role="tabpanel"
+                  id="method-tabpanel"
+                  aria-labelledby={`method-tab-${METHOD[active].letter}`}
+                  className="relative overflow-hidden rounded-[28px] border border-line bg-mist p-10 min-h-[420px]"
+                >
                   <MethodMetaphor index={active} />
                   <div className="relative">
                     <div className="fohat-mono text-[10px] uppercase tracking-[0.22em] text-blue">
@@ -170,7 +175,7 @@ export function FohatMethodStory() {
                 </div>
               </div>
               {/* âncoras invisíveis para dirigir o scroll */}
-              <div aria-hidden>
+              <div aria-hidden="true">
                 {METHOD.map((_, i) => (
                   <div
                     key={i}
