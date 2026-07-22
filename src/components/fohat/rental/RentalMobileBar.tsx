@@ -90,5 +90,3 @@ export function RentalMobileBar() {
   );
 }
 
-{/* Mount RentalRequestDialog even when bar hidden so the dialog can stay open?
-    Not needed — dialog closes before bar unmounts (dialogOpen=false first). */}
