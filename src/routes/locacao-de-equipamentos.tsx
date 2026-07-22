@@ -1,11 +1,17 @@
+import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight, ChevronRight, Check } from "lucide-react";
+import { ArrowUpRight, ChevronRight } from "lucide-react";
 
 import { SubpageShell } from "@/components/fohat/SubpageShell";
 import { Reveal } from "@/components/fohat/Reveal";
 import { ContactDialog } from "@/components/fohat/ContactDialog";
 import { RentalRequestDialog } from "@/components/fohat/RentalRequestDialog";
-import { RENTAL_CATEGORIES } from "@/data/rental-equipment";
+import { RentalEquipmentCard } from "@/components/fohat/RentalEquipmentCard";
+import {
+  RENTAL_CATALOG_ITEMS,
+  RENTAL_FILTERS,
+  type RentalFilterSlug,
+} from "@/data/rental-equipment";
 
 export const Route = createFileRoute("/locacao-de-equipamentos")({
   head: () => ({
