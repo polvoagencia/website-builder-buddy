@@ -109,11 +109,15 @@ export function PresencePrinciples() {
             as="article"
             delay={140}
             className="relative overflow-hidden rounded-[28px] p-10 text-white lg:col-span-12 lg:p-14"
-            style={{
-              background:
-                "linear-gradient(135deg, oklch(0.22 0.023 250), oklch(0.32 0.035 250))",
-            }}
           >
+            <div
+              aria-hidden
+              className="absolute inset-0 -z-10"
+              style={{
+                background:
+                  "linear-gradient(135deg, oklch(0.22 0.023 250), oklch(0.32 0.035 250))",
+              }}
+            />
             <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-40" />
             <div className="relative grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
               <div>
