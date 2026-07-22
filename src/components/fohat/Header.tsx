@@ -5,15 +5,10 @@ import logoAsset from "@/assets/logo-fohat.png.asset.json";
 import { ContactDialog } from "./ContactDialog";
 import { cn } from "@/lib/utils";
 
-/**
- * Menu structure with hoverable submenus.
- * Primary items may open a mega-menu of secondary destinations.
- */
 type SubItem = { label: string; to: string; description: string };
 type NavItem = {
   label: string;
   to?: string;
-  hash?: string;
   submenu?: { title: string; items: SubItem[] };
 };
 
@@ -23,58 +18,46 @@ const NAV: NavItem[] = [
     label: "Engenharia de Presença",
     to: "/engenharia-de-presenca",
     submenu: {
-      title: "O mecanismo por trás de cada projeto",
+      title: "Frente autoral · aplicações e projetos",
       items: [
         {
-          label: "O que é",
+          label: "Visão geral",
           to: "/engenharia-de-presenca",
-          description: "Como integramos tecnologia, narrativa, espaço e participação.",
+          description:
+            "Método, fórmula e pilares da frente autoral da FOHAT.",
         },
         {
-          label: "Método FOHAT",
-          to: "/engenharia-de-presenca#metodo",
-          description: "Cinco etapas: Fundamento, Orquestração, Humanização, Ativação, Transformação.",
+          label: "Para Marcas",
+          to: "/engenharia-de-presenca/marcas",
+          description: "Comunicação vira participação e memória.",
         },
         {
-          label: "Princípios",
-          to: "/engenharia-de-presenca#principios",
-          description: "Cinco pilares que orientam cada experiência.",
-        },
-      ],
-    },
-  },
-  {
-    label: "Experiências",
-    to: "/experiencias",
-    submenu: {
-      title: "Territórios de atuação",
-      items: [
-        {
-          label: "Marcas",
-          to: "/experiencias/marcas",
-          description: "Comunicação que vira participação e memória.",
-        },
-        {
-          label: "Cultura",
-          to: "/experiencias/cultura",
+          label: "Para Cultura",
+          to: "/engenharia-de-presenca/cultura",
           description: "Histórias, patrimônios e acervos vividos.",
         },
         {
-          label: "Eventos e Espaços",
-          to: "/experiencias/eventos",
+          label: "Para Eventos e Espaços",
+          to: "/engenharia-de-presenca/eventos-e-espacos",
           description: "Ambientes que reagem à presença do público.",
         },
         {
-          label: "Parceiros",
-          to: "/parceiros",
-          description: "Braço tecnológico de agências, produtoras e cenografia.",
+          label: "Projetos de Engenharia de Presença",
+          to: "/engenharia-de-presenca/projetos",
+          description: "Cases entregues pela FOHAT diante do público.",
+        },
+        {
+          label: "Tela Brasil",
+          to: "/engenharia-de-presenca/projetos/tela-brasil",
+          description:
+            "Cinema brasileiro em seis capitais com IA, impressão e projeção.",
         },
       ],
     },
   },
-  { label: "Projetos", to: "/projetos" },
+  { label: "Sistemas e Aplicativos", to: "/sistemas-e-aplicativos" },
   { label: "Locação de Equipamentos", to: "/locacao-de-equipamentos" },
-  { label: "Tecnologia", to: "/tecnologia" },
+  { label: "Para Parceiros", to: "/parceiros" },
 ];
 
 export function Header() {
@@ -86,9 +69,7 @@ export function Header() {
   const megaBaseId = useId();
   const mobileBaseId = useId();
 
-  // Track route changes to auto-close menus on navigation.
   const locationHref = useRouterState({ select: (s) => s.location.href });
-
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -97,15 +78,12 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close everything when the route changes.
   useEffect(() => {
     setMenuOpen(false);
     setExpandedMobile(null);
     setOpenMega(null);
   }, [locationHref]);
 
-
-  // Escape closes desktop mega and mobile drawer.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Escape") return;
@@ -116,7 +94,6 @@ export function Header() {
     return () => window.removeEventListener("keydown", onKey);
   }, [openMega, menuOpen]);
 
-  // Click outside desktop nav closes the mega menu.
   useEffect(() => {
     if (!openMega) return;
     const onDown = (e: MouseEvent) => {
@@ -200,7 +177,6 @@ export function Header() {
                         if (e.key === "ArrowDown") {
                           e.preventDefault();
                           openThis();
-                          // Move focus into first submenu link.
                           const panel = document.getElementById(panelId!);
                           const first =
                             panel?.querySelector<HTMLElement>("a[href]");
@@ -241,16 +217,14 @@ export function Header() {
                     </button>
                   )}
 
-                  {/* Mega menu */}
                   {hasMega && active && (
                     <div
                       id={panelId}
                       role="menu"
                       aria-label={item.submenu!.title}
-                      className="absolute left-1/2 top-full z-40 mt-3 w-[520px] -translate-x-1/2 animate-in fade-in slide-in-from-top-2"
+                      className="absolute left-1/2 top-full z-40 mt-3 w-[560px] -translate-x-1/2 animate-in fade-in slide-in-from-top-2"
                       onMouseEnter={openThis}
                     >
-                      {/* Hover safety bridge */}
                       <div className="h-3" />
                       <div className="overflow-hidden rounded-3xl border border-line bg-card/95 shadow-[var(--shadow-elegant)] backdrop-blur-xl">
                         <div className="border-b border-line bg-mist/70 px-6 py-4">
@@ -301,7 +275,6 @@ export function Header() {
           </button>
         </nav>
 
-        {/* Mobile drawer */}
         {menuOpen && (
           <div
             id="fohat-mobile-drawer"
@@ -403,7 +376,6 @@ function MegaLink({
   onNavigate: () => void;
   compact?: boolean;
 }) {
-  // Split hash target like "/engenharia-de-presenca#metodo" into pathname + hash for TanStack Link
   const [pathname, hash] = item.to.split("#");
   return (
     <Link

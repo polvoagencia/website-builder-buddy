@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TecnologiaRouteImport } from './routes/tecnologia'
+import { Route as SistemasEAplicativosRouteImport } from './routes/sistemas-e-aplicativos'
 import { Route as ParceirosRouteImport } from './routes/parceiros'
 import { Route as LocacaoDeEquipamentosRouteImport } from './routes/locacao-de-equipamentos'
 import { Route as ExperienciasRouteImport } from './routes/experiencias'
@@ -25,10 +26,17 @@ import { Route as ExperienciasCulturaRouteImport } from './routes/experiencias.c
 import { Route as EngenhariaDePresencaMarcasRouteImport } from './routes/engenharia-de-presenca.marcas'
 import { Route as EngenhariaDePresencaEventosEEspacosRouteImport } from './routes/engenharia-de-presenca.eventos-e-espacos'
 import { Route as EngenhariaDePresencaCulturaRouteImport } from './routes/engenharia-de-presenca.cultura'
+import { Route as EngenhariaDePresencaProjetosIndexRouteImport } from './routes/engenharia-de-presenca.projetos.index'
+import { Route as EngenhariaDePresencaProjetosSlugRouteImport } from './routes/engenharia-de-presenca.projetos.$slug'
 
 const TecnologiaRoute = TecnologiaRouteImport.update({
   id: '/tecnologia',
   path: '/tecnologia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SistemasEAplicativosRoute = SistemasEAplicativosRouteImport.update({
+  id: '/sistemas-e-aplicativos',
+  path: '/sistemas-e-aplicativos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ParceirosRoute = ParceirosRouteImport.update({
@@ -110,6 +118,18 @@ const EngenhariaDePresencaCulturaRoute =
     path: '/cultura',
     getParentRoute: () => EngenhariaDePresencaRoute,
   } as any)
+const EngenhariaDePresencaProjetosIndexRoute =
+  EngenhariaDePresencaProjetosIndexRouteImport.update({
+    id: '/projetos/',
+    path: '/projetos/',
+    getParentRoute: () => EngenhariaDePresencaRoute,
+  } as any)
+const EngenhariaDePresencaProjetosSlugRoute =
+  EngenhariaDePresencaProjetosSlugRouteImport.update({
+    id: '/projetos/$slug',
+    path: '/projetos/$slug',
+    getParentRoute: () => EngenhariaDePresencaRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -117,6 +137,7 @@ export interface FileRoutesByFullPath {
   '/experiencias': typeof ExperienciasRouteWithChildren
   '/locacao-de-equipamentos': typeof LocacaoDeEquipamentosRoute
   '/parceiros': typeof ParceirosRoute
+  '/sistemas-e-aplicativos': typeof SistemasEAplicativosRoute
   '/tecnologia': typeof TecnologiaRoute
   '/engenharia-de-presenca/cultura': typeof EngenhariaDePresencaCulturaRoute
   '/engenharia-de-presenca/eventos-e-espacos': typeof EngenhariaDePresencaEventosEEspacosRoute
@@ -128,11 +149,14 @@ export interface FileRoutesByFullPath {
   '/engenharia-de-presenca/': typeof EngenhariaDePresencaIndexRoute
   '/experiencias/': typeof ExperienciasIndexRoute
   '/projetos/': typeof ProjetosIndexRoute
+  '/engenharia-de-presenca/projetos/$slug': typeof EngenhariaDePresencaProjetosSlugRoute
+  '/engenharia-de-presenca/projetos/': typeof EngenhariaDePresencaProjetosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/locacao-de-equipamentos': typeof LocacaoDeEquipamentosRoute
   '/parceiros': typeof ParceirosRoute
+  '/sistemas-e-aplicativos': typeof SistemasEAplicativosRoute
   '/tecnologia': typeof TecnologiaRoute
   '/engenharia-de-presenca/cultura': typeof EngenhariaDePresencaCulturaRoute
   '/engenharia-de-presenca/eventos-e-espacos': typeof EngenhariaDePresencaEventosEEspacosRoute
@@ -144,6 +168,8 @@ export interface FileRoutesByTo {
   '/engenharia-de-presenca': typeof EngenhariaDePresencaIndexRoute
   '/experiencias': typeof ExperienciasIndexRoute
   '/projetos': typeof ProjetosIndexRoute
+  '/engenharia-de-presenca/projetos/$slug': typeof EngenhariaDePresencaProjetosSlugRoute
+  '/engenharia-de-presenca/projetos': typeof EngenhariaDePresencaProjetosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -152,6 +178,7 @@ export interface FileRoutesById {
   '/experiencias': typeof ExperienciasRouteWithChildren
   '/locacao-de-equipamentos': typeof LocacaoDeEquipamentosRoute
   '/parceiros': typeof ParceirosRoute
+  '/sistemas-e-aplicativos': typeof SistemasEAplicativosRoute
   '/tecnologia': typeof TecnologiaRoute
   '/engenharia-de-presenca/cultura': typeof EngenhariaDePresencaCulturaRoute
   '/engenharia-de-presenca/eventos-e-espacos': typeof EngenhariaDePresencaEventosEEspacosRoute
@@ -163,6 +190,8 @@ export interface FileRoutesById {
   '/engenharia-de-presenca/': typeof EngenhariaDePresencaIndexRoute
   '/experiencias/': typeof ExperienciasIndexRoute
   '/projetos/': typeof ProjetosIndexRoute
+  '/engenharia-de-presenca/projetos/$slug': typeof EngenhariaDePresencaProjetosSlugRoute
+  '/engenharia-de-presenca/projetos/': typeof EngenhariaDePresencaProjetosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -172,6 +201,7 @@ export interface FileRouteTypes {
     | '/experiencias'
     | '/locacao-de-equipamentos'
     | '/parceiros'
+    | '/sistemas-e-aplicativos'
     | '/tecnologia'
     | '/engenharia-de-presenca/cultura'
     | '/engenharia-de-presenca/eventos-e-espacos'
@@ -183,11 +213,14 @@ export interface FileRouteTypes {
     | '/engenharia-de-presenca/'
     | '/experiencias/'
     | '/projetos/'
+    | '/engenharia-de-presenca/projetos/$slug'
+    | '/engenharia-de-presenca/projetos/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/locacao-de-equipamentos'
     | '/parceiros'
+    | '/sistemas-e-aplicativos'
     | '/tecnologia'
     | '/engenharia-de-presenca/cultura'
     | '/engenharia-de-presenca/eventos-e-espacos'
@@ -199,6 +232,8 @@ export interface FileRouteTypes {
     | '/engenharia-de-presenca'
     | '/experiencias'
     | '/projetos'
+    | '/engenharia-de-presenca/projetos/$slug'
+    | '/engenharia-de-presenca/projetos'
   id:
     | '__root__'
     | '/'
@@ -206,6 +241,7 @@ export interface FileRouteTypes {
     | '/experiencias'
     | '/locacao-de-equipamentos'
     | '/parceiros'
+    | '/sistemas-e-aplicativos'
     | '/tecnologia'
     | '/engenharia-de-presenca/cultura'
     | '/engenharia-de-presenca/eventos-e-espacos'
@@ -217,6 +253,8 @@ export interface FileRouteTypes {
     | '/engenharia-de-presenca/'
     | '/experiencias/'
     | '/projetos/'
+    | '/engenharia-de-presenca/projetos/$slug'
+    | '/engenharia-de-presenca/projetos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -225,6 +263,7 @@ export interface RootRouteChildren {
   ExperienciasRoute: typeof ExperienciasRouteWithChildren
   LocacaoDeEquipamentosRoute: typeof LocacaoDeEquipamentosRoute
   ParceirosRoute: typeof ParceirosRoute
+  SistemasEAplicativosRoute: typeof SistemasEAplicativosRoute
   TecnologiaRoute: typeof TecnologiaRoute
   ProjetosSlugRoute: typeof ProjetosSlugRoute
   ProjetosIndexRoute: typeof ProjetosIndexRoute
@@ -237,6 +276,13 @@ declare module '@tanstack/react-router' {
       path: '/tecnologia'
       fullPath: '/tecnologia'
       preLoaderRoute: typeof TecnologiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sistemas-e-aplicativos': {
+      id: '/sistemas-e-aplicativos'
+      path: '/sistemas-e-aplicativos'
+      fullPath: '/sistemas-e-aplicativos'
+      preLoaderRoute: typeof SistemasEAplicativosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/parceiros': {
@@ -344,6 +390,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EngenhariaDePresencaCulturaRouteImport
       parentRoute: typeof EngenhariaDePresencaRoute
     }
+    '/engenharia-de-presenca/projetos/': {
+      id: '/engenharia-de-presenca/projetos/'
+      path: '/projetos'
+      fullPath: '/engenharia-de-presenca/projetos/'
+      preLoaderRoute: typeof EngenhariaDePresencaProjetosIndexRouteImport
+      parentRoute: typeof EngenhariaDePresencaRoute
+    }
+    '/engenharia-de-presenca/projetos/$slug': {
+      id: '/engenharia-de-presenca/projetos/$slug'
+      path: '/projetos/$slug'
+      fullPath: '/engenharia-de-presenca/projetos/$slug'
+      preLoaderRoute: typeof EngenhariaDePresencaProjetosSlugRouteImport
+      parentRoute: typeof EngenhariaDePresencaRoute
+    }
   }
 }
 
@@ -352,6 +412,8 @@ interface EngenhariaDePresencaRouteChildren {
   EngenhariaDePresencaEventosEEspacosRoute: typeof EngenhariaDePresencaEventosEEspacosRoute
   EngenhariaDePresencaMarcasRoute: typeof EngenhariaDePresencaMarcasRoute
   EngenhariaDePresencaIndexRoute: typeof EngenhariaDePresencaIndexRoute
+  EngenhariaDePresencaProjetosSlugRoute: typeof EngenhariaDePresencaProjetosSlugRoute
+  EngenhariaDePresencaProjetosIndexRoute: typeof EngenhariaDePresencaProjetosIndexRoute
 }
 
 const EngenhariaDePresencaRouteChildren: EngenhariaDePresencaRouteChildren = {
@@ -360,6 +422,9 @@ const EngenhariaDePresencaRouteChildren: EngenhariaDePresencaRouteChildren = {
     EngenhariaDePresencaEventosEEspacosRoute,
   EngenhariaDePresencaMarcasRoute: EngenhariaDePresencaMarcasRoute,
   EngenhariaDePresencaIndexRoute: EngenhariaDePresencaIndexRoute,
+  EngenhariaDePresencaProjetosSlugRoute: EngenhariaDePresencaProjetosSlugRoute,
+  EngenhariaDePresencaProjetosIndexRoute:
+    EngenhariaDePresencaProjetosIndexRoute,
 }
 
 const EngenhariaDePresencaRouteWithChildren =
@@ -389,6 +454,7 @@ const rootRouteChildren: RootRouteChildren = {
   ExperienciasRoute: ExperienciasRouteWithChildren,
   LocacaoDeEquipamentosRoute: LocacaoDeEquipamentosRoute,
   ParceirosRoute: ParceirosRoute,
+  SistemasEAplicativosRoute: SistemasEAplicativosRoute,
   TecnologiaRoute: TecnologiaRoute,
   ProjetosSlugRoute: ProjetosSlugRoute,
   ProjetosIndexRoute: ProjetosIndexRoute,
