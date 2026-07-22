@@ -1,11 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, ChevronRight } from "lucide-react";
 
-import eventosAsset from "@/assets/eventos.jpg.asset.json";
-
 import { SubpageShell } from "@/components/fohat/SubpageShell";
 import { Reveal } from "@/components/fohat/Reveal";
-import { Parallax } from "@/components/fohat/Parallax";
 import { ContactDialog } from "@/components/fohat/ContactDialog";
 import { Marquee } from "@/components/fohat/Subpage";
 import {
@@ -95,27 +92,72 @@ export function TelaBrasilCase() {
           </Reveal>
 
           <Reveal delay={140}>
-            <Parallax strength={40}>
-              <div className="relative h-[380px] overflow-hidden rounded-[32px_120px_32px_120px] shadow-[var(--shadow-elegant)] lg:h-[520px]">
-                <img
-                  src={eventosAsset.url}
-                  alt="Público vivenciando o cinema brasileiro em espaço urbano"
-                  className="h-full w-full object-cover"
-                  style={{ filter: "saturate(0.85) contrast(1.08)" }}
-                />
-                <div
-                  aria-hidden
-                  className="absolute inset-0"
-                  style={{
-                    background:
-                      "linear-gradient(180deg, transparent 45%, oklch(0.22 0.023 250 / 0.7))",
-                  }}
-                />
-                <div className="fohat-mono absolute left-5 top-5 rounded-full border border-white/30 bg-black/25 px-3 py-1.5 text-[10px] uppercase tracking-[0.18em] text-white/90 backdrop-blur-md">
-                  6 capitais · 3 ciclos
-                </div>
+            <div className="relative h-[380px] overflow-hidden rounded-[32px_120px_32px_120px] border border-white/10 bg-navy shadow-[var(--shadow-elegant)] lg:h-[520px]">
+              <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-60" />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  background:
+                    "radial-gradient(60% 50% at 30% 25%, oklch(0.4 0.1 240 / 0.55), transparent 60%), radial-gradient(50% 45% at 75% 80%, oklch(0.5 0.12 210 / 0.4), transparent 65%)",
+                }}
+              />
+              {/* Procedural map — six capitals + three cycles */}
+              <svg
+                viewBox="0 0 600 780"
+                preserveAspectRatio="xMidYMid slice"
+                className="absolute inset-0 h-full w-full"
+                aria-hidden
+              >
+                <defs>
+                  <linearGradient id="tb-line" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="oklch(0.85 0.14 210)" stopOpacity="0.8" />
+                    <stop offset="100%" stopColor="oklch(0.7 0.15 250)" stopOpacity="0.2" />
+                  </linearGradient>
+                </defs>
+                {/* Cycle 01 — Brasília + Goiânia */}
+                <line x1="320" y1="200" x2="270" y2="260" stroke="url(#tb-line)" strokeWidth="1" />
+                <circle cx="320" cy="200" r="6" fill="oklch(0.9 0.12 210)" />
+                <circle cx="270" cy="260" r="6" fill="oklch(0.9 0.12 210)" />
+                <text x="340" y="196" fill="oklch(0.95 0.02 250)" fontSize="14" fontFamily="ui-monospace,monospace">Brasília</text>
+                <text x="150" y="264" fill="oklch(0.95 0.02 250)" fontSize="14" fontFamily="ui-monospace,monospace" textAnchor="end">Goiânia</text>
+                {/* Cycle 02 — BH + Salvador */}
+                <line x1="360" y1="360" x2="470" y2="330" stroke="url(#tb-line)" strokeWidth="1" />
+                <circle cx="360" cy="360" r="6" fill="oklch(0.9 0.12 210)" />
+                <circle cx="470" cy="330" r="6" fill="oklch(0.9 0.12 210)" />
+                <text x="340" y="384" fill="oklch(0.95 0.02 250)" fontSize="14" fontFamily="ui-monospace,monospace" textAnchor="end">Belo Horizonte</text>
+                <text x="490" y="326" fill="oklch(0.95 0.02 250)" fontSize="14" fontFamily="ui-monospace,monospace">Salvador</text>
+                {/* Cycle 03 — SP + POA */}
+                <line x1="330" y1="500" x2="290" y2="640" stroke="url(#tb-line)" strokeWidth="1" />
+                <circle cx="330" cy="500" r="6" fill="oklch(0.9 0.12 210)" />
+                <circle cx="290" cy="640" r="6" fill="oklch(0.9 0.12 210)" />
+                <text x="350" y="504" fill="oklch(0.95 0.02 250)" fontSize="14" fontFamily="ui-monospace,monospace">São Paulo</text>
+                <text x="270" y="664" fill="oklch(0.95 0.02 250)" fontSize="14" fontFamily="ui-monospace,monospace" textAnchor="end">Porto Alegre</text>
+
+                {/* Cycle brackets */}
+                {[
+                  { y: 230, label: "Ciclo 01 · 18–20 jun" },
+                  { y: 345, label: "Ciclo 02 · 25–27 jun" },
+                  { y: 570, label: "Ciclo 03 · 01–03 jul" },
+                ].map((c) => (
+                  <g key={c.label}>
+                    <line x1="40" y1={c.y} x2="90" y2={c.y} stroke="oklch(0.85 0.14 210)" strokeWidth="0.8" opacity="0.6" />
+                    <text x="40" y={c.y - 8} fill="oklch(0.85 0.14 210)" fontSize="10" fontFamily="ui-monospace,monospace" letterSpacing="1">{c.label.toUpperCase()}</text>
+                  </g>
+                ))}
+              </svg>
+              <div
+                aria-hidden
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(180deg, transparent 45%, oklch(0.22 0.023 250 / 0.6))",
+                }}
+              />
+              <div className="fohat-mono absolute left-5 top-5 rounded-full border border-white/30 bg-black/25 px-3 py-1.5 text-[10px] uppercase tracking-[0.18em] text-white/90 backdrop-blur-md">
+                6 capitais · 3 ciclos
               </div>
-            </Parallax>
+            </div>
           </Reveal>
         </div>
       </section>
