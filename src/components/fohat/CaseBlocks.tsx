@@ -188,6 +188,7 @@ export function MediaPlaceholder({
   tone?: "light" | "dark";
   className?: string;
 }) {
+  if (!import.meta.env.DEV) return null;
   return (
     <div
       className={cn(
@@ -333,6 +334,7 @@ export function DashboardPlaceholder({
   title: string;
   metrics: string[];
 }) {
+  if (!import.meta.env.DEV) return null;
   return (
     <Reveal
       as="article"
@@ -424,6 +426,7 @@ export function ResultsPlaceholder({
 }: {
   fields: string[];
 }) {
+  if (!import.meta.env.DEV) return null;
   return (
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {fields.map((f, i) => (
