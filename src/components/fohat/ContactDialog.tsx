@@ -138,9 +138,10 @@ export function ContactDialog({
             Vamos projetar uma presença.
           </DialogTitle>
           <DialogDescription className="text-base text-muted-foreground">
-            Deixe seu contato. Retornamos em até um dia útil para entender o que
-            você quer que o público viva, sinta ou lembre.
+            Deixe seu contato e conte brevemente sua ideia, necessidade ou
+            desafio. Não precisa estar tudo definido para começarmos a conversa.
           </DialogDescription>
+
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-5" noValidate>
