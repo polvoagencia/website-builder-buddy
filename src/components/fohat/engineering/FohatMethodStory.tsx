@@ -89,8 +89,8 @@ export function FohatMethodStory() {
             A presença não acontece por acaso. Ela é projetada.
           </h2>
           <p className="fohat-lead mt-5">
-            Cinco etapas conectam intenção, tecnologia e execução até a
-            experiência encontrar o público.
+            Cinco etapas conectam intenção, tecnologia e execução até a experiência encontrar o
+            público.
           </p>
         </SectionReveal>
 
@@ -120,9 +120,7 @@ export function FohatMethodStory() {
                       onKeyDown={(e) => onKeyDown(e, i)}
                       className={cn(
                         "group flex items-center gap-4 rounded-2xl border px-4 py-3 text-left transition-all outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2",
-                        isActive
-                          ? "border-blue/40 bg-ice"
-                          : "border-transparent hover:border-line",
+                        isActive ? "border-blue/40 bg-ice" : "border-transparent hover:border-line",
                       )}
                     >
                       <span
@@ -133,9 +131,7 @@ export function FohatMethodStory() {
                       >
                         {s.letter}
                       </span>
-                      <span className="text-sm font-bold tracking-tight">
-                        {s.title}
-                      </span>
+                      <span className="text-sm font-bold tracking-tight">{s.title}</span>
                     </button>
                   );
                 })}
@@ -202,12 +198,8 @@ export function FohatMethodStory() {
                       <div className="fohat-mono text-[10px] uppercase tracking-[0.22em] text-blue">
                         Etapa {String(i + 1).padStart(2, "0")}
                       </div>
-                      <h3 className="mt-1 text-lg font-bold tracking-tight">
-                        {s.title}
-                      </h3>
-                      <p className="mt-2 text-sm text-muted-foreground">
-                        {s.desc}
-                      </p>
+                      <h3 className="mt-1 text-lg font-bold tracking-tight">{s.title}</h3>
+                      <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
                     </div>
                   </div>
                 </li>

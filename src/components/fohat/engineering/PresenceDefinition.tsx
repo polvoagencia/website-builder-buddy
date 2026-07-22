@@ -11,16 +11,12 @@ export function PresenceDefinition() {
       aria-labelledby="definicao-heading"
       className="relative overflow-hidden bg-white py-32 lg:py-44"
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 fohat-grid-bg opacity-40"
-      />
+      <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg opacity-40" />
       <div
         aria-hidden
         className="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full"
         style={{
-          background:
-            "radial-gradient(circle, oklch(0.85 0.055 245 / 0.35), transparent 65%)",
+          background: "radial-gradient(circle, oklch(0.85 0.055 245 / 0.35), transparent 65%)",
         }}
       />
 

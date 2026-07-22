@@ -47,8 +47,8 @@ export function PresenceTerritories() {
             O mesmo método. Contextos diferentes.
           </h2>
           <p className="fohat-lead mt-5">
-            Marcas, cultura, eventos e espaços chegam com desafios distintos —
-            cada um resolvido com a mesma lógica de engenharia.
+            Marcas, cultura, eventos e espaços chegam com desafios distintos — cada um resolvido com
+            a mesma lógica de engenharia.
           </p>
         </SectionReveal>
 
@@ -90,12 +90,8 @@ export function PresenceTerritories() {
                   </div>
                   <div className="flex flex-1 flex-col gap-4 p-7">
                     <div>
-                      <h3 className="text-2xl font-bold tracking-tight">
-                        {t.label}
-                      </h3>
-                      <p className="mt-2 text-sm text-muted-foreground">
-                        {t.description}
-                      </p>
+                      <h3 className="text-2xl font-bold tracking-tight">{t.label}</h3>
+                      <p className="mt-2 text-sm text-muted-foreground">{t.description}</p>
                     </div>
                     <ul className="flex flex-wrap gap-1.5">
                       {media.tags.map((tag) => (

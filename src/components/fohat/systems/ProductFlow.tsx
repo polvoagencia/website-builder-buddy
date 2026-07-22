@@ -12,7 +12,10 @@ export function ProductFlow() {
       aria-labelledby="interfaces-heading"
       className="relative overflow-hidden bg-navy py-24 text-white lg:py-32"
     >
-      <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-40" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-40"
+      />
       <div className="fohat-shell relative">
         <SectionReveal className="mb-14 max-w-[820px]">
           <span className="fohat-eyebrow" style={{ color: "var(--color-cyan)" }}>
@@ -22,8 +25,8 @@ export function ProductFlow() {
             Cada camada da operação ganha uma interface própria.
           </h2>
           <p className="fohat-lead mt-5 text-[oklch(0.85_0.02_250)]">
-            Painéis, aplicativos, integrações e automações — representados aqui
-            em estado neutro, sem números fictícios.
+            Painéis, aplicativos, integrações e automações — representados aqui em estado neutro,
+            sem números fictícios.
           </p>
         </SectionReveal>
 
@@ -70,14 +73,43 @@ export function ProductFlow() {
 
           <Panel title="Integração" state="ativa">
             <svg viewBox="0 0 200 120" aria-hidden className="mt-3 h-24 w-full">
-              <rect x="10" y="30" width="50" height="30" rx="4" fill="oklch(1 0 0 / 0.08)" stroke="oklch(1 0 0 / 0.15)" />
-              <rect x="140" y="30" width="50" height="30" rx="4" fill="oklch(1 0 0 / 0.08)" stroke="oklch(1 0 0 / 0.15)" />
-              <rect x="75" y="70" width="50" height="30" rx="4" fill="oklch(1 0 0 / 0.08)" stroke="oklch(1 0 0 / 0.15)" />
+              <rect
+                x="10"
+                y="30"
+                width="50"
+                height="30"
+                rx="4"
+                fill="oklch(1 0 0 / 0.08)"
+                stroke="oklch(1 0 0 / 0.15)"
+              />
+              <rect
+                x="140"
+                y="30"
+                width="50"
+                height="30"
+                rx="4"
+                fill="oklch(1 0 0 / 0.08)"
+                stroke="oklch(1 0 0 / 0.15)"
+              />
+              <rect
+                x="75"
+                y="70"
+                width="50"
+                height="30"
+                rx="4"
+                fill="oklch(1 0 0 / 0.08)"
+                stroke="oklch(1 0 0 / 0.15)"
+              />
               <path d="M60 45 L140 45" stroke="oklch(0.85 0.14 210)" strokeDasharray="3 3" />
               <path d="M35 60 L100 70" stroke="oklch(0.85 0.14 210)" strokeDasharray="3 3" />
               <path d="M165 60 L125 70" stroke="oklch(0.85 0.14 210)" strokeDasharray="3 3" />
               <circle cx="100" cy="45" r="3" fill="oklch(0.85 0.14 210)">
-                <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite" />
+                <animate
+                  attributeName="opacity"
+                  values="0.3;1;0.3"
+                  dur="2s"
+                  repeatCount="indefinite"
+                />
               </circle>
             </svg>
           </Panel>
@@ -86,16 +118,40 @@ export function ProductFlow() {
             <svg viewBox="0 0 200 120" aria-hidden className="mt-3 h-24 w-full">
               {[0, 1, 2, 3].map((i) => (
                 <g key={i}>
-                  <circle cx={30 + i * 45} cy="60" r="7" fill="oklch(1 0 0 / 0.08)" stroke="oklch(0.85 0.14 210 / 0.6)" />
-                  <text x={30 + i * 45} y="63" fontSize="6" textAnchor="middle" fill="oklch(0.85 0.14 210)" className="fohat-mono">
+                  <circle
+                    cx={30 + i * 45}
+                    cy="60"
+                    r="7"
+                    fill="oklch(1 0 0 / 0.08)"
+                    stroke="oklch(0.85 0.14 210 / 0.6)"
+                  />
+                  <text
+                    x={30 + i * 45}
+                    y="63"
+                    fontSize="6"
+                    textAnchor="middle"
+                    fill="oklch(0.85 0.14 210)"
+                    className="fohat-mono"
+                  >
                     {String(i + 1).padStart(2, "0")}
                   </text>
                   {i < 3 && (
-                    <path d={`M${37 + i * 45} 60 L${68 + i * 45} 60`} stroke="oklch(0.85 0.14 210 / 0.6)" strokeDasharray="2 2" />
+                    <path
+                      d={`M${37 + i * 45} 60 L${68 + i * 45} 60`}
+                      stroke="oklch(0.85 0.14 210 / 0.6)"
+                      strokeDasharray="2 2"
+                    />
                   )}
                 </g>
               ))}
-              <text x="100" y="30" fontSize="7" textAnchor="middle" fill="oklch(1 0 0 / 0.6)" className="fohat-mono">
+              <text
+                x="100"
+                y="30"
+                fontSize="7"
+                textAnchor="middle"
+                fill="oklch(1 0 0 / 0.6)"
+                className="fohat-mono"
+              >
                 FLUXO EM EXECUÇÃO
               </text>
             </svg>

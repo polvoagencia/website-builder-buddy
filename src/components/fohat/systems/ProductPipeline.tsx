@@ -50,10 +50,7 @@ export function ProductPipeline() {
             {STEPS.map((s, i) => (
               <li key={s.title} className="relative">
                 <div className="relative flex flex-col items-start">
-                  <span
-                    aria-hidden
-                    className="mb-2 flex h-[46px] items-center justify-center"
-                  >
+                  <span aria-hidden className="mb-2 flex h-[46px] items-center justify-center">
                     <span className="flex h-7 w-7 items-center justify-center rounded-full border border-blue bg-white text-[10px] font-bold text-blue">
                       {String(i + 1).padStart(2, "0")}
                     </span>
@@ -62,9 +59,7 @@ export function ProductPipeline() {
                     <div className="fohat-mono text-[10px] uppercase tracking-[0.22em] text-blue">
                       Etapa {String(i + 1).padStart(2, "0")}
                     </div>
-                    <h3 className="mt-2 text-lg font-bold tracking-tight">
-                      {s.title}
-                    </h3>
+                    <h3 className="mt-2 text-lg font-bold tracking-tight">{s.title}</h3>
                     <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
                   </div>
                 </div>
@@ -76,10 +71,7 @@ export function ProductPipeline() {
         {/* Mobile: timeline vertical */}
         <ol className="space-y-4 md:hidden">
           {STEPS.map((s, i) => (
-            <li
-              key={s.title}
-              className="relative rounded-2xl border border-line bg-mist p-5"
-            >
+            <li key={s.title} className="relative rounded-2xl border border-line bg-mist p-5">
               <div className="flex items-start gap-4">
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-blue bg-white text-xs font-bold text-blue">
                   {String(i + 1).padStart(2, "0")}

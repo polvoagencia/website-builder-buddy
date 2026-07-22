@@ -99,8 +99,8 @@ export function CapabilityNetwork() {
             Uma rede que se combina conforme o problema.
           </h2>
           <p className="fohat-lead mt-5">
-            Cada capacidade é um nó. Nenhum projeto usa todos — mas quase todos
-            precisam de mais de um.
+            Cada capacidade é um nó. Nenhum projeto usa todos — mas quase todos precisam de mais de
+            um.
           </p>
         </SectionReveal>
 
@@ -114,7 +114,14 @@ export function CapabilityNetwork() {
             className="relative aspect-square w-full max-w-[560px]"
           >
             <svg viewBox="0 0 100 100" aria-hidden className="absolute inset-0 h-full w-full">
-              <circle cx="50" cy="50" r="34" fill="none" stroke="oklch(0.46 0.055 253 / 0.2)" strokeDasharray="1 2" />
+              <circle
+                cx="50"
+                cy="50"
+                r="34"
+                fill="none"
+                stroke="oklch(0.46 0.055 253 / 0.2)"
+                strokeDasharray="1 2"
+              />
               {POSITIONS.map((p, i) => (
                 <line
                   key={i}
@@ -122,12 +129,21 @@ export function CapabilityNetwork() {
                   y1="50"
                   x2={p.x}
                   y2={p.y}
-                  stroke={i === active ? "oklch(0.46 0.055 253 / 0.9)" : "oklch(0.46 0.055 253 / 0.25)"}
+                  stroke={
+                    i === active ? "oklch(0.46 0.055 253 / 0.9)" : "oklch(0.46 0.055 253 / 0.25)"
+                  }
                   strokeWidth={i === active ? 0.6 : 0.3}
                 />
               ))}
               <circle cx="50" cy="50" r="6" fill="oklch(0.22 0.023 250)" />
-              <text x="50" y="52" fontSize="2.4" textAnchor="middle" fill="oklch(1 0 0)" className="fohat-mono">
+              <text
+                x="50"
+                y="52"
+                fontSize="2.4"
+                textAnchor="middle"
+                fill="oklch(1 0 0)"
+                className="fohat-mono"
+              >
                 OPERAÇÃO
               </text>
             </svg>
@@ -171,9 +187,7 @@ export function CapabilityNetwork() {
                 exit={reduce ? undefined : { opacity: 0, y: -6 }}
                 transition={{ duration: 0.28, ease: [0.22, 0.61, 0.36, 1] }}
               >
-                <h3 className="mt-3 text-3xl font-bold tracking-tight">
-                  {cap.label}
-                </h3>
+                <h3 className="mt-3 text-3xl font-bold tracking-tight">{cap.label}</h3>
                 <dl className="mt-6 space-y-4">
                   <Row term="Problema que resolve" desc={cap.problem} />
                   <Row term="Contexto de uso" desc={cap.context} />
@@ -206,9 +220,7 @@ export function CapabilityNetwork() {
                     onClick={() => setActive(open ? -1 : i)}
                     className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
                   >
-                    <span className="text-sm font-bold tracking-tight">
-                      {c.label}
-                    </span>
+                    <span className="text-sm font-bold tracking-tight">{c.label}</span>
                     <span className="fohat-mono text-[10px] uppercase tracking-[0.2em] text-blue">
                       {open ? "—" : "+"}
                     </span>
@@ -233,9 +245,7 @@ export function CapabilityNetwork() {
 function Row({ term, desc }: { term: string; desc: string }) {
   return (
     <div>
-      <dt className="fohat-mono text-[10px] uppercase tracking-[0.2em] text-blue">
-        {term}
-      </dt>
+      <dt className="fohat-mono text-[10px] uppercase tracking-[0.2em] text-blue">{term}</dt>
       <dd className="mt-1 text-sm text-navy">{desc}</dd>
     </div>
   );

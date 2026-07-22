@@ -14,7 +14,10 @@ export function PresenceProjects() {
       aria-labelledby="projetos-heading"
       className="relative overflow-hidden bg-navy py-24 text-white lg:py-32"
     >
-      <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-40" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-40"
+      />
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
@@ -33,8 +36,8 @@ export function PresenceProjects() {
             Do conceito ao funcionamento diante do público.
           </h2>
           <p className="fohat-lead mt-6 text-[oklch(0.85_0.02_250)]">
-            Conheça projetos em que a metodologia saiu do conceito e entrou em
-            funcionamento diante do público.
+            Conheça projetos em que a metodologia saiu do conceito e entrou em funcionamento diante
+            do público.
           </p>
           <div className="mt-10">
             <Link
@@ -49,11 +52,7 @@ export function PresenceProjects() {
 
         <SectionReveal delay={120} className="relative">
           <div className="relative aspect-[5/4] overflow-hidden rounded-[28px] border border-white/12 bg-white/[0.03] backdrop-blur-sm">
-            <svg
-              viewBox="0 0 500 400"
-              aria-hidden
-              className="absolute inset-0 h-full w-full"
-            >
+            <svg viewBox="0 0 500 400" aria-hidden className="absolute inset-0 h-full w-full">
               <defs>
                 <linearGradient id="pp-cell" x1="0" y1="0" x2="1" y2="1">
                   <stop offset="0%" stopColor="oklch(0.85 0.055 245 / 0.35)" />

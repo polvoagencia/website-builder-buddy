@@ -19,10 +19,7 @@ export function PresenceJourney() {
       aria-labelledby="jornada-heading"
       className="relative overflow-hidden bg-mist py-24 lg:py-32"
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 fohat-grid-bg opacity-40"
-      />
+      <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg opacity-40" />
 
       <div className="fohat-shell relative">
         <SectionReveal className="mb-14 max-w-[820px]">
@@ -31,8 +28,7 @@ export function PresenceJourney() {
             A relação se aprofunda a cada passo.
           </h2>
           <p className="fohat-lead mt-5">
-            O público não assiste — atravessa camadas até se tornar parte da
-            experiência.
+            O público não assiste — atravessa camadas até se tornar parte da experiência.
           </p>
         </SectionReveal>
 
@@ -100,12 +96,8 @@ export function PresenceJourney() {
                 <div className="fohat-mono text-[10px] uppercase tracking-[0.22em] text-blue">
                   {String(i + 1).padStart(2, "0")}
                 </div>
-                <h3 className="mt-1 text-xl font-bold tracking-tight">
-                  {s.title}
-                </h3>
-                <p className="mt-2 max-w-md text-sm text-muted-foreground">
-                  {s.desc}
-                </p>
+                <h3 className="mt-1 text-xl font-bold tracking-tight">{s.title}</h3>
+                <p className="mt-2 max-w-md text-sm text-muted-foreground">{s.desc}</p>
               </SectionReveal>
             ))}
           </ol>

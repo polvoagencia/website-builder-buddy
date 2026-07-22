@@ -54,8 +54,7 @@ export function SystemsArchitecture() {
             Um sistema é uma estrutura conectada — não uma tela.
           </h2>
           <p className="fohat-lead mt-5">
-            Cada camada resolve uma parte específica do problema e conversa com
-            as demais.
+            Cada camada resolve uma parte específica do problema e conversa com as demais.
           </p>
         </SectionReveal>
 
@@ -72,7 +71,14 @@ export function SystemsArchitecture() {
                 </defs>
 
                 {/* eixo central vertical (pipeline) */}
-                <line x1="260" y1="60" x2="260" y2="460" stroke="oklch(0.46 0.055 253 / 0.35)" strokeDasharray="4 6" />
+                <line
+                  x1="260"
+                  y1="60"
+                  x2="260"
+                  y2="460"
+                  stroke="oklch(0.46 0.055 253 / 0.35)"
+                  strokeDasharray="4 6"
+                />
 
                 {/* nós das 5 camadas */}
                 {LAYERS.map((_, i) => {
@@ -81,7 +87,14 @@ export function SystemsArchitecture() {
                   const bx = 260 + side * 160;
                   return (
                     <g key={i}>
-                      <line x1="260" y1={y} x2={bx} y2={y} stroke="url(#sa-line)" strokeWidth="0.8" />
+                      <line
+                        x1="260"
+                        y1={y}
+                        x2={bx}
+                        y2={y}
+                        stroke="url(#sa-line)"
+                        strokeWidth="0.8"
+                      />
                       <rect
                         x={bx - 50}
                         y={y - 18}
@@ -102,7 +115,13 @@ export function SystemsArchitecture() {
                         {LAYERS[i].tag.toUpperCase()}
                       </text>
                       <circle cx="260" cy={y} r="6" fill="oklch(0.22 0.023 250)" />
-                      <circle cx="260" cy={y} r="10" fill="none" stroke="oklch(0.85 0.055 245 / 0.6)" />
+                      <circle
+                        cx="260"
+                        cy={y}
+                        r="10"
+                        fill="none"
+                        stroke="oklch(0.85 0.055 245 / 0.6)"
+                      />
                     </g>
                   );
                 })}
@@ -147,9 +166,7 @@ export function SystemsArchitecture() {
                   <div className="fohat-mono text-[10px] uppercase tracking-[0.22em] text-blue">
                     {l.tag}
                   </div>
-                  <div className="mt-1 text-base font-bold tracking-tight">
-                    {l.title}
-                  </div>
+                  <div className="mt-1 text-base font-bold tracking-tight">{l.title}</div>
                   <p className="mt-1 text-sm text-muted-foreground">{l.desc}</p>
                 </div>
               </SectionReveal>

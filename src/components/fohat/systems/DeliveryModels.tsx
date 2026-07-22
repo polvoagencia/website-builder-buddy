@@ -18,7 +18,12 @@ const MODELS = [
     tag: "Validação",
     title: "MVP funcional",
     desc: "Primeira versão utilizável para validar hipóteses e valor real.",
-    items: ["Primeira versão utilizável", "Validação com usuários", "Aprendizado técnico", "Direção para o produto"],
+    items: [
+      "Primeira versão utilizável",
+      "Validação com usuários",
+      "Aprendizado técnico",
+      "Direção para o produto",
+    ],
   },
   {
     depth: 3,
@@ -44,8 +49,7 @@ export function DeliveryModels() {
             Três profundidades — não uma escada obrigatória.
           </h2>
           <p className="fohat-lead mt-5">
-            Cada projeto começa onde faz sentido. Nem todos passam por todas as
-            camadas.
+            Cada projeto começa onde faz sentido. Nem todos passam por todas as camadas.
           </p>
         </SectionReveal>
 
@@ -78,10 +82,7 @@ export function DeliveryModels() {
 
               <ul className="mt-6 space-y-2">
                 {m.items.map((it) => (
-                  <li
-                    key={it}
-                    className="flex items-start gap-3 text-sm text-navy"
-                  >
+                  <li key={it} className="flex items-start gap-3 text-sm text-navy">
                     <span
                       aria-hidden
                       className="mt-1.5 block h-1.5 w-1.5 shrink-0 rounded-full bg-blue"

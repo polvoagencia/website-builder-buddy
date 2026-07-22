@@ -21,8 +21,7 @@ export function SystemsHero() {
         aria-hidden
         className="pointer-events-none absolute -top-40 right-[-10%] h-[520px] w-[520px] rounded-full"
         style={{
-          background:
-            "radial-gradient(circle, oklch(0.85 0.055 245 / 0.4), transparent 65%)",
+          background: "radial-gradient(circle, oklch(0.85 0.055 245 / 0.4), transparent 65%)",
         }}
       />
 
@@ -31,7 +30,9 @@ export function SystemsHero() {
           aria-label="Você está aqui"
           className="fohat-mono mb-8 flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-blue"
         >
-          <Link to="/" className="hover:text-navy">Início</Link>
+          <Link to="/" className="hover:text-navy">
+            Início
+          </Link>
           <ChevronRight aria-hidden className="h-3 w-3 opacity-50" />
           <span className="text-navy/70">Sistemas e Aplicativos</span>
         </nav>
@@ -54,9 +55,9 @@ export function SystemsHero() {
               </span>
             </h1>
             <p className="fohat-lead mt-8 max-w-[560px]">
-              A FOHAT desenvolve soluções digitais sob medida para empresas,
-              projetos, eventos e operações que precisam organizar processos,
-              conectar informações e criar novas formas de interação.
+              A FOHAT desenvolve soluções digitais sob medida para empresas, projetos, eventos e
+              operações que precisam organizar processos, conectar informações e criar novas formas
+              de interação.
             </p>
             <SectionReveal delay={160} className="mt-10 flex flex-wrap gap-3">
               <Link
@@ -65,7 +66,9 @@ export function SystemsHero() {
                 className="group inline-flex h-14 items-center gap-3 rounded-full bg-navy px-7 text-sm font-bold text-white shadow-[var(--shadow-cta)] transition-transform hover:-translate-y-0.5 hover:bg-blue"
               >
                 Conte o sistema que você precisa desenvolver
-                <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+                <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+                  →
+                </span>
               </Link>
               <InnerCTA to="/sistemas-e-aplicativos" hash="capacidades" variant="ghost">
                 Ver capacidades

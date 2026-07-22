@@ -18,10 +18,7 @@ export function PresenceHero() {
   ];
 
   return (
-    <section
-      id="visao-geral"
-      className="fohat-inner-hero relative pt-36 pb-24 lg:pt-44 lg:pb-32"
-    >
+    <section id="visao-geral" className="fohat-inner-hero relative pt-36 pb-24 lg:pt-44 lg:pb-32">
       <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg-dark" />
       <div aria-hidden className="fohat-scanline" style={{ top: "18%" }} />
       <div aria-hidden className="fohat-scanline" style={{ top: "62%", animationDelay: "6s" }} />
@@ -31,7 +28,9 @@ export function PresenceHero() {
           aria-label="Você está aqui"
           className="fohat-mono mb-8 flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-cyan/90"
         >
-          <Link to="/" className="text-cyan hover:text-white">Início</Link>
+          <Link to="/" className="text-cyan hover:text-white">
+            Início
+          </Link>
           <ChevronRight aria-hidden className="h-3 w-3 opacity-50" />
           <span className="text-white/70">Engenharia de Presença</span>
         </nav>
@@ -52,18 +51,15 @@ export function PresenceHero() {
               </span>
             </h1>
             <p className="fohat-lead mt-8 max-w-[560px] text-[oklch(0.85_0.02_250)]">
-              Engenharia de Presença é o método que a FOHAT desenvolveu para
-              transformar tecnologia, narrativa, espaço e participação humana em
-              uma experiência única — vivida, sentida e lembrada.
+              Engenharia de Presença é o método que a FOHAT desenvolveu para transformar tecnologia,
+              narrativa, espaço e participação humana em uma experiência única — vivida, sentida e
+              lembrada.
             </p>
             <SectionReveal delay={180} className="mt-10 flex flex-wrap gap-3">
               <InnerCTA to="/engenharia-de-presenca" hash="metodo">
                 Ver o método aplicado
               </InnerCTA>
-              <InnerCTA
-                to="/engenharia-de-presenca/projetos"
-                variant="ghost"
-              >
+              <InnerCTA to="/engenharia-de-presenca/projetos" variant="ghost">
                 Projetos de Engenharia de Presença
               </InnerCTA>
             </SectionReveal>
@@ -72,11 +68,7 @@ export function PresenceHero() {
           {/* Composição procedural: quatro camadas + centro humano */}
           <SectionReveal delay={140} className="relative">
             <div className="relative mx-auto aspect-square w-full max-w-[520px]">
-              <svg
-                viewBox="0 0 520 520"
-                aria-hidden
-                className="absolute inset-0 h-full w-full"
-              >
+              <svg viewBox="0 0 520 520" aria-hidden className="absolute inset-0 h-full w-full">
                 <defs>
                   <radialGradient id="ph-core" cx="50%" cy="50%" r="50%">
                     <stop offset="0%" stopColor="oklch(0.85 0.055 245)" stopOpacity="0.9" />
@@ -148,13 +140,7 @@ export function PresenceHero() {
                   { x: 260, y: 500, key: "esp" },
                   { x: 20, y: 260, key: "pub" },
                 ].map((p) => (
-                  <circle
-                    key={p.key}
-                    cx={p.x}
-                    cy={p.y}
-                    r="5"
-                    fill="oklch(0.85 0.055 245)"
-                  />
+                  <circle key={p.key} cx={p.x} cy={p.y} r="5" fill="oklch(0.85 0.055 245)" />
                 ))}
               </svg>
 
@@ -168,16 +154,11 @@ export function PresenceHero() {
                     "left-[2%] top-1/2 -translate-y-1/2 text-left",
                   ][i];
                   return (
-                    <li
-                      key={l.key}
-                      className={`absolute w-[42%] max-w-[180px] ${pos}`}
-                    >
+                    <li key={l.key} className={`absolute w-[42%] max-w-[180px] ${pos}`}>
                       <span className="fohat-mono block text-[10px] uppercase tracking-[0.22em] text-cyan">
                         0{i + 1}
                       </span>
-                      <span className="mt-1 block text-sm font-bold text-white">
-                        {l.label}
-                      </span>
+                      <span className="mt-1 block text-sm font-bold text-white">{l.label}</span>
                       <span className="mt-1 block text-[11px] leading-snug text-white/60">
                         {l.desc}
                       </span>

@@ -19,12 +19,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RENTAL_EQUIPMENT_OPTIONS } from "@/data/rental-equipment";
 import { supabase } from "@/integrations/supabase/client";
-import {
-  attachmentPath,
-  canSubmit,
-  getPageContext,
-  getStoredUtms,
-} from "@/lib/lead-tracking";
+import { attachmentPath, canSubmit, getPageContext, getStoredUtms } from "@/lib/lead-tracking";
 
 const MAX_FILE_MB = 10;
 const ACCEPTED_MIME = new Set([
@@ -246,10 +241,8 @@ export function RentalRequestDialog({
       return;
     }
 
-
     toast.success("Recebemos sua solicitação.", {
-      description:
-        "Nossa equipe verificará disponibilidade, configuração e logística.",
+      description: "Nossa equipe verificará disponibilidade, configuração e logística.",
     });
     reset();
     setFile(null);
@@ -260,7 +253,9 @@ export function RentalRequestDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <span ref={triggerRef} className="contents">{children}</span>
+        <span ref={triggerRef} className="contents">
+          {children}
+        </span>
       </DialogTrigger>
       <DialogContent className="max-h-[92vh] overflow-y-auto rounded-3xl border-line bg-card p-6 sm:max-w-2xl sm:p-10">
         <DialogHeader className="space-y-3 text-left">
@@ -269,17 +264,12 @@ export function RentalRequestDialog({
             Solicite disponibilidade
           </DialogTitle>
           <DialogDescription className="text-base text-muted-foreground">
-            Conte quais equipamentos você precisa e como será o projeto. A
-            equipe da FOHAT avaliará disponibilidade, configuração, logística e
-            suporte necessário.
+            Conte quais equipamentos você precisa e como será o projeto. A equipe da FOHAT avaliará
+            disponibilidade, configuração, logística e suporte necessário.
           </DialogDescription>
         </DialogHeader>
 
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="mt-6 space-y-6"
-          noValidate
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-6" noValidate>
           {/* Honeypot */}
           <input
             type="text"
@@ -310,11 +300,7 @@ export function RentalRequestDialog({
                 {...register("company")}
               />
             </Field>
-            <Field
-              label="E-mail"
-              htmlFor="rent-email"
-              error={errors.email?.message}
-            >
+            <Field label="E-mail" htmlFor="rent-email" error={errors.email?.message}>
               <Input
                 id="rent-email"
                 type="email"
@@ -324,11 +310,7 @@ export function RentalRequestDialog({
                 {...register("email")}
               />
             </Field>
-            <Field
-              label="Telefone"
-              htmlFor="rent-phone"
-              error={errors.phone?.message}
-            >
+            <Field label="Telefone" htmlFor="rent-phone" error={errors.phone?.message}>
               <Input
                 id="rent-phone"
                 autoComplete="tel"
@@ -374,11 +356,7 @@ export function RentalRequestDialog({
                 {...register("endDate")}
               />
             </Field>
-            <Field
-              label="Tipo de evento ou projeto"
-              htmlFor="rent-type"
-              className="sm:col-span-2"
-            >
+            <Field label="Tipo de evento ou projeto" htmlFor="rent-type" className="sm:col-span-2">
               <Input
                 id="rent-type"
                 placeholder="Ex.: ativação de marca, feira, exposição, festival…"
@@ -432,21 +410,9 @@ export function RentalRequestDialog({
               Necessidades adicionais
             </div>
             <div className="grid gap-2 sm:grid-cols-3">
-              <BoolBox
-                id="rent-delivery"
-                label="Entrega"
-                {...register("needsDelivery")}
-              />
-              <BoolBox
-                id="rent-install"
-                label="Instalação"
-                {...register("needsInstall")}
-              />
-              <BoolBox
-                id="rent-support"
-                label="Suporte técnico"
-                {...register("needsSupport")}
-              />
+              <BoolBox id="rent-delivery" label="Entrega" {...register("needsDelivery")} />
+              <BoolBox id="rent-install" label="Instalação" {...register("needsInstall")} />
+              <BoolBox id="rent-support" label="Suporte técnico" {...register("needsSupport")} />
             </div>
           </div>
 
@@ -524,9 +490,8 @@ export function RentalRequestDialog({
           </button>
 
           <p className="rounded-2xl border border-line bg-mist px-5 py-4 text-xs text-muted-foreground">
-            O envio da solicitação não confirma reserva. A disponibilidade, os
-            valores, a logística e o escopo técnico serão confirmados pela
-            equipe da FOHAT.
+            O envio da solicitação não confirma reserva. A disponibilidade, os valores, a logística
+            e o escopo técnico serão confirmados pela equipe da FOHAT.
           </p>
         </form>
       </DialogContent>
@@ -551,10 +516,7 @@ function Field({
 }) {
   return (
     <div className={`space-y-2 ${className ?? ""}`}>
-      <Label
-        htmlFor={htmlFor}
-        className="text-xs uppercase tracking-[0.14em] text-blue"
-      >
+      <Label htmlFor={htmlFor} className="text-xs uppercase tracking-[0.14em] text-blue">
         {label}
       </Label>
       {children}

@@ -32,8 +32,8 @@ export function PresenceFormula() {
             Cada etapa alimenta a próxima.
           </h2>
           <p className="fohat-lead mt-5">
-            A engenharia por trás da presença é uma cadeia — não um cardápio.
-            O que entra no início determina o que permanece no fim.
+            A engenharia por trás da presença é uma cadeia — não um cardápio. O que entra no início
+            determina o que permanece no fim.
           </p>
         </SectionReveal>
 
@@ -57,9 +57,7 @@ export function PresenceFormula() {
                   aria-hidden
                   className="absolute left-2 top-1 flex h-9 w-9 items-center justify-center rounded-full border border-blue/40 bg-white shadow-[var(--shadow-card)] md:left-1/2 md:-translate-x-1/2"
                 >
-                  <span className="fohat-mono text-[10px] font-bold text-blue">
-                    0{i + 1}
-                  </span>
+                  <span className="fohat-mono text-[10px] font-bold text-blue">0{i + 1}</span>
                 </span>
 
                 <SectionReveal
@@ -73,12 +71,8 @@ export function PresenceFormula() {
                   <div className="fohat-mono text-[10px] uppercase tracking-[0.2em] text-blue">
                     {f.label}
                   </div>
-                  <div className="mt-2 text-2xl font-bold tracking-tight">
-                    {f.value}
-                  </div>
-                  <p className="mt-2 max-w-md text-sm text-muted-foreground md:ml-auto">
-                    {f.desc}
-                  </p>
+                  <div className="mt-2 text-2xl font-bold tracking-tight">{f.value}</div>
+                  <p className="mt-2 max-w-md text-sm text-muted-foreground md:ml-auto">{f.desc}</p>
                 </SectionReveal>
 
                 {/* espaço espelhado no lado oposto (desktop) */}
