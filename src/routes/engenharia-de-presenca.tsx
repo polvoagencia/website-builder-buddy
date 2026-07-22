@@ -59,6 +59,15 @@ const FORMULA = [
   },
 ];
 
+const METHOD = [
+  { letter: "F", title: "Fundamento da Presença", desc: "Definimos o que o público precisa viver, sentir e lembrar." },
+  { letter: "O", title: "Orquestração de Mundos", desc: "Conectamos narrativa, tecnologia, espaço e conhecimentos." },
+  { letter: "H", title: "Humanização da Tecnologia", desc: "Desenhamos a interação a partir das pessoas." },
+  { letter: "A", title: "Ativação no Mundo Real", desc: "Desenvolvemos, integramos, testamos e implantamos." },
+  { letter: "T", title: "Transformação em Memória", desc: "Projetamos o que deve permanecer depois da interação." },
+];
+
+
 const PRINCIPLES = [
   {
     n: "01",
