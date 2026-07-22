@@ -14,7 +14,7 @@ import { RENTAL_CATALOG_ITEMS } from "@/data/rental-equipment";
 
 import { HeroLayered } from "@/components/fohat/home/HeroLayered";
 import { StickyFronts } from "@/components/fohat/home/StickyFronts";
-import { TelaBrasilCinematic } from "@/components/fohat/home/TelaBrasilCinematic";
+import { ProjectsGateway } from "@/components/fohat/home/ProjectsGateway";
 import { PartnersNetwork } from "@/components/fohat/home/PartnersNetwork";
 import { MagneticCTA } from "@/components/fohat/home/MagneticCTA";
 
@@ -64,7 +64,7 @@ function Home() {
           { id: "inicio", label: "Início" },
           { id: "frentes", label: "Frentes" },
           { id: "locacao", label: "Vitrine" },
-          { id: "tela-brasil", label: "Tela Brasil" },
+          { id: "projetos", label: "Projetos" },
           { id: "posicionamento", label: "Posicionamento" },
           { id: "parceiros", label: "Parceiros" },
           { id: "contato", label: "Contato" },
@@ -138,8 +138,8 @@ function Home() {
           </div>
         </section>
 
-        {/* ============ TELA BRASIL ============ */}
-        <TelaBrasilCinematic />
+        {/* ============ PROJETOS (gateway geral) ============ */}
+        <ProjectsGateway />
 
         {/* ============ POSICIONAMENTO ============ */}
         <section id="posicionamento" className="bg-white py-24 lg:py-32">
