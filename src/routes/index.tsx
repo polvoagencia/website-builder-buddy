@@ -11,7 +11,7 @@ import { Footer } from "@/components/fohat/Footer";
 import { ContactDialog } from "@/components/fohat/ContactDialog";
 import { Reveal } from "@/components/fohat/Reveal";
 import { Parallax } from "@/components/fohat/Parallax";
-import { ScrollProgress } from "@/components/fohat/ScrollProgress";
+import { ProgressRail } from "@/components/fohat/motion/ProgressRail";
 import { Marquee } from "@/components/fohat/Subpage";
 import { RentalEquipmentCard } from "@/components/fohat/RentalEquipmentCard";
 import { RENTAL_CATALOG_ITEMS } from "@/data/rental-equipment";
@@ -72,7 +72,18 @@ const SERVICE_IMAGES: Record<string, { src: string; alt: string }> = {
 function Home() {
   return (
     <div className="min-h-screen bg-mist text-navy">
-      <ScrollProgress />
+      <ProgressRail
+        contextLabel="Home · FOHAT"
+        chapters={[
+          { id: "inicio", label: "Início" },
+          { id: "solucoes", label: "Soluções" },
+          { id: "locacao", label: "Locação" },
+          { id: "prova", label: "Prova" },
+          { id: "posicionamento", label: "Posicionamento" },
+          { id: "parceiros", label: "Parceiros" },
+          { id: "contato", label: "Contato" },
+        ]}
+      />
       <Header />
 
       <main>
@@ -339,7 +350,7 @@ function Home() {
         </section>
 
         {/* ============ PROVA EM FUNCIONAMENTO ============ */}
-        <section className="relative overflow-hidden bg-navy py-24 text-white lg:py-32">
+        <section id="prova" className="relative overflow-hidden bg-navy py-24 text-white lg:py-32">
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-60"
@@ -365,10 +376,11 @@ function Home() {
                 Da primeira intenção à operação diante do público.
               </h2>
               <p className="fohat-lead mt-6 text-[oklch(0.85_0.02_250)]">
-                No projeto Tela Brasil, a FOHAT integrou software, IA,
-                impressão em tempo real, equipamentos, dashboards e suporte
-                técnico presencial em uma operação simultânea em seis
-                capitais brasileiras.
+                No projeto Tela Brasil, a FOHAT integrou software,
+                inteligência artificial, impressão em tempo real,
+                equipamentos, dashboards e suporte técnico presencial em
+                uma operação nacional realizada em seis capitais,
+                organizada em três ciclos de duas capitais simultâneas.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
@@ -392,7 +404,7 @@ function Home() {
         </section>
 
         {/* ============ POSICIONAMENTO FOHAT ============ */}
-        <section className="bg-white py-24 lg:py-32">
+        <section id="posicionamento" className="bg-white py-24 lg:py-32">
           <div className="fohat-shell grid gap-16 lg:grid-cols-[1fr_1fr] lg:items-start lg:gap-20">
             {/* Assinatura institucional */}
             <Reveal>
@@ -431,6 +443,7 @@ function Home() {
 
         {/* ============ PARA PARCEIROS ============ */}
         <section
+          id="parceiros"
           className="relative overflow-hidden py-24 lg:py-32"
           style={{
             background:

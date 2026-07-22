@@ -519,7 +519,7 @@ export function TelaBrasilCase() {
       {/* ============ OPERAÇÃO ============ */}
       <CaseSection
         id="operacao"
-        eyebrow="Escala e operação simultânea"
+        eyebrow="Escala e ciclos operacionais"
         title="Três ciclos, duas capitais por semana, dois kits reutilizados."
         lead="A operação nacional foi organizada em três ciclos. A cada semana, duas capitais funcionavam simultaneamente. Para isso, a FOHAT estruturou dois kits tecnológicos completos, capazes de operar em paralelo e ser reutilizados nas etapas seguintes do projeto."
         variant="dark"

@@ -10,6 +10,8 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import { MotionProvider } from "@/components/fohat/motion/MotionProvider";
+import { RouteTransition } from "@/components/fohat/motion/RouteTransition";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -142,7 +144,11 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <MotionProvider>
+        <RouteTransition>
+          <Outlet />
+        </RouteTransition>
+      </MotionProvider>
       <Toaster richColors position="top-right" />
     </QueryClientProvider>
   );

@@ -343,8 +343,152 @@
   line-height: 1;
 }
 
+/* ================================================================
+ * FOHAT motion system — tokens, primitives and route transitions.
+ * All motion primitives read from these tokens so timing stays
+ * consistent across the site.
+ * ================================================================ */
+@theme inline {
+  --motion-fast: 180ms;
+  --motion-base: 320ms;
+  --motion-slow: 560ms;
+  --motion-cinematic: 900ms;
+
+  /* Curated easings — precise, not bouncy */
+  --ease-fohat: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 0.6, 1);
+  --ease-elastic-subtle: cubic-bezier(0.34, 1.16, 0.64, 1);
+}
+
+/* SectionReveal — GPU-only transform + opacity */
+.fohat-section-reveal {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-offset, 24px), 0);
+  transition:
+    opacity var(--motion-slow) var(--ease-reveal),
+    transform var(--motion-slow) var(--ease-reveal);
+}
+.fohat-section-reveal[data-visible="true"] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* TextReveal — line-by-line slide-up behind a clip mask */
+.fohat-text-reveal {
+  display: inline-block;
+}
+.fohat-text-reveal-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em; /* room for descenders */
+}
+.fohat-text-reveal-inner {
+  display: inline-block;
+  transform: translate3d(0, 105%, 0);
+  transition: transform var(--motion-cinematic) var(--ease-reveal);
+  will-change: transform;
+}
+.fohat-text-reveal[data-visible="true"] .fohat-text-reveal-inner {
+  transform: translate3d(0, 0, 0);
+}
+
+/* MediaReveal — wipe + subtle scale */
+.fohat-media-reveal {
+  position: relative;
+  overflow: hidden;
+  clip-path: inset(0 100% 0 0 round 0);
+  transition: clip-path var(--motion-cinematic) var(--ease-reveal);
+}
+.fohat-media-reveal[data-from="left"] { clip-path: inset(0 0 0 100% round 0); }
+.fohat-media-reveal[data-from="bottom"] { clip-path: inset(100% 0 0 0 round 0); }
+.fohat-media-reveal[data-visible="true"] { clip-path: inset(0 0 0 0 round 0); }
+.fohat-media-reveal > * {
+  transform: scale(1.06);
+  transition: transform var(--motion-cinematic) var(--ease-reveal);
+  will-change: transform;
+}
+.fohat-media-reveal[data-visible="true"] > * { transform: scale(1); }
+
+/* RouteTransition — brief outgoing fade during pathname change */
+.fohat-route-transition {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition:
+    opacity var(--motion-base) var(--ease-exit),
+    transform var(--motion-base) var(--ease-exit);
+}
+.fohat-route-transition.is-transitioning {
+  opacity: 0.72;
+  transform: translate3d(0, 6px, 0);
+}
+
+/* View Transitions API — Chromium-based browsers get a
+ * true cross-fade owned by the browser. Falls back silently. */
+@supports (view-transition-name: root) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: var(--motion-base);
+    animation-timing-function: var(--ease-fohat);
+  }
+}
+
+/* ================================================================
+ * prefers-reduced-motion — reveal state, no movement, no continuous
+ * animation. Content stays visible; no clipping, no translate.
+ * ================================================================ */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .fohat-reveal, .fohat-reveal-blur { opacity: 1; transform: none; filter: none; }
   .fohat-marquee, .fohat-scanline { animation: none; }
+
+  .fohat-section-reveal,
+  .fohat-section-reveal[data-visible="false"] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .fohat-text-reveal-inner {
+    transform: none !important;
+    transition: none !important;
+  }
+  .fohat-media-reveal,
+  .fohat-media-reveal[data-visible="false"] {
+    clip-path: none !important;
+    transition: none !important;
+  }
+  .fohat-media-reveal > * {
+    transform: none !important;
+    transition: none !important;
+  }
+  .fohat-route-transition,
+  .fohat-route-transition.is-transitioning {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .fohat-mega-enter { animation: none !important; }
 }
+
+/* Mega menu entrance — mask + lift */
+@keyframes fohat-mega-in {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -6px);
+    clip-path: inset(0 0 100% 0 round 24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+    clip-path: inset(0 0 0 0 round 24px);
+  }
+}
+@utility fohat-mega-enter {
+  animation: fohat-mega-in var(--motion-base) var(--ease-reveal) both;
+}
+
+/* Header active-route indicator dot */
+.fohat-header nav a[data-status="active"] {
+  position: relative;
+}
+
