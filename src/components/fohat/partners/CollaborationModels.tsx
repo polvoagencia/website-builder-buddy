@@ -56,7 +56,7 @@ export function CollaborationModels() {
                 <div className="absolute inset-x-6 top-1/2 h-px bg-line" aria-hidden />
                 <div className="absolute inset-y-6 left-1/2 w-px bg-line" aria-hidden />
                 {/* quadrant labels */}
-                <div className="absolute inset-0" aria-hidden>
+                <div className="absolute inset-0">
                   {models.map((m, i) => {
                     const isActive = i === safe;
                     return (
