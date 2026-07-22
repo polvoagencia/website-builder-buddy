@@ -63,7 +63,9 @@ export function TelaBrasilCase() {
             >
               <Link to="/" className="text-cyan hover:text-white">Início</Link>
               <ChevronRight className="h-3 w-3 opacity-50" />
-              <Link to="/projetos" className="text-cyan hover:text-white">Projetos</Link>
+              <Link to="/engenharia-de-presenca" className="text-cyan hover:text-white">Engenharia de Presença</Link>
+              <ChevronRight className="h-3 w-3 opacity-50" />
+              <Link to="/engenharia-de-presenca/projetos" className="text-cyan hover:text-white">Projetos</Link>
               <ChevronRight className="h-3 w-3 opacity-50" />
               <span className="text-white/70">Tela Brasil</span>
             </nav>
@@ -729,7 +731,7 @@ export function TelaBrasilCase() {
                 </button>
               </ContactDialog>
               <Link
-                to="/projetos"
+                to="/engenharia-de-presenca/projetos"
                 className="group inline-flex h-14 items-center gap-3 rounded-full border border-white/28 bg-white/[0.06] px-7 text-sm font-bold text-white backdrop-blur-md transition-all hover:border-cyan hover:text-cyan"
               >
                 Ver todos os projetos
