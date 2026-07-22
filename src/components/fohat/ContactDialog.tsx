@@ -211,6 +211,39 @@ export function ContactDialog({
             )}
           </div>
 
+          <div className="space-y-2">
+            <Label htmlFor="fohat-description" className="text-xs uppercase tracking-[0.14em] text-blue">
+              Conte sua ideia
+            </Label>
+            <Textarea
+              id="fohat-description"
+              rows={5}
+              maxLength={2000}
+              placeholder="Conte brevemente o que você quer criar, realizar ou colocar em funcionamento."
+              aria-invalid={!!errors.description}
+              aria-describedby="fohat-description-help fohat-description-count"
+              className="rounded-xl border-line bg-background focus-visible:ring-blue"
+              {...register("description")}
+            />
+            <div className="flex items-start justify-between gap-3">
+              <p id="fohat-description-help" className="text-xs text-muted-foreground">
+                Não precisa estar tudo definido. Explique o contexto, a
+                necessidade ou o desafio.
+              </p>
+              <span
+                id="fohat-description-count"
+                aria-live="polite"
+                className="fohat-mono shrink-0 text-[10px] uppercase tracking-[0.14em] text-muted-foreground"
+              >
+                {descriptionValue.length}/2000
+              </span>
+            </div>
+            {errors.description && (
+              <p className="text-xs text-destructive">{errors.description.message}</p>
+            )}
+          </div>
+
+
           <button
             type="submit"
             disabled={isSubmitting}
