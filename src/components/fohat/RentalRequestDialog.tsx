@@ -179,6 +179,7 @@ export function RentalRequestDialog({
         : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
     let attachment_url: string | null = null;
+    let uploadedPath: string | null = null;
     if (file) {
       const path = attachmentPath(leadId, file.name);
       const { error: uploadError } = await supabase.storage
@@ -195,6 +196,7 @@ export function RentalRequestDialog({
         return;
       }
       attachment_url = path;
+      uploadedPath = path;
     }
 
     const { error } = await supabase.from("fohat_leads").insert({
@@ -230,11 +232,20 @@ export function RentalRequestDialog({
 
     if (error) {
       if (import.meta.env.DEV) console.error("[fohat_leads:locacao]", error);
+      if (uploadedPath) {
+        const { error: removeError } = await supabase.storage
+          .from("fohat-lead-attachments")
+          .remove([uploadedPath]);
+        if (removeError && import.meta.env.DEV) {
+          console.error("[fohat_leads:cleanup]", removeError);
+        }
+      }
       toast.error("Não foi possível enviar agora.", {
         description: "Seus dados foram mantidos. Tente novamente em instantes.",
       });
       return;
     }
+
 
     toast.success("Recebemos sua solicitação.", {
       description:
