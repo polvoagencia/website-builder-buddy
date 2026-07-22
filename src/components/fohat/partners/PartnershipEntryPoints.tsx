@@ -6,38 +6,32 @@ import { cn } from "@/lib/utils";
 export function PartnershipEntryPoints() {
   const { eyebrow, title, intro, points } = PARTNERS_ENTRY;
   const [active, setActive] = useState(0);
-  const tabsRef = useRef<Array<HTMLButtonElement | null>>([]);
+  const desktopTabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const mobileTabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const safeActive = Math.min(Math.max(active, 0), points.length - 1);
   const activePoint = points[safeActive];
 
-  const focusTab = (i: number) => {
-    const next = (i + points.length) % points.length;
-    setActive(next);
-    tabsRef.current[next]?.focus();
-  };
+  const makeOnKey =
+    (refs: React.MutableRefObject<Array<HTMLButtonElement | null>>) =>
+    (e: React.KeyboardEvent, i: number) => {
+      const map: Record<string, number> = {
+        ArrowRight: i + 1,
+        ArrowDown: i + 1,
+        ArrowLeft: i - 1,
+        ArrowUp: i - 1,
+        Home: 0,
+        End: points.length - 1,
+      };
+      if (e.key in map) {
+        e.preventDefault();
+        const next = (map[e.key] + points.length) % points.length;
+        setActive(next);
+        refs.current[next]?.focus();
+      }
+    };
 
-  const onKey = (e: React.KeyboardEvent, i: number) => {
-    switch (e.key) {
-      case "ArrowRight":
-      case "ArrowDown":
-        e.preventDefault();
-        focusTab(i + 1);
-        break;
-      case "ArrowLeft":
-      case "ArrowUp":
-        e.preventDefault();
-        focusTab(i - 1);
-        break;
-      case "Home":
-        e.preventDefault();
-        focusTab(0);
-        break;
-      case "End":
-        e.preventDefault();
-        focusTab(points.length - 1);
-        break;
-    }
-  };
+  const onKeyDesktop = makeOnKey(desktopTabRefs);
+  const onKeyMobile = makeOnKey(mobileTabRefs);
 
   return (
     <section id="entradas" className="bg-white py-20 lg:py-28">
@@ -60,12 +54,12 @@ export function PartnershipEntryPoints() {
                 points={points}
                 activeIndex={safeActive}
                 onSelect={setActive}
-                onKey={onKey}
-                registerRef={(el, i) => (tabsRef.current[i] = el)}
+                onKey={onKeyDesktop}
+                registerRef={(el, i) => (desktopTabRefs.current[i] = el)}
               />
               <div
                 role="tabpanel"
-                id="entries-panel"
+                id="entries-panel-desktop"
                 aria-labelledby={`entry-tab-${activePoint.id}`}
                 className="relative mt-10 grid gap-4 rounded-3xl border border-line bg-white p-8 sm:grid-cols-[auto_1fr] sm:items-baseline"
               >
@@ -82,22 +76,30 @@ export function PartnershipEntryPoints() {
             </div>
           </div>
 
-          {/* Mobile / tablet: vertical accordion-like list */}
-          <div className="lg:hidden" role="tablist" aria-orientation="vertical" aria-label="Pontos de entrada da parceria">
-            <ul className="space-y-3">
+          {/* Mobile / tablet: vertical list */}
+          <div className="lg:hidden">
+            <ul
+              role="tablist"
+              aria-orientation="vertical"
+              aria-label="Pontos de entrada da parceria"
+              className="space-y-3"
+            >
               {points.map((p, i) => {
                 const isActive = i === safeActive;
                 return (
                   <li key={p.id}>
                     <button
+                      ref={(el) => {
+                        mobileTabRefs.current[i] = el;
+                      }}
                       type="button"
                       role="tab"
                       id={`entry-tab-m-${p.id}`}
                       aria-selected={isActive}
-                      aria-controls={`entry-panel-m-${p.id}`}
+                      aria-controls="entries-panel-mobile"
                       tabIndex={isActive ? 0 : -1}
                       onClick={() => setActive(i)}
-                      onKeyDown={(e) => onKey(e, i)}
+                      onKeyDown={(e) => onKeyMobile(e, i)}
                       className={cn(
                         "flex w-full items-center justify-between rounded-2xl border px-4 py-3 text-left transition-colors",
                         isActive
@@ -110,20 +112,18 @@ export function PartnershipEntryPoints() {
                         {String(i + 1).padStart(2, "0")}
                       </span>
                     </button>
-                    {isActive && (
-                      <div
-                        role="tabpanel"
-                        id={`entry-panel-m-${p.id}`}
-                        aria-labelledby={`entry-tab-m-${p.id}`}
-                        className="mt-2 rounded-2xl border border-line bg-mist px-4 py-3 text-sm text-muted-foreground"
-                      >
-                        {p.desc}
-                      </div>
-                    )}
                   </li>
                 );
               })}
             </ul>
+            <div
+              role="tabpanel"
+              id="entries-panel-mobile"
+              aria-labelledby={`entry-tab-m-${activePoint.id}`}
+              className="mt-3 rounded-2xl border border-line bg-mist px-4 py-3 text-sm text-muted-foreground"
+            >
+              {activePoint.desc}
+            </div>
           </div>
         </SectionReveal>
       </div>
@@ -198,7 +198,7 @@ function EntryMap({
               role="tab"
               id={`entry-tab-${p.id}`}
               aria-selected={isActive}
-              aria-controls="entries-panel"
+              aria-controls="entries-panel-desktop"
               tabIndex={isActive ? 0 : -1}
               onClick={() => onSelect(i)}
               onKeyDown={(e) => onKey(e, i)}
