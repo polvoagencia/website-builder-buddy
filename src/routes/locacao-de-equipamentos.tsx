@@ -456,3 +456,96 @@ function LocacaoPage() {
     </SubpageShell>
   );
 }
+
+function CatalogSection() {
+  const [filter, setFilter] = useState<RentalFilterSlug>("todos");
+
+  const availableFilters = useMemo(() => {
+    const active = new Set(RENTAL_CATALOG_ITEMS.map((it) => it.filter));
+    return RENTAL_FILTERS.filter(
+      (f) => f.slug === "todos" || active.has(f.slug as never),
+    );
+  }, []);
+
+  const items = useMemo(() => {
+    if (filter === "todos") return RENTAL_CATALOG_ITEMS;
+    return RENTAL_CATALOG_ITEMS.filter((it) => it.filter === filter);
+  }, [filter]);
+
+  return (
+    <section
+      id="catalogo"
+      className="relative overflow-hidden py-20 lg:py-28"
+      style={{
+        background:
+          "linear-gradient(180deg, oklch(0.97 0.008 250), oklch(0.93 0.015 250))",
+      }}
+    >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 fohat-grid-bg opacity-70"
+      />
+      <div className="fohat-shell relative">
+        <Reveal className="mb-10 max-w-[900px]">
+          <span className="fohat-eyebrow">Catálogo</span>
+          <h2 className="fohat-h2 mt-5">
+            Equipamentos disponíveis para locação
+          </h2>
+          <p className="mt-5 text-muted-foreground">
+            Conheça as principais categorias de equipamentos que podem compor
+            sua operação. Modelos, quantidades e configurações são confirmados
+            de acordo com a disponibilidade e as necessidades do projeto.
+          </p>
+        </Reveal>
+
+        {/* Filtros */}
+        <div
+          role="tablist"
+          aria-label="Filtrar equipamentos por categoria"
+          className="mb-8 flex flex-wrap gap-2"
+        >
+          {availableFilters.map((f) => {
+            const active = filter === f.slug;
+            return (
+              <button
+                key={f.slug}
+                type="button"
+                role="tab"
+                aria-selected={active}
+                onClick={() => setFilter(f.slug)}
+                className={`fohat-mono h-9 rounded-full border px-4 text-[11px] uppercase tracking-[0.16em] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue ${
+                  active
+                    ? "border-navy bg-navy text-white"
+                    : "border-line bg-white text-navy hover:border-blue hover:text-blue"
+                }`}
+              >
+                {f.label}
+              </button>
+            );
+          })}
+        </div>
+
+        <p aria-live="polite" className="sr-only">
+          {`Exibindo ${items.length} ${items.length === 1 ? "equipamento" : "equipamentos"}.`}
+        </p>
+
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {items.map((item, i) => (
+            <RentalEquipmentCard
+              key={item.slug}
+              item={item}
+              anchorId={item.slug}
+              eager={i === 0}
+              sourcePage="/locacao-de-equipamentos"
+            />
+          ))}
+        </div>
+
+        <p className="fohat-mono mt-10 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+          Nenhum item apresentado como disponível em estoque sem confirmação.
+          Marcas, modelos e especificações confirmados pela equipe comercial.
+        </p>
+      </div>
+    </section>
+  );
+}
