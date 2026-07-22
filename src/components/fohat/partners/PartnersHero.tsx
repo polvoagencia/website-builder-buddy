@@ -52,11 +52,7 @@ function HeroBridge({
   disciplines: readonly string[];
 }) {
   return (
-    <div
-      className="relative overflow-hidden rounded-[32px] border border-line bg-mist/70 p-6 sm:p-10"
-      role="img"
-      aria-label="Ponte entre criação e tecnologia: ideia criativa, viabilidade, arquitetura, desenvolvimento, integração e operação."
-    >
+    <div className="relative overflow-hidden rounded-[32px] border border-line bg-mist/70 p-6 sm:p-10">
       {/* disciplines chips top */}
       <ul className="flex flex-wrap gap-2">
         {disciplines.map((d) => (
@@ -70,7 +66,11 @@ function HeroBridge({
       </ul>
 
       {/* Desktop bridge diagram */}
-      <div className="mt-10 hidden lg:block">
+      <div
+        className="mt-10 hidden lg:block"
+        role="img"
+        aria-label="Diagrama da ponte entre criação e tecnologia: ideia criativa, viabilidade, arquitetura, desenvolvimento, integração e operação."
+      >
         <div className="grid grid-cols-6 gap-3">
           <div className="fohat-mono col-span-2 text-[10px] uppercase tracking-[0.2em] text-blue">
             Criação

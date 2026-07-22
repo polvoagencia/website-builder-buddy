@@ -45,18 +45,19 @@ export function PartnershipEntryPoints() {
         <SectionReveal className="mt-12" delay={100}>
           {/* Desktop: map with independent points */}
           <div className="hidden lg:block">
-            <div
-              role="tablist"
-              aria-label="Pontos de entrada da parceria"
-              className="relative overflow-hidden rounded-[32px] border border-line bg-mist p-8"
-            >
-              <EntryMap
-                points={points}
-                activeIndex={safeActive}
-                onSelect={setActive}
-                onKey={onKeyDesktop}
-                registerRef={(el, i) => (desktopTabRefs.current[i] = el)}
-              />
+            <div className="relative overflow-hidden rounded-[32px] border border-line bg-mist p-8">
+              <div
+                role="tablist"
+                aria-label="Pontos de entrada da parceria"
+              >
+                <EntryMap
+                  points={points}
+                  activeIndex={safeActive}
+                  onSelect={setActive}
+                  onKey={onKeyDesktop}
+                  registerRef={(el, i) => (desktopTabRefs.current[i] = el)}
+                />
+              </div>
               <div
                 role="tabpanel"
                 id="entries-panel-desktop"
