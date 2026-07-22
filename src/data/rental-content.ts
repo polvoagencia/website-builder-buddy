@@ -1,6 +1,6 @@
 /**
  * Conteúdo centralizado da página de Locação (formatos, processo,
- * diferenciais e capítulos do ProgressRail). Consumido pelos
+ * diferenciais). Consumido pelos
  * componentes em `src/components/fohat/rental/`.
  */
 

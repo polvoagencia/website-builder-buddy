@@ -107,15 +107,6 @@ export const BRANDS = {
     title: "O que sua marca gostaria que as pessoas vivessem, e não apenas vissem?",
     button: "Crie uma experiência para sua marca",
   },
-  rail: [
-    { id: "visao-geral", label: "Visão geral" },
-    { id: "desafio", label: "Desafio" },
-    { id: "transformacao", label: "Transformação" },
-    { id: "possibilidades", label: "Possibilidades" },
-    { id: "jornada", label: "Jornada" },
-    { id: "formatos", label: "Formatos" },
-    { id: "contato", label: "Contato" },
-  ],
 } as const;
 
 /* -------------------------------------------------------------- */
@@ -206,14 +197,6 @@ export const CULTURE = {
     title: "Que história precisa encontrar novas formas de chegar às pessoas?",
     button: "Transforme uma história em experiência",
   },
-  rail: [
-    { id: "visao-geral", label: "Visão geral" },
-    { id: "manifesto", label: "Manifesto" },
-    { id: "camadas", label: "Camadas" },
-    { id: "possibilidades", label: "Possibilidades" },
-    { id: "mediacao", label: "Mediação" },
-    { id: "contato", label: "Contato" },
-  ],
 } as const;
 
 /* -------------------------------------------------------------- */
@@ -313,12 +296,4 @@ export const EVENTS = {
     title: "Como o seu espaço pode reconhecer e responder à presença do público?",
     button: "Transforme seu espaço em experiência",
   },
-  rail: [
-    { id: "visao-geral", label: "Visão geral" },
-    { id: "resposta", label: "Resposta" },
-    { id: "jornada", label: "Jornada" },
-    { id: "possibilidades", label: "Possibilidades" },
-    { id: "operacao", label: "Operação" },
-    { id: "contato", label: "Contato" },
-  ],
 } as const;

@@ -258,15 +258,3 @@ export const PARTNERS_CTA = {
   intro: "Conte em que etapa o projeto está e onde a tecnologia precisa entrar.",
   buttonLabel: "Construa com a FOHAT",
 };
-
-export const PARTNERS_CHAPTERS = [
-  { id: "visao-geral", label: "Visão geral" },
-  { id: "principio", label: "Princípio" },
-  { id: "entradas", label: "Pontos de entrada" },
-  { id: "capacidades", label: "Capacidades" },
-  { id: "transparencia", label: "Transparência" },
-  { id: "modelos", label: "Modelos" },
-  { id: "frentes", label: "Frentes" },
-  { id: "colaboracao", label: "Colaboração" },
-  { id: "contato", label: "Contato" },
-];

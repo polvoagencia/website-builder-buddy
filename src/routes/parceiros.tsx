@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { SubpageShell } from "@/components/fohat/SubpageShell";
-import { ProgressRail } from "@/components/fohat/motion/ProgressRail";
+
 import { PartnersHero } from "@/components/fohat/partners/PartnersHero";
 import { CreativeTechnologyBridge } from "@/components/fohat/partners/CreativeTechnologyBridge";
 import { PartnershipEntryPoints } from "@/components/fohat/partners/PartnershipEntryPoints";
@@ -10,7 +10,6 @@ import { PartnershipPrinciples } from "@/components/fohat/partners/PartnershipPr
 import { CollaborationModels } from "@/components/fohat/partners/CollaborationModels";
 import { PartnersFronts, CollaborationFlow } from "@/components/fohat/partners/PartnersFronts";
 import { PartnersContactCTA } from "@/components/fohat/partners/PartnersContactCTA";
-import { PARTNERS_CHAPTERS } from "@/data/partners-content";
 
 export const Route = createFileRoute("/parceiros")({
   head: () => ({
@@ -38,7 +37,6 @@ export const Route = createFileRoute("/parceiros")({
 function Parceiros() {
   return (
     <SubpageShell>
-      <ProgressRail chapters={PARTNERS_CHAPTERS} contextLabel="Parceiros" />
       <PartnersHero />
       <CreativeTechnologyBridge />
       <PartnershipEntryPoints />

@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { SubpageShell } from "@/components/fohat/SubpageShell";
-import { ProgressRail } from "@/components/fohat/motion/ProgressRail";
 
 import { BRANDS } from "@/data/presence-territories-content";
 import { TerritoryMethodReference } from "@/components/fohat/territories/shared/TerritoryMethodReference";
@@ -39,7 +38,6 @@ export const Route = createFileRoute("/engenharia-de-presenca/marcas")({
 function Marcas() {
   return (
     <SubpageShell>
-      <ProgressRail chapters={[...BRANDS.rail]} contextLabel="Marcas" />
       <BrandsHero />
       <TerritoryMethodReference />
       <BrandParticipationShift />

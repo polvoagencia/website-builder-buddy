@@ -6,7 +6,7 @@ import markAsset from "@/assets/mark-fohat.png.asset.json";
 import { Header } from "@/components/fohat/Header";
 import { Footer } from "@/components/fohat/Footer";
 import { ContactDialog } from "@/components/fohat/ContactDialog";
-import { ProgressRail } from "@/components/fohat/motion/ProgressRail";
+
 import { SectionReveal } from "@/components/fohat/motion/SectionReveal";
 import { Marquee } from "@/components/fohat/Subpage";
 import { RentalEquipmentCard } from "@/components/fohat/RentalEquipmentCard";
@@ -58,18 +58,6 @@ const MARQUEE_WORDS = [
 function Home() {
   return (
     <div className="min-h-screen bg-mist text-navy">
-      <ProgressRail
-        contextLabel="Home · FOHAT"
-        chapters={[
-          { id: "inicio", label: "Início" },
-          { id: "frentes", label: "Frentes" },
-          { id: "locacao", label: "Vitrine" },
-          { id: "projetos", label: "Projetos" },
-          { id: "posicionamento", label: "Posicionamento" },
-          { id: "parceiros", label: "Parceiros" },
-          { id: "contato", label: "Contato" },
-        ]}
-      />
       <Header />
 
       <main>

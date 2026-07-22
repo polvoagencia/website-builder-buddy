@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { SubpageShell } from "@/components/fohat/SubpageShell";
-import { ProgressRail } from "@/components/fohat/motion/ProgressRail";
 
 import { RentalHero } from "@/components/fohat/rental/RentalHero";
 import { RentalModes } from "@/components/fohat/rental/RentalModes";
@@ -41,19 +40,6 @@ export const Route = createFileRoute("/locacao-de-equipamentos")({
 function LocacaoPage() {
   return (
     <SubpageShell>
-      <ProgressRail
-        contextLabel="Locação · FOHAT"
-        chapters={[
-          { id: "visao-geral", label: "Visão geral" },
-          { id: "formatos", label: "Formatos" },
-          { id: "catalogo", label: "Catálogo" },
-          { id: "processo", label: "Processo" },
-          { id: "diferenciais", label: "Diferenciais" },
-          { id: "capacidade", label: "Capacidade" },
-          { id: "solicitar", label: "Solicitar" },
-        ]}
-      />
-
       <RentalHero />
       <RentalModes />
       <RentalCatalog />
