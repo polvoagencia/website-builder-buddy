@@ -11,7 +11,6 @@ import { CollaborationModels } from "@/components/fohat/partners/CollaborationMo
 import { PartnersFronts, CollaborationFlow } from "@/components/fohat/partners/PartnersFronts";
 import { PartnersContactCTA } from "@/components/fohat/partners/PartnersContactCTA";
 
-
 export const Route = createFileRoute("/parceiros")({
   head: () => ({
     meta: [
@@ -38,7 +37,6 @@ export const Route = createFileRoute("/parceiros")({
 function Parceiros() {
   return (
     <SubpageShell>
-      
       <PartnersHero />
       <CreativeTechnologyBridge />
       <PartnershipEntryPoints />

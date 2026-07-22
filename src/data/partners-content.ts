@@ -258,4 +258,3 @@ export const PARTNERS_CTA = {
   intro: "Conte em que etapa o projeto está e onde a tecnologia precisa entrar.",
   buttonLabel: "Construa com a FOHAT",
 };
-

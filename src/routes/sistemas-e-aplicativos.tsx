@@ -40,7 +40,6 @@ export const Route = createFileRoute("/sistemas-e-aplicativos")({
 function SistemasEAplicativos() {
   return (
     <SubpageShell>
-
       <SystemsHero />
       <SystemsArchitecture />
       <CapabilityNetwork />

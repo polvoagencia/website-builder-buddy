@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { SubpageShell } from "@/components/fohat/SubpageShell";
 
-
 import { RentalHero } from "@/components/fohat/rental/RentalHero";
 import { RentalModes } from "@/components/fohat/rental/RentalModes";
 import { RentalCatalog } from "@/components/fohat/rental/RentalCatalog";
@@ -41,7 +40,6 @@ export const Route = createFileRoute("/locacao-de-equipamentos")({
 function LocacaoPage() {
   return (
     <SubpageShell>
-
       <RentalHero />
       <RentalModes />
       <RentalCatalog />

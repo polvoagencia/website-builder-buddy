@@ -39,7 +39,6 @@ export const Route = createFileRoute("/engenharia-de-presenca/")({
 function EngenhariaDePresenca() {
   return (
     <SubpageShell>
-
       <PresenceHero />
       <PresenceDefinition />
       <PresenceFormula />

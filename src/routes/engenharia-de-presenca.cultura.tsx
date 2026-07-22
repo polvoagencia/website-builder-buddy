@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { SubpageShell } from "@/components/fohat/SubpageShell";
 
-
 import { CULTURE } from "@/data/presence-territories-content";
 import { TerritoryMethodReference } from "@/components/fohat/territories/shared/TerritoryMethodReference";
 import { TerritoryContactCTA } from "@/components/fohat/territories/shared/TerritoryContactCTA";
@@ -37,7 +36,6 @@ export const Route = createFileRoute("/engenharia-de-presenca/cultura")({
 function Cultura() {
   return (
     <SubpageShell>
-      
       <CultureHero />
       <TerritoryMethodReference />
       <CultureManifesto />

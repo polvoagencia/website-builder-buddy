@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { SubpageShell } from "@/components/fohat/SubpageShell";
 
-
 import { BRANDS } from "@/data/presence-territories-content";
 import { TerritoryMethodReference } from "@/components/fohat/territories/shared/TerritoryMethodReference";
 import { TerritoryContactCTA } from "@/components/fohat/territories/shared/TerritoryContactCTA";
@@ -39,7 +38,6 @@ export const Route = createFileRoute("/engenharia-de-presenca/marcas")({
 function Marcas() {
   return (
     <SubpageShell>
-      
       <BrandsHero />
       <TerritoryMethodReference />
       <BrandParticipationShift />
