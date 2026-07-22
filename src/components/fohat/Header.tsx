@@ -32,9 +32,10 @@ const NAV: NavItem[] = [
         },
         {
           label: "Método FOHAT",
-          to: "/#metodo",
+          to: "/engenharia-de-presenca#metodo",
           description: "Cinco etapas: Fundamento, Orquestração, Humanização, Ativação, Transformação.",
         },
+
         {
           label: "Princípios",
           to: "/engenharia-de-presenca#principios",
