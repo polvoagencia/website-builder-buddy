@@ -39,10 +39,7 @@ export function PartnersContactCTA() {
 
           <div className="relative grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-end">
             <div>
-              <span
-                className="fohat-eyebrow"
-                style={{ color: "var(--color-cyan)" }}
-              >
+              <span className="fohat-eyebrow" style={{ color: "var(--color-cyan)" }}>
                 Vamos conversar
               </span>
               <h2 className="fohat-h2 mt-5 max-w-[720px] text-white">{title}</h2>

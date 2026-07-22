@@ -23,17 +23,13 @@ export function RentalOperationProof() {
       <div className="fohat-shell">
         <Reveal className="grid gap-10 lg:grid-cols-[1.1fr_.9fr] lg:items-center">
           <div>
-            <span className="fohat-eyebrow">
-              Infraestrutura em funcionamento
-            </span>
+            <span className="fohat-eyebrow">Infraestrutura em funcionamento</span>
             <h2 className="fohat-h2 mt-5 max-w-[640px]">
-              Dois kits tecnológicos operando simultaneamente em uma operação
-              nacional.
+              Dois kits tecnológicos operando simultaneamente em uma operação nacional.
             </h2>
             <p className="mt-6 max-w-[620px] text-muted-foreground">
-              No Tela Brasil, a FOHAT estruturou equipamentos, sistemas,
-              impressão, monitoramento e suporte técnico para duas capitais
-              simultâneas em cada ciclo operacional.
+              No Tela Brasil, a FOHAT estruturou equipamentos, sistemas, impressão, monitoramento e
+              suporte técnico para duas capitais simultâneas em cada ciclo operacional.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-2">
@@ -60,19 +56,13 @@ export function RentalOperationProof() {
           </div>
 
           {/* Diagrama procedural: 2 kits simultâneos */}
-          <div
-            aria-hidden
-            className="relative rounded-3xl border border-line bg-mist p-6 sm:p-8"
-          >
+          <div aria-hidden className="relative rounded-3xl border border-line bg-mist p-6 sm:p-8">
             <div className="fohat-mono text-[10px] uppercase tracking-[0.2em] text-blue">
               Kits simultâneos · Diagrama
             </div>
             <div className="mt-6 grid grid-cols-2 gap-4">
               {[1, 2].map((k) => (
-                <div
-                  key={k}
-                  className="rounded-2xl border border-navy/15 bg-white p-4"
-                >
+                <div key={k} className="rounded-2xl border border-navy/15 bg-white p-4">
                   <div className="fohat-mono text-[9px] uppercase tracking-[0.18em] text-steel">
                     Kit {String(k).padStart(2, "0")}
                   </div>

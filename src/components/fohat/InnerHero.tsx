@@ -22,14 +22,7 @@ interface InnerHeroProps {
  * Subpage hero — visually distinct from home:
  * dark navy gradient, blueprint grid, tight composition, mono breadcrumb.
  */
-export function InnerHero({
-  eyebrow,
-  title,
-  lead,
-  breadcrumb,
-  image,
-  actions,
-}: InnerHeroProps) {
+export function InnerHero({ eyebrow, title, lead, breadcrumb, image, actions }: InnerHeroProps) {
   return (
     <section
       className="relative overflow-hidden pt-36 pb-20 text-white lg:pt-44 lg:pb-28"
@@ -51,18 +44,13 @@ export function InnerHero({
             {breadcrumb.map((c, i) => (
               <span key={i} className="inline-flex items-center gap-2">
                 {c.to ? (
-                  <Link
-                    to={c.to}
-                    className="text-cyan transition-colors hover:text-white"
-                  >
+                  <Link to={c.to} className="text-cyan transition-colors hover:text-white">
                     {c.label}
                   </Link>
                 ) : (
                   <span className="text-white/70">{c.label}</span>
                 )}
-                {i < breadcrumb.length - 1 && (
-                  <ChevronRight className="h-3 w-3 opacity-50" />
-                )}
+                {i < breadcrumb.length - 1 && <ChevronRight className="h-3 w-3 opacity-50" />}
               </span>
             ))}
           </nav>
@@ -73,9 +61,7 @@ export function InnerHero({
           <h1 className="fohat-h1 mt-6 max-w-[820px] text-white [font-size:clamp(2.5rem,5.2vw,5rem)]">
             {title}
           </h1>
-          <p className="fohat-lead mt-6 max-w-[620px] text-[oklch(0.85_0.02_250)]">
-            {lead}
-          </p>
+          <p className="fohat-lead mt-6 max-w-[620px] text-[oklch(0.85_0.02_250)]">{lead}</p>
           {actions && <div className="mt-8 flex flex-wrap gap-3">{actions}</div>}
         </Reveal>
 

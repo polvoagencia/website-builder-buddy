@@ -58,8 +58,7 @@ const LAYERS: Layer[] = [
     index: 2,
     eyebrow: "Produto e engenharia",
     title: "Sistemas e Aplicativos",
-    short:
-      "Software sob medida — interfaces, integrações, dashboards e inteligência aplicada.",
+    short: "Software sob medida — interfaces, integrações, dashboards e inteligência aplicada.",
     media: {
       src: labAsset.url,
       alt: "Equipe desenvolvendo sistemas e aplicativos",
@@ -89,9 +88,10 @@ export function HeroLayered() {
   const activeLayer = LAYERS[active];
 
   // Encontra CTA da frente ativa a partir do arquivo centralizado
-  const activeCta =
-    SERVICES.find((s) => s.slug === activeLayer.slug)?.cta ??
-    { label: "Saiba mais", to: activeLayer.href };
+  const activeCta = SERVICES.find((s) => s.slug === activeLayer.slug)?.cta ?? {
+    label: "Saiba mais",
+    to: activeLayer.href,
+  };
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowRight") {
@@ -128,17 +128,15 @@ export function HeroLayered() {
       <div className="fohat-shell relative z-10 grid items-center gap-14 lg:grid-cols-[1fr_1.05fr] lg:gap-[70px]">
         {/* Coluna esquerda — copy institucional */}
         <div>
-          <span className="fohat-eyebrow">
-            Tecnologia aplicada, do conceito à operação
-          </span>
+          <span className="fohat-eyebrow">Tecnologia aplicada, do conceito à operação</span>
           <h1 className="fohat-h1 mt-6 max-w-[900px]">
-            Tecnologia para criar presença, desenvolver soluções e colocar
-            operações em funcionamento.
+            Tecnologia para criar presença, desenvolver soluções e colocar operações em
+            funcionamento.
           </h1>
           <p className="fohat-lead mt-7 max-w-[640px]">
-            Três frentes de contratação, uma única lógica de engenharia. A
-            FOHAT integra experiências, software e infraestrutura em projetos
-            que acontecem de verdade — diante do público.
+            Três frentes de contratação, uma única lógica de engenharia. A FOHAT integra
+            experiências, software e infraestrutura em projetos que acontecem de verdade — diante do
+            público.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
@@ -194,11 +192,7 @@ export function HeroLayered() {
                   "linear-gradient(180deg, transparent 45%, oklch(0.22 0.023 250 / 0.78))",
               }}
             />
-            <div
-              aria-hidden
-              className="fohat-scanline"
-              style={{ top: "10%" }}
-            />
+            <div aria-hidden className="fohat-scanline" style={{ top: "10%" }} />
 
             {/* Legenda da camada ativa */}
             <div className="absolute inset-x-6 bottom-6 text-white">
@@ -206,8 +200,7 @@ export function HeroLayered() {
                 className="fohat-mono text-[10px] uppercase tracking-[0.22em]"
                 style={{ color: activeLayer.accent }}
               >
-                Frente {String(activeLayer.index).padStart(2, "0")} ·{" "}
-                {activeLayer.eyebrow}
+                Frente {String(activeLayer.index).padStart(2, "0")} · {activeLayer.eyebrow}
               </span>
               <div className="mt-2 text-2xl font-bold leading-tight tracking-tight">
                 {activeLayer.title}
@@ -255,9 +248,7 @@ export function HeroLayered() {
                   <span
                     className={cn(
                       "fohat-mono grid h-8 w-8 shrink-0 place-items-center rounded-full text-[10px] font-bold tabular-nums transition-colors",
-                      isActive
-                        ? "bg-navy text-white"
-                        : "bg-mist text-steel group-hover:bg-ice",
+                      isActive ? "bg-navy text-white" : "bg-mist text-steel group-hover:bg-ice",
                     )}
                   >
                     {String(l.index).padStart(2, "0")}

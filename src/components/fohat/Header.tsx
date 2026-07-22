@@ -23,8 +23,7 @@ const NAV: NavItem[] = [
         {
           label: "Visão geral",
           to: "/engenharia-de-presenca",
-          description:
-            "Método, fórmula e pilares da frente autoral da FOHAT.",
+          description: "Método, fórmula e pilares da frente autoral da FOHAT.",
         },
         {
           label: "Para Marcas",
@@ -49,8 +48,7 @@ const NAV: NavItem[] = [
         {
           label: "Tela Brasil",
           to: "/engenharia-de-presenca/projetos/tela-brasil",
-          description:
-            "Cinema brasileiro em seis capitais com IA, impressão e projeção.",
+          description: "Cinema brasileiro em seis capitais com IA, impressão e projeção.",
         },
       ],
     },
@@ -151,10 +149,7 @@ export function Header() {
                   onMouseEnter={() => hasMega && openThis()}
                   onFocus={() => hasMega && openThis()}
                   onBlur={(e) => {
-                    if (
-                      hasMega &&
-                      !e.currentTarget.contains(e.relatedTarget as Node | null)
-                    ) {
+                    if (hasMega && !e.currentTarget.contains(e.relatedTarget as Node | null)) {
                       closeThis();
                     }
                   }}
@@ -179,8 +174,7 @@ export function Header() {
                           e.preventDefault();
                           openThis();
                           const panel = document.getElementById(panelId!);
-                          const first =
-                            panel?.querySelector<HTMLElement>("a[href]");
+                          const first = panel?.querySelector<HTMLElement>("a[href]");
                           first?.focus();
                         }
                       }}
@@ -188,10 +182,7 @@ export function Header() {
                       {item.label}
                       {hasMega && (
                         <ChevronDown
-                          className={cn(
-                            "h-3.5 w-3.5 transition-transform",
-                            active && "rotate-180",
-                          )}
+                          className={cn("h-3.5 w-3.5 transition-transform", active && "rotate-180")}
                         />
                       )}
                     </Link>
@@ -208,9 +199,7 @@ export function Header() {
                       aria-expanded={active}
                       aria-controls={panelId}
                       aria-label={
-                        active
-                          ? `Recolher submenu ${item.label}`
-                          : `Expandir submenu ${item.label}`
+                        active ? `Recolher submenu ${item.label}` : `Expandir submenu ${item.label}`
                       }
                       className="sr-only focus:not-sr-only focus:absolute focus:left-0 focus:top-full focus:mt-1 focus:rounded-md focus:bg-navy focus:px-2 focus:py-1 focus:text-xs focus:text-white"
                     >
@@ -304,9 +293,7 @@ export function Header() {
                           {item.label}
                         </Link>
                       ) : (
-                        <span className="py-3 text-base font-semibold text-navy">
-                          {item.label}
-                        </span>
+                        <span className="py-3 text-base font-semibold text-navy">{item.label}</span>
                       )}
                       {item.submenu && (
                         <button
@@ -319,17 +306,12 @@ export function Header() {
                           aria-expanded={expanded}
                           aria-controls={panelId}
                           onClick={() =>
-                            setExpandedMobile((e) =>
-                              e === item.label ? null : item.label,
-                            )
+                            setExpandedMobile((e) => (e === item.label ? null : item.label))
                           }
                           className="p-2 text-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue/50 rounded-md"
                         >
                           <ChevronDown
-                            className={cn(
-                              "h-4 w-4 transition-transform",
-                              expanded && "rotate-180",
-                            )}
+                            className={cn("h-4 w-4 transition-transform", expanded && "rotate-180")}
                           />
                         </button>
                       )}

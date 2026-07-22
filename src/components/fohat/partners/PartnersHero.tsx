@@ -5,18 +5,14 @@ import { SectionReveal } from "@/components/fohat/motion/SectionReveal";
 import { PARTNERS_HERO } from "@/data/partners-content";
 
 export function PartnersHero() {
-  const { eyebrow, breadcrumb, title, lead, ctaLabel, stages, disciplines } =
-    PARTNERS_HERO;
+  const { eyebrow, breadcrumb, title, lead, ctaLabel, stages, disciplines } = PARTNERS_HERO;
 
   return (
     <section
       id="visao-geral"
       className="relative overflow-hidden bg-white pb-20 pt-28 lg:pb-28 lg:pt-36"
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 fohat-grid-bg opacity-40"
-      />
+      <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg opacity-40" />
       <div className="fohat-shell relative">
         <SectionReveal className="max-w-3xl">
           <TerritoryBreadcrumb items={breadcrumb} />
@@ -52,11 +48,7 @@ function HeroBridge({
   disciplines: readonly string[];
 }) {
   return (
-    <div
-      className="relative overflow-hidden rounded-[32px] border border-line bg-mist/70 p-6 sm:p-10"
-      role="img"
-      aria-label="Ponte entre criação e tecnologia: ideia criativa, viabilidade, arquitetura, desenvolvimento, integração e operação."
-    >
+    <div className="relative overflow-hidden rounded-[32px] border border-line bg-mist/70 p-6 sm:p-10">
       {/* disciplines chips top */}
       <ul className="flex flex-wrap gap-2">
         {disciplines.map((d) => (
@@ -70,7 +62,11 @@ function HeroBridge({
       </ul>
 
       {/* Desktop bridge diagram */}
-      <div className="mt-10 hidden lg:block">
+      <div
+        className="mt-10 hidden lg:block"
+        role="img"
+        aria-label="Diagrama da ponte entre criação e tecnologia: ideia criativa, viabilidade, arquitetura, desenvolvimento, integração e operação."
+      >
         <div className="grid grid-cols-6 gap-3">
           <div className="fohat-mono col-span-2 text-[10px] uppercase tracking-[0.2em] text-blue">
             Criação
@@ -91,14 +87,7 @@ function HeroBridge({
             </linearGradient>
           </defs>
           {/* baseline */}
-          <line
-            x1="40"
-            y1="110"
-            x2="960"
-            y2="110"
-            stroke="url(#bridge-line)"
-            strokeWidth="1.5"
-          />
+          <line x1="40" y1="110" x2="960" y2="110" stroke="url(#bridge-line)" strokeWidth="1.5" />
           {stages.map((s, i) => {
             const x = 40 + (920 / (stages.length - 1)) * i;
             const isBridge = s.side === "bridge";

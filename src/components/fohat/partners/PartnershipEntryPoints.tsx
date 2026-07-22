@@ -45,18 +45,16 @@ export function PartnershipEntryPoints() {
         <SectionReveal className="mt-12" delay={100}>
           {/* Desktop: map with independent points */}
           <div className="hidden lg:block">
-            <div
-              role="tablist"
-              aria-label="Pontos de entrada da parceria"
-              className="relative overflow-hidden rounded-[32px] border border-line bg-mist p-8"
-            >
-              <EntryMap
-                points={points}
-                activeIndex={safeActive}
-                onSelect={setActive}
-                onKey={onKeyDesktop}
-                registerRef={(el, i) => (desktopTabRefs.current[i] = el)}
-              />
+            <div className="relative overflow-hidden rounded-[32px] border border-line bg-mist p-8">
+              <div role="tablist" aria-label="Pontos de entrada da parceria">
+                <EntryMap
+                  points={points}
+                  activeIndex={safeActive}
+                  onSelect={setActive}
+                  onKey={onKeyDesktop}
+                  registerRef={(el, i) => (desktopTabRefs.current[i] = el)}
+                />
+              </div>
               <div
                 role="tabpanel"
                 id="entries-panel-desktop"
@@ -68,9 +66,7 @@ export function PartnershipEntryPoints() {
                 </span>
                 <div>
                   <h3 className="fohat-h3 text-navy">{activePoint.label}</h3>
-                  <p className="mt-3 text-base text-muted-foreground">
-                    {activePoint.desc}
-                  </p>
+                  <p className="mt-3 text-base text-muted-foreground">{activePoint.desc}</p>
                 </div>
               </div>
             </div>

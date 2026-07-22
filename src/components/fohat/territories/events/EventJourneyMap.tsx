@@ -36,9 +36,7 @@ export function EventJourneyMap() {
                       {String(i + 1).padStart(2, "0")}
                     </span>
                   </div>
-                  <div className="mt-4 text-center text-sm font-bold text-navy">
-                    {s}
-                  </div>
+                  <div className="mt-4 text-center text-sm font-bold text-navy">{s}</div>
                   {i < steps.length - 1 && (
                     <div
                       aria-hidden
@@ -48,9 +46,7 @@ export function EventJourneyMap() {
                 </li>
               ))}
             </ol>
-            <p className="mt-6 text-center text-sm text-muted-foreground">
-              {note}
-            </p>
+            <p className="mt-6 text-center text-sm text-muted-foreground">{note}</p>
           </div>
         </SectionReveal>
 
@@ -61,10 +57,7 @@ export function EventJourneyMap() {
           </div>
           <ul className="flex flex-wrap gap-2">
             {pillars.map((p) => (
-              <li
-                key={p}
-                className="fohat-tag"
-              >
+              <li key={p} className="fohat-tag">
                 {p}
               </li>
             ))}

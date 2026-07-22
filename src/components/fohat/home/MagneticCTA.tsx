@@ -54,9 +54,7 @@ export function MagneticCTA({
       className={className}
       style={{ display: "inline-block" }}
     >
-      <motion.div style={{ x: reduce ? 0 : sx, y: reduce ? 0 : sy }}>
-        {children}
-      </motion.div>
+      <motion.div style={{ x: reduce ? 0 : sx, y: reduce ? 0 : sy }}>{children}</motion.div>
     </div>
   );
 }

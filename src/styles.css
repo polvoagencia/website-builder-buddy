@@ -77,13 +77,13 @@
   --radius: 1.5rem;
 
   /* Brand palette in oklch (mapped from source hex) */
-  --navy: oklch(0.22 0.023 250);        /* #15202c */
-  --blue: oklch(0.46 0.055 253);        /* #43618c */
-  --blue-2: oklch(0.58 0.048 253);      /* #6887ad */
-  --steel: oklch(0.63 0.03 250);        /* #7d8fa6 */
-  --ice: oklch(0.9 0.02 250);           /* #dce5ee */
-  --mist: oklch(0.97 0.008 250);        /* #f5f8fb */
-  --cyan: oklch(0.85 0.055 245);        /* #a9d2f5 */
+  --navy: oklch(0.22 0.023 250); /* #15202c */
+  --blue: oklch(0.46 0.055 253); /* #43618c */
+  --blue-2: oklch(0.58 0.048 253); /* #6887ad */
+  --steel: oklch(0.63 0.03 250); /* #7d8fa6 */
+  --ice: oklch(0.9 0.02 250); /* #dce5ee */
+  --mist: oklch(0.97 0.008 250); /* #f5f8fb */
+  --cyan: oklch(0.85 0.055 245); /* #a9d2f5 */
   --line: oklch(0.46 0.055 253 / 0.2);
 
   /* Semantic (FOHAT light theme is default) */
@@ -159,7 +159,10 @@
     line-height: 1.55;
   }
 
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-display);
     letter-spacing: -0.045em;
   }
@@ -169,7 +172,6 @@
     scroll-margin-top: 96px;
   }
 }
-
 
 @utility fohat-shell {
   width: min(calc(100% - 3rem), 1240px);
@@ -217,7 +219,12 @@
 @utility fohat-hero-bg {
   background:
     radial-gradient(circle at 20% 5%, oklch(0.85 0.055 245 / 0.34), transparent 35%),
-    linear-gradient(135deg, oklch(0.98 0.006 250) 0%, oklch(0.92 0.014 250) 68%, oklch(0.88 0.018 250) 100%);
+    linear-gradient(
+      135deg,
+      oklch(0.98 0.006 250) 0%,
+      oklch(0.92 0.014 250) 68%,
+      oklch(0.88 0.018 250) 100%
+    );
 }
 
 @utility fohat-image-frame {
@@ -230,7 +237,9 @@
 @utility fohat-reveal {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
 
   &.is-visible {
     opacity: 1;
@@ -276,8 +285,12 @@
 
 /* Scan line for tech vibe */
 @keyframes fohat-scan {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(2400%); }
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(2400%);
+  }
 }
 
 @utility fohat-scanline {
@@ -291,8 +304,12 @@
 
 /* Marquee band */
 @keyframes fohat-marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 @utility fohat-marquee {
   animation: fohat-marquee 38s linear infinite;
@@ -303,7 +320,10 @@
   opacity: 0;
   filter: blur(14px);
   transform: translateY(28px);
-  transition: opacity 0.9s ease, filter 0.9s ease, transform 0.9s ease;
+  transition:
+    opacity 0.9s ease,
+    filter 0.9s ease,
+    transform 0.9s ease;
   &.is-visible {
     opacity: 1;
     filter: blur(0);
@@ -400,15 +420,23 @@
   clip-path: inset(0 100% 0 0 round 0);
   transition: clip-path var(--motion-cinematic) var(--ease-reveal);
 }
-.fohat-media-reveal[data-from="left"] { clip-path: inset(0 0 0 100% round 0); }
-.fohat-media-reveal[data-from="bottom"] { clip-path: inset(100% 0 0 0 round 0); }
-.fohat-media-reveal[data-visible="true"] { clip-path: inset(0 0 0 0 round 0); }
+.fohat-media-reveal[data-from="left"] {
+  clip-path: inset(0 0 0 100% round 0);
+}
+.fohat-media-reveal[data-from="bottom"] {
+  clip-path: inset(100% 0 0 0 round 0);
+}
+.fohat-media-reveal[data-visible="true"] {
+  clip-path: inset(0 0 0 0 round 0);
+}
 .fohat-media-reveal > * {
   transform: scale(1.06);
   transition: transform var(--motion-cinematic) var(--ease-reveal);
   will-change: transform;
 }
-.fohat-media-reveal[data-visible="true"] > * { transform: scale(1); }
+.fohat-media-reveal[data-visible="true"] > * {
+  transform: scale(1);
+}
 
 /* RouteTransition — brief outgoing fade during pathname change */
 .fohat-route-transition {
@@ -438,9 +466,19 @@
  * animation. Content stays visible; no clipping, no translate.
  * ================================================================ */
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .fohat-reveal, .fohat-reveal-blur { opacity: 1; transform: none; filter: none; }
-  .fohat-marquee, .fohat-scanline { animation: none; }
+  html {
+    scroll-behavior: auto;
+  }
+  .fohat-reveal,
+  .fohat-reveal-blur {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+  .fohat-marquee,
+  .fohat-scanline {
+    animation: none;
+  }
 
   .fohat-section-reveal,
   .fohat-section-reveal[data-visible="false"] {
@@ -467,7 +505,9 @@
     transform: none !important;
     transition: none !important;
   }
-  .fohat-mega-enter { animation: none !important; }
+  .fohat-mega-enter {
+    animation: none !important;
+  }
 }
 
 /* Mega menu entrance — mask + lift */
@@ -491,4 +531,3 @@
 .fohat-header nav a[data-status="active"] {
   position: relative;
 }
-

@@ -93,29 +93,31 @@ export function ResponsiveSpace() {
                 rx="8"
               />
               {/* pontos de interação */}
-              {[[80, 80], [200, 60], [320, 100], [140, 180], [280, 180]].map(
-                ([x, y], i) => {
-                  const on = i / 5 <= intensity;
-                  return (
-                    <g key={i}>
-                      <circle
-                        cx={x}
-                        cy={y}
-                        r={on ? 14 : 6}
-                        fill={on ? "oklch(0.85 0.055 245 / 0.25)" : "transparent"}
-                        stroke="oklch(0.85 0.055 245)"
-                        strokeWidth="1"
-                        style={{
-                          transition: reduced
-                            ? "none"
-                            : "r 400ms var(--ease-reveal), fill 400ms",
-                        }}
-                      />
-                      <circle cx={x} cy={y} r="2" fill="oklch(0.85 0.055 245)" />
-                    </g>
-                  );
-                },
-              )}
+              {[
+                [80, 80],
+                [200, 60],
+                [320, 100],
+                [140, 180],
+                [280, 180],
+              ].map(([x, y], i) => {
+                const on = i / 5 <= intensity;
+                return (
+                  <g key={i}>
+                    <circle
+                      cx={x}
+                      cy={y}
+                      r={on ? 14 : 6}
+                      fill={on ? "oklch(0.85 0.055 245 / 0.25)" : "transparent"}
+                      stroke="oklch(0.85 0.055 245)"
+                      strokeWidth="1"
+                      style={{
+                        transition: reduced ? "none" : "r 400ms var(--ease-reveal), fill 400ms",
+                      }}
+                    />
+                    <circle cx={x} cy={y} r="2" fill="oklch(0.85 0.055 245)" />
+                  </g>
+                );
+              })}
               {/* trajetos ativos */}
               <path
                 d="M 20 220 Q 100 190 200 60 T 380 100"

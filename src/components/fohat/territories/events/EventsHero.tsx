@@ -45,15 +45,10 @@ export function EventsHero() {
               <TextReveal as="span" text={hero.titleAccent} stagger={120} delay={220} />
             </span>
           </h1>
-          <p className="fohat-lead mt-6 max-w-[560px] text-[oklch(0.85_0.02_250)]">
-            {hero.lead}
-          </p>
+          <p className="fohat-lead mt-6 max-w-[560px] text-[oklch(0.85_0.02_250)]">{hero.lead}</p>
 
           {/* Legenda de zonas */}
-          <ul
-            aria-label="Zonas de uma jornada espacial"
-            className="mt-10 flex flex-wrap gap-2"
-          >
+          <ul aria-label="Zonas de uma jornada espacial" className="mt-10 flex flex-wrap gap-2">
             {zones.map((z, i) => (
               <li
                 key={z}
@@ -92,7 +87,12 @@ export function EventsHero() {
             >
               <defs>
                 <pattern id="ev-grid" width="24" height="24" patternUnits="userSpaceOnUse">
-                  <path d="M 24 0 L 0 0 0 24" fill="none" stroke="oklch(0.85 0.055 245 / 0.15)" strokeWidth="0.5" />
+                  <path
+                    d="M 24 0 L 0 0 0 24"
+                    fill="none"
+                    stroke="oklch(0.85 0.055 245 / 0.15)"
+                    strokeWidth="0.5"
+                  />
                 </pattern>
               </defs>
               <rect width="500" height="400" fill="url(#ev-grid)" />
@@ -139,18 +139,22 @@ export function EventsHero() {
               />
 
               {/* Fluxo de pessoas — pontos */}
-              {[[85, 330], [240, 295], [400, 275], [270, 145], [425, 95]].map(
-                ([x, y], i) => (
-                  <circle key={i} cx={x} cy={y} r="4" fill="oklch(0.85 0.055 245)">
-                    <animate
-                      attributeName="opacity"
-                      values="0.4;1;0.4"
-                      dur={`${2 + i * 0.4}s`}
-                      repeatCount="indefinite"
-                    />
-                  </circle>
-                ),
-              )}
+              {[
+                [85, 330],
+                [240, 295],
+                [400, 275],
+                [270, 145],
+                [425, 95],
+              ].map(([x, y], i) => (
+                <circle key={i} cx={x} cy={y} r="4" fill="oklch(0.85 0.055 245)">
+                  <animate
+                    attributeName="opacity"
+                    values="0.4;1;0.4"
+                    dur={`${2 + i * 0.4}s`}
+                    repeatCount="indefinite"
+                  />
+                </circle>
+              ))}
             </svg>
 
             {/* Fragmento editorial no canto */}

@@ -15,9 +15,7 @@ export function MotionProvider({ children }: { children: ReactNode }) {
     if (typeof window === "undefined") return;
 
     const root = document.documentElement;
-    const reduce = window.matchMedia?.(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
     if (reduce) {
       root.style.setProperty("--fohat-scroll", "0");

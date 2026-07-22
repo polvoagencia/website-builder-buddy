@@ -18,11 +18,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 
-import {
-  canSubmit,
-  getPageContext,
-  getStoredUtms,
-} from "@/lib/lead-tracking";
+import { canSubmit, getPageContext, getStoredUtms } from "@/lib/lead-tracking";
 
 const contactSchema = z.object({
   name: z
@@ -56,11 +52,7 @@ interface ContactDialogProps {
   sourceCta?: string;
 }
 
-export function ContactDialog({
-  children,
-  sourcePage,
-  sourceCta,
-}: ContactDialogProps) {
+export function ContactDialog({ children, sourcePage, sourceCta }: ContactDialogProps) {
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLSpanElement | null>(null);
 
@@ -76,7 +68,6 @@ export function ContactDialog({
   });
 
   const descriptionValue = watch("description") ?? "";
-
 
   const onSubmit = async (data: ContactFormValues, event?: React.BaseSyntheticEvent) => {
     // Honeypot: bots fill hidden field.
@@ -110,7 +101,6 @@ export function ContactDialog({
       status: "novo",
     });
 
-
     if (error) {
       if (import.meta.env.DEV) console.error("[fohat_leads:contato]", error);
       toast.error("Não foi possível enviar agora.", {
@@ -129,7 +119,9 @@ export function ContactDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <span ref={triggerRef} className="contents">{children}</span>
+        <span ref={triggerRef} className="contents">
+          {children}
+        </span>
       </DialogTrigger>
       <DialogContent className="sm:max-w-lg rounded-3xl border-line bg-card p-8 sm:p-10">
         <DialogHeader className="space-y-3 text-left">
@@ -138,10 +130,9 @@ export function ContactDialog({
             Vamos projetar uma presença.
           </DialogTitle>
           <DialogDescription className="text-base text-muted-foreground">
-            Deixe seu contato e conte brevemente sua ideia, necessidade ou
-            desafio. Não precisa estar tudo definido para começarmos a conversa.
+            Deixe seu contato e conte brevemente sua ideia, necessidade ou desafio. Não precisa
+            estar tudo definido para começarmos a conversa.
           </DialogDescription>
-
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-5" noValidate>
@@ -168,13 +159,14 @@ export function ContactDialog({
               className="h-12 rounded-xl border-line bg-background focus-visible:ring-blue"
               {...register("name")}
             />
-            {errors.name && (
-              <p className="text-xs text-destructive">{errors.name.message}</p>
-            )}
+            {errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="fohat-whatsapp" className="text-xs uppercase tracking-[0.14em] text-blue">
+            <Label
+              htmlFor="fohat-whatsapp"
+              className="text-xs uppercase tracking-[0.14em] text-blue"
+            >
               WhatsApp
             </Label>
             <Input
@@ -206,13 +198,14 @@ export function ContactDialog({
               className="h-12 rounded-xl border-line bg-background focus-visible:ring-blue"
               {...register("email")}
             />
-            {errors.email && (
-              <p className="text-xs text-destructive">{errors.email.message}</p>
-            )}
+            {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="fohat-description" className="text-xs uppercase tracking-[0.14em] text-blue">
+            <Label
+              htmlFor="fohat-description"
+              className="text-xs uppercase tracking-[0.14em] text-blue"
+            >
               Conte sua ideia
             </Label>
             <Textarea
@@ -227,8 +220,7 @@ export function ContactDialog({
             />
             <div className="flex items-start justify-between gap-3">
               <p id="fohat-description-help" className="text-xs text-muted-foreground">
-                Não precisa estar tudo definido. Explique o contexto, a
-                necessidade ou o desafio.
+                Não precisa estar tudo definido. Explique o contexto, a necessidade ou o desafio.
               </p>
               <span
                 id="fohat-description-count"
@@ -242,7 +234,6 @@ export function ContactDialog({
               <p className="text-xs text-destructive">{errors.description.message}</p>
             )}
           </div>
-
 
           <button
             type="submit"

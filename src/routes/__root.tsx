@@ -47,9 +47,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          Algo deu errado
-        </h1>
+        <h1 className="text-xl font-semibold tracking-tight text-foreground">Algo deu errado</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Não foi possível carregar esta página. Tente novamente ou volte ao início.
         </p>
@@ -99,8 +97,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:title", content: "FOHAT | Engenharia de Presença" },
       {
         name: "twitter:description",
-        content:
-          "Experiências tecnológicas imersivas para marcas, cultura, eventos e espaços.",
+        content: "Experiências tecnológicas imersivas para marcas, cultura, eventos e espaços.",
       },
     ],
     links: [

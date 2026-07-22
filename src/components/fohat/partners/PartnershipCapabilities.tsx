@@ -219,11 +219,7 @@ export function PartnershipCapabilities() {
 
             {/* Mobile tabs + panel */}
             <div className="lg:hidden">
-              <div
-                role="tablist"
-                aria-orientation="vertical"
-                aria-label="Capacidades de parceria"
-              >
+              <div role="tablist" aria-orientation="vertical" aria-label="Capacidades de parceria">
                 <ul className="grid gap-2 sm:grid-cols-2">
                   {items.map((it, i) => {
                     const isActive = i === safe;
@@ -268,9 +264,8 @@ export function PartnershipCapabilities() {
           </div>
 
           <p className="mt-8 max-w-3xl text-sm text-muted-foreground">
-            Nem todo projeto utiliza todas as capacidades. A combinação é
-            desenhada conforme o conceito, o escopo, o prazo e as condições de
-            operação.
+            Nem todo projeto utiliza todas as capacidades. A combinação é desenhada conforme o
+            conceito, o escopo, o prazo e as condições de operação.
           </p>
         </SectionReveal>
       </div>

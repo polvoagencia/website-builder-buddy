@@ -27,17 +27,13 @@ export function RentalMobileBar() {
 
     const catObs = new IntersectionObserver(
       ([entry]) => {
-        setPastCatalog(
-          entry.isIntersecting || entry.boundingClientRect.top <= HEADER_OFFSET,
-        );
+        setPastCatalog(entry.isIntersecting || entry.boundingClientRect.top <= HEADER_OFFSET);
       },
       { rootMargin: `-${HEADER_OFFSET}px 0px 0px 0px`, threshold: [0, 1] },
     );
     const solObs = new IntersectionObserver(
       ([entry]) => {
-        setPastSolicitar(
-          entry.isIntersecting || entry.boundingClientRect.top <= HEADER_OFFSET,
-        );
+        setPastSolicitar(entry.isIntersecting || entry.boundingClientRect.top <= HEADER_OFFSET);
       },
       { rootMargin: `-${HEADER_OFFSET}px 0px 0px 0px`, threshold: [0, 1] },
     );
@@ -70,14 +66,9 @@ export function RentalMobileBar() {
               <div className="fohat-mono text-[9px] uppercase tracking-[0.18em] text-cyan/90">
                 Locação · Catálogo
               </div>
-              <div className="truncate text-xs font-bold text-white">
-                Sujeito a disponibilidade
-              </div>
+              <div className="truncate text-xs font-bold text-white">Sujeito a disponibilidade</div>
             </div>
-            <RentalRequestDialog
-              sourcePage="/locacao-de-equipamentos"
-              onOpenChange={setDialogOpen}
-            >
+            <RentalRequestDialog sourcePage="/locacao-de-equipamentos" onOpenChange={setDialogOpen}>
               <button className="inline-flex h-11 shrink-0 items-center gap-2 rounded-full bg-white px-4 text-[11px] font-bold uppercase tracking-[0.14em] text-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan">
                 Solicitar
                 <ArrowUpRight className="h-3.5 w-3.5" />
@@ -89,4 +80,3 @@ export function RentalMobileBar() {
     </AnimatePresence>
   );
 }
-

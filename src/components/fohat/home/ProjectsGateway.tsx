@@ -48,11 +48,27 @@ const NODES: { x: number; y: number; r: number; label?: string }[] = [
 ];
 
 const EDGES: [number, number][] = [
-  [0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6],
-  [0, 7], [2, 8], [4, 10], [6, 11],
-  [7, 8], [8, 9], [9, 10], [10, 11],
-  [7, 12], [8, 13], [10, 14], [11, 15],
-  [12, 13], [13, 14], [14, 15],
+  [0, 1],
+  [1, 2],
+  [2, 3],
+  [3, 4],
+  [4, 5],
+  [5, 6],
+  [0, 7],
+  [2, 8],
+  [4, 10],
+  [6, 11],
+  [7, 8],
+  [8, 9],
+  [9, 10],
+  [10, 11],
+  [7, 12],
+  [8, 13],
+  [10, 14],
+  [11, 15],
+  [12, 13],
+  [13, 14],
+  [14, 15],
 ];
 
 export function ProjectsGateway() {
@@ -122,13 +138,7 @@ export function ProjectsGateway() {
           })}
           {NODES.map((n, i) => (
             <g key={i}>
-              <circle
-                cx={n.x}
-                cy={n.y}
-                r={n.r}
-                fill="oklch(0.9 0.12 210)"
-                opacity="0.85"
-              />
+              <circle cx={n.x} cy={n.y} r={n.r} fill="oklch(0.9 0.12 210)" opacity="0.85" />
               <circle
                 cx={n.x}
                 cy={n.y}
@@ -154,19 +164,16 @@ export function ProjectsGateway() {
 
       <div className="fohat-shell relative">
         <SectionReveal className="max-w-[840px]">
-          <span
-            className="fohat-eyebrow"
-            style={{ color: "var(--color-cyan)" }}
-          >
+          <span className="fohat-eyebrow" style={{ color: "var(--color-cyan)" }}>
             Projetos em funcionamento
           </span>
           <h2 className="fohat-h2 mt-5 text-white">
             Tecnologia que sai do conceito e entra em operação no mundo real.
           </h2>
           <p className="fohat-lead mt-6 text-[oklch(0.85_0.02_250)]">
-            Conheça projetos em que a FOHAT integrou estratégia, desenvolvimento,
-            inteligência artificial, equipamentos e operação para criar
-            experiências e soluções em diferentes contextos.
+            Conheça projetos em que a FOHAT integrou estratégia, desenvolvimento, inteligência
+            artificial, equipamentos e operação para criar experiências e soluções em diferentes
+            contextos.
           </p>
         </SectionReveal>
 
@@ -197,9 +204,7 @@ export function ProjectsGateway() {
                   <div className="fohat-mono text-[10px] uppercase tracking-[0.22em] text-cyan">
                     Camada {step.n}
                   </div>
-                  <div className="mt-3 text-xl font-bold tracking-tight text-white">
-                    {step.t}
-                  </div>
+                  <div className="mt-3 text-xl font-bold tracking-tight text-white">{step.t}</div>
                   <p className="mt-2 text-sm text-white/70">{step.d}</p>
                 </div>
               ))}

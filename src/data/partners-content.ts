@@ -5,13 +5,9 @@
 
 export const PARTNERS_HERO = {
   eyebrow: "FOHAT para Parceiros",
-  breadcrumb: [
-    { label: "Início", to: "/" as const },
-    { label: "Parceiros" },
-  ],
+  breadcrumb: [{ label: "Início", to: "/" as const }, { label: "Parceiros" }],
   title: "Grandes ideias criativas precisam de um caminho tecnológico.",
-  lead:
-    "Atuamos ao lado de agências, produtoras, cenógrafos, arquitetos e equipes criativas para transformar conceitos em experiências executáveis.",
+  lead: "Atuamos ao lado de agências, produtoras, cenógrafos, arquitetos e equipes criativas para transformar conceitos em experiências executáveis.",
   ctaLabel: "Construa essa experiência com a FOHAT",
   stages: [
     { label: "Ideia criativa", side: "creation" as const },
@@ -38,13 +34,7 @@ export const PARTNERS_PRINCIPLE = {
   headline: "Assumimos a complexidade tecnológica sem perder a intenção criativa.",
   partner: {
     label: "Parceiro",
-    items: [
-      "Ideia",
-      "Conceito",
-      "Direção criativa",
-      "Narrativa",
-      "Relação com o cliente",
-    ],
+    items: ["Ideia", "Conceito", "Direção criativa", "Narrativa", "Relação com o cliente"],
   },
   fohat: {
     label: "FOHAT",
@@ -57,8 +47,7 @@ export const PARTNERS_PRINCIPLE = {
       "Operação",
     ],
   },
-  note:
-    "O desenho de responsabilidades é definido conforme cada projeto. Estas listas são uma representação de responsabilidades possíveis, não uma divisão contratual obrigatória.",
+  note: "O desenho de responsabilidades é definido conforme cada projeto. Estas listas são uma representação de responsabilidades possíveis, não uma divisão contratual obrigatória.",
 };
 
 export const PARTNERS_ENTRY = {
@@ -206,8 +195,7 @@ export const PARTNERS_MODELS = {
       y: 0.82,
     },
   ],
-  note:
-    "Formatos possíveis de colaboração. Não são planos, hierarquias ou condições comerciais.",
+  note: "Formatos possíveis de colaboração. Não são planos, hierarquias ou condições comerciais.",
 };
 
 export const PARTNERS_FRONTS = {
@@ -262,14 +250,12 @@ export const PARTNERS_FLOW = {
       desc: "A solução é testada e colocada em funcionamento conforme o projeto.",
     },
   ],
-  note:
-    "O ponto de entrada e o desenho da colaboração variam conforme cada projeto.",
+  note: "O ponto de entrada e o desenho da colaboração variam conforme cada projeto.",
 };
 
 export const PARTNERS_CTA = {
   title: "Você tem a ideia. Nós ajudamos a construir o caminho até o público.",
-  intro:
-    "Conte em que etapa o projeto está e onde a tecnologia precisa entrar.",
+  intro: "Conte em que etapa o projeto está e onde a tecnologia precisa entrar.",
   buttonLabel: "Construa com a FOHAT",
 };
 

@@ -36,11 +36,7 @@ export function CultureHero() {
             id="culture-hero-title"
             className="fohat-h1 mt-8 max-w-[760px] text-navy [font-size:clamp(2.5rem,5.2vw,5rem)] [line-height:1.02]"
           >
-            <TextReveal
-              as="span"
-              text={hero.titleLead}
-              stagger={140}
-            />
+            <TextReveal as="span" text={hero.titleLead} stagger={140} />
             <span className="mt-3 block text-blue">
               <TextReveal as="span" text={hero.titleAccent} stagger={140} delay={280} />
             </span>
@@ -48,10 +44,7 @@ export function CultureHero() {
           <p className="fohat-lead mt-8 max-w-[560px] text-navy/70">{hero.lead}</p>
 
           {/* Fragmentos de acervo — pequenos rótulos que representam camadas */}
-          <ul
-            aria-label="Camadas de conteúdo cultural"
-            className="mt-10 flex flex-wrap gap-2"
-          >
+          <ul aria-label="Camadas de conteúdo cultural" className="mt-10 flex flex-wrap gap-2">
             {hero.fragments.map((f, i) => (
               <li
                 key={f}
@@ -64,10 +57,7 @@ export function CultureHero() {
           </ul>
 
           <div className="mt-12">
-            <ContactDialog
-              sourcePage="/engenharia-de-presenca/cultura"
-              sourceCta={hero.cta}
-            >
+            <ContactDialog sourcePage="/engenharia-de-presenca/cultura" sourceCta={hero.cta}>
               <button
                 type="button"
                 className="group inline-flex h-14 items-center gap-3 rounded-full bg-navy px-7 text-sm font-bold text-white shadow-[var(--shadow-cta)] transition-all hover:-translate-y-0.5 hover:bg-blue"
@@ -109,9 +99,7 @@ export function CultureHero() {
                     <span className="fohat-mono text-[10px] uppercase tracking-[0.14em] text-navy/70">
                       {t}
                     </span>
-                    <span className="ml-auto text-[9px] text-steel">
-                      camada 0{i + 1}
-                    </span>
+                    <span className="ml-auto text-[9px] text-steel">camada 0{i + 1}</span>
                   </div>
                 ))}
               </div>
@@ -125,8 +113,7 @@ export function CultureHero() {
                 Patrimônio
               </div>
               <p className="mt-2 text-[13px] leading-snug">
-                A obra permanece no centro. A tecnologia abre novas portas de
-                entrada.
+                A obra permanece no centro. A tecnologia abre novas portas de entrada.
               </p>
             </div>
           </div>

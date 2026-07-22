@@ -14,17 +14,9 @@ export function CreativeTechnologyBridge() {
 
         <SectionReveal className="mt-12 lg:mt-16" delay={100}>
           <div className="grid gap-6 lg:grid-cols-[1fr_auto_1fr] lg:items-stretch">
-            <ResponsibilityCard
-              side="partner"
-              label={partner.label}
-              items={partner.items}
-            />
+            <ResponsibilityCard side="partner" label={partner.label} items={partner.items} />
             <Bridge />
-            <ResponsibilityCard
-              side="fohat"
-              label={fohat.label}
-              items={fohat.items}
-            />
+            <ResponsibilityCard side="fohat" label={fohat.label} items={fohat.items} />
           </div>
 
           <p className="mt-8 max-w-3xl text-sm text-muted-foreground">{note}</p>
@@ -74,10 +66,7 @@ function ResponsibilityCard({
 
 function Bridge() {
   return (
-    <div
-      aria-hidden
-      className="hidden items-center justify-center lg:flex"
-    >
+    <div aria-hidden className="hidden items-center justify-center lg:flex">
       <svg viewBox="0 0 120 320" className="h-full w-24">
         <defs>
           <linearGradient id="bridge-vert" x1="0" x2="1" y1="0" y2="0">

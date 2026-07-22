@@ -22,9 +22,7 @@ export function RentalCatalog() {
 
   const availableFilters = useMemo(() => {
     const active = new Set(RENTAL_CATALOG_ITEMS.map((it) => it.filter));
-    return RENTAL_FILTERS.filter(
-      (f) => f.slug === "todos" || active.has(f.slug as never),
-    );
+    return RENTAL_FILTERS.filter((f) => f.slug === "todos" || active.has(f.slug as never));
   }, []);
 
   const items = useMemo(() => {
@@ -37,25 +35,18 @@ export function RentalCatalog() {
       id="catalogo"
       className="relative overflow-hidden py-20 lg:py-28"
       style={{
-        background:
-          "linear-gradient(180deg, oklch(0.97 0.008 250), oklch(0.94 0.014 250))",
+        background: "linear-gradient(180deg, oklch(0.97 0.008 250), oklch(0.94 0.014 250))",
       }}
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 fohat-grid-bg opacity-70"
-      />
+      <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg opacity-70" />
 
       <div className="fohat-shell relative">
         <Reveal className="mb-8 max-w-[900px]">
           <span className="fohat-eyebrow">Catálogo</span>
-          <h2 className="fohat-h2 mt-5">
-            Equipamentos disponíveis para locação
-          </h2>
+          <h2 className="fohat-h2 mt-5">Equipamentos disponíveis para locação</h2>
           <p className="mt-5 text-muted-foreground">
-            Conheça as categorias de equipamentos que podem compor sua
-            operação. Modelos, quantidades, configurações e disponibilidade
-            são confirmados conforme cada projeto.
+            Conheça as categorias de equipamentos que podem compor sua operação. Modelos,
+            quantidades, configurações e disponibilidade são confirmados conforme cada projeto.
           </p>
         </Reveal>
 
@@ -67,9 +58,7 @@ export function RentalCatalog() {
         />
 
         <p aria-live="polite" className="sr-only">
-          {`Exibindo ${items.length} ${
-            items.length === 1 ? "equipamento" : "equipamentos"
-          }.`}
+          {`Exibindo ${items.length} ${items.length === 1 ? "equipamento" : "equipamentos"}.`}
         </p>
 
         <div
@@ -101,9 +90,8 @@ export function RentalCatalog() {
         </div>
 
         <p className="fohat-mono mt-10 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-          Nenhum item é apresentado como disponível em estoque sem
-          confirmação. Marcas, modelos e especificações são confirmados pela
-          equipe comercial.
+          Nenhum item é apresentado como disponível em estoque sem confirmação. Marcas, modelos e
+          especificações são confirmados pela equipe comercial.
         </p>
       </div>
     </section>

@@ -31,13 +31,10 @@ export function RentalModes() {
       <div className="fohat-shell">
         <Reveal className="max-w-[880px]">
           <span className="fohat-eyebrow">Formatos de contratação</span>
-          <h2 className="fohat-h2 mt-5">
-            Como a FOHAT pode participar da operação
-          </h2>
+          <h2 className="fohat-h2 mt-5">Como a FOHAT pode participar da operação</h2>
           <p className="mt-5 text-muted-foreground">
-            Cinco possibilidades combinadas de acordo com o equipamento,
-            localidade, período e escopo aprovado. Elas não representam uma
-            progressão obrigatória.
+            Cinco possibilidades combinadas de acordo com o equipamento, localidade, período e
+            escopo aprovado. Elas não representam uma progressão obrigatória.
           </p>
         </Reveal>
 
@@ -69,9 +66,7 @@ export function RentalModes() {
                       focusTab((i + 1) % RENTAL_MODES.length);
                     } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
                       e.preventDefault();
-                      focusTab(
-                        (i - 1 + RENTAL_MODES.length) % RENTAL_MODES.length,
-                      );
+                      focusTab((i - 1 + RENTAL_MODES.length) % RENTAL_MODES.length);
                     } else if (e.key === "Home") {
                       e.preventDefault();
                       focusTab(0);
@@ -99,9 +94,7 @@ export function RentalModes() {
                     >
                       {m.title}
                     </span>
-                    <span className="mt-1 block text-xs text-muted-foreground">
-                      {m.short}
-                    </span>
+                    <span className="mt-1 block text-xs text-muted-foreground">{m.short}</span>
                   </span>
                   <span
                     aria-hidden
@@ -136,15 +129,13 @@ export function RentalModes() {
                 <h3 className="mt-4 text-2xl font-bold tracking-tight text-navy sm:text-3xl">
                   {current.title}
                 </h3>
-                <p className="mt-4 text-base text-muted-foreground">
-                  {current.description}
-                </p>
+                <p className="mt-4 text-base text-muted-foreground">{current.description}</p>
 
                 <div className="mt-8 flex items-start gap-3 rounded-xl border border-line bg-white/70 p-4">
                   <Check className="mt-0.5 h-4 w-4 shrink-0 text-blue" aria-hidden />
                   <p className="fohat-mono text-[10px] uppercase leading-relaxed tracking-[0.14em] text-steel">
-                    Formatos sujeitos ao equipamento, localidade, período,
-                    logística e escopo aprovado.
+                    Formatos sujeitos ao equipamento, localidade, período, logística e escopo
+                    aprovado.
                   </p>
                 </div>
               </motion.div>

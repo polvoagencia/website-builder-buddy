@@ -9,9 +9,7 @@ import { useEffect, useState, type RefObject } from "react";
  * Values before/after that window are clamped. Useful for sticky story
  * sections that transform as the user scrolls through them.
  */
-export function useElementProgress(
-  ref: RefObject<HTMLElement | null>,
-): number {
+export function useElementProgress(ref: RefObject<HTMLElement | null>): number {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {

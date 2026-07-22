@@ -35,9 +35,7 @@ export function CultureLayers() {
                   <span className="fohat-mono text-[10px] uppercase tracking-[0.22em] text-blue">
                     Camada {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-xl font-bold tracking-[-0.02em] text-navy">
-                    {it.label}
-                  </span>
+                  <span className="text-xl font-bold tracking-[-0.02em] text-navy">{it.label}</span>
                 </div>
                 <p className="mt-2 text-sm text-muted-foreground">{it.note}</p>
                 <div

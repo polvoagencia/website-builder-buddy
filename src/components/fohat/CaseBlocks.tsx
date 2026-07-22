@@ -42,9 +42,7 @@ export function CaseSectionNav({ items }: { items: SectionAnchor[] }) {
                 href={`#${it.id}`}
                 className={cn(
                   "flex items-center gap-2 rounded-xl px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors",
-                  active === it.id
-                    ? "bg-navy text-white"
-                    : "text-muted-foreground hover:text-navy",
+                  active === it.id ? "bg-navy text-white" : "text-muted-foreground hover:text-navy",
                 )}
               >
                 <span
@@ -86,9 +84,7 @@ export function CaseSectionNav({ items }: { items: SectionAnchor[] }) {
                   onClick={() => setOpen(false)}
                   className={cn(
                     "block rounded-xl px-3 py-2 text-sm font-semibold",
-                    active === it.id
-                      ? "bg-navy text-white"
-                      : "bg-white text-navy",
+                    active === it.id ? "bg-navy text-white" : "bg-white text-navy",
                   )}
                 >
                   {it.label}
@@ -127,10 +123,7 @@ export function CaseSection({
         ? "bg-[oklch(0.96_0.01_250)]"
         : "bg-white";
   return (
-    <section
-      id={id}
-      className={cn("relative overflow-hidden py-20 lg:py-28", bg, className)}
-    >
+    <section id={id} className={cn("relative overflow-hidden py-20 lg:py-28", bg, className)}>
       {variant === "dark" && (
         <div
           aria-hidden
@@ -149,14 +142,7 @@ export function CaseSection({
               </span>
             )}
             {title && (
-              <h2
-                className={cn(
-                  "fohat-h2 mt-5",
-                  variant === "dark" && "text-white",
-                )}
-              >
-                {title}
-              </h2>
+              <h2 className={cn("fohat-h2 mt-5", variant === "dark" && "text-white")}>{title}</h2>
             )}
             {lead && (
               <p
@@ -193,9 +179,7 @@ export function MediaPlaceholder({
     <div
       className={cn(
         "relative overflow-hidden rounded-3xl border",
-        tone === "dark"
-          ? "border-white/12 bg-white/[0.04]"
-          : "border-line bg-mist",
+        tone === "dark" ? "border-white/12 bg-white/[0.04]" : "border-line bg-mist",
         className,
       )}
       style={{ aspectRatio: aspect }}
@@ -240,11 +224,7 @@ export function MediaPlaceholder({
 }
 
 /* ---------------- ResponsibilityGrid ---------------- */
-export function ResponsibilityGrid({
-  items,
-}: {
-  items: { title: string; desc: string }[];
-}) {
+export function ResponsibilityGrid({ items }: { items: { title: string; desc: string }[] }) {
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {items.map((it, i) => (
@@ -281,9 +261,7 @@ export function InfraGrid({
           delay={i * 50}
           className={cn(
             "rounded-2xl border p-6",
-            tone === "dark"
-              ? "border-white/12 bg-white/[0.04]"
-              : "border-line bg-mist",
+            tone === "dark" ? "border-white/12 bg-white/[0.04]" : "border-line bg-mist",
           )}
         >
           <div
@@ -327,13 +305,7 @@ export function InfraGrid({
 }
 
 /* ---------------- DashboardPlaceholder ---------------- */
-export function DashboardPlaceholder({
-  title,
-  metrics,
-}: {
-  title: string;
-  metrics: string[];
-}) {
+export function DashboardPlaceholder({ title, metrics }: { title: string; metrics: string[] }) {
   if (!import.meta.env.DEV) return null;
   return (
     <Reveal
@@ -341,9 +313,7 @@ export function DashboardPlaceholder({
       className="overflow-hidden rounded-3xl border border-white/12 bg-white/[0.04] p-6"
     >
       <div className="mb-4 flex items-center justify-between">
-        <div className="fohat-mono text-[10px] uppercase tracking-[0.2em] text-cyan">
-          Dashboard
-        </div>
+        <div className="fohat-mono text-[10px] uppercase tracking-[0.2em] text-cyan">Dashboard</div>
         <div className="fohat-mono text-[10px] uppercase tracking-[0.16em] text-white/50">
           Dados em consolidação
         </div>
@@ -393,11 +363,7 @@ export function JourneyDiagram({
 }
 
 /* ---------------- PillarsList ---------------- */
-export function PillarsList({
-  items,
-}: {
-  items: { title: string; desc: string }[];
-}) {
+export function PillarsList({ items }: { items: { title: string; desc: string }[] }) {
   return (
     <ul className="grid gap-4 md:grid-cols-2">
       {items.map((it, i) => (
@@ -410,9 +376,7 @@ export function PillarsList({
           <div className="fohat-mono text-[10px] uppercase tracking-[0.2em] text-cyan">
             Pilar {String(i + 1).padStart(2, "0")}
           </div>
-          <h3 className="mt-4 text-xl font-bold tracking-tight text-white">
-            {it.title}
-          </h3>
+          <h3 className="mt-4 text-xl font-bold tracking-tight text-white">{it.title}</h3>
           <p className="mt-2 text-sm text-[oklch(0.82_0.02_250)]">{it.desc}</p>
         </Reveal>
       ))}
@@ -421,11 +385,7 @@ export function PillarsList({
 }
 
 /* ---------------- ResultsPlaceholder ---------------- */
-export function ResultsPlaceholder({
-  fields,
-}: {
-  fields: string[];
-}) {
+export function ResultsPlaceholder({ fields }: { fields: string[] }) {
   if (!import.meta.env.DEV) return null;
   return (
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -438,9 +398,7 @@ export function ResultsPlaceholder({
           <div className="fohat-mono text-[10px] uppercase tracking-[0.2em] text-blue">
             Indicador
           </div>
-          <div className="mt-3 text-2xl font-bold tracking-tight text-navy/40">
-            — · —
-          </div>
+          <div className="mt-3 text-2xl font-bold tracking-tight text-navy/40">— · —</div>
           <div className="mt-1 text-sm font-semibold text-navy">{f}</div>
           <div className="fohat-mono mt-3 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
             Dados finais em consolidação

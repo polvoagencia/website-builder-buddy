@@ -23,10 +23,7 @@ export function RentalHero() {
       id="visao-geral"
       className="relative overflow-hidden pt-32 pb-16 text-white lg:pt-40 lg:pb-24 fohat-inner-hero"
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 fohat-grid-bg-dark"
-      />
+      <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg-dark" />
 
       <div className="fohat-shell relative">
         <div className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-16">
@@ -43,27 +40,22 @@ export function RentalHero() {
               <span className="text-white/70">Locação de Equipamentos</span>
             </nav>
 
-            <span
-              className="fohat-eyebrow"
-              style={{ color: "var(--color-cyan)" }}
-            >
+            <span className="fohat-eyebrow" style={{ color: "var(--color-cyan)" }}>
               Frente de infraestrutura · FOHAT
             </span>
 
             <h1 className="fohat-h1 mt-6 max-w-[720px] text-white [font-size:clamp(2.2rem,4.6vw,4.4rem)]">
-              Locação de{" "}
-              <span className="text-cyan">Equipamentos Tecnológicos</span>
+              Locação de <span className="text-cyan">Equipamentos Tecnológicos</span>
             </h1>
 
             <p className="fohat-lead mt-6 max-w-[620px] text-[oklch(0.9_0.02_250)]">
-              A infraestrutura certa para sua experiência acontecer no mundo
-              real.
+              A infraestrutura certa para sua experiência acontecer no mundo real.
             </p>
 
             <p className="mt-4 max-w-[620px] text-base text-[oklch(0.82_0.02_250)]">
-              Equipamentos tecnológicos para eventos, ativações, exposições,
-              produções e operações especiais, com possibilidade de
-              configuração, instalação, integração e suporte técnico.
+              Equipamentos tecnológicos para eventos, ativações, exposições, produções e operações
+              especiais, com possibilidade de configuração, instalação, integração e suporte
+              técnico.
             </p>
 
             <div className="mt-9 flex flex-wrap gap-3">
@@ -120,9 +112,7 @@ export function RentalHero() {
                   <div className="fohat-mono text-[9px] uppercase tracking-[0.18em] text-cyan">
                     Módulo principal
                   </div>
-                  <div className="text-xs font-bold text-white">
-                    {main.name}
-                  </div>
+                  <div className="text-xs font-bold text-white">{main.name}</div>
                 </div>
               </div>
 

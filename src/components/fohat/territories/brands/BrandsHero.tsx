@@ -60,10 +60,7 @@ export function BrandsHero() {
                   {label}
                 </span>
                 {i < diagram.length - 1 && (
-                  <ArrowRight
-                    className="h-4 w-4 text-white/40"
-                    aria-hidden
-                  />
+                  <ArrowRight className="h-4 w-4 text-white/40" aria-hidden />
                 )}
               </li>
             ))}
@@ -109,16 +106,16 @@ export function BrandsHero() {
               className="absolute inset-0 h-full w-full mix-blend-screen opacity-70"
             >
               {[
-                [80, 110], [180, 60], [300, 130], [340, 260], [260, 360],
-                [140, 400], [60, 300], [220, 210],
+                [80, 110],
+                [180, 60],
+                [300, 130],
+                [340, 260],
+                [260, 360],
+                [140, 400],
+                [60, 300],
+                [220, 210],
               ].map(([x, y], i) => (
-                <circle
-                  key={i}
-                  cx={x}
-                  cy={y}
-                  r="3"
-                  fill="oklch(0.85 0.055 245)"
-                >
+                <circle key={i} cx={x} cy={y} r="3" fill="oklch(0.85 0.055 245)">
                   <animate
                     attributeName="r"
                     values="3;5;3"

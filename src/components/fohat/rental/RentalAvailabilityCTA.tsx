@@ -18,18 +18,15 @@ export function RentalAvailabilityCTA() {
             className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-40"
           />
           <div className="relative">
-            <span
-              className="fohat-eyebrow"
-              style={{ color: "var(--color-cyan)" }}
-            >
+            <span className="fohat-eyebrow" style={{ color: "var(--color-cyan)" }}>
               Solicite disponibilidade
             </span>
             <h2 className="fohat-h2 mt-5 max-w-[820px] text-white">
               Conte quais equipamentos você precisa e como será o projeto.
             </h2>
             <p className="mt-5 max-w-[720px] text-[oklch(0.85_0.02_250)]">
-              A equipe da FOHAT avaliará disponibilidade, configuração,
-              período, logística e suporte necessário.
+              A equipe da FOHAT avaliará disponibilidade, configuração, período, logística e suporte
+              necessário.
             </p>
 
             <div className="mt-9 flex flex-wrap gap-3">
@@ -48,9 +45,8 @@ export function RentalAvailabilityCTA() {
             </div>
 
             <p className="fohat-mono mt-10 max-w-[720px] text-[11px] uppercase leading-relaxed tracking-[0.16em] text-white/60">
-              O envio da solicitação não confirma reserva. Disponibilidade,
-              valores, logística e escopo técnico serão confirmados pela
-              equipe da FOHAT.
+              O envio da solicitação não confirma reserva. Disponibilidade, valores, logística e
+              escopo técnico serão confirmados pela equipe da FOHAT.
             </p>
           </div>
         </Reveal>

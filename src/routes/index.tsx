@@ -82,10 +82,7 @@ function Home() {
         <StickyFronts />
 
         {/* ============ VITRINE DE EQUIPAMENTOS ============ */}
-        <section
-          id="locacao"
-          className="relative overflow-hidden bg-mist py-20 lg:py-24"
-        >
+        <section id="locacao" className="relative overflow-hidden bg-mist py-20 lg:py-24">
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0 fohat-grid-bg opacity-60"
@@ -94,13 +91,11 @@ function Home() {
             <SectionReveal className="mb-10 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
               <div>
                 <span className="fohat-eyebrow">Vitrine · Locação</span>
-                <h2 className="fohat-h2 mt-4">
-                  Uma amostra do que está disponível
-                </h2>
+                <h2 className="fohat-h2 mt-4">Uma amostra do que está disponível</h2>
               </div>
               <p className="max-w-[520px] text-muted-foreground">
-                Equipamentos, quantidades, logística e suporte são confirmados
-                conforme a necessidade de cada projeto.
+                Equipamentos, quantidades, logística e suporte são confirmados conforme a
+                necessidade de cada projeto.
               </p>
             </SectionReveal>
 
@@ -108,21 +103,16 @@ function Home() {
               className="-mx-4 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-4 px-4 pb-4 md:mx-0 md:grid md:snap-none md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-4"
               style={{ scrollbarWidth: "thin" }}
             >
-              {RENTAL_CATALOG_ITEMS.filter((it) => it.featured).map(
-                (item, i) => (
-                  <div
-                    key={item.slug}
-                    className="w-[82%] shrink-0 snap-start md:w-auto md:shrink"
-                  >
-                    <RentalEquipmentCard
-                      item={item}
-                      variant="compact"
-                      eager={i === 0}
-                      sourcePage="/"
-                    />
-                  </div>
-                ),
-              )}
+              {RENTAL_CATALOG_ITEMS.filter((it) => it.featured).map((item, i) => (
+                <div key={item.slug} className="w-[82%] shrink-0 snap-start md:w-auto md:shrink">
+                  <RentalEquipmentCard
+                    item={item}
+                    variant="compact"
+                    eager={i === 0}
+                    sourcePage="/"
+                  />
+                </div>
+              ))}
             </div>
 
             <SectionReveal className="mt-10">
@@ -147,12 +137,11 @@ function Home() {
             <SectionReveal>
               <span className="fohat-eyebrow">Nossa crença</span>
               <h2 className="fohat-h2 mt-5 max-w-[540px]">
-                A tecnologia não precisa afastar as pessoas do mundo. Ela pode
-                devolvê-las a ele.
+                A tecnologia não precisa afastar as pessoas do mundo. Ela pode devolvê-las a ele.
               </h2>
               <p className="mt-6 text-muted-foreground">
-                Projetamos tecnologia com intenção, integração e foco no que
-                permanece para o público.
+                Projetamos tecnologia com intenção, integração e foco no que permanece para o
+                público.
               </p>
             </SectionReveal>
 
@@ -165,8 +154,8 @@ function Home() {
                 A presença é projetada, não improvisada.
               </h3>
               <p className="mt-5 text-muted-foreground">
-                A FOHAT conecta intenção, narrativa, tecnologia, espaço e
-                execução por meio de um método próprio.
+                A FOHAT conecta intenção, narrativa, tecnologia, espaço e execução por meio de um
+                método próprio.
               </p>
               <Link
                 to="/engenharia-de-presenca"
@@ -188,8 +177,7 @@ function Home() {
           id="contato"
           className="overflow-hidden py-20"
           style={{
-            background:
-              "linear-gradient(135deg, oklch(0.88 0.018 250), oklch(0.98 0.006 250))",
+            background: "linear-gradient(135deg, oklch(0.88 0.018 250), oklch(0.98 0.006 250))",
           }}
         >
           <div className="fohat-shell">
@@ -201,19 +189,16 @@ function Home() {
                 className="pointer-events-none absolute -bottom-24 -right-20 w-72 opacity-[0.085] sm:w-96"
                 style={{ filter: "grayscale(1) brightness(4)" }}
               />
-              <span
-                className="fohat-eyebrow"
-                style={{ color: "var(--color-cyan)" }}
-              >
+              <span className="fohat-eyebrow" style={{ color: "var(--color-cyan)" }}>
                 Comece pela intenção
               </span>
               <h2 className="fohat-h2 mt-5 max-w-[840px] text-white">
-                Presença, sistema ou infraestrutura — conte o que você precisa
-                colocar em funcionamento.
+                Presença, sistema ou infraestrutura — conte o que você precisa colocar em
+                funcionamento.
               </h2>
               <p className="mt-6 max-w-[700px] text-lg text-[oklch(0.85_0.02_250)] lg:text-xl">
-                A ideia não precisa estar pronta. A FOHAT ajuda a encontrar o
-                caminho entre a intenção e a execução.
+                A ideia não precisa estar pronta. A FOHAT ajuda a encontrar o caminho entre a
+                intenção e a execução.
               </p>
               <div className="relative z-10 mt-8">
                 <MagneticCTA strength={12}>

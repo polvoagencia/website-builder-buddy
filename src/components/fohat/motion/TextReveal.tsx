@@ -19,13 +19,7 @@ type Props = {
  * Uses transform + clip-path (mask) for a cinematic slide-up per line.
  * Falls back to a plain reveal under reduced motion.
  */
-export function TextReveal({
-  as: Tag = "span",
-  text,
-  className,
-  stagger = 90,
-  delay = 0,
-}: Props) {
+export function TextReveal({ as: Tag = "span", text, className, stagger = 90, delay = 0 }: Props) {
   const ref = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
   const lines = text.split("\n");

@@ -124,9 +124,7 @@ export function EventPossibilities() {
                     >
                       Zona {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="text-[13px] font-bold leading-tight">
-                      {it.title}
-                    </span>
+                    <span className="text-[13px] font-bold leading-tight">{it.title}</span>
                   </div>
                 </button>
               );
@@ -145,19 +143,14 @@ export function EventPossibilities() {
             <h3 className="mt-4 text-3xl font-bold tracking-[-0.03em] text-navy">
               {items[active].title}
             </h3>
-            <p className="mt-4 text-base text-muted-foreground">
-              {items[active].desc}
-            </p>
+            <p className="mt-4 text-base text-muted-foreground">{items[active].desc}</p>
           </div>
         </div>
 
         {/* Mobile: lista vertical */}
         <ul className="flex flex-col gap-2 lg:hidden">
           {items.map((it, i) => (
-            <li
-              key={it.key}
-              className="rounded-2xl border border-navy/10 bg-white p-5"
-            >
+            <li key={it.key} className="rounded-2xl border border-navy/10 bg-white p-5">
               <div className="flex items-baseline gap-3">
                 <span className="fohat-mono text-[10px] uppercase tracking-[0.2em] text-blue">
                   Zona {String(i + 1).padStart(2, "0")}

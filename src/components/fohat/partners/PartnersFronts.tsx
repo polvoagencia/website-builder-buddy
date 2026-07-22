@@ -29,12 +29,8 @@ export function PartnersFronts() {
                       </span>
                       <ArrowUpRight className="h-4 w-4 text-navy transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </div>
-                    <h3 className="mt-5 text-xl font-semibold text-navy">
-                      {f.label}
-                    </h3>
-                    <p className="mt-3 text-sm text-muted-foreground">
-                      {f.desc}
-                    </p>
+                    <h3 className="mt-5 text-xl font-semibold text-navy">{f.label}</h3>
+                    <p className="mt-3 text-sm text-muted-foreground">{f.desc}</p>
                   </div>
                 </Link>
               </li>
@@ -66,16 +62,11 @@ export function CollaborationFlow() {
                   <span className="fohat-mono text-[10px] uppercase tracking-[0.2em] text-blue">
                     Etapa {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-3 text-base font-semibold text-navy">
-                    {s.title}
-                  </h3>
+                  <h3 className="mt-3 text-base font-semibold text-navy">{s.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
                 </div>
                 {i < steps.length - 1 && (
-                  <span
-                    aria-hidden
-                    className="absolute -right-2 top-8 h-px w-4 bg-blue/40"
-                  />
+                  <span aria-hidden className="absolute -right-2 top-8 h-px w-4 bg-blue/40" />
                 )}
               </li>
             ))}
@@ -93,9 +84,7 @@ export function CollaborationFlow() {
                   <span className="fohat-mono text-[10px] uppercase tracking-[0.2em] text-blue">
                     Etapa {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-2 text-base font-semibold text-navy">
-                    {s.title}
-                  </h3>
+                  <h3 className="mt-2 text-base font-semibold text-navy">{s.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
                 </div>
               </li>

@@ -47,29 +47,23 @@ export function PartnersNetwork() {
       id="parceiros"
       className="relative overflow-hidden py-24 lg:py-32"
       style={{
-        background:
-          "linear-gradient(180deg, oklch(0.97 0.008 250), oklch(0.93 0.015 250))",
+        background: "linear-gradient(180deg, oklch(0.97 0.008 250), oklch(0.93 0.015 250))",
       }}
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 fohat-grid-bg opacity-60"
-      />
+      <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg opacity-60" />
       <div className="fohat-shell relative grid items-center gap-14 lg:grid-cols-[.95fr_1.05fr] lg:gap-16">
         <SectionReveal>
           <span className="fohat-eyebrow">Para Parceiros</span>
           <h2 className="fohat-h2 mt-5">
-            Uma rede que amplia o que criativos, agências e produtoras já
-            constroem.
+            Uma rede que amplia o que criativos, agências e produtoras já constroem.
           </h2>
           <p className="fohat-lead mt-5">
-            A FOHAT pode atuar como braço de tecnologia, desenvolvimento,
-            integração e operação de parceiros criativos — em qualquer uma
-            das três frentes.
+            A FOHAT pode atuar como braço de tecnologia, desenvolvimento, integração e operação de
+            parceiros criativos — em qualquer uma das três frentes.
           </p>
           <p className="mt-4 text-muted-foreground">
-            Engenharia de Presença, Sistemas e Aplicativos ou Locação de
-            Equipamentos — combinados ou independentes.
+            Engenharia de Presença, Sistemas e Aplicativos ou Locação de Equipamentos — combinados
+            ou independentes.
           </p>
           <div className="mt-8">
             <Link
@@ -186,17 +180,9 @@ export function PartnersNetwork() {
               return (
                 <motion.g
                   key={n.label}
-                  initial={
-                    reduce
-                      ? { opacity: 1, scale: 1 }
-                      : { opacity: 0, scale: 0.6 }
-                  }
+                  initial={reduce ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.6 }}
                   animate={
-                    inView
-                      ? { opacity: 1, scale: 1 }
-                      : reduce
-                        ? { opacity: 1, scale: 1 }
-                        : {}
+                    inView ? { opacity: 1, scale: 1 } : reduce ? { opacity: 1, scale: 1 } : {}
                   }
                   transition={{
                     duration: reduce ? 0 : 0.45,

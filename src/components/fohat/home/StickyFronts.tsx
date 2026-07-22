@@ -1,12 +1,7 @@
 import { useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  type MotionValue,
-} from "motion/react";
+import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 
 import portalAsset from "@/assets/portal.jpg.asset.json";
 import labAsset from "@/assets/lab.jpg.asset.json";
@@ -82,17 +77,14 @@ function StickyMedia({
       <div
         className="pointer-events-none absolute inset-0"
         style={{
-          background:
-            "linear-gradient(180deg, transparent 40%, oklch(0.22 0.023 250 / 0.75))",
+          background: "linear-gradient(180deg, transparent 40%, oklch(0.22 0.023 250 / 0.75))",
         }}
       />
       <div className="absolute inset-x-8 bottom-8 text-white">
         <span className="fohat-mono text-[10px] uppercase tracking-[0.22em] text-cyan">
           Frente {String(index + 1).padStart(2, "0")}
         </span>
-        <div className="mt-2 text-3xl font-bold leading-tight tracking-tight">
-          {service.title}
-        </div>
+        <div className="mt-2 text-3xl font-bold leading-tight tracking-tight">{service.title}</div>
       </div>
     </motion.div>
   );
@@ -113,12 +105,10 @@ export function StickyFronts() {
       <div className="fohat-shell pt-24 lg:pt-32">
         <SectionReveal className="max-w-[860px]">
           <span className="fohat-eyebrow">Como podemos atuar</span>
-          <h2 className="fohat-h2 mt-5">
-            Três caminhos para colocar tecnologia em funcionamento.
-          </h2>
+          <h2 className="fohat-h2 mt-5">Três caminhos para colocar tecnologia em funcionamento.</h2>
           <p className="fohat-lead mt-5">
-            A FOHAT pode ser contratada por qualquer uma destas frentes —
-            separadamente ou combinadas dentro de um mesmo projeto.
+            A FOHAT pode ser contratada por qualquer uma destas frentes — separadamente ou
+            combinadas dentro de um mesmo projeto.
           </p>
         </SectionReveal>
       </div>
@@ -157,12 +147,7 @@ export function StickyFronts() {
           {/* Coluna scroll — cards das frentes */}
           <div className="flex flex-col gap-24 py-10">
             {SERVICES.map((s, i) => (
-              <SectionReveal
-                as="article"
-                key={s.slug}
-                className="min-h-[70vh]"
-                offset={40}
-              >
+              <SectionReveal as="article" key={s.slug} className="min-h-[70vh]" offset={40}>
                 <span className="fohat-mono text-[11px] uppercase tracking-[0.24em] text-blue">
                   Frente {String(i + 1).padStart(2, "0")} · {s.eyebrow}
                 </span>
@@ -207,9 +192,7 @@ export function StickyFronts() {
               key={s.slug}
               className={cn(
                 "overflow-hidden rounded-[28px] border",
-                highlighted
-                  ? "border-navy/20 bg-navy text-white"
-                  : "border-line bg-white",
+                highlighted ? "border-navy/20 bg-navy text-white" : "border-line bg-white",
               )}
             >
               <div className="relative aspect-[16/10] overflow-hidden">
@@ -249,15 +232,11 @@ export function StickyFronts() {
                   >
                     {s.eyebrow}
                   </span>
-                  <h3 className="mt-3 text-2xl font-bold tracking-tight">
-                    {s.title}
-                  </h3>
+                  <h3 className="mt-3 text-2xl font-bold tracking-tight">{s.title}</h3>
                   <p
                     className={cn(
                       "mt-3 text-base",
-                      highlighted
-                        ? "text-[oklch(0.85_0.02_250)]"
-                        : "text-muted-foreground",
+                      highlighted ? "text-[oklch(0.85_0.02_250)]" : "text-muted-foreground",
                     )}
                   >
                     {s.lead}
@@ -269,9 +248,7 @@ export function StickyFronts() {
                       key={p}
                       className={cn(
                         "fohat-mono rounded-full border px-3 py-1 text-[10px] uppercase tracking-[0.14em]",
-                        highlighted
-                          ? "border-white/25 text-white/80"
-                          : "border-line text-blue",
+                        highlighted ? "border-white/25 text-white/80" : "border-line text-blue",
                       )}
                     >
                       {p}

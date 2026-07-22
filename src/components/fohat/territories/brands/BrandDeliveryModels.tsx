@@ -56,8 +56,8 @@ export function BrandDeliveryModels() {
             Três portas de entrada possíveis
           </h2>
           <p className="fohat-lead mt-5">
-            Cada formato é uma forma independente de começar. A contratação não
-            precisa passar obrigatoriamente pelos três.
+            Cada formato é uma forma independente de começar. A contratação não precisa passar
+            obrigatoriamente pelos três.
           </p>
         </SectionReveal>
 
@@ -133,9 +133,7 @@ export function BrandDeliveryModels() {
                 {formats[active].title}
               </h3>
             </div>
-            <p className="text-base text-muted-foreground">
-              {formats[active].desc}
-            </p>
+            <p className="text-base text-muted-foreground">{formats[active].desc}</p>
           </div>
         </div>
       </div>

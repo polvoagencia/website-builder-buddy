@@ -26,9 +26,7 @@ export const Route = createFileRoute("/engenharia-de-presenca/projetos/")({
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/engenharia-de-presenca/projetos" },
     ],
-    links: [
-      { rel: "canonical", href: "/engenharia-de-presenca/projetos" },
-    ],
+    links: [{ rel: "canonical", href: "/engenharia-de-presenca/projetos" }],
   }),
   component: ProjetosIndex,
 });
@@ -52,12 +50,11 @@ function ProjetosIndex() {
               aria-label="Você está aqui"
               className="fohat-mono mb-6 flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-cyan/90"
             >
-              <Link to="/" className="text-cyan hover:text-white">Início</Link>
+              <Link to="/" className="text-cyan hover:text-white">
+                Início
+              </Link>
               <span className="opacity-50">/</span>
-              <Link
-                to="/engenharia-de-presenca"
-                className="text-cyan hover:text-white"
-              >
+              <Link to="/engenharia-de-presenca" className="text-cyan hover:text-white">
                 Engenharia de Presença
               </Link>
               <span className="opacity-50">/</span>
@@ -70,8 +67,8 @@ function ProjetosIndex() {
               Projetos de <span className="text-cyan">Engenharia de Presença</span>
             </h1>
             <p className="fohat-lead mt-6 max-w-[720px] text-[oklch(0.85_0.02_250)]">
-              Cases em que tecnologia, narrativa, espaço e participação foram
-              integrados para criar experiências no mundo real.
+              Cases em que tecnologia, narrativa, espaço e participação foram integrados para criar
+              experiências no mundo real.
             </p>
           </Reveal>
         </div>
@@ -161,8 +158,7 @@ function CaseCard({
           aria-hidden
           className="absolute inset-0"
           style={{
-            background:
-              "linear-gradient(0deg, oklch(0.22 0.023 250 / 0.55), transparent 55%)",
+            background: "linear-gradient(0deg, oklch(0.22 0.023 250 / 0.55), transparent 55%)",
           }}
         />
         <div className="fohat-mono absolute left-5 top-5 rounded-full border border-white/30 bg-black/25 px-3 py-1.5 text-[10px] uppercase tracking-[0.18em] text-white/90 backdrop-blur-md">
@@ -179,9 +175,7 @@ function CaseCard({
               </span>
             ))}
           </div>
-          <h2 className="fohat-h2 mt-6 [font-size:clamp(1.75rem,3vw,2.75rem)]">
-            {data.title}
-          </h2>
+          <h2 className="fohat-h2 mt-6 [font-size:clamp(1.75rem,3vw,2.75rem)]">{data.title}</h2>
           <p className="mt-3 text-lg font-semibold text-blue">{data.tagline}</p>
           <p className="mt-4 text-base text-muted-foreground">{data.summary}</p>
           <div className="mt-6 flex flex-wrap gap-2">
