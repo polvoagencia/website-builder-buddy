@@ -189,6 +189,48 @@ function EngenhariaDePresenca() {
         </div>
       </section>
 
+      {/* MÉTODO FOHAT */}
+      <section id="metodo" className="overflow-hidden bg-white py-20 lg:py-28">
+        <div className="fohat-shell">
+          <Reveal className="mb-14 max-w-[820px]">
+            <span className="fohat-eyebrow">Método FOHAT</span>
+            <h2 className="fohat-h2 mt-5">
+              A presença não acontece por acaso. Ela é projetada.
+            </h2>
+            <p className="fohat-lead mt-5">
+              Cinco etapas conectam intenção, tecnologia e execução até a
+              experiência encontrar o público.
+            </p>
+          </Reveal>
+
+          <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-5">
+            {METHOD.map((s, i) => (
+              <Reveal
+                key={s.letter}
+                delay={i * 80}
+                className="relative min-h-[280px] overflow-hidden rounded-3xl border border-blue/12 p-6 transition-all hover:-translate-y-1 hover:border-blue/40"
+                style={{
+                  background:
+                    "linear-gradient(180deg, oklch(0.98 0.006 250), oklch(0.93 0.015 250))",
+                }}
+              >
+                <div className="mb-7 text-[68px] font-extrabold leading-none text-blue/20">
+                  {s.letter}
+                </div>
+                <h3 className="text-lg font-bold tracking-tight">{s.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
+                <div
+                  aria-hidden
+                  className="absolute -bottom-14 -right-11 h-32 w-32 rotate-45 rounded-3xl border border-blue/15"
+                />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+
       <ProcessLine
         eyebrow="A experiência que projetamos"
         title="O público percebe, participa, interfere e leva algo consigo."
