@@ -13,6 +13,7 @@ export function ResponsiveSpace() {
   const { quote, states } = EVENTS.responsive;
   const [active, setActive] = useState(0);
   const refs = useRef<Array<HTMLButtonElement | null>>([]);
+  const reduced = useReducedMotion();
 
   useEffect(() => {
     if (active < 0 || active >= states.length) setActive(0);
