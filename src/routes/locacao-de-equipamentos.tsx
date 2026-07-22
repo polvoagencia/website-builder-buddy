@@ -159,84 +159,9 @@ function LocacaoPage() {
         </div>
       </section>
 
-      {/* ============ CATEGORIAS ============ */}
-      <section
-        id="categorias"
-        className="relative overflow-hidden py-20 lg:py-28"
-        style={{
-          background:
-            "linear-gradient(180deg, oklch(0.97 0.008 250), oklch(0.93 0.015 250))",
-        }}
-      >
-        <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg opacity-70" />
-        <div className="fohat-shell relative">
-          <Reveal className="mb-12 max-w-[900px]">
-            <span className="fohat-eyebrow">Catálogo</span>
-            <h2 className="fohat-h2 mt-5">
-              Categorias de equipamentos disponíveis para locação
-            </h2>
-            <p className="mt-5 text-muted-foreground">
-              Estrutura modular pensada para crescer. Todos os equipamentos
-              estão sujeitos a disponibilidade e confirmação comercial.
-            </p>
-          </Reveal>
+      {/* ============ CATÁLOGO ============ */}
+      <CatalogSection />
 
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {RENTAL_CATEGORIES.map((cat, i) => (
-              <Reveal
-                as="article"
-                key={cat.slug}
-                delay={i * 60}
-                className="group flex flex-col overflow-hidden rounded-3xl border border-line bg-white p-7 transition-all hover:-translate-y-1 hover:border-blue/40 hover:shadow-[var(--shadow-card)]"
-              >
-                <div className="fohat-mono text-[10px] uppercase tracking-[0.18em] text-blue">
-                  {String(i + 1).padStart(2, "0")} · Categoria
-                </div>
-                <h3 className="mt-4 text-xl font-bold tracking-tight">
-                  {cat.label}
-                </h3>
-                <p className="mt-3 text-sm text-muted-foreground">
-                  {cat.description}
-                </p>
-
-                <div className="mt-6">
-                  <div className="fohat-mono mb-2 text-[10px] uppercase tracking-[0.18em] text-blue">
-                    Possibilidades de uso
-                  </div>
-                  <ul className="space-y-1.5">
-                    {cat.uses.map((u) => (
-                      <li
-                        key={u}
-                        className="flex items-start gap-2 text-sm text-navy"
-                      >
-                        <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-blue" />
-                        <span>{u}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="mt-8 flex items-center justify-between border-t border-line pt-5">
-                  <span className="fohat-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
-                    Sujeito a disponibilidade
-                  </span>
-                  <RentalRequestDialog defaultEquipment={cat.label}>
-                    <button className="group/btn inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-navy transition-colors hover:text-blue">
-                      Consultar
-                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-                    </button>
-                  </RentalRequestDialog>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <p className="fohat-mono mt-8 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-            Nenhum item apresentado como disponível em estoque sem confirmação.
-            Marcas, modelos e especificações confirmados pela equipe comercial.
-          </p>
-        </div>
-      </section>
 
       {/* ============ COMO FUNCIONA ============ */}
       <section className="relative overflow-hidden bg-navy py-20 text-white lg:py-28">
