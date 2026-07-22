@@ -98,6 +98,7 @@ export function ContactDialog({
       name: data.name,
       email: data.email,
       phone: data.whatsapp,
+      description: data.description,
       source_page: sourcePage ?? ctx.source_page,
       source_cta: sourceCta ?? triggerText,
       page_url: ctx.page_url,
@@ -108,6 +109,7 @@ export function ContactDialog({
       utm_term: utms.utm_term,
       status: "novo",
     });
+
 
     if (error) {
       if (import.meta.env.DEV) console.error("[fohat_leads:contato]", error);
