@@ -255,10 +255,11 @@ export function RentalRequestDialog({
     setFile(null);
     setFileName(null);
     setOpen(false);
+    onOpenChange?.(false);
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={updateOpen}>
       <DialogTrigger asChild>
         <span ref={triggerRef} className="contents">
           {children}
