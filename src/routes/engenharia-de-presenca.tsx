@@ -103,12 +103,13 @@ function EngenhariaDePresenca() {
         image={{ src: portalAsset.url, alt: "Instalação imersiva tecnológica" }}
         actions={
           <>
-            <InnerCTA to="/" hash="metodo">Ver o método aplicado</InnerCTA>
+            <InnerCTA to="/engenharia-de-presenca" hash="metodo">Ver o método aplicado</InnerCTA>
             <InnerCTA to="/experiencias" variant="ghost">
               Onde aplicamos
             </InnerCTA>
           </>
         }
+
       />
 
       <Marquee
