@@ -360,7 +360,7 @@ function LocacaoPage() {
             </p>
             <div className="mt-8">
               <Link
-                to="/projetos/$slug"
+                to="/engenharia-de-presenca/projetos/$slug"
                 params={{ slug: "tela-brasil" }}
                 className="group inline-flex h-14 items-center gap-3 rounded-full border border-white/28 bg-white/[0.06] px-7 text-sm font-bold text-white backdrop-blur-md transition-all hover:border-cyan hover:text-cyan"
               >
