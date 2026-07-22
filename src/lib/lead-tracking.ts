@@ -66,7 +66,7 @@ export function canSubmit(kind: string, cooldownMs = 4000): boolean {
 export function safeFileName(name: string): string {
   const cleaned = name
     .normalize("NFKD")
-    .replace(/[^\w.\-]+/g, "_")
+    .replace(/[^\w.-]+/g, "_")
     .replace(/_+/g, "_")
     .slice(-120);
   return cleaned || "arquivo";
