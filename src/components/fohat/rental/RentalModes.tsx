@@ -53,28 +53,31 @@ export function RentalModes() {
               return (
                 <button
                   key={m.slug}
+                  ref={(el) => {
+                    tabRefs.current[i] = el;
+                  }}
                   type="button"
                   role="tab"
                   id={`mode-tab-${m.slug}`}
                   aria-selected={isActive}
-                  aria-controls={`mode-panel-${m.slug}`}
+                  aria-controls={PANEL_ID}
                   tabIndex={isActive ? 0 : -1}
                   onClick={() => setActive(i)}
                   onKeyDown={(e) => {
                     if (e.key === "ArrowDown" || e.key === "ArrowRight") {
                       e.preventDefault();
-                      setActive((i + 1) % RENTAL_MODES.length);
+                      focusTab((i + 1) % RENTAL_MODES.length);
                     } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
                       e.preventDefault();
-                      setActive(
+                      focusTab(
                         (i - 1 + RENTAL_MODES.length) % RENTAL_MODES.length,
                       );
                     } else if (e.key === "Home") {
                       e.preventDefault();
-                      setActive(0);
+                      focusTab(0);
                     } else if (e.key === "End") {
                       e.preventDefault();
-                      setActive(RENTAL_MODES.length - 1);
+                      focusTab(RENTAL_MODES.length - 1);
                     }
                   }}
                   className={`group flex items-start gap-4 px-5 py-4 text-left transition-colors focus:outline-none focus-visible:bg-white ${
@@ -114,7 +117,7 @@ export function RentalModes() {
           {/* Painel */}
           <div
             role="tabpanel"
-            id={`mode-panel-${current.slug}`}
+            id={PANEL_ID}
             aria-labelledby={`mode-tab-${current.slug}`}
             className="relative min-h-[280px] rounded-2xl border border-line bg-mist p-8 sm:p-10"
           >
