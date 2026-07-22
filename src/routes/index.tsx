@@ -14,7 +14,7 @@ import { RENTAL_CATALOG_ITEMS } from "@/data/rental-equipment";
 
 import { HeroLayered } from "@/components/fohat/home/HeroLayered";
 import { StickyFronts } from "@/components/fohat/home/StickyFronts";
-import { TelaBrasilCinematic } from "@/components/fohat/home/TelaBrasilCinematic";
+import { ProjectsGateway } from "@/components/fohat/home/ProjectsGateway";
 import { PartnersNetwork } from "@/components/fohat/home/PartnersNetwork";
 import { MagneticCTA } from "@/components/fohat/home/MagneticCTA";
 
