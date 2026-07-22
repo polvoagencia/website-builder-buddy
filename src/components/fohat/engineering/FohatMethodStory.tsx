@@ -110,9 +110,11 @@ export function FohatMethodStory() {
                       ref={(el) => {
                         tabRefs.current[i] = el;
                       }}
+                      id={`method-tab-${s.letter}`}
                       role="tab"
                       type="button"
                       aria-selected={isActive}
+                      aria-controls="method-tabpanel"
                       tabIndex={isActive ? 0 : -1}
                       onClick={() => goTo(i)}
                       onKeyDown={(e) => onKeyDown(e, i)}
