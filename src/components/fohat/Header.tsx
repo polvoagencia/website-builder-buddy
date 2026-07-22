@@ -102,7 +102,8 @@ export function Header() {
     setMenuOpen(false);
     setExpandedMobile(null);
     setOpenMega(null);
-  }, [pathname, searchStr, hash]);
+  }, [locationHref]);
+
 
   // Escape closes desktop mega and mobile drawer.
   useEffect(() => {
