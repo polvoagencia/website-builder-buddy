@@ -17,34 +17,32 @@ export function FohatMethodStory() {
   const stepRefs = useRef<Array<HTMLDivElement | null>>([]);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
-  // Detecta o passo ativo conforme o scroll (apenas desktop)
+  // Detecta o passo ativo via IntersectionObserver (sem listener global de scroll)
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (reduce) return;
-    let raf = 0;
-    const tick = () => {
-      const trigger = window.innerHeight * 0.5;
-      let current = 0;
-      stepRefs.current.forEach((el, i) => {
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        if (rect.top <= trigger) current = i;
-      });
-      setActive((prev) => (prev === current ? prev : current));
-    };
-    const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(tick);
-    };
-    tick();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [reduce]);
+    if (typeof IntersectionObserver === "undefined") return;
+    const els = stepRefs.current.filter((el): el is HTMLDivElement => !!el);
+    if (els.length === 0) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .map((e) => ({
+            i: stepRefs.current.indexOf(e.target as HTMLDivElement),
+            ratio: e.intersectionRatio,
+          }))
+          .filter((v) => v.i >= 0)
+          .sort((a, b) => b.ratio - a.ratio);
+        if (visible.length > 0) {
+          const next = visible[0].i;
+          setActive((prev) => (prev === next ? prev : next));
+        }
+      },
+      { rootMargin: "-40% 0px -40% 0px", threshold: [0, 0.5, 1] },
+    );
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   const goTo = (i: number) => {
     setActive(i);
@@ -112,9 +110,11 @@ export function FohatMethodStory() {
                       ref={(el) => {
                         tabRefs.current[i] = el;
                       }}
+                      id={`method-tab-${s.letter}`}
                       role="tab"
                       type="button"
                       aria-selected={isActive}
+                      aria-controls="method-tabpanel"
                       tabIndex={isActive ? 0 : -1}
                       onClick={() => goTo(i)}
                       onKeyDown={(e) => onKeyDown(e, i)}
@@ -144,7 +144,12 @@ export function FohatMethodStory() {
             {/* Painel sticky visível apenas em desktop */}
             <div className="hidden lg:block">
               <div className="sticky top-32">
-                <div className="relative overflow-hidden rounded-[28px] border border-line bg-mist p-10 min-h-[420px]">
+                <div
+                  role="tabpanel"
+                  id="method-tabpanel"
+                  aria-labelledby={`method-tab-${METHOD[active].letter}`}
+                  className="relative overflow-hidden rounded-[28px] border border-line bg-mist p-10 min-h-[420px]"
+                >
                   <MethodMetaphor index={active} />
                   <div className="relative">
                     <div className="fohat-mono text-[10px] uppercase tracking-[0.22em] text-blue">
@@ -170,7 +175,7 @@ export function FohatMethodStory() {
                 </div>
               </div>
               {/* âncoras invisíveis para dirigir o scroll */}
-              <div aria-hidden>
+              <div aria-hidden="true">
                 {METHOD.map((_, i) => (
                   <div
                     key={i}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { SectionReveal } from "@/components/fohat/motion/SectionReveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
  * CapabilityNetwork — rede de capacidades da FOHAT.
  * Desktop: 6 nós ao redor de um centro "Operação digital"; o nó selecionado
  * (clique ou teclado) atualiza um painel de detalhe.
- * Mobile: converte para lista de tabs verticais (accordion-like).
+ * Mobile: tabs verticais — sempre há uma capacidade ativa.
  */
 const CAPS = [
   {
@@ -67,20 +67,49 @@ const POSITIONS = [
 export function CapabilityNetwork() {
   const reduce = useReducedMotion();
   const [active, setActive] = useState(0);
+  const desktopTabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const mobileTabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+
+  const focusDesktop = (i: number) => {
+    setActive(i);
+    desktopTabRefs.current[i]?.focus();
+  };
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowRight" || e.key === "ArrowDown") {
       e.preventDefault();
-      setActive((i) => (i + 1) % CAPS.length);
+      focusDesktop((active + 1) % CAPS.length);
     } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
       e.preventDefault();
-      setActive((i) => (i - 1 + CAPS.length) % CAPS.length);
+      focusDesktop((active - 1 + CAPS.length) % CAPS.length);
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      focusDesktop(0);
+    } else if (e.key === "End") {
+      e.preventDefault();
+      focusDesktop(CAPS.length - 1);
+    }
+  };
+
+  const onMobileKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+      e.preventDefault();
+      const next = (active + 1) % CAPS.length;
+      setActive(next);
+      mobileTabRefs.current[next]?.focus();
+    } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+      e.preventDefault();
+      const prev = (active - 1 + CAPS.length) % CAPS.length;
+      setActive(prev);
+      mobileTabRefs.current[prev]?.focus();
     } else if (e.key === "Home") {
       e.preventDefault();
       setActive(0);
+      mobileTabRefs.current[0]?.focus();
     } else if (e.key === "End") {
       e.preventDefault();
       setActive(CAPS.length - 1);
+      mobileTabRefs.current[CAPS.length - 1]?.focus();
     }
   };
 
@@ -154,9 +183,14 @@ export function CapabilityNetwork() {
               return (
                 <button
                   key={c.key}
+                  ref={(el) => {
+                    desktopTabRefs.current[i] = el;
+                  }}
+                  id={`cap-tab-desktop-${c.key}`}
                   role="tab"
                   type="button"
                   aria-selected={isActive}
+                  aria-controls={`cap-panel-desktop-${c.key}`}
                   tabIndex={isActive ? 0 : -1}
                   onClick={() => setActive(i)}
                   onFocus={() => setActive(i)}
@@ -175,7 +209,12 @@ export function CapabilityNetwork() {
             })}
           </div>
 
-          <div className="relative rounded-[28px] border border-line bg-mist p-8">
+          <div
+            role="tabpanel"
+            id={`cap-panel-desktop-${cap.key}`}
+            aria-labelledby={`cap-tab-desktop-${cap.key}`}
+            className="relative rounded-[28px] border border-line bg-mist p-8"
+          >
             <div className="fohat-mono text-[10px] uppercase tracking-[0.22em] text-blue">
               Capacidade {String(active + 1).padStart(2, "0")}
             </div>
@@ -198,9 +237,15 @@ export function CapabilityNetwork() {
           </div>
         </div>
 
-        {/* Mobile: tabs verticais legíveis */}
+        {/* Mobile: tabs verticais legíveis — sempre uma ativa */}
         <div className="lg:hidden">
-          <div role="tablist" aria-label="Capacidades da FOHAT" className="space-y-3">
+          <div
+            role="tablist"
+            aria-label="Capacidades da FOHAT"
+            aria-orientation="vertical"
+            onKeyDown={onMobileKeyDown}
+            className="space-y-3"
+          >
             {CAPS.map((c, i) => {
               const open = i === active;
               return (
@@ -212,12 +257,16 @@ export function CapabilityNetwork() {
                   )}
                 >
                   <button
+                    ref={(el) => {
+                      mobileTabRefs.current[i] = el;
+                    }}
+                    id={`cap-tab-mobile-${c.key}`}
                     role="tab"
                     type="button"
                     aria-selected={open}
-                    aria-expanded={open}
-                    aria-controls={`cap-panel-${c.key}`}
-                    onClick={() => setActive(open ? -1 : i)}
+                    aria-controls={`cap-panel-mobile-${c.key}`}
+                    tabIndex={open ? 0 : -1}
+                    onClick={() => setActive(i)}
                     className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
                   >
                     <span className="text-sm font-bold tracking-tight">{c.label}</span>
@@ -225,13 +274,17 @@ export function CapabilityNetwork() {
                       {open ? "—" : "+"}
                     </span>
                   </button>
-                  {open && (
-                    <div id={`cap-panel-${c.key}`} className="space-y-3 px-5 pb-5">
-                      <Row term="Problema" desc={c.problem} />
-                      <Row term="Contexto" desc={c.context} />
-                      <Row term="Relação" desc={c.relation} />
-                    </div>
-                  )}
+                  <div
+                    role="tabpanel"
+                    id={`cap-panel-mobile-${c.key}`}
+                    aria-labelledby={`cap-tab-mobile-${c.key}`}
+                    hidden={!open}
+                    className="space-y-3 px-5 pb-5"
+                  >
+                    <Row term="Problema" desc={c.problem} />
+                    <Row term="Contexto" desc={c.context} />
+                    <Row term="Relação" desc={c.relation} />
+                  </div>
                 </div>
               );
             })}
