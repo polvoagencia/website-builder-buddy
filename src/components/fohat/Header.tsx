@@ -111,11 +111,12 @@ export function Header() {
 
   return (
     <header
+      data-scrolled={scrolled ? "true" : "false"}
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+        "fohat-header fixed inset-x-0 top-0 z-50 transition-[padding,background-color,border-color,backdrop-filter] duration-[var(--motion-base)] ease-[var(--ease-fohat)]",
         scrolled
-          ? "border-b border-line bg-mist/85 py-2 backdrop-blur-xl"
-          : "border-b border-transparent py-4",
+          ? "border-b border-line/70 bg-mist/80 py-2 backdrop-blur-xl"
+          : "border-b border-transparent bg-transparent py-4",
       )}
     >
       <div className="fohat-shell">
@@ -222,12 +223,16 @@ export function Header() {
                       id={panelId}
                       role="menu"
                       aria-label={item.submenu!.title}
-                      className="absolute left-1/2 top-full z-40 mt-3 w-[560px] -translate-x-1/2 animate-in fade-in slide-in-from-top-2"
+                      className="absolute left-1/2 top-full z-40 mt-3 w-[560px] -translate-x-1/2 fohat-mega-enter"
                       onMouseEnter={openThis}
                     >
                       <div className="h-3" />
-                      <div className="overflow-hidden rounded-3xl border border-line bg-card/95 shadow-[var(--shadow-elegant)] backdrop-blur-xl">
-                        <div className="border-b border-line bg-mist/70 px-6 py-4">
+                      <div className="relative overflow-hidden rounded-3xl border border-line bg-card/95 shadow-[var(--shadow-elegant)] backdrop-blur-xl">
+                        <div
+                          aria-hidden
+                          className="pointer-events-none absolute inset-0 fohat-grid-bg opacity-40"
+                        />
+                        <div className="relative border-b border-line bg-mist/70 px-6 py-4">
                           <span className="fohat-mono text-[10px] uppercase tracking-[0.22em] text-blue">
                             {item.label}
                           </span>
@@ -235,7 +240,7 @@ export function Header() {
                             {item.submenu!.title}
                           </p>
                         </div>
-                        <ul className="p-3">
+                        <ul className="relative p-3">
                           {item.submenu!.items.map((s) => (
                             <li key={s.to} role="none">
                               <MegaLink item={s} onNavigate={closeThis} />
