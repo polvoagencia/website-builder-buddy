@@ -1,19 +1,17 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
-
-import marcasAsset from "@/assets/marcas.jpg.asset.json";
-import heroAsset from "@/assets/hero.jpg.asset.json";
+import { createFileRoute } from "@tanstack/react-router";
 
 import { SubpageShell } from "@/components/fohat/SubpageShell";
-import { InnerHero, InnerCTA } from "@/components/fohat/InnerHero";
-import {
-  QuoteBand,
-  SplitMedia,
-  ContentList,
-  ProcessLine,
-  FormatGrid,
-  SubpageCTA,
-} from "@/components/fohat/Subpage";
+import { ProgressRail } from "@/components/fohat/motion/ProgressRail";
+
+import { BRANDS } from "@/data/presence-territories-content";
+import { TerritoryMethodReference } from "@/components/fohat/territories/shared/TerritoryMethodReference";
+import { TerritoryContactCTA } from "@/components/fohat/territories/shared/TerritoryContactCTA";
+import { BrandsHero } from "@/components/fohat/territories/brands/BrandsHero";
+import { BrandParticipationShift } from "@/components/fohat/territories/brands/BrandParticipationShift";
+import { BrandEngagementCircuit } from "@/components/fohat/territories/brands/BrandEngagementCircuit";
+import { BrandPossibilities } from "@/components/fohat/territories/brands/BrandPossibilities";
+import { BrandEngagementJourney } from "@/components/fohat/territories/brands/BrandEngagementJourney";
+import { BrandDeliveryModels } from "@/components/fohat/territories/brands/BrandDeliveryModels";
 
 export const Route = createFileRoute("/engenharia-de-presenca/marcas")({
   head: () => ({
@@ -41,125 +39,20 @@ export const Route = createFileRoute("/engenharia-de-presenca/marcas")({
 function Marcas() {
   return (
     <SubpageShell>
-      <InnerHero
-        eyebrow="Engenharia de Presença · Marcas"
-        breadcrumb={[
-          { label: "Início", to: "/" },
-          { label: "Engenharia de Presença", to: "/engenharia-de-presenca" },
-          { label: "Marcas" },
-        ]}
-        title={
-          <>
-            Marcas podem ser vistas.{" "}
-            <span className="text-cyan">Também podem ser vividas.</span>
-          </>
-        }
-        lead="Criamos experiências tecnológicas que transformam mensagens em participação e interação em memória."
-        image={{ src: marcasAsset.url, alt: "Público em ativação tecnológica de marca" }}
-        actions={
-          <InnerCTA to="/" hash="contato">
-            Crie uma experiência para sua marca
-          </InnerCTA>
-        }
-      />
-
-      <MethodReference />
-
-      <QuoteBand
-        eyebrow="O desafio"
-        quote={
-          <>
-            Campanhas são vistas por alguns segundos. Experiências podem
-            permanecer associadas à marca.
-          </>
-        }
-      />
-
-      <SplitMedia
-        eyebrow="O que transformamos"
-        title="Da mensagem recebida à experiência compartilhada."
-        lead="A FOHAT coloca o público dentro da narrativa da marca. Cada escolha, gesto ou participação passa a interferir no que acontece e pode gerar um resultado pessoal, físico ou compartilhável."
-        tags={[
-          "Participação",
-          "Personalização",
-          "Conteúdo",
-          "Relacionamento",
-          "Memória de marca",
-        ]}
-        image={{
-          src: heroAsset.url,
-          alt: "Interação em evento de marca premium",
-          caption:
-            "A marca deixa de falar sozinha e começa a construir a experiência com as pessoas.",
-        }}
-        reverse
-      />
-
-      <ContentList
-        eyebrow="Possibilidades"
-        title="Experiências desenhadas para cada intenção"
-        intro="As soluções abaixo são pontos de partida, não produtos fechados."
-        items={[
-          { title: "Ativações interativas", desc: "Experiências para campanhas, patrocínios, feiras e pontos de contato." },
-          { title: "IA personalizada", desc: "Imagens, narrativas e conteúdos que respondem a cada participante." },
-          { title: "Lançamentos", desc: "Ambientes e jornadas que tornam a apresentação de uma novidade participativa." },
-          { title: "Conteúdo do público", desc: "Experiências capazes de gerar registros pessoais e compartilhamento espontâneo." },
-          { title: "Gamificação", desc: "Desafios, escolhas e progressões conectados ao universo da marca." },
-          { title: "Personalização física", desc: "Brindes, impressões ou entregas criadas em tempo real a partir da interação." },
-        ]}
-      />
-
-      <ProcessLine
-        eyebrow="Desafios específicos"
-        title="Não basta chamar atenção. É preciso criar um motivo para participar."
-        steps={[
-          { title: "Intenção", desc: "Definimos a relação que a marca deseja construir." },
-          { title: "Narrativa", desc: "Transformamos mensagem em uma jornada que convida à ação." },
-          { title: "Tecnologia", desc: "Escolhemos as capacidades que tornam cada participação única." },
-          { title: "Memória", desc: "Projetamos o que o público leva, compartilha e associa à marca." },
-        ]}
-      />
-
-      <FormatGrid
-        eyebrow="Formatos de contratação"
-        title="Do diagnóstico à ativação completa"
-        items={[
-          { tag: "Entrada", title: "Diagnóstico de Presença", desc: "Organizamos objetivo, público, contexto e oportunidades." },
-          { tag: "Validação", title: "Protótipo de Presença", desc: "Testamos interação, tecnologia e viabilidade antes da escala." },
-          { tag: "Principal", title: "Projeto Completo", desc: "Concebemos, desenvolvemos, integramos e colocamos a experiência no mundo." },
-        ]}
-      />
-
-      <SubpageCTA
-        title="O que sua marca gostaria que as pessoas vivessem, e não apenas vissem?"
-        buttonLabel="Crie uma experiência para sua marca"
+      <ProgressRail chapters={[...BRANDS.rail]} contextLabel="Marcas" />
+      <BrandsHero />
+      <TerritoryMethodReference />
+      <BrandParticipationShift />
+      <BrandEngagementCircuit />
+      <BrandPossibilities />
+      <BrandEngagementJourney />
+      <BrandDeliveryModels />
+      <TerritoryContactCTA
+        tone="brands"
+        sourcePage="/engenharia-de-presenca/marcas"
+        title={BRANDS.contactCTA.title}
+        buttonLabel={BRANDS.contactCTA.button}
       />
     </SubpageShell>
-  );
-}
-
-/**
- * Referência curta à página-mãe da Engenharia de Presença.
- * Evita repetir método, pilares e fórmula em cada território.
- */
-export function MethodReference() {
-  return (
-    <section className="border-y border-line bg-mist py-8">
-      <div className="fohat-shell flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="max-w-[640px] text-sm text-muted-foreground">
-          <span className="fohat-mono mr-2 text-[10px] uppercase tracking-[0.18em] text-blue">
-            Referência
-          </span>
-          Este território é atendido por meio da Engenharia de Presença da FOHAT.
-        </p>
-        <Link
-          to="/engenharia-de-presenca"
-          className="group inline-flex items-center gap-2 text-sm font-bold text-navy hover:text-blue"
-        >
-          Entenda como funciona
-          <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </Link>
-      </div>
-    </section>
   );
 }
