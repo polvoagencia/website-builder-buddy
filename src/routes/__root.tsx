@@ -144,7 +144,11 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <MotionProvider>
+        <RouteTransition>
+          <Outlet />
+        </RouteTransition>
+      </MotionProvider>
       <Toaster richColors position="top-right" />
     </QueryClientProvider>
   );
