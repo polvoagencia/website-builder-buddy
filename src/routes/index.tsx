@@ -64,7 +64,7 @@ function Home() {
           { id: "inicio", label: "Início" },
           { id: "frentes", label: "Frentes" },
           { id: "locacao", label: "Vitrine" },
-          { id: "tela-brasil", label: "Tela Brasil" },
+          { id: "projetos", label: "Projetos" },
           { id: "posicionamento", label: "Posicionamento" },
           { id: "parceiros", label: "Parceiros" },
           { id: "contato", label: "Contato" },
@@ -138,8 +138,8 @@ function Home() {
           </div>
         </section>
 
-        {/* ============ TELA BRASIL ============ */}
-        <TelaBrasilCinematic />
+        {/* ============ PROJETOS (gateway geral) ============ */}
+        <ProjectsGateway />
 
         {/* ============ POSICIONAMENTO ============ */}
         <section id="posicionamento" className="bg-white py-24 lg:py-32">
