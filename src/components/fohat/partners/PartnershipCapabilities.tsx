@@ -3,32 +3,92 @@ import { SectionReveal } from "@/components/fohat/motion/SectionReveal";
 import { PARTNERS_CAPABILITIES } from "@/data/partners-content";
 import { cn } from "@/lib/utils";
 
+type Item = (typeof PARTNERS_CAPABILITIES.items)[number];
+
+function CapabilityPanel({
+  id,
+  labelledBy,
+  activeItem,
+  items,
+  onSelectById,
+}: {
+  id: string;
+  labelledBy: string;
+  activeItem: Item;
+  items: readonly Item[];
+  onSelectById: (id: string) => void;
+}) {
+  return (
+    <div
+      role="tabpanel"
+      id={id}
+      aria-labelledby={labelledBy}
+      className="rounded-3xl border border-line bg-white p-8"
+    >
+      <span className="fohat-mono text-[10px] uppercase tracking-[0.22em] text-blue">
+        Capacidade ativa
+      </span>
+      <h3 className="fohat-h3 mt-3 text-navy">{activeItem.label}</h3>
+      <p className="mt-4 text-base text-muted-foreground">{activeItem.desc}</p>
+      <div className="mt-6 border-t border-line pt-6">
+        <div className="fohat-mono text-[10px] uppercase tracking-[0.2em] text-steel">
+          Conecta-se com
+        </div>
+        <ul className="mt-3 flex flex-wrap gap-2">
+          {activeItem.links.map((linkId) => {
+            const linked = items.find((x) => x.id === linkId);
+            if (!linked) return null;
+            return (
+              <li key={linkId}>
+                <button
+                  type="button"
+                  onClick={() => onSelectById(linkId)}
+                  className="rounded-full border border-line px-3 py-1 text-xs text-navy transition-colors hover:border-blue/60 hover:bg-mist"
+                >
+                  {linked.label}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
 export function PartnershipCapabilities() {
-  const { eyebrow, title, intro, center, items } = PARTNERS_CAPABILITIES;
+  const { eyebrow, title, intro, items } = PARTNERS_CAPABILITIES;
   const [active, setActive] = useState(0);
   const safe = Math.min(Math.max(active, 0), items.length - 1);
   const activeItem = items[safe];
-  const tabsRef = useRef<Array<HTMLButtonElement | null>>([]);
+  const desktopTabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const mobileTabRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
-  const focusTab = (i: number) => {
-    const next = (i + items.length) % items.length;
-    setActive(next);
-    tabsRef.current[next]?.focus();
-  };
-
-  const onKey = (e: React.KeyboardEvent, i: number) => {
-    const keys: Record<string, number> = {
-      ArrowRight: i + 1,
-      ArrowDown: i + 1,
-      ArrowLeft: i - 1,
-      ArrowUp: i - 1,
-      Home: 0,
-      End: items.length - 1,
+  const makeOnKey =
+    (refs: React.MutableRefObject<Array<HTMLButtonElement | null>>) =>
+    (e: React.KeyboardEvent, i: number) => {
+      const keys: Record<string, number> = {
+        ArrowRight: i + 1,
+        ArrowDown: i + 1,
+        ArrowLeft: i - 1,
+        ArrowUp: i - 1,
+        Home: 0,
+        End: items.length - 1,
+      };
+      if (e.key in keys) {
+        e.preventDefault();
+        const next = (keys[e.key] + items.length) % items.length;
+        setActive(next);
+        refs.current[next]?.focus();
+      }
     };
-    if (e.key in keys) {
-      e.preventDefault();
-      focusTab(keys[e.key]);
-    }
+
+  const onKeyDesktop = makeOnKey(desktopTabRefs);
+  const onKeyMobile = makeOnKey(mobileTabRefs);
+
+  const selectById = (id: string) => {
+    const idx = items.findIndex((x) => x.id === id);
+    if (idx >= 0) setActive(idx);
   };
 
   const radius = 160;
@@ -56,16 +116,18 @@ export function PartnershipCapabilities() {
               aria-orientation="horizontal"
             >
               <div className="relative mx-auto aspect-square w-full max-w-[440px]">
-                <svg viewBox="-220 -220 440 440" className="absolute inset-0 h-full w-full" aria-hidden>
-                  {/* connection lines */}
+                <svg
+                  viewBox="-220 -220 440 440"
+                  className="absolute inset-0 h-full w-full"
+                  aria-hidden
+                >
                   {items.map((it, i) =>
                     it.links.map((linkId) => {
                       const j = items.findIndex((x) => x.id === linkId);
                       if (j < 0) return null;
                       const a = positions[i];
                       const b = positions[j];
-                      const isRelated =
-                        i === safe || j === safe;
+                      const isRelated = i === safe || j === safe;
                       return (
                         <line
                           key={`${i}-${linkId}`}
@@ -80,7 +142,6 @@ export function PartnershipCapabilities() {
                       );
                     }),
                   )}
-                  {/* center */}
                   <circle cx="0" cy="0" r="52" fill="oklch(0.22 0.023 250)" />
                   <text
                     x="0"
@@ -105,7 +166,7 @@ export function PartnershipCapabilities() {
                     executável
                   </text>
                 </svg>
-                <div className="absolute inset-0" aria-hidden>
+                <div className="absolute inset-0">
                   {items.map((it, i) => {
                     const pos = positions[i];
                     const isActive = i === safe;
@@ -113,16 +174,17 @@ export function PartnershipCapabilities() {
                     return (
                       <button
                         key={it.id}
-                        ref={(el) => { tabsRef.current[i] = el; }}
+                        ref={(el) => {
+                          desktopTabRefs.current[i] = el;
+                        }}
                         type="button"
                         role="tab"
                         id={`cap-tab-${it.id}`}
                         aria-selected={isActive}
-                        aria-controls="cap-panel"
+                        aria-controls="cap-panel-desktop"
                         tabIndex={isActive ? 0 : -1}
-                        aria-hidden={undefined}
                         onClick={() => setActive(i)}
-                        onKeyDown={(e) => onKey(e, i)}
+                        onKeyDown={(e) => onKeyDesktop(e, i)}
                         style={{
                           left: `calc(50% + ${pos.x}px)`,
                           top: `calc(50% + ${pos.y}px)`,
@@ -144,74 +206,64 @@ export function PartnershipCapabilities() {
               </div>
             </div>
 
-            {/* Panel */}
-            <div
-              role="tabpanel"
-              id="cap-panel"
-              aria-labelledby={`cap-tab-${activeItem.id}`}
-              className="rounded-3xl border border-line bg-white p-8"
-            >
-              <span className="fohat-mono text-[10px] uppercase tracking-[0.22em] text-blue">
-                Capacidade ativa
-              </span>
-              <h3 className="fohat-h3 mt-3 text-navy">{activeItem.label}</h3>
-              <p className="mt-4 text-base text-muted-foreground">
-                {activeItem.desc}
-              </p>
-              <div className="mt-6 border-t border-line pt-6">
-                <div className="fohat-mono text-[10px] uppercase tracking-[0.2em] text-steel">
-                  Conecta-se com
-                </div>
-                <ul className="mt-3 flex flex-wrap gap-2">
-                  {activeItem.links.map((id) => {
-                    const linked = items.find((x) => x.id === id);
-                    if (!linked) return null;
+            {/* Desktop panel */}
+            <div className="hidden lg:block">
+              <CapabilityPanel
+                id="cap-panel-desktop"
+                labelledBy={`cap-tab-${activeItem.id}`}
+                activeItem={activeItem}
+                items={items}
+                onSelectById={selectById}
+              />
+            </div>
+
+            {/* Mobile tabs + panel */}
+            <div className="lg:hidden">
+              <div
+                role="tablist"
+                aria-orientation="vertical"
+                aria-label="Capacidades de parceria"
+              >
+                <ul className="grid gap-2 sm:grid-cols-2">
+                  {items.map((it, i) => {
+                    const isActive = i === safe;
                     return (
-                      <li key={id}>
+                      <li key={it.id}>
                         <button
+                          ref={(el) => {
+                            mobileTabRefs.current[i] = el;
+                          }}
                           type="button"
-                          onClick={() =>
-                            setActive(items.findIndex((x) => x.id === id))
-                          }
-                          className="rounded-full border border-line px-3 py-1 text-xs text-navy transition-colors hover:border-blue/60 hover:bg-mist"
+                          role="tab"
+                          id={`cap-tab-m-${it.id}`}
+                          aria-selected={isActive}
+                          aria-controls="cap-panel-mobile"
+                          tabIndex={isActive ? 0 : -1}
+                          onClick={() => setActive(i)}
+                          onKeyDown={(e) => onKeyMobile(e, i)}
+                          className={cn(
+                            "w-full rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition-colors",
+                            isActive
+                              ? "border-navy bg-navy text-white"
+                              : "border-line bg-white text-navy",
+                          )}
                         >
-                          {linked.label}
+                          {it.label}
                         </button>
                       </li>
                     );
                   })}
                 </ul>
               </div>
-            </div>
-
-            {/* Mobile tabs */}
-            <div className="lg:hidden" role="tablist" aria-orientation="vertical" aria-label="Capacidades de parceria">
-              <ul className="grid gap-2 sm:grid-cols-2">
-                {items.map((it, i) => {
-                  const isActive = i === safe;
-                  return (
-                    <li key={it.id}>
-                      <button
-                        type="button"
-                        role="tab"
-                        aria-selected={isActive}
-                        aria-controls="cap-panel"
-                        tabIndex={isActive ? 0 : -1}
-                        onClick={() => setActive(i)}
-                        onKeyDown={(e) => onKey(e, i)}
-                        className={cn(
-                          "w-full rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition-colors",
-                          isActive
-                            ? "border-navy bg-navy text-white"
-                            : "border-line bg-white text-navy",
-                        )}
-                      >
-                        {it.label}
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
+              <div className="mt-4">
+                <CapabilityPanel
+                  id="cap-panel-mobile"
+                  labelledBy={`cap-tab-m-${activeItem.id}`}
+                  activeItem={activeItem}
+                  items={items}
+                  onSelectById={selectById}
+                />
+              </div>
             </div>
           </div>
 
