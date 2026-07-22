@@ -15,10 +15,7 @@ export function BrandPossibilities() {
   const desktopRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const mobileRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
-  const focusTab = (
-    i: number,
-    refs: React.MutableRefObject<Array<HTMLButtonElement | null>>,
-  ) => {
+  const focusTab = (i: number, refs: React.MutableRefObject<Array<HTMLButtonElement | null>>) => {
     const idx = (i + items.length) % items.length;
     setActive(idx);
     refs.current[idx]?.focus();
@@ -136,9 +133,7 @@ export function BrandPossibilities() {
               <h3 className="mt-4 text-3xl font-bold tracking-[-0.03em] text-navy">
                 {current.title}
               </h3>
-              <p className="mt-4 max-w-[520px] text-base text-muted-foreground">
-                {current.desc}
-              </p>
+              <p className="mt-4 max-w-[520px] text-base text-muted-foreground">{current.desc}</p>
             </div>
           </div>
         </div>
@@ -175,9 +170,7 @@ export function BrandPossibilities() {
                     <span className="fohat-mono text-[10px] uppercase tracking-[0.2em] text-blue">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="flex-1 text-base font-bold text-navy">
-                      {it.title}
-                    </span>
+                    <span className="flex-1 text-base font-bold text-navy">{it.title}</span>
                     <span
                       aria-hidden
                       className={cn(

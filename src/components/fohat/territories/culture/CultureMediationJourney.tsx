@@ -15,7 +15,10 @@ export function CultureMediationJourney() {
       aria-labelledby="culture-mediation-title"
       className="relative overflow-hidden bg-navy py-24 text-white lg:py-32"
     >
-      <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-50" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-50"
+      />
       <div className="fohat-shell relative">
         <SectionReveal className="max-w-[820px]">
           <span className="fohat-eyebrow" style={{ color: "var(--color-cyan)" }}>
@@ -39,9 +42,7 @@ export function CultureMediationJourney() {
                   <div className="fohat-mono mt-4 whitespace-nowrap text-[10px] uppercase tracking-[0.2em] text-cyan/90">
                     {String(i).padStart(2, "0")}
                   </div>
-                  <div className="mt-1 whitespace-nowrap text-sm font-bold text-white">
-                    {label}
-                  </div>
+                  <div className="mt-1 whitespace-nowrap text-sm font-bold text-white">{label}</div>
                 </div>
               ))}
               <div

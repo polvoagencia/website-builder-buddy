@@ -8,7 +8,10 @@ import { ContactDialog } from "./ContactDialog";
 export function QuoteBand({ eyebrow, quote }: { eyebrow: string; quote: ReactNode }) {
   return (
     <section className="relative overflow-hidden bg-navy py-20 text-white lg:py-24">
-      <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-60" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-60"
+      />
       <div className="fohat-shell relative">
         <Reveal>
           <span className="fohat-eyebrow" style={{ color: "var(--color-cyan)" }}>
@@ -43,28 +46,20 @@ export function SplitMedia({
   reverse,
   variant = "light",
 }: SplitMediaProps) {
-  const bg =
-    variant === "soft"
-      ? "bg-[oklch(0.96_0.01_250)]"
-      : "bg-white";
+  const bg = variant === "soft" ? "bg-[oklch(0.96_0.01_250)]" : "bg-white";
   return (
     <section className={`${bg} py-20 lg:py-28`}>
       <div className="fohat-shell grid items-center gap-14 lg:grid-cols-2 lg:gap-16">
         <div className={reverse ? "lg:order-2" : ""}>
           <Reveal className="relative h-[400px] overflow-hidden rounded-[var(--radius)] shadow-[var(--shadow-elegant)] lg:h-[560px]">
             <Parallax strength={50}>
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="h-full w-full object-cover"
-              />
+              <img src={image.src} alt={image.alt} className="h-full w-full object-cover" />
             </Parallax>
             <div
               aria-hidden
               className="absolute inset-0"
               style={{
-                background:
-                  "linear-gradient(0deg, oklch(0.22 0.023 250 / 0.62), transparent 55%)",
+                background: "linear-gradient(0deg, oklch(0.22 0.023 250 / 0.62), transparent 55%)",
               }}
             />
             {image.caption && (
@@ -110,10 +105,10 @@ export function ContentList({
   items: Item[];
 }) {
   return (
-    <section className="relative overflow-hidden py-20 lg:py-28"
+    <section
+      className="relative overflow-hidden py-20 lg:py-28"
       style={{
-        background:
-          "linear-gradient(180deg, oklch(0.97 0.008 250), oklch(0.93 0.015 250))",
+        background: "linear-gradient(180deg, oklch(0.97 0.008 250), oklch(0.93 0.015 250))",
       }}
     >
       <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg opacity-70" />
@@ -123,9 +118,7 @@ export function ContentList({
             <span className="fohat-eyebrow">{eyebrow}</span>
             <h2 className="fohat-h2 mt-5">{title}</h2>
           </div>
-          {intro && (
-            <p className="max-w-[520px] text-muted-foreground">{intro}</p>
-          )}
+          {intro && <p className="max-w-[520px] text-muted-foreground">{intro}</p>}
         </Reveal>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {items.map((it, i) => (
@@ -161,7 +154,10 @@ export function ProcessLine({
 }) {
   return (
     <section className="relative overflow-hidden bg-navy py-20 text-white lg:py-28">
-      <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-60" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-60"
+      />
       <div className="fohat-shell relative">
         <Reveal className="max-w-[880px]">
           <span className="fohat-eyebrow" style={{ color: "var(--color-cyan)" }}>
@@ -180,9 +176,7 @@ export function ProcessLine({
               <div className="fohat-mono mb-5 text-xs uppercase tracking-[0.18em] text-cyan">
                 {String(i + 1).padStart(2, "0")}
               </div>
-              <h3 className="text-lg font-bold tracking-tight text-white">
-                {s.title}
-              </h3>
+              <h3 className="text-lg font-bold tracking-tight text-white">{s.title}</h3>
               <p className="mt-2 text-sm text-[oklch(0.8_0.02_250)]">{s.desc}</p>
             </Reveal>
           ))}
@@ -244,8 +238,7 @@ export function SubpageCTA({
     <section
       className="overflow-hidden py-20"
       style={{
-        background:
-          "linear-gradient(135deg, oklch(0.88 0.018 250), oklch(0.98 0.006 250))",
+        background: "linear-gradient(135deg, oklch(0.88 0.018 250), oklch(0.98 0.006 250))",
       }}
     >
       <div className="fohat-shell">
@@ -255,16 +248,11 @@ export function SubpageCTA({
             className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-40"
           />
           {eyebrow && (
-            <span
-              className="fohat-eyebrow relative"
-              style={{ color: "var(--color-cyan)" }}
-            >
+            <span className="fohat-eyebrow relative" style={{ color: "var(--color-cyan)" }}>
               {eyebrow}
             </span>
           )}
-          <h2 className="fohat-h2 relative mt-5 max-w-[840px] text-white">
-            {title}
-          </h2>
+          <h2 className="fohat-h2 relative mt-5 max-w-[840px] text-white">{title}</h2>
           <div className="relative mt-8">
             <ContactDialog>
               <button className="group inline-flex h-14 items-center gap-3 rounded-full bg-white px-7 text-sm font-bold text-navy shadow-[0_14px_40px_oklch(0_0_0_/_0.2)] transition-all hover:-translate-y-0.5 hover:bg-cyan">

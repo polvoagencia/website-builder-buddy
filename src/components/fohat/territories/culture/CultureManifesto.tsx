@@ -52,7 +52,13 @@ export function CultureManifesto() {
                 stroke="oklch(0.46 0.055 253 / 0.2)"
                 strokeDasharray="2 6"
               />
-              <circle cx={cx} cy={cy} r="58" fill="oklch(0.97 0.008 250)" stroke="oklch(0.46 0.055 253 / 0.5)" />
+              <circle
+                cx={cx}
+                cy={cy}
+                r="58"
+                fill="oklch(0.97 0.008 250)"
+                stroke="oklch(0.46 0.055 253 / 0.5)"
+              />
               <text
                 x={cx}
                 y={cy - 4}

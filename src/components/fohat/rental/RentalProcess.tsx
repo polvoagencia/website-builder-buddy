@@ -8,10 +8,7 @@ import { RENTAL_PROCESS } from "@/data/rental-content";
  */
 export function RentalProcess() {
   return (
-    <section
-      id="processo"
-      className="relative overflow-hidden bg-navy py-20 text-white lg:py-28"
-    >
+    <section id="processo" className="relative overflow-hidden bg-navy py-20 text-white lg:py-28">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-60"
@@ -19,15 +16,10 @@ export function RentalProcess() {
 
       <div className="fohat-shell relative">
         <Reveal className="max-w-[880px]">
-          <span
-            className="fohat-eyebrow"
-            style={{ color: "var(--color-cyan)" }}
-          >
+          <span className="fohat-eyebrow" style={{ color: "var(--color-cyan)" }}>
             Como funciona
           </span>
-          <h2 className="fohat-h2 mt-5 text-white">
-            Da demanda à operação em campo
-          </h2>
+          <h2 className="fohat-h2 mt-5 text-white">Da demanda à operação em campo</h2>
         </Reveal>
 
         {/* Desktop pipeline */}
@@ -36,12 +28,7 @@ export function RentalProcess() {
           className="mt-14 hidden lg:grid lg:grid-cols-5 lg:gap-4"
         >
           {RENTAL_PROCESS.map((step, i) => (
-            <Reveal
-              as="li"
-              key={step.title}
-              delay={i * 100}
-              className="relative"
-            >
+            <Reveal as="li" key={step.title} delay={i * 100} className="relative">
               {/* conector */}
               {i < RENTAL_PROCESS.length - 1 && (
                 <span
@@ -58,22 +45,15 @@ export function RentalProcess() {
                 <span className="fohat-mono mt-4 text-[10px] uppercase tracking-[0.2em] text-cyan/80">
                   {step.keyword}
                 </span>
-                <h3 className="mt-2 text-base font-bold tracking-tight text-white">
-                  {step.title}
-                </h3>
-                <p className="mt-2 text-sm text-[oklch(0.82_0.02_250)]">
-                  {step.desc}
-                </p>
+                <h3 className="mt-2 text-base font-bold tracking-tight text-white">{step.title}</h3>
+                <p className="mt-2 text-sm text-[oklch(0.82_0.02_250)]">{step.desc}</p>
               </div>
             </Reveal>
           ))}
         </ol>
 
         {/* Mobile/tablet timeline */}
-        <ol
-          aria-label="Etapas do processo de locação"
-          className="mt-14 lg:hidden"
-        >
+        <ol aria-label="Etapas do processo de locação" className="mt-14 lg:hidden">
           {RENTAL_PROCESS.map((step, i) => (
             <Reveal
               as="li"
@@ -98,12 +78,8 @@ export function RentalProcess() {
                 <span className="fohat-mono text-[10px] uppercase tracking-[0.2em] text-cyan/80">
                   {step.keyword}
                 </span>
-                <h3 className="mt-1 text-base font-bold tracking-tight text-white">
-                  {step.title}
-                </h3>
-                <p className="mt-2 text-sm text-[oklch(0.82_0.02_250)]">
-                  {step.desc}
-                </p>
+                <h3 className="mt-1 text-base font-bold tracking-tight text-white">{step.title}</h3>
+                <p className="mt-2 text-sm text-[oklch(0.82_0.02_250)]">{step.desc}</p>
               </div>
             </Reveal>
           ))}

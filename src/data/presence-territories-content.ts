@@ -40,13 +40,7 @@ export const BRANDS = {
       "Compartilhamento",
       "Memória",
     ],
-    pillars: [
-      "Participação",
-      "Personalização",
-      "Conteúdo",
-      "Relacionamento",
-      "Memória de marca",
-    ],
+    pillars: ["Participação", "Personalização", "Conteúdo", "Relacionamento", "Memória de marca"],
   },
   possibilities: [
     {
@@ -85,7 +79,10 @@ export const BRANDS = {
     steps: [
       { title: "Intenção", desc: "Definimos a relação que a marca deseja construir." },
       { title: "Narrativa", desc: "Transformamos mensagem em uma jornada que convida à ação." },
-      { title: "Tecnologia", desc: "Escolhemos as capacidades que tornam cada participação única." },
+      {
+        title: "Tecnologia",
+        desc: "Escolhemos as capacidades que tornam cada participação única.",
+      },
       { title: "Memória", desc: "Projetamos o que o público leva, compartilha e associa à marca." },
     ],
   },
@@ -188,8 +185,7 @@ export const CULTURE = {
     },
   ],
   mediation: {
-    message:
-      "A tecnologia entra para aproximar o público da cultura, não para ficar entre eles.",
+    message: "A tecnologia entra para aproximar o público da cultura, não para ficar entre eles.",
     steps: [
       {
         title: "Escuta",
@@ -253,14 +249,7 @@ export const EVENTS = {
     title: "Fluxo em jornada. Circulação em participação. Espaço em experiência.",
     body: "A FOHAT pode criar um ponto de interação ou conectar diferentes momentos do evento, da chegada à memória levada para casa.",
     pillars: ["Fluxo", "Interação", "Ambiente", "Personalização", "Operação"],
-    steps: [
-      "Chegada",
-      "Descoberta",
-      "Interação",
-      "Participação",
-      "Entrega",
-      "Memória",
-    ],
+    steps: ["Chegada", "Descoberta", "Interação", "Participação", "Entrega", "Memória"],
     note: "A jornada não precisa conter todas as etapas em todos os projetos. É uma possibilidade de integração.",
   },
   possibilities: [

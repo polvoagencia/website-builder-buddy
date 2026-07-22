@@ -13,7 +13,10 @@ export function BrandEngagementJourney() {
       aria-labelledby="brands-journey-title"
       className="relative overflow-hidden bg-navy py-24 text-white lg:py-32"
     >
-      <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-60" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-60"
+      />
       <div className="fohat-shell relative">
         <SectionReveal className="max-w-[820px]">
           <span className="fohat-eyebrow" style={{ color: "var(--color-cyan)" }}>
@@ -39,16 +42,11 @@ export function BrandEngagementJourney() {
                 <span className="fohat-mono text-[10px] uppercase tracking-[0.2em] text-cyan">
                   Etapa {String(i + 1).padStart(2, "0")}
                 </span>
-                <span
-                  aria-hidden
-                  className="fohat-mono text-[10px] text-cyan/50"
-                >
+                <span aria-hidden className="fohat-mono text-[10px] text-cyan/50">
                   {i === steps.length - 1 ? "↺" : "→"}
                 </span>
               </div>
-              <h3 className="text-xl font-bold tracking-tight text-white">
-                {s.title}
-              </h3>
+              <h3 className="text-xl font-bold tracking-tight text-white">{s.title}</h3>
               <p className="mt-3 text-sm text-[oklch(0.82_0.02_250)]">{s.desc}</p>
             </SectionReveal>
           ))}

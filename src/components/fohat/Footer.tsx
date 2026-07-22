@@ -13,8 +13,8 @@ export function Footer() {
               className="mb-6 h-10 w-auto brightness-0 invert opacity-90"
             />
             <p className="max-w-md text-lg leading-relaxed text-white">
-              Tecnologia aplicada para criar presença, desenvolver soluções e
-              colocar operações em funcionamento.
+              Tecnologia aplicada para criar presença, desenvolver soluções e colocar operações em
+              funcionamento.
             </p>
             <p className="mt-3 fohat-mono text-xs uppercase tracking-[0.18em] text-white/50">
               Tecnologia Aplicada, Serviços e Eventos
@@ -50,34 +50,22 @@ export function Footer() {
             </h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link
-                  to="/engenharia-de-presenca/marcas"
-                  className="hover:text-white"
-                >
+                <Link to="/engenharia-de-presenca/marcas" className="hover:text-white">
                   Marcas
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/engenharia-de-presenca/cultura"
-                  className="hover:text-white"
-                >
+                <Link to="/engenharia-de-presenca/cultura" className="hover:text-white">
                   Cultura
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/engenharia-de-presenca/eventos-e-espacos"
-                  className="hover:text-white"
-                >
+                <Link to="/engenharia-de-presenca/eventos-e-espacos" className="hover:text-white">
                   Eventos e Espaços
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/engenharia-de-presenca/projetos"
-                  className="hover:text-white"
-                >
+                <Link to="/engenharia-de-presenca/projetos" className="hover:text-white">
                   Projetos
                 </Link>
               </li>
@@ -85,9 +73,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4 text-xs font-bold uppercase tracking-[0.14em] text-white">
-              FOHAT
-            </h4>
+            <h4 className="mb-4 text-xs font-bold uppercase tracking-[0.14em] text-white">FOHAT</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link to="/parceiros" className="hover:text-white">
@@ -104,10 +90,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between">
-          <span>
-            © {new Date().getFullYear()} FOHAT — Tecnologia Aplicada, Serviços
-            e Eventos.
-          </span>
+          <span>© {new Date().getFullYear()} FOHAT — Tecnologia Aplicada, Serviços e Eventos.</span>
           <span className="fohat-mono uppercase tracking-[0.16em]">
             Presença projetada · São Paulo, BR
           </span>

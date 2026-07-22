@@ -15,10 +15,7 @@ export function PartnershipPrinciples() {
         <SectionReveal className="mt-12" delay={80}>
           <ol className="grid gap-4 sm:grid-cols-2">
             {commitments.map((c, i) => (
-              <li
-                key={c.title}
-                className="rounded-3xl border border-line bg-mist p-6"
-              >
+              <li key={c.title} className="rounded-3xl border border-line bg-mist p-6">
                 <div className="flex items-baseline justify-between">
                   <span className="fohat-mono text-[10px] uppercase tracking-[0.22em] text-blue">
                     Compromisso

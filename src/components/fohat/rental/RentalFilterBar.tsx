@@ -35,11 +35,7 @@ export function RentalFilterBar({ filters, active, onChange, count }: Props) {
   };
 
   return (
-    <div
-      className={cn(
-        "sticky top-[76px] z-30 -mx-4 px-4 py-3 sm:mx-0 sm:px-0",
-      )}
-    >
+    <div className={cn("sticky top-[76px] z-30 -mx-4 px-4 py-3 sm:mx-0 sm:px-0")}>
       <div className="rounded-2xl border border-line/70 bg-white/85 px-3 py-2 shadow-[0_8px_30px_oklch(0.22_0.023_250_/_0.08)] backdrop-blur-md">
         <div className="flex items-center gap-3">
           <div

@@ -8,10 +8,7 @@ import { PartnershipEntryPoints } from "@/components/fohat/partners/PartnershipE
 import { PartnershipCapabilities } from "@/components/fohat/partners/PartnershipCapabilities";
 import { PartnershipPrinciples } from "@/components/fohat/partners/PartnershipPrinciples";
 import { CollaborationModels } from "@/components/fohat/partners/CollaborationModels";
-import {
-  PartnersFronts,
-  CollaborationFlow,
-} from "@/components/fohat/partners/PartnersFronts";
+import { PartnersFronts, CollaborationFlow } from "@/components/fohat/partners/PartnersFronts";
 import { PartnersContactCTA } from "@/components/fohat/partners/PartnersContactCTA";
 import { PARTNERS_CHAPTERS } from "@/data/partners-content";
 

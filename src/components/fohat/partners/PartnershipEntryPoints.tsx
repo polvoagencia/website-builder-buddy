@@ -46,10 +46,7 @@ export function PartnershipEntryPoints() {
           {/* Desktop: map with independent points */}
           <div className="hidden lg:block">
             <div className="relative overflow-hidden rounded-[32px] border border-line bg-mist p-8">
-              <div
-                role="tablist"
-                aria-label="Pontos de entrada da parceria"
-              >
+              <div role="tablist" aria-label="Pontos de entrada da parceria">
                 <EntryMap
                   points={points}
                   activeIndex={safeActive}
@@ -69,9 +66,7 @@ export function PartnershipEntryPoints() {
                 </span>
                 <div>
                   <h3 className="fohat-h3 text-navy">{activePoint.label}</h3>
-                  <p className="mt-3 text-base text-muted-foreground">
-                    {activePoint.desc}
-                  </p>
+                  <p className="mt-3 text-base text-muted-foreground">{activePoint.desc}</p>
                 </div>
               </div>
             </div>

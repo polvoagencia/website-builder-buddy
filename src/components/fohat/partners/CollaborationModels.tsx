@@ -62,7 +62,9 @@ export function CollaborationModels() {
                     return (
                       <button
                         key={m.id}
-                        ref={(el) => { btnRefs.current[i] = el; }}
+                        ref={(el) => {
+                          btnRefs.current[i] = el;
+                        }}
                         type="button"
                         role="tab"
                         id={`model-tab-${m.id}`}
@@ -114,19 +116,14 @@ export function CollaborationModels() {
                 Modelo ativo
               </span>
               <h3 className="fohat-h3 mt-3 text-navy">{activeModel.label}</h3>
-              <p className="mt-4 text-base text-muted-foreground">
-                {activeModel.desc}
-              </p>
+              <p className="mt-4 text-base text-muted-foreground">{activeModel.desc}</p>
             </div>
           </div>
 
           {/* Mobile: sequential list */}
           <ul className="grid gap-3 lg:hidden">
             {models.map((m) => (
-              <li
-                key={m.id}
-                className="rounded-3xl border border-line bg-white p-5"
-              >
+              <li key={m.id} className="rounded-3xl border border-line bg-white p-5">
                 <h3 className="text-base font-semibold text-navy">{m.label}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{m.desc}</p>
               </li>

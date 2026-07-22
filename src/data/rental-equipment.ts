@@ -184,8 +184,7 @@ export const RENTAL_CATALOG_ITEMS: RentalCatalogItem[] = [
     fullDescription:
       "Equipamentos preparados para impressão rápida durante eventos, ativações e experiências. Podem compor fluxos de impressão instantânea, lembranças personalizadas e ativações com inteligência artificial. Modelos, quantidades e insumos são confirmados conforme a disponibilidade e o escopo do projeto.",
     image: impressorasImg,
-    imageAlt:
-      "Impressora compacta sobre fundo neutro em enquadramento de catálogo",
+    imageAlt: "Impressora compacta sobre fundo neutro em enquadramento de catálogo",
     uses: [
       "Impressão instantânea",
       "Experiências fotográficas",
@@ -253,8 +252,7 @@ export const RENTAL_CATALOG_ITEMS: RentalCatalogItem[] = [
     fullDescription:
       "Máquinas para operação, processamento de imagens, controle audiovisual, dashboards, apresentações e estações temporárias de trabalho. Especificações e volumes definidos conforme a operação técnica do projeto.",
     image: computadoresImg,
-    imageAlt:
-      "Notebook aberto centralizado sobre fundo neutro em enquadramento de catálogo",
+    imageAlt: "Notebook aberto centralizado sobre fundo neutro em enquadramento de catálogo",
     uses: [
       "Operação de sistemas",
       "Processamento de imagens",

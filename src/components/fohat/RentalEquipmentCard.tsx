@@ -67,20 +67,13 @@ export function RentalEquipmentCard({
         <div className="fohat-mono text-[10px] uppercase tracking-[0.18em] text-blue">
           {item.category}
         </div>
-        <h3 className="mt-3 text-lg font-bold tracking-tight text-navy">
-          {item.name}
-        </h3>
-        <p className="mt-3 text-sm text-muted-foreground">
-          {item.shortDescription}
-        </p>
+        <h3 className="mt-3 text-lg font-bold tracking-tight text-navy">{item.name}</h3>
+        <p className="mt-3 text-sm text-muted-foreground">{item.shortDescription}</p>
 
         {variant === "full" && (
           <ul className="mt-5 space-y-1.5">
             {usesPreview.map((u) => (
-              <li
-                key={u}
-                className="flex items-start gap-2 text-sm text-navy"
-              >
+              <li key={u} className="flex items-start gap-2 text-sm text-navy">
                 <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-blue" />
                 <span>{u}</span>
               </li>
@@ -149,9 +142,7 @@ export function RentalEquipmentCard({
           <div className="p-6 sm:p-10">
             <DialogHeader className="space-y-3 text-left">
               <span className="fohat-eyebrow">{item.category}</span>
-              <DialogTitle className="fohat-h2 text-3xl sm:text-4xl">
-                {item.name}
-              </DialogTitle>
+              <DialogTitle className="fohat-h2 text-3xl sm:text-4xl">{item.name}</DialogTitle>
               <DialogDescription
                 id={`rental-desc-${item.slug}`}
                 className="text-base text-muted-foreground"
@@ -166,10 +157,7 @@ export function RentalEquipmentCard({
               </div>
               <ul className="grid gap-2 sm:grid-cols-2">
                 {item.uses.map((u) => (
-                  <li
-                    key={u}
-                    className="flex items-start gap-2 text-sm text-navy"
-                  >
+                  <li key={u} className="flex items-start gap-2 text-sm text-navy">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-blue" />
                     <span>{u}</span>
                   </li>

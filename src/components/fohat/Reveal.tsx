@@ -7,7 +7,14 @@ interface RevealProps extends HTMLAttributes<HTMLDivElement> {
   as?: "div" | "article" | "section" | "span" | "li" | "ol" | "ul";
 }
 
-export function Reveal({ children, delay = 0, as = "div", className, style, ...rest }: RevealProps) {
+export function Reveal({
+  children,
+  delay = 0,
+  as = "div",
+  className,
+  style,
+  ...rest
+}: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 

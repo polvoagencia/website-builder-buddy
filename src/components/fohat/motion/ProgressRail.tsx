@@ -31,9 +31,7 @@ type Props = {
 export function ProgressRail({ chapters, contextLabel, className }: Props) {
   const fillRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
-  const [activeId, setActiveId] = useState<string | null>(
-    chapters?.[0]?.id ?? null,
-  );
+  const [activeId, setActiveId] = useState<string | null>(chapters?.[0]?.id ?? null);
 
   // Page progress + active section (single rAF loop)
   useEffect(() => {

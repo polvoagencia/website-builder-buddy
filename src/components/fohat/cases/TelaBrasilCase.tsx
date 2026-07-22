@@ -58,11 +58,17 @@ export function TelaBrasilCase() {
               aria-label="Você está aqui"
               className="fohat-mono mb-6 flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-cyan/90"
             >
-              <Link to="/" className="text-cyan hover:text-white">Início</Link>
+              <Link to="/" className="text-cyan hover:text-white">
+                Início
+              </Link>
               <ChevronRight className="h-3 w-3 opacity-50" />
-              <Link to="/engenharia-de-presenca" className="text-cyan hover:text-white">Engenharia de Presença</Link>
+              <Link to="/engenharia-de-presenca" className="text-cyan hover:text-white">
+                Engenharia de Presença
+              </Link>
               <ChevronRight className="h-3 w-3 opacity-50" />
-              <Link to="/engenharia-de-presenca/projetos" className="text-cyan hover:text-white">Projetos</Link>
+              <Link to="/engenharia-de-presenca/projetos" className="text-cyan hover:text-white">
+                Projetos
+              </Link>
               <ChevronRight className="h-3 w-3 opacity-50" />
               <span className="text-white/70">Tela Brasil</span>
             </nav>
@@ -76,8 +82,8 @@ export function TelaBrasilCase() {
               Cinema brasileiro vivido no espaço público.
             </p>
             <p className="mt-5 max-w-[640px] text-base text-[oklch(0.85_0.02_250)]">
-              Tecnologia, inteligência artificial e conteúdo audiovisual conectando
-              pessoas ao cinema nacional em seis capitais brasileiras.
+              Tecnologia, inteligência artificial e conteúdo audiovisual conectando pessoas ao
+              cinema nacional em seis capitais brasileiras.
             </p>
             <div className="mt-8 flex flex-wrap gap-2">
               {TAGS.map((t) => (
@@ -93,7 +99,10 @@ export function TelaBrasilCase() {
 
           <Reveal delay={140}>
             <div className="relative h-[380px] overflow-hidden rounded-[32px_120px_32px_120px] border border-white/10 bg-navy shadow-[var(--shadow-elegant)] lg:h-[520px]">
-              <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-60" />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-60"
+              />
               <div
                 aria-hidden
                 className="pointer-events-none absolute inset-0"
@@ -119,20 +128,71 @@ export function TelaBrasilCase() {
                 <line x1="320" y1="200" x2="270" y2="260" stroke="url(#tb-line)" strokeWidth="1" />
                 <circle cx="320" cy="200" r="6" fill="oklch(0.9 0.12 210)" />
                 <circle cx="270" cy="260" r="6" fill="oklch(0.9 0.12 210)" />
-                <text x="340" y="196" fill="oklch(0.95 0.02 250)" fontSize="14" fontFamily="ui-monospace,monospace">Brasília</text>
-                <text x="150" y="264" fill="oklch(0.95 0.02 250)" fontSize="14" fontFamily="ui-monospace,monospace" textAnchor="end">Goiânia</text>
+                <text
+                  x="340"
+                  y="196"
+                  fill="oklch(0.95 0.02 250)"
+                  fontSize="14"
+                  fontFamily="ui-monospace,monospace"
+                >
+                  Brasília
+                </text>
+                <text
+                  x="150"
+                  y="264"
+                  fill="oklch(0.95 0.02 250)"
+                  fontSize="14"
+                  fontFamily="ui-monospace,monospace"
+                  textAnchor="end"
+                >
+                  Goiânia
+                </text>
                 {/* Cycle 02 — BH + Salvador */}
                 <line x1="360" y1="360" x2="470" y2="330" stroke="url(#tb-line)" strokeWidth="1" />
                 <circle cx="360" cy="360" r="6" fill="oklch(0.9 0.12 210)" />
                 <circle cx="470" cy="330" r="6" fill="oklch(0.9 0.12 210)" />
-                <text x="340" y="384" fill="oklch(0.95 0.02 250)" fontSize="14" fontFamily="ui-monospace,monospace" textAnchor="end">Belo Horizonte</text>
-                <text x="490" y="326" fill="oklch(0.95 0.02 250)" fontSize="14" fontFamily="ui-monospace,monospace">Salvador</text>
+                <text
+                  x="340"
+                  y="384"
+                  fill="oklch(0.95 0.02 250)"
+                  fontSize="14"
+                  fontFamily="ui-monospace,monospace"
+                  textAnchor="end"
+                >
+                  Belo Horizonte
+                </text>
+                <text
+                  x="490"
+                  y="326"
+                  fill="oklch(0.95 0.02 250)"
+                  fontSize="14"
+                  fontFamily="ui-monospace,monospace"
+                >
+                  Salvador
+                </text>
                 {/* Cycle 03 — SP + POA */}
                 <line x1="330" y1="500" x2="290" y2="640" stroke="url(#tb-line)" strokeWidth="1" />
                 <circle cx="330" cy="500" r="6" fill="oklch(0.9 0.12 210)" />
                 <circle cx="290" cy="640" r="6" fill="oklch(0.9 0.12 210)" />
-                <text x="350" y="504" fill="oklch(0.95 0.02 250)" fontSize="14" fontFamily="ui-monospace,monospace">São Paulo</text>
-                <text x="270" y="664" fill="oklch(0.95 0.02 250)" fontSize="14" fontFamily="ui-monospace,monospace" textAnchor="end">Porto Alegre</text>
+                <text
+                  x="350"
+                  y="504"
+                  fill="oklch(0.95 0.02 250)"
+                  fontSize="14"
+                  fontFamily="ui-monospace,monospace"
+                >
+                  São Paulo
+                </text>
+                <text
+                  x="270"
+                  y="664"
+                  fill="oklch(0.95 0.02 250)"
+                  fontSize="14"
+                  fontFamily="ui-monospace,monospace"
+                  textAnchor="end"
+                >
+                  Porto Alegre
+                </text>
 
                 {/* Cycle brackets */}
                 {[
@@ -141,8 +201,25 @@ export function TelaBrasilCase() {
                   { y: 570, label: "Ciclo 03 · 01–03 jul" },
                 ].map((c) => (
                   <g key={c.label}>
-                    <line x1="40" y1={c.y} x2="90" y2={c.y} stroke="oklch(0.85 0.14 210)" strokeWidth="0.8" opacity="0.6" />
-                    <text x="40" y={c.y - 8} fill="oklch(0.85 0.14 210)" fontSize="10" fontFamily="ui-monospace,monospace" letterSpacing="1">{c.label.toUpperCase()}</text>
+                    <line
+                      x1="40"
+                      y1={c.y}
+                      x2="90"
+                      y2={c.y}
+                      stroke="oklch(0.85 0.14 210)"
+                      strokeWidth="0.8"
+                      opacity="0.6"
+                    />
+                    <text
+                      x="40"
+                      y={c.y - 8}
+                      fill="oklch(0.85 0.14 210)"
+                      fontSize="10"
+                      fontFamily="ui-monospace,monospace"
+                      letterSpacing="1"
+                    >
+                      {c.label.toUpperCase()}
+                    </text>
                   </g>
                 ))}
               </svg>
@@ -191,34 +268,28 @@ export function TelaBrasilCase() {
             <div className="fohat-mono text-[10px] uppercase tracking-[0.2em] text-blue">
               Frente 01
             </div>
-            <h3 className="mt-4 text-2xl font-bold tracking-tight">
-              Estação Tela Brasil
-            </h3>
+            <h3 className="mt-4 text-2xl font-bold tracking-tight">Estação Tela Brasil</h3>
             <p className="mt-3 text-muted-foreground">
-              Um ambiente interativo composto por três experiências: Pipoca & Cena,
-              Dê um Match com o Cinema Brasileiro e Curta Tela Brasil.
+              Um ambiente interativo composto por três experiências: Pipoca & Cena, Dê um Match com
+              o Cinema Brasileiro e Curta Tela Brasil.
             </p>
           </Reveal>
           <Reveal delay={100} className="rounded-3xl border border-line bg-mist p-8">
             <div className="fohat-mono text-[10px] uppercase tracking-[0.2em] text-blue">
               Frente 02
             </div>
-            <h3 className="mt-4 text-2xl font-bold tracking-tight">
-              Projeção Mapeada
-            </h3>
+            <h3 className="mt-4 text-2xl font-bold tracking-tight">Projeção Mapeada</h3>
             <p className="mt-3 text-muted-foreground">
-              Conteúdos audiovisuais projetados em prédios e fachadas urbanas,
-              transformando a arquitetura das cidades em grandes telas para o
-              cinema nacional.
+              Conteúdos audiovisuais projetados em prédios e fachadas urbanas, transformando a
+              arquitetura das cidades em grandes telas para o cinema nacional.
             </p>
           </Reveal>
         </div>
         <Reveal delay={200} className="mt-8 rounded-3xl border border-line bg-white p-8">
           <p className="text-base text-navy">
-            A FOHAT foi responsável pela criação e pelo desenvolvimento das
-            soluções tecnológicas da estação, pelo fornecimento da infraestrutura
-            necessária à operação e pelo desenvolvimento do conteúdo audiovisual
-            utilizado na projeção mapeada.
+            A FOHAT foi responsável pela criação e pelo desenvolvimento das soluções tecnológicas da
+            estação, pelo fornecimento da infraestrutura necessária à operação e pelo
+            desenvolvimento do conteúdo audiovisual utilizado na projeção mapeada.
           </p>
         </Reveal>
       </CaseSection>
@@ -232,13 +303,10 @@ export function TelaBrasilCase() {
       >
         <div className="grid gap-10 lg:grid-cols-[.9fr_1.1fr]">
           <Reveal>
-            <p className="fohat-lead">
-              Não bastava apenas apresentar o catálogo do Tela Brasil.
-            </p>
+            <p className="fohat-lead">Não bastava apenas apresentar o catálogo do Tela Brasil.</p>
             <p className="mt-4 text-muted-foreground">
-              A tecnologia precisava funcionar em ambientes de grande circulação,
-              ser intuitiva para diferentes públicos e manter o mesmo padrão de
-              experiência em seis capitais.
+              A tecnologia precisava funcionar em ambientes de grande circulação, ser intuitiva para
+              diferentes públicos e manter o mesmo padrão de experiência em seis capitais.
             </p>
           </Reveal>
           <Reveal delay={120}>
@@ -357,25 +425,21 @@ export function TelaBrasilCase() {
         <div className="grid gap-10 lg:grid-cols-[1fr_1fr]">
           <Reveal>
             <p className="text-muted-foreground">
-              A experiência começava nos totens. O visitante escolhia uma obra,
-              registrava sua fotografia e aguardava enquanto o sistema processava
-              sua participação com inteligência artificial.
+              A experiência começava nos totens. O visitante escolhia uma obra, registrava sua
+              fotografia e aguardava enquanto o sistema processava sua participação com inteligência
+              artificial.
             </p>
             <p className="mt-4 text-muted-foreground">
-              A imagem final colocava a pessoa em uma ambientação visual inspirada
-              no filme escolhido. O resultado era disponibilizado digitalmente e
-              também impresso no local por meio de uma impressora profissional
-              KODAK 6900.
+              A imagem final colocava a pessoa em uma ambientação visual inspirada no filme
+              escolhido. O resultado era disponibilizado digitalmente e também impresso no local por
+              meio de uma impressora profissional KODAK 6900.
             </p>
             <blockquote className="mt-8 border-l-2 border-cyan pl-6 text-xl font-semibold tracking-tight text-navy">
               A experiência começava no digital e terminava nas mãos do participante.
             </blockquote>
           </Reveal>
           <Reveal delay={120}>
-            <MediaPlaceholder
-              label="Totens, captura e impressão em tempo real"
-              aspect="4/5"
-            />
+            <MediaPlaceholder label="Totens, captura e impressão em tempo real" aspect="4/5" />
           </Reveal>
         </div>
 
@@ -419,13 +483,13 @@ export function TelaBrasilCase() {
         <div className="grid gap-10 lg:grid-cols-[1.1fr_.9fr]">
           <Reveal>
             <p className="text-muted-foreground">
-              O participante respondia a um quiz utilizando um dos tablets
-              disponíveis. A partir das respostas, o sistema apresentava uma
-              recomendação personalizada de filmes do catálogo Tela Brasil.
+              O participante respondia a um quiz utilizando um dos tablets disponíveis. A partir das
+              respostas, o sistema apresentava uma recomendação personalizada de filmes do catálogo
+              Tela Brasil.
             </p>
             <p className="mt-4 text-muted-foreground">
-              A solução foi desenvolvida para transformar a descoberta do catálogo
-              em uma experiência simples, lúdica e individual.
+              A solução foi desenvolvida para transformar a descoberta do catálogo em uma
+              experiência simples, lúdica e individual.
             </p>
             <div className="mt-8">
               <div className="fohat-mono mb-4 text-[11px] uppercase tracking-[0.18em] text-blue">
@@ -470,10 +534,10 @@ export function TelaBrasilCase() {
           </Reveal>
           <Reveal delay={120}>
             <p className="text-muted-foreground">
-              A experiência foi estruturada com três televisões por capital, cada
-              uma conectada a um sistema capaz de distribuir áudio para múltiplos
-              fones de ouvido. Isso permitia que diferentes pessoas assistissem
-              simultaneamente aos conteúdos, com autonomia e conforto.
+              A experiência foi estruturada com três televisões por capital, cada uma conectada a um
+              sistema capaz de distribuir áudio para múltiplos fones de ouvido. Isso permitia que
+              diferentes pessoas assistissem simultaneamente aos conteúdos, com autonomia e
+              conforto.
             </p>
             <div className="mt-8">
               <div className="fohat-mono mb-4 text-[11px] uppercase tracking-[0.18em] text-blue">
@@ -510,14 +574,13 @@ export function TelaBrasilCase() {
         <div className="grid gap-10 lg:grid-cols-[1.1fr_.9fr]">
           <Reveal>
             <p className="text-[oklch(0.85_0.02_250)]">
-              A FOHAT desenvolveu o conteúdo audiovisual utilizado nas projeções
-              mapeadas realizadas nas seis capitais. O trabalho envolveu a
-              construção da narrativa visual e a preparação do conteúdo para
-              diferentes edifícios e superfícies.
+              A FOHAT desenvolveu o conteúdo audiovisual utilizado nas projeções mapeadas realizadas
+              nas seis capitais. O trabalho envolveu a construção da narrativa visual e a preparação
+              do conteúdo para diferentes edifícios e superfícies.
             </p>
             <p className="mt-4 text-[oklch(0.85_0.02_250)]">
-              A projeção ampliava a presença do cinema brasileiro no espaço urbano
-              e fazia a experiência ultrapassar os limites físicos da estação.
+              A projeção ampliava a presença do cinema brasileiro no espaço urbano e fazia a
+              experiência ultrapassar os limites físicos da estação.
             </p>
           </Reveal>
           <Reveal delay={120}>
@@ -579,12 +642,8 @@ export function TelaBrasilCase() {
               delay={i * 60}
               className="rounded-2xl border border-white/12 bg-white/[0.04] p-6"
             >
-              <div className="text-4xl font-bold tracking-tight text-white">
-                {it.qty}
-              </div>
-              <div className="mt-2 text-sm text-[oklch(0.82_0.02_250)]">
-                {it.label}
-              </div>
+              <div className="text-4xl font-bold tracking-tight text-white">{it.qty}</div>
+              <div className="mt-2 text-sm text-[oklch(0.82_0.02_250)]">{it.label}</div>
             </Reveal>
           ))}
         </div>
@@ -599,10 +658,7 @@ export function TelaBrasilCase() {
               { n: "02", capitais: ["Belo Horizonte", "Salvador"], data: "25, 26 e 27 de junho" },
               { n: "03", capitais: ["São Paulo", "Porto Alegre"], data: "1, 2 e 3 de julho" },
             ].map((c) => (
-              <Reveal
-                key={c.n}
-                className="rounded-2xl border border-white/12 bg-white/[0.04] p-6"
-              >
+              <Reveal key={c.n} className="rounded-2xl border border-white/12 bg-white/[0.04] p-6">
                 <div className="flex items-baseline justify-between">
                   <span className="fohat-mono text-[10px] uppercase tracking-[0.22em] text-cyan">
                     Ciclo {c.n}
@@ -621,7 +677,6 @@ export function TelaBrasilCase() {
             ))}
           </div>
         </div>
-
 
         <div className="mt-12">
           <div className="fohat-mono mb-5 text-[11px] uppercase tracking-[0.18em] text-cyan">
@@ -732,16 +787,13 @@ export function TelaBrasilCase() {
             "Repercussão",
           ].map((label, i) => (
             <Reveal key={label} delay={i * 50}>
-              <MediaPlaceholder
-                label={label}
-                aspect={i % 3 === 0 ? "4/5" : "4/3"}
-              />
+              <MediaPlaceholder label={label} aspect={i % 3 === 0 ? "4/5" : "4/3"} />
             </Reveal>
           ))}
         </div>
         <p className="mt-6 text-xs text-muted-foreground">
-          Vídeos e publicações de influenciadores aparecem como registros da
-          experiência e repercussão, não como entregas executadas pela FOHAT.
+          Vídeos e publicações de influenciadores aparecem como registros da experiência e
+          repercussão, não como entregas executadas pela FOHAT.
         </p>
       </CaseSection>
 
@@ -772,7 +824,10 @@ export function TelaBrasilCase() {
 
       {/* ============ ENCERRAMENTO ============ */}
       <section className="relative overflow-hidden bg-navy py-24 text-white lg:py-32">
-        <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-60" />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-60"
+        />
         <div aria-hidden className="fohat-scanline" style={{ top: "30%" }} />
         <div className="fohat-shell relative">
           <Reveal className="max-w-[960px]">
@@ -780,24 +835,21 @@ export function TelaBrasilCase() {
               Encerramento
             </span>
             <h2 className="fohat-h2 mt-6 text-white">
-              O cinema brasileiro saiu da tela para ocupar a cidade, a
-              participação e a memória do público.
+              O cinema brasileiro saiu da tela para ocupar a cidade, a participação e a memória do
+              público.
             </h2>
             <p className="mt-6 text-lg text-[oklch(0.85_0.02_250)]">
-              Em seis capitais, a FOHAT integrou experiências, equipamentos,
-              impressão, inteligência artificial, conteúdo audiovisual, técnicos
-              presenciais e monitoramento em tempo real. A operação foi executada
-              em três ciclos, com duas capitais funcionando simultaneamente por
-              semana.
+              Em seis capitais, a FOHAT integrou experiências, equipamentos, impressão, inteligência
+              artificial, conteúdo audiovisual, técnicos presenciais e monitoramento em tempo real.
+              A operação foi executada em três ciclos, com duas capitais funcionando simultaneamente
+              por semana.
             </p>
             <p className="mt-4 text-lg text-[oklch(0.85_0.02_250)]">
-              Mais do que colocar tecnologia no espaço, o projeto demonstrou como
-              ela pode aproximar pessoas da cultura e transformar participação em
-              lembrança.
+              Mais do que colocar tecnologia no espaço, o projeto demonstrou como ela pode aproximar
+              pessoas da cultura e transformar participação em lembrança.
             </p>
             <blockquote className="mt-10 border-l-2 border-cyan pl-6 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-              A tecnologia não precisa afastar as pessoas do mundo. Ela pode
-              devolvê-las a ele.
+              A tecnologia não precisa afastar as pessoas do mundo. Ela pode devolvê-las a ele.
             </blockquote>
             <div className="mt-10 flex flex-wrap gap-3">
               <ContactDialog>

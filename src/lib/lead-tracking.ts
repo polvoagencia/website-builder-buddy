@@ -1,13 +1,7 @@
 // Utilities to capture UTM parameters and source context for FOHAT lead forms.
 
 const STORAGE_KEY = "fohat:utms";
-const UTM_KEYS = [
-  "utm_source",
-  "utm_medium",
-  "utm_campaign",
-  "utm_content",
-  "utm_term",
-] as const;
+const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"] as const;
 
 export type UtmParams = Partial<Record<(typeof UTM_KEYS)[number], string>>;
 

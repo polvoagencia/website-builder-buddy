@@ -38,11 +38,7 @@ export function TerritoryContactCTA({
     <section id={id} className="overflow-hidden bg-white py-20 lg:py-28">
       <div className="fohat-shell">
         <SectionReveal className="relative overflow-hidden rounded-[38px] p-10 text-white sm:p-16">
-          <div
-            aria-hidden
-            className="absolute inset-0"
-            style={{ background: backgrounds[tone] }}
-          />
+          <div aria-hidden className="absolute inset-0" style={{ background: backgrounds[tone] }} />
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-50"
@@ -50,10 +46,7 @@ export function TerritoryContactCTA({
           {visual}
           <div className="relative grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-end">
             <div>
-              <span
-                className="fohat-eyebrow"
-                style={{ color: "var(--color-cyan)" }}
-              >
+              <span className="fohat-eyebrow" style={{ color: "var(--color-cyan)" }}>
                 Vamos conversar
               </span>
               <h2 className="fohat-h2 mt-5 max-w-[720px] text-white">{title}</h2>
