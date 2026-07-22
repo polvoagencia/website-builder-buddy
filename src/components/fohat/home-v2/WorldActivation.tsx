@@ -21,11 +21,7 @@ export function WorldActivation() {
   const openness = reduce ? 0.6 : opennessMv;
 
   return (
-    <section
-      id="ativacao"
-      ref={ref}
-      className="relative overflow-hidden bg-white py-28 lg:py-40"
-    >
+    <section id="ativacao" ref={ref} className="relative overflow-hidden bg-white py-28 lg:py-40">
       <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg opacity-50" />
 
       <div className="fohat-shell relative grid gap-16 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-24">
@@ -72,20 +68,14 @@ export function WorldActivation() {
                 opacity: 1,
               }}
             >
-              <FohatCoreVisual
-                state="sistemas"
-                openness={reduce ? 0.6 : undefined}
-              />
+              <FohatCoreVisual state="sistemas" openness={reduce ? 0.6 : undefined} />
             </motion.div>
             {/* Núcleo animado sobreposto — recebe MotionValue como prop numérica
                 via componente motion.div em torno; para simplicidade, usamos
                 dois estados: reduce estático, senão wrapper com key para
                 forçar re-render conforme progress. */}
             {!reduce && (
-              <motion.div
-                className="absolute inset-0"
-                style={{ opacity: opennessMv }}
-              >
+              <motion.div className="absolute inset-0" style={{ opacity: opennessMv }}>
                 <FohatCoreVisual state="infraestrutura" openness={0.9} />
               </motion.div>
             )}

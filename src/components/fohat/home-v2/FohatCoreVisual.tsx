@@ -35,12 +35,7 @@ const STATE_META: Record<
   },
 };
 
-export function FohatCoreVisual({
-  state = "presenca",
-  openness = 0,
-  className,
-  ariaLabel,
-}: Props) {
+export function FohatCoreVisual({ state = "presenca", openness = 0, className, ariaLabel }: Props) {
   const reduce = useReducedMotion();
   const meta = STATE_META[state];
   const o = reduce ? 0.5 : Math.max(0, Math.min(1, openness));

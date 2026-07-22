@@ -50,10 +50,7 @@ export const HOME_FRONTS: HomeFront[] = [
     id: "frente-infraestrutura",
     state: "infraestrutura",
     index: "03",
-    titleLines: [
-      "Infraestrutura preparada para a tecnologia",
-      "funcionar no mundo real.",
-    ],
+    titleLines: ["Infraestrutura preparada para a tecnologia", "funcionar no mundo real."],
     lead: "Equipamentos, configuração, instalação, integração e suporte conforme a necessidade de cada projeto.",
     cta: { label: "Conheça a Locação de Equipamentos", to: "/locacao-de-equipamentos" },
   },

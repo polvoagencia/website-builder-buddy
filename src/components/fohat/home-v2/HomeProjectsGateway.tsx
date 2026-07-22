@@ -14,12 +14,14 @@ export function HomeProjectsGateway() {
     <section
       className="relative overflow-hidden py-28 lg:py-36"
       style={{
-        background:
-          "linear-gradient(180deg, oklch(0.22 0.023 250), oklch(0.18 0.023 250))",
+        background: "linear-gradient(180deg, oklch(0.22 0.023 250), oklch(0.18 0.023 250))",
         color: "white",
       }}
     >
-      <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-70" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-70"
+      />
 
       <div className="fohat-shell relative grid gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-20">
         <SectionReveal>
@@ -39,7 +41,10 @@ export function HomeProjectsGateway() {
           >
             {HOME_PROJECTS.title}
           </h2>
-          <p className="mt-6 max-w-[520px] text-lg leading-relaxed" style={{ color: "oklch(0.86 0.02 250)" }}>
+          <p
+            className="mt-6 max-w-[520px] text-lg leading-relaxed"
+            style={{ color: "oklch(0.86 0.02 250)" }}
+          >
             {HOME_PROJECTS.lead}
           </p>
           <Link
@@ -67,7 +72,12 @@ function ProceduralOperationDiagram() {
   const steps = ["Conceito", "Sistema", "Operação"];
   return (
     <div className="relative aspect-[5/4] w-full">
-      <svg viewBox="0 0 500 400" className="h-full w-full" role="img" aria-label="Diagrama: conceito, sistema e operação conectados como um único fluxo">
+      <svg
+        viewBox="0 0 500 400"
+        className="h-full w-full"
+        role="img"
+        aria-label="Diagrama: conceito, sistema e operação conectados como um único fluxo"
+      >
         <defs>
           <linearGradient id="gwFlow" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stopColor="var(--color-cyan)" stopOpacity="0.9" />
@@ -96,7 +106,14 @@ function ProceduralOperationDiagram() {
           const x = 40 + i * 210;
           return (
             <g key={label}>
-              <circle cx={x} cy={200} r={22} fill="var(--color-navy)" stroke="var(--color-cyan)" strokeWidth="1.5" />
+              <circle
+                cx={x}
+                cy={200}
+                r={22}
+                fill="var(--color-navy)"
+                stroke="var(--color-cyan)"
+                strokeWidth="1.5"
+              />
               <circle cx={x} cy={200} r={6} fill="var(--color-cyan)" />
               <text
                 x={x}

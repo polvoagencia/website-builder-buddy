@@ -39,9 +39,7 @@ export function HomeFrontsStory() {
       <div className="fohat-shell pt-24 lg:pt-32">
         <SectionReveal className="max-w-[820px]">
           <span className="fohat-eyebrow">Três frentes complementares</span>
-          <h2 className="fohat-h2 mt-5">
-            Uma capacidade, três caminhos para entrar em operação.
-          </h2>
+          <h2 className="fohat-h2 mt-5">Uma capacidade, três caminhos para entrar em operação.</h2>
         </SectionReveal>
       </div>
 

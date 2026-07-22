@@ -20,7 +20,10 @@ export function HomeFinalCTA() {
         color: "white",
       }}
     >
-      <div aria-hidden className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-50" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 fohat-grid-bg-dark opacity-50"
+      />
 
       <div className="fohat-shell relative">
         {/* Nota parceiros */}
