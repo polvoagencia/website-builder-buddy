@@ -76,7 +76,7 @@ export function ResponsiveSpace() {
             className="relative aspect-[16/10] overflow-hidden rounded-[28px] border border-navy/10 bg-navy p-6 text-white"
             style={{
               background: `radial-gradient(circle at ${20 + intensity * 60}% ${50}%, oklch(0.5 0.12 220 / ${0.15 + intensity * 0.45}), oklch(0.22 0.023 250))`,
-              transition: "background 700ms var(--ease-reveal)",
+              transition: reduced ? "none" : "background 700ms var(--ease-reveal)",
             }}
           >
             <div aria-hidden className="absolute inset-0 fohat-grid-bg-dark opacity-40" />
