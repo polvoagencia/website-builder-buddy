@@ -15,7 +15,9 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
+
 import {
   canSubmit,
   getPageContext,
@@ -39,6 +41,11 @@ const contactSchema = z.object({
     .min(10, { message: "WhatsApp inválido." })
     .max(20, { message: "WhatsApp inválido." })
     .regex(/^[\d\s()+-]+$/, { message: "Use apenas números e ( ) + -." }),
+  description: z
+    .string()
+    .trim()
+    .min(10, { message: "Conte um pouco mais — pelo menos 10 caracteres." })
+    .max(2000, { message: "Máximo de 2000 caracteres." }),
 });
 
 type ContactFormValues = z.infer<typeof contactSchema>;
@@ -61,11 +68,15 @@ export function ContactDialog({
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
-    defaultValues: { name: "", email: "", whatsapp: "" },
+    defaultValues: { name: "", email: "", whatsapp: "", description: "" },
   });
+
+  const descriptionValue = watch("description") ?? "";
+
 
   const onSubmit = async (data: ContactFormValues, event?: React.BaseSyntheticEvent) => {
     // Honeypot: bots fill hidden field.
@@ -87,6 +98,7 @@ export function ContactDialog({
       name: data.name,
       email: data.email,
       phone: data.whatsapp,
+      description: data.description,
       source_page: sourcePage ?? ctx.source_page,
       source_cta: sourceCta ?? triggerText,
       page_url: ctx.page_url,
@@ -97,6 +109,7 @@ export function ContactDialog({
       utm_term: utms.utm_term,
       status: "novo",
     });
+
 
     if (error) {
       if (import.meta.env.DEV) console.error("[fohat_leads:contato]", error);
@@ -125,9 +138,10 @@ export function ContactDialog({
             Vamos projetar uma presença.
           </DialogTitle>
           <DialogDescription className="text-base text-muted-foreground">
-            Deixe seu contato. Retornamos em até um dia útil para entender o que
-            você quer que o público viva, sinta ou lembre.
+            Deixe seu contato e conte brevemente sua ideia, necessidade ou
+            desafio. Não precisa estar tudo definido para começarmos a conversa.
           </DialogDescription>
+
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-5" noValidate>
@@ -196,6 +210,39 @@ export function ContactDialog({
               <p className="text-xs text-destructive">{errors.email.message}</p>
             )}
           </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="fohat-description" className="text-xs uppercase tracking-[0.14em] text-blue">
+              Conte sua ideia
+            </Label>
+            <Textarea
+              id="fohat-description"
+              rows={5}
+              maxLength={2000}
+              placeholder="Conte brevemente o que você quer criar, realizar ou colocar em funcionamento."
+              aria-invalid={!!errors.description}
+              aria-describedby="fohat-description-help fohat-description-count"
+              className="rounded-xl border-line bg-background focus-visible:ring-blue"
+              {...register("description")}
+            />
+            <div className="flex items-start justify-between gap-3">
+              <p id="fohat-description-help" className="text-xs text-muted-foreground">
+                Não precisa estar tudo definido. Explique o contexto, a
+                necessidade ou o desafio.
+              </p>
+              <span
+                id="fohat-description-count"
+                aria-live="polite"
+                className="fohat-mono shrink-0 text-[10px] uppercase tracking-[0.14em] text-muted-foreground"
+              >
+                {descriptionValue.length}/2000
+              </span>
+            </div>
+            {errors.description && (
+              <p className="text-xs text-destructive">{errors.description.message}</p>
+            )}
+          </div>
+
 
           <button
             type="submit"

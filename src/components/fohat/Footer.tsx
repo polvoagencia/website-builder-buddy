@@ -40,8 +40,8 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               <li><Link to="/engenharia-de-presenca" className="hover:text-white">Engenharia de Presença</Link></li>
               <li><Link to="/tecnologia" className="hover:text-white">Tecnologia de Experiência</Link></li>
-              <li><Link to="/" hash="metodo" className="hover:text-white">Método</Link></li>
-              <li><Link to="/" hash="projetos" className="hover:text-white">Projetos</Link></li>
+              <li><Link to="/engenharia-de-presenca" hash="metodo" className="hover:text-white">Método</Link></li>
+              <li><Link to="/projetos" className="hover:text-white">Projetos</Link></li>
             </ul>
           </div>
 
@@ -51,10 +51,10 @@ export function Footer() {
             </h4>
             <ul className="space-y-2 text-sm">
               <li><Link to="/" hash="contato" className="hover:text-white">Conte sua ideia</Link></li>
-              <li><a href="#" className="hover:text-white">LinkedIn</a></li>
-              <li><a href="#" className="hover:text-white">Instagram</a></li>
+              {/* Social links (LinkedIn/Instagram) serão incluídos quando os endereços oficiais forem definidos. */}
             </ul>
           </div>
+
         </div>
 
         <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between">

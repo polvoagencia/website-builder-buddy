@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { useEffect, useId, useRef, useState } from "react";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
 import logoAsset from "@/assets/logo-fohat.png.asset.json";
 import { ContactDialog } from "./ContactDialog";
@@ -32,7 +32,7 @@ const NAV: NavItem[] = [
         },
         {
           label: "Método FOHAT",
-          to: "/#metodo",
+          to: "/engenharia-de-presenca#metodo",
           description: "Cinco etapas: Fundamento, Orquestração, Humanização, Ativação, Transformação.",
         },
         {
@@ -82,6 +82,13 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openMega, setOpenMega] = useState<string | null>(null);
   const [expandedMobile, setExpandedMobile] = useState<string | null>(null);
+  const desktopNavRef = useRef<HTMLDivElement | null>(null);
+  const megaBaseId = useId();
+  const mobileBaseId = useId();
+
+  // Track route changes to auto-close menus on navigation.
+  const locationHref = useRouterState({ select: (s) => s.location.href });
+
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -89,6 +96,41 @@ export function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Close everything when the route changes.
+  useEffect(() => {
+    setMenuOpen(false);
+    setExpandedMobile(null);
+    setOpenMega(null);
+  }, [locationHref]);
+
+
+  // Escape closes desktop mega and mobile drawer.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      if (openMega) setOpenMega(null);
+      if (menuOpen) setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [openMega, menuOpen]);
+
+  // Click outside desktop nav closes the mega menu.
+  useEffect(() => {
+    if (!openMega) return;
+    const onDown = (e: MouseEvent) => {
+      if (!desktopNavRef.current) return;
+      if (!desktopNavRef.current.contains(e.target as Node)) setOpenMega(null);
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, [openMega]);
+
+  const megaPanelId = (label: string) =>
+    `${megaBaseId}-${label.replace(/\s+/g, "-").toLowerCase()}`;
+  const mobilePanelId = (label: string) =>
+    `${mobileBaseId}-${label.replace(/\s+/g, "-").toLowerCase()}`;
 
   return (
     <header
@@ -110,28 +152,61 @@ export function Header() {
           </Link>
 
           <div
+            ref={desktopNavRef}
             className="hidden items-center gap-1 text-sm font-semibold lg:flex"
             onMouseLeave={() => setOpenMega(null)}
           >
             {NAV.map((item) => {
               const hasMega = !!item.submenu;
               const active = openMega === item.label;
+              const panelId = hasMega ? megaPanelId(item.label) : undefined;
+
+              const openThis = () => setOpenMega(item.label);
+              const closeThis = () => setOpenMega(null);
+              const toggleThis = () =>
+                setOpenMega((cur) => (cur === item.label ? null : item.label));
+
               return (
                 <div
                   key={item.label}
                   className="relative"
-                  onMouseEnter={() => setOpenMega(hasMega ? item.label : null)}
+                  onMouseEnter={() => hasMega && openThis()}
+                  onFocus={() => hasMega && openThis()}
+                  onBlur={(e) => {
+                    if (
+                      hasMega &&
+                      !e.currentTarget.contains(e.relatedTarget as Node | null)
+                    ) {
+                      closeThis();
+                    }
+                  }}
                 >
                   {item.to ? (
                     <Link
                       to={item.to}
                       className={cn(
-                        "inline-flex items-center gap-1 rounded-full px-3 py-2 transition-all",
+                        "inline-flex items-center gap-1 rounded-full px-3 py-2 transition-all outline-none",
                         "opacity-70 hover:opacity-100 hover:text-blue",
+                        "focus-visible:opacity-100 focus-visible:text-blue focus-visible:ring-2 focus-visible:ring-blue/50",
                         active && "opacity-100 text-blue",
                       )}
                       activeProps={{ className: "opacity-100 text-blue" }}
                       activeOptions={{ exact: item.to === "/" }}
+                      aria-haspopup={hasMega ? "menu" : undefined}
+                      aria-expanded={hasMega ? active : undefined}
+                      aria-controls={panelId}
+                      onKeyDown={(e) => {
+                        if (!hasMega) return;
+                        if (e.key === "ArrowDown") {
+                          e.preventDefault();
+                          openThis();
+                          // Move focus into first submenu link.
+                          const panel = document.getElementById(panelId!);
+                          const first =
+                            panel?.querySelector<HTMLElement>("a[href]");
+                          first?.focus();
+                        }
+                      }}
                     >
                       {item.label}
                       {hasMega && (
@@ -145,11 +220,35 @@ export function Header() {
                     </Link>
                   ) : null}
 
+                  {hasMega && (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        toggleThis();
+                      }}
+                      aria-haspopup="menu"
+                      aria-expanded={active}
+                      aria-controls={panelId}
+                      aria-label={
+                        active
+                          ? `Recolher submenu ${item.label}`
+                          : `Expandir submenu ${item.label}`
+                      }
+                      className="sr-only focus:not-sr-only focus:absolute focus:left-0 focus:top-full focus:mt-1 focus:rounded-md focus:bg-navy focus:px-2 focus:py-1 focus:text-xs focus:text-white"
+                    >
+                      {active ? "Recolher" : "Expandir"} {item.label}
+                    </button>
+                  )}
+
                   {/* Mega menu */}
                   {hasMega && active && (
                     <div
+                      id={panelId}
+                      role="menu"
+                      aria-label={item.submenu!.title}
                       className="absolute left-1/2 top-full z-40 mt-3 w-[520px] -translate-x-1/2 animate-in fade-in slide-in-from-top-2"
-                      onMouseEnter={() => setOpenMega(item.label)}
+                      onMouseEnter={openThis}
                     >
                       {/* Hover safety bridge */}
                       <div className="h-3" />
@@ -164,8 +263,8 @@ export function Header() {
                         </div>
                         <ul className="p-3">
                           {item.submenu!.items.map((s) => (
-                            <li key={s.to}>
-                              <MegaLink item={s} onNavigate={() => setOpenMega(null)} />
+                            <li key={s.to} role="none">
+                              <MegaLink item={s} onNavigate={closeThis} />
                             </li>
                           ))}
                         </ul>
@@ -187,7 +286,15 @@ export function Header() {
           <button
             type="button"
             aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
-            onClick={() => setMenuOpen((o) => !o)}
+            aria-expanded={menuOpen}
+            aria-controls="fohat-mobile-drawer"
+            onClick={() =>
+              setMenuOpen((o) => {
+                const next = !o;
+                if (!next) setExpandedMobile(null);
+                return next;
+              })
+            }
             className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line bg-card text-navy lg:hidden"
           >
             {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -196,63 +303,85 @@ export function Header() {
 
         {/* Mobile drawer */}
         {menuOpen && (
-          <div className="mt-3 max-h-[75vh] overflow-auto rounded-3xl border border-line bg-card p-5 shadow-[var(--shadow-card)] lg:hidden">
+          <div
+            id="fohat-mobile-drawer"
+            className="mt-3 max-h-[75vh] overflow-auto rounded-3xl border border-line bg-card p-5 shadow-[var(--shadow-card)] lg:hidden"
+          >
             <ul className="flex flex-col gap-1">
-              {NAV.map((item) => (
-                <li key={item.label} className="border-b border-line/60 last:border-0">
-                  <div className="flex items-center justify-between">
-                    {item.to ? (
-                      <Link
-                        to={item.to}
-                        onClick={() => setMenuOpen(false)}
-                        className="flex-1 py-3 text-base font-semibold text-navy"
-                      >
-                        {item.label}
-                      </Link>
-                    ) : (
-                      <span className="py-3 text-base font-semibold text-navy">
-                        {item.label}
-                      </span>
-                    )}
-                    {item.submenu && (
-                      <button
-                        type="button"
-                        aria-label="Expandir"
-                        onClick={() =>
-                          setExpandedMobile((e) =>
-                            e === item.label ? null : item.label,
-                          )
-                        }
-                        className="p-2 text-blue"
-                      >
-                        <ChevronDown
-                          className={cn(
-                            "h-4 w-4 transition-transform",
-                            expandedMobile === item.label && "rotate-180",
-                          )}
-                        />
-                      </button>
-                    )}
-                  </div>
-                  {item.submenu && expandedMobile === item.label && (
-                    <ul className="mb-3 space-y-1 rounded-2xl bg-mist p-2">
-                      {item.submenu.items.map((s) => (
-                        <li key={s.to}>
-                          <MegaLink
-                            item={s}
-                            onNavigate={() => setMenuOpen(false)}
-                            compact
+              {NAV.map((item) => {
+                const expanded = expandedMobile === item.label;
+                const panelId = item.submenu ? mobilePanelId(item.label) : undefined;
+                return (
+                  <li key={item.label} className="border-b border-line/60 last:border-0">
+                    <div className="flex items-center justify-between">
+                      {item.to ? (
+                        <Link
+                          to={item.to}
+                          onClick={() => {
+                            setMenuOpen(false);
+                            setExpandedMobile(null);
+                          }}
+                          className="flex-1 py-3 text-base font-semibold text-navy"
+                        >
+                          {item.label}
+                        </Link>
+                      ) : (
+                        <span className="py-3 text-base font-semibold text-navy">
+                          {item.label}
+                        </span>
+                      )}
+                      {item.submenu && (
+                        <button
+                          type="button"
+                          aria-label={
+                            expanded
+                              ? `Recolher submenu ${item.label}`
+                              : `Expandir submenu ${item.label}`
+                          }
+                          aria-expanded={expanded}
+                          aria-controls={panelId}
+                          onClick={() =>
+                            setExpandedMobile((e) =>
+                              e === item.label ? null : item.label,
+                            )
+                          }
+                          className="p-2 text-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue/50 rounded-md"
+                        >
+                          <ChevronDown
+                            className={cn(
+                              "h-4 w-4 transition-transform",
+                              expanded && "rotate-180",
+                            )}
                           />
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
+                        </button>
+                      )}
+                    </div>
+                    {item.submenu && expanded && (
+                      <ul id={panelId} className="mb-3 space-y-1 rounded-2xl bg-mist p-2">
+                        {item.submenu.items.map((s) => (
+                          <li key={s.to}>
+                            <MegaLink
+                              item={s}
+                              onNavigate={() => {
+                                setMenuOpen(false);
+                                setExpandedMobile(null);
+                              }}
+                              compact
+                            />
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
             <ContactDialog>
               <button
-                onClick={() => setMenuOpen(false)}
+                onClick={() => {
+                  setMenuOpen(false);
+                  setExpandedMobile(null);
+                }}
                 className="mt-4 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-navy px-5 text-sm font-bold text-primary-foreground"
               >
                 Conte sua ideia <ArrowUpRight className="h-4 w-4" />
@@ -274,15 +403,16 @@ function MegaLink({
   onNavigate: () => void;
   compact?: boolean;
 }) {
-  // Split hash target like "/#metodo" into pathname + hash for TanStack Link
+  // Split hash target like "/engenharia-de-presenca#metodo" into pathname + hash for TanStack Link
   const [pathname, hash] = item.to.split("#");
   return (
     <Link
       to={pathname || "/"}
       hash={hash}
       onClick={onNavigate}
+      role="menuitem"
       className={cn(
-        "group flex items-start gap-3 rounded-2xl p-3 transition-colors hover:bg-mist",
+        "group flex items-start gap-3 rounded-2xl p-3 transition-colors hover:bg-mist focus-visible:bg-mist focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue/50",
         compact && "p-2",
       )}
     >
