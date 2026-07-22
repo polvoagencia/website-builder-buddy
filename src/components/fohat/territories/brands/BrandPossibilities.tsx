@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { useRef, useState, type KeyboardEvent } from "react";
 import { BRANDS } from "@/data/presence-territories-content";
 import { SectionReveal } from "@/components/fohat/motion/SectionReveal";
 import { cn } from "@/lib/utils";
@@ -7,45 +7,50 @@ import { cn } from "@/lib/utils";
  * Marcas · Possibilidades — painel interativo (tabs) representando
  * seis formas diferentes de participação. Navegação por clique e teclado.
  * Desktop: seletor lateral + painel visual dinâmico.
- * Mobile: accordion vertical.
+ * Mobile: tabs verticais empilhadas (sempre uma ativa).
  */
 export function BrandPossibilities() {
   const items = BRANDS.possibilities;
   const [active, setActive] = useState(0);
-  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const desktopRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const mobileRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
-  useEffect(() => {
-    if (active < 0 || active >= items.length) setActive(0);
-  }, [active, items.length]);
-
-  const focusTab = (i: number) => {
+  const focusTab = (
+    i: number,
+    refs: React.MutableRefObject<Array<HTMLButtonElement | null>>,
+  ) => {
     const idx = (i + items.length) % items.length;
     setActive(idx);
-    tabRefs.current[idx]?.focus();
+    refs.current[idx]?.focus();
   };
 
-  const onKey = (e: KeyboardEvent<HTMLButtonElement>, i: number) => {
-    switch (e.key) {
-      case "ArrowDown":
-      case "ArrowRight":
-        e.preventDefault();
-        focusTab(i + 1);
-        break;
-      case "ArrowUp":
-      case "ArrowLeft":
-        e.preventDefault();
-        focusTab(i - 1);
-        break;
-      case "Home":
-        e.preventDefault();
-        focusTab(0);
-        break;
-      case "End":
-        e.preventDefault();
-        focusTab(items.length - 1);
-        break;
-    }
-  };
+  const makeOnKey =
+    (refs: React.MutableRefObject<Array<HTMLButtonElement | null>>) =>
+    (e: KeyboardEvent<HTMLButtonElement>, i: number) => {
+      switch (e.key) {
+        case "ArrowDown":
+        case "ArrowRight":
+          e.preventDefault();
+          focusTab(i + 1, refs);
+          break;
+        case "ArrowUp":
+        case "ArrowLeft":
+          e.preventDefault();
+          focusTab(i - 1, refs);
+          break;
+        case "Home":
+          e.preventDefault();
+          focusTab(0, refs);
+          break;
+        case "End":
+          e.preventDefault();
+          focusTab(items.length - 1, refs);
+          break;
+      }
+    };
+
+  const onKeyDesktop = makeOnKey(desktopRefs);
+  const onKeyMobile = makeOnKey(mobileRefs);
 
   const current = items[active];
 
@@ -78,7 +83,7 @@ export function BrandPossibilities() {
               <button
                 key={it.key}
                 ref={(el) => {
-                  tabRefs.current[i] = el;
+                  desktopRefs.current[i] = el;
                 }}
                 id={`brands-tab-${it.key}`}
                 role="tab"
@@ -86,7 +91,7 @@ export function BrandPossibilities() {
                 aria-selected={active === i}
                 aria-controls="brands-poss-panel"
                 tabIndex={active === i ? 0 : -1}
-                onKeyDown={(e) => onKey(e, i)}
+                onKeyDown={(e) => onKeyDesktop(e, i)}
                 onClick={() => setActive(i)}
                 className={cn(
                   "group -ml-px flex items-start gap-4 border-l-2 py-5 pl-6 text-left transition-all",
@@ -138,45 +143,64 @@ export function BrandPossibilities() {
           </div>
         </div>
 
-        {/* Mobile: accordion */}
-        <ul className="flex flex-col gap-2 lg:hidden">
-          {items.map((it, i) => {
-            const open = active === i;
-            return (
-              <li key={it.key} className="overflow-hidden rounded-2xl border border-line bg-mist">
-                <button
-                  type="button"
-                  aria-expanded={open}
-                  aria-controls={`brands-acc-${it.key}`}
-                  onClick={() => setActive(open ? -1 : i)}
-                  className="flex w-full items-center gap-4 px-5 py-4 text-left"
+        {/* Mobile: vertical tablist (sempre uma ativa) */}
+        <div className="lg:hidden">
+          <div
+            role="tablist"
+            aria-orientation="vertical"
+            aria-label="Formas de participação"
+            className="flex flex-col gap-2"
+          >
+            {items.map((it, i) => {
+              const open = active === i;
+              return (
+                <div
+                  key={it.key}
+                  className="overflow-hidden rounded-2xl border border-line bg-mist"
                 >
-                  <span className="fohat-mono text-[10px] uppercase tracking-[0.2em] text-blue">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="flex-1 text-base font-bold text-navy">
-                    {it.title}
-                  </span>
-                  <span
-                    aria-hidden
-                    className={cn(
-                      "h-2 w-2 rounded-full bg-blue transition-transform",
-                      open && "scale-150",
-                    )}
-                  />
-                </button>
-                {open && (
-                  <div
-                    id={`brands-acc-${it.key}`}
-                    className="border-t border-line px-5 py-4 text-sm text-muted-foreground"
+                  <button
+                    ref={(el) => {
+                      mobileRefs.current[i] = el;
+                    }}
+                    id={`brands-tab-m-${it.key}`}
+                    role="tab"
+                    type="button"
+                    aria-selected={open}
+                    aria-controls={open ? `brands-panel-m-${it.key}` : undefined}
+                    tabIndex={open ? 0 : -1}
+                    onKeyDown={(e) => onKeyMobile(e, i)}
+                    onClick={() => setActive(i)}
+                    className="flex w-full items-center gap-4 px-5 py-4 text-left"
                   >
-                    {it.desc}
-                  </div>
-                )}
-              </li>
-            );
-          })}
-        </ul>
+                    <span className="fohat-mono text-[10px] uppercase tracking-[0.2em] text-blue">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="flex-1 text-base font-bold text-navy">
+                      {it.title}
+                    </span>
+                    <span
+                      aria-hidden
+                      className={cn(
+                        "h-2 w-2 rounded-full bg-blue transition-transform",
+                        open && "scale-150",
+                      )}
+                    />
+                  </button>
+                  {open && (
+                    <div
+                      id={`brands-panel-m-${it.key}`}
+                      role="tabpanel"
+                      aria-labelledby={`brands-tab-m-${it.key}`}
+                      className="border-t border-line px-5 py-4 text-sm text-muted-foreground"
+                    >
+                      {it.desc}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </section>
   );
