@@ -15,7 +15,7 @@ export function PartnersHero() {
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 fohat-grid-bg-light opacity-40"
+        className="pointer-events-none absolute inset-0 fohat-grid-bg opacity-40"
       />
       <div className="fohat-shell relative">
         <SectionReveal className="max-w-3xl">
