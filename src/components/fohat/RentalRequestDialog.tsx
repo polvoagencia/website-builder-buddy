@@ -254,8 +254,7 @@ export function RentalRequestDialog({
     reset();
     setFile(null);
     setFileName(null);
-    setOpen(false);
-    onOpenChange?.(false);
+    updateOpen(false);
   };
 
   return (
