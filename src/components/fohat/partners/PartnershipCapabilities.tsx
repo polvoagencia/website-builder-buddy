@@ -113,7 +113,7 @@ export function PartnershipCapabilities() {
                     return (
                       <button
                         key={it.id}
-                        ref={(el) => (tabsRef.current[i] = el)}
+                        ref={(el) => { tabsRef.current[i] = el; }}
                         type="button"
                         role="tab"
                         id={`cap-tab-${it.id}`}

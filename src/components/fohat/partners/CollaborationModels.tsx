@@ -62,7 +62,7 @@ export function CollaborationModels() {
                     return (
                       <button
                         key={m.id}
-                        ref={(el) => (btnRefs.current[i] = el)}
+                        ref={(el) => { btnRefs.current[i] = el; }}
                         type="button"
                         role="tab"
                         id={`model-tab-${m.id}`}
