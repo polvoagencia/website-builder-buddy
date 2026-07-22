@@ -1,7 +1,12 @@
 import { useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
-import { motion, useScroll, useTransform } from "motion/react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from "motion/react";
 
 import portalAsset from "@/assets/portal.jpg.asset.json";
 import labAsset from "@/assets/lab.jpg.asset.json";
@@ -31,6 +36,67 @@ const FRENTES = [
   { slug: "sistemas-e-aplicativos", media: labAsset.url },
   { slug: "locacao-de-equipamentos", media: heroAsset.url },
 ] as const;
+
+function StickyMedia({
+  progress,
+  index,
+  total,
+  reduce,
+}: {
+  progress: MotionValue<number>;
+  index: number;
+  total: number;
+  reduce: boolean;
+}) {
+  const start = index / total;
+  const end = (index + 1) / total;
+  const mid = (start + end) / 2;
+
+  // Hooks chamados incondicionalmente; valor final é ignorado se reduce=true.
+  const opacityMv = useTransform(
+    progress,
+    [start, mid, end],
+    [index === 0 ? 1 : 0, 1, index === total - 1 ? 1 : 0],
+  );
+  const scaleMv = useTransform(progress, [start, end], [1.06, 1]);
+
+  const f = FRENTES[index];
+  const service = SERVICES.find((s) => s.slug === f.slug)!;
+
+  return (
+    <motion.div
+      style={{
+        opacity: reduce ? (index === 0 ? 1 : 0) : opacityMv,
+        scale: reduce ? 1 : scaleMv,
+      }}
+      className="absolute inset-0"
+      aria-hidden={index !== 0}
+    >
+      <img
+        src={f.media}
+        alt={service.title}
+        className="h-full w-full object-cover"
+        style={{ filter: "saturate(0.82) contrast(1.06)" }}
+        loading="lazy"
+      />
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(180deg, transparent 40%, oklch(0.22 0.023 250 / 0.75))",
+        }}
+      />
+      <div className="absolute inset-x-8 bottom-8 text-white">
+        <span className="fohat-mono text-[10px] uppercase tracking-[0.22em] text-cyan">
+          Frente {String(index + 1).padStart(2, "0")}
+        </span>
+        <div className="mt-2 text-3xl font-bold leading-tight tracking-tight">
+          {service.title}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export function StickyFronts() {
   const reduce = useReducedMotion();
@@ -63,61 +129,19 @@ export function StickyFronts() {
           {/* Coluna sticky (mídia + label da frente ativa) */}
           <div className="relative">
             <div className="sticky top-28 aspect-[4/5] w-full max-w-[520px] overflow-hidden rounded-[36px] border border-line bg-navy shadow-[var(--shadow-elegant)]">
-              {FRENTES.map((f, i) => {
-                // Cada mídia aparece durante o "seu" terço.
-                const start = i / FRENTES.length;
-                const end = (i + 1) / FRENTES.length;
-                const mid = (start + end) / 2;
-                const opacity = reduce
-                  ? i === 0
-                    ? 1
-                    : 0
-                  : // triangular fade — full at mid, zero at borders
-                    useTransform(
-                      scrollYProgress,
-                      [start, mid, end],
-                      [i === 0 ? 1 : 0, 1, i === FRENTES.length - 1 ? 1 : 0],
-                    );
-                const scale = reduce
-                  ? 1
-                  : useTransform(scrollYProgress, [start, end], [1.06, 1]);
-                const service = SERVICES.find((s) => s.slug === f.slug)!;
-                return (
-                  <motion.div
-                    key={f.slug}
-                    style={{ opacity, scale }}
-                    className="absolute inset-0"
-                    aria-hidden={i !== 0}
-                  >
-                    <img
-                      src={f.media}
-                      alt={service.title}
-                      className="h-full w-full object-cover"
-                      style={{ filter: "saturate(0.82) contrast(1.06)" }}
-                      loading="lazy"
-                    />
-                    <div
-                      className="pointer-events-none absolute inset-0"
-                      style={{
-                        background:
-                          "linear-gradient(180deg, transparent 40%, oklch(0.22 0.023 250 / 0.75))",
-                      }}
-                    />
-                    <div className="absolute inset-x-8 bottom-8 text-white">
-                      <span className="fohat-mono text-[10px] uppercase tracking-[0.22em] text-cyan">
-                        Frente {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <div className="mt-2 text-3xl font-bold leading-tight tracking-tight">
-                        {service.title}
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
+              {FRENTES.map((_, i) => (
+                <StickyMedia
+                  key={i}
+                  progress={scrollYProgress}
+                  index={i}
+                  total={FRENTES.length}
+                  reduce={reduce}
+                />
+              ))}
 
               {/* Barra de progresso vertical */}
               {!reduce && (
-                <motion.div
+                <div
                   aria-hidden
                   className="absolute right-4 top-4 h-24 w-[3px] overflow-hidden rounded-full bg-white/25"
                 >
@@ -125,7 +149,7 @@ export function StickyFronts() {
                     className="h-full w-full origin-top rounded-full bg-cyan"
                     style={{ scaleY: scrollYProgress }}
                   />
-                </motion.div>
+                </div>
               )}
             </div>
           </div>
