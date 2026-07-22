@@ -105,7 +105,11 @@ export function ResponsiveSpace() {
                         fill={on ? "oklch(0.85 0.055 245 / 0.25)" : "transparent"}
                         stroke="oklch(0.85 0.055 245)"
                         strokeWidth="1"
-                        style={{ transition: "r 400ms var(--ease-reveal), fill 400ms" }}
+                        style={{
+                          transition: reduced
+                            ? "none"
+                            : "r 400ms var(--ease-reveal), fill 400ms",
+                        }}
                       />
                       <circle cx={x} cy={y} r="2" fill="oklch(0.85 0.055 245)" />
                     </g>
