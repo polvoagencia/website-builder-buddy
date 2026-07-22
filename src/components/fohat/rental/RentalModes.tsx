@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Check } from "lucide-react";
 
 import { Reveal } from "@/components/fohat/Reveal";
 import { RENTAL_MODES } from "@/data/rental-content";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+
+const PANEL_ID = "rental-modes-panel";
 
 /**
  * Cinco formatos de contratação, consolidados em uma única seção.
@@ -17,6 +19,12 @@ export function RentalModes() {
   const [active, setActive] = useState(0);
   const reduced = useReducedMotion();
   const current = RENTAL_MODES[active];
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+
+  const focusTab = (index: number) => {
+    setActive(index);
+    tabRefs.current[index]?.focus();
+  };
 
   return (
     <section id="formatos" className="bg-white py-20 lg:py-28">
