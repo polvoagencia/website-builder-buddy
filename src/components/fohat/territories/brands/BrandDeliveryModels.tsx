@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useRef, useState, type KeyboardEvent } from "react";
 import { BRANDS } from "@/data/presence-territories-content";
 import { SectionReveal } from "@/components/fohat/motion/SectionReveal";
 import { cn } from "@/lib/utils";
+
+const PANEL_ID = "brands-formats-panel";
 
 /**
  * Marcas · Formatos — três portas de entrada.
@@ -10,6 +12,36 @@ import { cn } from "@/lib/utils";
 export function BrandDeliveryModels() {
   const formats = BRANDS.formats;
   const [active, setActive] = useState(0);
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+
+  const focusTab = (i: number) => {
+    const idx = (i + formats.length) % formats.length;
+    setActive(idx);
+    tabRefs.current[idx]?.focus();
+  };
+
+  const onKey = (e: KeyboardEvent<HTMLButtonElement>, i: number) => {
+    switch (e.key) {
+      case "ArrowRight":
+      case "ArrowDown":
+        e.preventDefault();
+        focusTab(i + 1);
+        break;
+      case "ArrowLeft":
+      case "ArrowUp":
+        e.preventDefault();
+        focusTab(i - 1);
+        break;
+      case "Home":
+        e.preventDefault();
+        focusTab(0);
+        break;
+      case "End":
+        e.preventDefault();
+        focusTab(formats.length - 1);
+        break;
+    }
+  };
 
   return (
     <section
@@ -39,10 +71,15 @@ export function BrandDeliveryModels() {
             return (
               <button
                 key={f.title}
+                ref={(el) => {
+                  tabRefs.current[i] = el;
+                }}
+                id={`brands-format-tab-${i}`}
                 role="tab"
                 aria-selected={open}
-                aria-controls={`brands-format-panel-${i}`}
-                id={`brands-format-tab-${i}`}
+                aria-controls={PANEL_ID}
+                tabIndex={open ? 0 : -1}
+                onKeyDown={(e) => onKey(e, i)}
                 onClick={() => setActive(i)}
                 type="button"
                 className={cn(
@@ -82,7 +119,7 @@ export function BrandDeliveryModels() {
 
         {/* Painel único de detalhe */}
         <div
-          id={`brands-format-panel-${active}`}
+          id={PANEL_ID}
           role="tabpanel"
           aria-labelledby={`brands-format-tab-${active}`}
           className="mt-6 rounded-3xl border border-line bg-mist p-8 md:p-10"
