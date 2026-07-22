@@ -549,6 +549,40 @@ export function TelaBrasilCase() {
 
         <div className="mt-12">
           <div className="fohat-mono mb-5 text-[11px] uppercase tracking-[0.18em] text-cyan">
+            Ciclos e capitais
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {[
+              { n: "01", capitais: ["Brasília", "Goiânia"], data: "18, 19 e 20 de junho" },
+              { n: "02", capitais: ["Belo Horizonte", "Salvador"], data: "25, 26 e 27 de junho" },
+              { n: "03", capitais: ["São Paulo", "Porto Alegre"], data: "1, 2 e 3 de julho" },
+            ].map((c) => (
+              <Reveal
+                key={c.n}
+                className="rounded-2xl border border-white/12 bg-white/[0.04] p-6"
+              >
+                <div className="flex items-baseline justify-between">
+                  <span className="fohat-mono text-[10px] uppercase tracking-[0.22em] text-cyan">
+                    Ciclo {c.n}
+                  </span>
+                  <span className="fohat-mono text-[10px] tabular-nums text-white/50">
+                    02 capitais
+                  </span>
+                </div>
+                <div className="mt-4 text-xl font-bold tracking-tight text-white">
+                  {c.capitais.join(" + ")}
+                </div>
+                <div className="mt-3 fohat-mono text-[11px] uppercase tracking-[0.16em] text-white/70">
+                  {c.data}
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+
+
+        <div className="mt-12">
+          <div className="fohat-mono mb-5 text-[11px] uppercase tracking-[0.18em] text-cyan">
             Estrutura total mobilizada simultaneamente
           </div>
           <InfraGrid
