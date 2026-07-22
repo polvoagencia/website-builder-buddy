@@ -17,6 +17,9 @@ import { Reveal } from "@/components/fohat/Reveal";
 import { Parallax } from "@/components/fohat/Parallax";
 import { ScrollProgress } from "@/components/fohat/ScrollProgress";
 import { Marquee } from "@/components/fohat/Subpage";
+import { RentalEquipmentCard } from "@/components/fohat/RentalEquipmentCard";
+import { RentalRequestDialog } from "@/components/fohat/RentalRequestDialog";
+import { RENTAL_CATALOG_ITEMS } from "@/data/rental-equipment";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -346,6 +349,80 @@ function Home() {
                 Nossa capacidade tecnológica <ArrowUpRight className="h-4 w-4" />
               </Link>
             </div>
+          </div>
+        </section>
+
+        {/* LOCAÇÃO — frente complementar */}
+        <section
+          id="locacao"
+          className="relative overflow-hidden bg-mist py-24 lg:py-32"
+        >
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 fohat-grid-bg opacity-60"
+          />
+          <div className="fohat-shell relative">
+            <Reveal className="mb-12 max-w-[900px]">
+              <span className="fohat-eyebrow">Locação de equipamentos</span>
+              <h2 className="fohat-h2 mt-5">
+                A infraestrutura certa para sua experiência acontecer no
+                mundo real.
+              </h2>
+              <p className="fohat-lead mt-5">
+                Além de desenvolver projetos completos de Engenharia de
+                Presença, a FOHAT também disponibiliza equipamentos
+                tecnológicos para eventos, ativações, exposições, produções
+                e operações especiais.
+              </p>
+              <p className="mt-4 text-muted-foreground">
+                Você pode contratar apenas os equipamentos ou combinar a
+                locação com instalação, configuração, integração e suporte
+                técnico.
+              </p>
+            </Reveal>
+
+            <div
+              className="-mx-4 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-4 px-4 pb-4 md:mx-0 md:grid md:snap-none md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-4"
+              style={{ scrollbarWidth: "thin" }}
+            >
+              {RENTAL_CATALOG_ITEMS.filter((it) => it.featured).map(
+                (item, i) => (
+                  <div
+                    key={item.slug}
+                    className="w-[82%] shrink-0 snap-start md:w-auto md:shrink"
+                  >
+                    <RentalEquipmentCard
+                      item={item}
+                      variant="compact"
+                      eager={i === 0}
+                      sourcePage="/"
+                    />
+                  </div>
+                ),
+              )}
+            </div>
+
+            <div className="mt-12 flex flex-wrap items-center gap-3">
+              <Link
+                to="/locacao-de-equipamentos"
+                hash="catalogo"
+                className="group inline-flex h-12 items-center gap-2 rounded-full bg-navy px-6 text-sm font-bold text-primary-foreground shadow-[var(--shadow-cta)] transition-all hover:-translate-y-0.5 hover:bg-blue"
+              >
+                Conheça os equipamentos
+                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+              <RentalRequestDialog sourcePage="/" sourceCta="Consultar disponibilidade · Home">
+                <button className="group inline-flex h-12 items-center gap-2 rounded-full border border-navy/15 bg-white px-6 text-sm font-bold text-navy transition-all hover:border-blue hover:text-blue">
+                  Consultar disponibilidade
+                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </button>
+              </RentalRequestDialog>
+            </div>
+
+            <p className="fohat-mono mt-8 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+              Equipamentos, quantidades, logística e suporte são confirmados
+              conforme a necessidade de cada projeto.
+            </p>
           </div>
         </section>
 

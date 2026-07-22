@@ -134,3 +134,195 @@ export const RENTAL_EQUIPMENT_OPTIONS = [
   "Acessórios",
   "Outros",
 ] as const;
+
+/* ----------------------------------------------------------
+ * Catálogo visual reutilizável — Home + página de locação.
+ * Enquanto as fotografias reais do estoque FOHAT não forem
+ * fornecidas, cada item usa uma imagem ilustrativa marcada
+ * com `illustrativeImage: true`.
+ * -------------------------------------------------------- */
+
+import impressorasImg from "@/assets/rental/impressoras.jpg";
+import televisoesImg from "@/assets/rental/televisoes.jpg";
+import totensImg from "@/assets/rental/totens.jpg";
+import computadoresImg from "@/assets/rental/computadores.jpg";
+import tabletsImg from "@/assets/rental/tablets.jpg";
+import acessoriosImg from "@/assets/rental/acessorios.jpg";
+
+export type RentalFilterSlug =
+  | "todos"
+  | "impressao"
+  | "exibicao"
+  | "interacao"
+  | "processamento"
+  | "mobilidade"
+  | "acessorios";
+
+export interface RentalCatalogItem {
+  slug: RentalCategorySlug;
+  name: string;
+  category: string;
+  filter: Exclude<RentalFilterSlug, "todos">;
+  shortDescription: string;
+  fullDescription: string;
+  image: string;
+  imageAlt: string;
+  uses: string[];
+  featured: boolean;
+  illustrativeImage: boolean;
+  defaultFormOption: (typeof RENTAL_EQUIPMENT_OPTIONS)[number];
+}
+
+export const RENTAL_CATALOG_ITEMS: RentalCatalogItem[] = [
+  {
+    slug: "impressoras",
+    name: "Impressoras profissionais",
+    category: "Impressão",
+    filter: "impressao",
+    shortDescription:
+      "Impressão rápida de fotografias e materiais personalizados durante eventos e ativações.",
+    fullDescription:
+      "Equipamentos preparados para impressão rápida durante eventos, ativações e experiências. Podem compor fluxos de impressão instantânea, lembranças personalizadas e ativações com inteligência artificial. Modelos, quantidades e insumos são confirmados conforme a disponibilidade e o escopo do projeto.",
+    image: impressorasImg,
+    imageAlt:
+      "Impressora compacta sobre fundo neutro em enquadramento de catálogo",
+    uses: [
+      "Impressão instantânea",
+      "Experiências fotográficas",
+      "Lembranças personalizadas",
+      "Ativações com inteligência artificial",
+      "Impressão em eventos",
+    ],
+    featured: true,
+    illustrativeImage: true,
+    defaultFormOption: "Impressoras",
+  },
+  {
+    slug: "televisoes",
+    name: "Televisões e monitores",
+    category: "Exibição",
+    filter: "exibicao",
+    shortDescription:
+      "Telas para conteúdos audiovisuais, apresentações, exposições e experiências em diferentes ambientes.",
+    fullDescription:
+      "Telas para exibição de conteúdos audiovisuais, sinalização, apresentações, experiências interativas e ambientação de espaços. Utilizadas em estandes, exposições, eventos e distribuição para múltiplos pontos, conforme a configuração aprovada.",
+    image: televisoesImg,
+    imageAlt: "Monitor de tela plana centralizado em fundo neutro de estúdio",
+    uses: [
+      "Exibição de vídeos",
+      "Sinalização",
+      "Estandes",
+      "Exposições",
+      "Eventos",
+      "Distribuição para múltiplos pontos",
+    ],
+    featured: true,
+    illustrativeImage: true,
+    defaultFormOption: "Televisões",
+  },
+  {
+    slug: "totens",
+    name: "Totens tecnológicos",
+    category: "Interação",
+    filter: "interacao",
+    shortDescription:
+      "Estruturas preparadas para interfaces, cadastros, quizzes, captura de imagens e experiências interativas.",
+    fullDescription:
+      "Estruturas para receber interfaces interativas, cadastros, quizzes, inteligência artificial, captura de imagens, jogos e jornadas digitais. Configuração, conteúdo e integração são definidos junto do escopo de cada projeto.",
+    image: totensImg,
+    imageAlt: "Totem vertical com tela touch em fundo neutro de estúdio",
+    uses: [
+      "Ativações interativas",
+      "Inteligência artificial",
+      "Credenciamento",
+      "Pesquisas",
+      "Geração de conteúdo",
+      "Jornadas digitais",
+    ],
+    featured: true,
+    illustrativeImage: true,
+    defaultFormOption: "Totens",
+  },
+  {
+    slug: "computadores",
+    name: "Computadores e notebooks",
+    category: "Processamento",
+    filter: "processamento",
+    shortDescription:
+      "Equipamentos para processamento, operação, controle audiovisual e suporte de sistemas tecnológicos.",
+    fullDescription:
+      "Máquinas para operação, processamento de imagens, controle audiovisual, dashboards, apresentações e estações temporárias de trabalho. Especificações e volumes definidos conforme a operação técnica do projeto.",
+    image: computadoresImg,
+    imageAlt:
+      "Notebook aberto centralizado sobre fundo neutro em enquadramento de catálogo",
+    uses: [
+      "Operação de sistemas",
+      "Processamento de imagens",
+      "Controle audiovisual",
+      "Dashboards",
+      "Apresentações",
+      "Estações temporárias de trabalho",
+    ],
+    featured: true,
+    illustrativeImage: true,
+    defaultFormOption: "Computadores ou notebooks",
+  },
+  {
+    slug: "tablets",
+    name: "Tablets",
+    category: "Mobilidade",
+    filter: "mobilidade",
+    shortDescription:
+      "Dispositivos para formulários, quizzes, atendimento, credenciamento e interação com o público.",
+    fullDescription:
+      "Dispositivos móveis para cadastros, pesquisas, quizzes, recomendação de conteúdo, credenciamento e apoio a equipes em campo. Podem compor jornadas itinerantes ou pontos fixos de atendimento.",
+    image: tabletsImg,
+    imageAlt: "Tablet moderno centralizado sobre fundo neutro de estúdio",
+    uses: [
+      "Cadastros",
+      "Pesquisas",
+      "Quizzes",
+      "Recomendação de conteúdo",
+      "Credenciamento",
+      "Apoio a equipes",
+    ],
+    featured: false,
+    illustrativeImage: true,
+    defaultFormOption: "Tablets",
+  },
+  {
+    slug: "acessorios",
+    name: "Equipamentos e acessórios complementares",
+    category: "Acessórios",
+    filter: "acessorios",
+    shortDescription:
+      "Componentes que completam a estrutura tecnológica e ajudam a manter toda a operação conectada.",
+    fullDescription:
+      "Fones de ouvido, sistemas de distribuição de áudio, câmeras, roteadores, cabos, conexões, suportes e periféricos que apoiam a operação técnica das experiências. Composição definida conforme cada projeto.",
+    image: acessoriosImg,
+    imageAlt:
+      "Conjunto de acessórios de tecnologia — fones, cabos e adaptadores — em composição de estúdio",
+    uses: [
+      "Fones de ouvido",
+      "Sistemas de distribuição de áudio",
+      "Câmeras",
+      "Roteadores",
+      "Cabos e conexões",
+      "Suportes",
+      "Periféricos",
+    ],
+    featured: false,
+    illustrativeImage: true,
+    defaultFormOption: "Acessórios",
+  },
+];
+
+export const RENTAL_FILTERS: { slug: RentalFilterSlug; label: string }[] = [
+  { slug: "todos", label: "Todos" },
+  { slug: "impressao", label: "Impressão" },
+  { slug: "exibicao", label: "Exibição" },
+  { slug: "interacao", label: "Interação" },
+  { slug: "processamento", label: "Processamento" },
+  { slug: "mobilidade", label: "Mobilidade" },
+  { slug: "acessorios", label: "Acessórios" },
+];
