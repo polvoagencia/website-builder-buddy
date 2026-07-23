@@ -34,7 +34,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Engenharia de Presença, Sistemas e Aplicativos e Locação de Equipamentos Tecnológicos.",
+          "A FOHAT atua na criação de experiências tecnológicas, no desenvolvimento de sistemas e aplicativos e na locação de equipamentos para eventos, projetos e operações especiais.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },

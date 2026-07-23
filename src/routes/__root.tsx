@@ -78,27 +78,29 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "FOHAT | Engenharia de Presença" },
+      { title: "FOHAT | Tecnologia aplicada, do conceito à operação" },
       {
         name: "description",
         content:
-          "A FOHAT projeta experiências tecnológicas imersivas que reconectam pessoas ao mundo. Integramos tecnologia, IA, narrativa, espaço e participação humana.",
+          "A FOHAT atua na criação de experiências tecnológicas, no desenvolvimento de sistemas e aplicativos e na locação de equipamentos para eventos, projetos e operações especiais.",
       },
       { name: "author", content: "FOHAT" },
-      { property: "og:title", content: "FOHAT | Engenharia de Presença" },
+      { property: "og:title", content: "FOHAT | Tecnologia aplicada, do conceito à operação" },
       {
         property: "og:description",
         content:
-          "Criamos experiências tecnológicas imersivas que reconectam pessoas ao mundo. Marcas, cultura, eventos e espaços.",
+          "A FOHAT atua na criação de experiências tecnológicas, no desenvolvimento de sistemas e aplicativos e na locação de equipamentos para eventos, projetos e operações especiais.",
       },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "pt_BR" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "FOHAT | Engenharia de Presença" },
+      { name: "twitter:title", content: "FOHAT | Tecnologia aplicada, do conceito à operação" },
       {
         name: "twitter:description",
-        content: "Experiências tecnológicas imersivas para marcas, cultura, eventos e espaços.",
+        content: "A FOHAT atua na criação de experiências tecnológicas, no desenvolvimento de sistemas e aplicativos e na locação de equipamentos para eventos, projetos e operações especiais.",
       },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3e255c47-c79d-4938-8520-7a58cd0b4667/id-preview-ee5382a2--c62f4a9e-71a5-4d88-8a3e-3d2ed15b95af.lovable.app-1784818821446.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3e255c47-c79d-4938-8520-7a58cd0b4667/id-preview-ee5382a2--c62f4a9e-71a5-4d88-8a3e-3d2ed15b95af.lovable.app-1784818821446.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
