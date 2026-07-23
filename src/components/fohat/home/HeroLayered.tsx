@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Boxes, Cpu, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-
-import heroAsset from "@/assets/hero.jpg.asset.json";
-import portalAsset from "@/assets/portal.jpg.asset.json";
-import labAsset from "@/assets/lab.jpg.asset.json";
 
 import { ContactDialog } from "@/components/fohat/ContactDialog";
 import { SERVICES } from "@/data/fohat-services";
@@ -13,32 +9,30 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { cn } from "@/lib/utils";
 
 /**
- * Hero em camadas — três frentes comunicadas simultaneamente.
+ * Hero cinematográfica — modo "keynote".
  *
- * Estrutura:
- *  - Copy institucional à esquerda (título único da FOHAT).
- *  - À direita, três camadas (frentes) empilhadas em profundidade.
- *    A camada ativa avança, se ilumina e mostra sua mídia.
- *  - Controles acessíveis: tabs com role="tablist" + setas ← → e Home/End,
- *    reflete estado ativo com aria-selected e foco visível.
+ * Palco escuro em tela cheia com um "produto flutuante" à direita que troca
+ * conforme a frente selecionada. Camadas de luz (glows radiais), linha do
+ * horizonte, grid sutil e vidro (backdrop-blur) compõem a profundidade.
+ * Preserva identidade FOHAT: navy, blue e cyan como acento — sem neon roxo.
  *
- * motion/react é usado para transição coordenada de mídia (crossfade
- * + escala) e reordenação suave das camadas — interações que dependem
- * de layout coordenado. Micro-interações continuam em CSS.
+ * A/11y: tabs com role="tablist", setas ←/→, Home/End, aria-selected,
+ * foco visível e legendas persistentes. Reduced motion desliga transições
+ * de escala/opacidade e mantém o conteúdo estático.
  */
 
-type Layer = {
+type Front = {
   slug: string;
   index: number;
   eyebrow: string;
   title: string;
   short: string;
-  media: { src: string; alt: string };
-  accent: string;
   href: string;
+  icon: typeof Sparkles;
+  metrics: { label: string; value: string }[];
 };
 
-const LAYERS: Layer[] = [
+const FRONTS: Front[] = [
   {
     slug: "engenharia-de-presenca",
     index: 1,
@@ -46,12 +40,12 @@ const LAYERS: Layer[] = [
     title: "Engenharia de Presença",
     short:
       "Ativações, ambientes e experiências que integram tecnologia, narrativa e presença humana.",
-    media: {
-      src: portalAsset.url,
-      alt: "Experiência imersiva de Engenharia de Presença",
-    },
-    accent: "var(--color-cyan)",
     href: "/engenharia-de-presenca",
+    icon: Sparkles,
+    metrics: [
+      { label: "Territórios", value: "Marcas · Cultura · Eventos" },
+      { label: "Método", value: "F · O · H · A · T" },
+    ],
   },
   {
     slug: "sistemas-e-aplicativos",
@@ -59,12 +53,12 @@ const LAYERS: Layer[] = [
     eyebrow: "Produto e engenharia",
     title: "Sistemas e Aplicativos",
     short: "Software sob medida — interfaces, integrações, dashboards e inteligência aplicada.",
-    media: {
-      src: labAsset.url,
-      alt: "Equipe desenvolvendo sistemas e aplicativos",
-    },
-    accent: "var(--color-blue-2)",
     href: "/sistemas-e-aplicativos",
+    icon: Cpu,
+    metrics: [
+      { label: "Camadas", value: "Web · Mobile · API · IA" },
+      { label: "Entrega", value: "Discovery → operação" },
+    ],
   },
   {
     slug: "locacao-de-equipamentos",
@@ -73,199 +67,384 @@ const LAYERS: Layer[] = [
     title: "Locação de Equipamentos",
     short:
       "Infraestrutura tecnológica para eventos, projetos e operações — com suporte técnico e logística.",
-    media: {
-      src: heroAsset.url,
-      alt: "Equipamentos tecnológicos em operação",
-    },
-    accent: "var(--color-blue)",
     href: "/locacao-de-equipamentos",
+    icon: Boxes,
+    metrics: [
+      { label: "Escopo", value: "Vídeo · Áudio · Interação" },
+      { label: "Suporte", value: "Técnico + logística" },
+    ],
   },
 ];
 
 export function HeroLayered() {
   const [active, setActive] = useState(0);
   const reduce = useReducedMotion();
-  const activeLayer = LAYERS[active];
+  const front = FRONTS[active];
+  const Icon = front.icon;
 
-  // Encontra CTA da frente ativa a partir do arquivo centralizado
-  const activeCta = SERVICES.find((s) => s.slug === activeLayer.slug)?.cta ?? {
+  const activeCta = SERVICES.find((s) => s.slug === front.slug)?.cta ?? {
     label: "Saiba mais",
-    to: activeLayer.href,
+    to: front.href,
   };
 
   const onKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "ArrowRight") {
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") {
       e.preventDefault();
-      setActive((a) => (a + 1) % LAYERS.length);
-    } else if (e.key === "ArrowLeft") {
+      setActive((a) => (a + 1) % FRONTS.length);
+    } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
       e.preventDefault();
-      setActive((a) => (a - 1 + LAYERS.length) % LAYERS.length);
+      setActive((a) => (a - 1 + FRONTS.length) % FRONTS.length);
     } else if (e.key === "Home") {
       e.preventDefault();
       setActive(0);
     } else if (e.key === "End") {
       e.preventDefault();
-      setActive(LAYERS.length - 1);
+      setActive(FRONTS.length - 1);
     }
   };
 
   return (
     <section
       id="inicio"
-      className="fohat-hero-bg relative flex min-h-screen items-center overflow-hidden pb-24 pt-36 lg:pt-40"
+      className="relative isolate flex min-h-screen flex-col overflow-hidden bg-navy pt-32 text-white lg:pt-36"
     >
-      {/* Grid geométrico sutil */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-40"
-        style={{
-          backgroundImage:
-            "linear-gradient(30deg, transparent 0 48%, oklch(0.46 0.055 253 / 0.06) 49% 51%, transparent 52%), linear-gradient(150deg, transparent 0 48%, oklch(0.46 0.055 253 / 0.04) 49% 51%, transparent 52%)",
-          backgroundSize: "150px 150px",
-        }}
-      />
+      {/* ==== Camadas de luz cinematográficas ==== */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        {/* glow superior azul */}
+        <div
+          className="absolute -top-[20%] -left-[15%] h-[70%] w-[70%] rounded-full"
+          style={{
+            background: "radial-gradient(circle, oklch(0.46 0.09 253 / 0.55), transparent 65%)",
+            filter: "blur(120px)",
+          }}
+        />
+        {/* glow inferior cyan */}
+        <div
+          className="absolute top-[35%] -right-[10%] h-[65%] w-[65%] rounded-full"
+          style={{
+            background: "radial-gradient(circle, oklch(0.78 0.11 220 / 0.35), transparent 65%)",
+            filter: "blur(140px)",
+          }}
+        />
+        {/* mesh grid */}
+        <div
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage:
+              "linear-gradient(oklch(0.85 0.055 245) 1px, transparent 1px), linear-gradient(90deg, oklch(0.85 0.055 245) 1px, transparent 1px)",
+            backgroundSize: "72px 72px",
+            maskImage:
+              "radial-gradient(ellipse at 50% 40%, black 40%, transparent 80%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse at 50% 40%, black 40%, transparent 80%)",
+          }}
+        />
+        {/* linha do horizonte cyan */}
+        <div
+          className="absolute bottom-[18%] left-0 h-px w-full"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent, oklch(0.85 0.11 220 / 0.7), transparent)",
+            boxShadow: "0 0 24px oklch(0.85 0.11 220 / 0.5)",
+          }}
+        />
+        {/* lens flare horizontal */}
+        <div
+          className="absolute top-[22%] left-0 h-px w-full opacity-40"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent, oklch(0.85 0.055 245 / 0.6), transparent)",
+            filter: "blur(1.5px)",
+          }}
+        />
+      </div>
 
-      <div className="fohat-shell relative z-10 grid items-center gap-14 lg:grid-cols-[1fr_1.05fr] lg:gap-[70px]">
-        {/* Coluna esquerda — copy institucional */}
-        <div>
-          <span className="fohat-eyebrow">Tecnologia aplicada, do conceito à operação</span>
-          <h1 className="fohat-h1 mt-6 max-w-[900px]">
-            Tecnologia para criar presença, desenvolver soluções e colocar operações em
-            funcionamento.
-          </h1>
-          <p className="fohat-lead mt-7 max-w-[640px]">
-            Três frentes de contratação, uma única lógica de engenharia. A FOHAT integra
-            experiências, software e infraestrutura em projetos que acontecem de verdade — diante do
-            público.
-          </p>
-
-          <div className="mt-9 flex flex-wrap items-center gap-3">
-            <ContactDialog>
-              <button className="group inline-flex h-14 items-center gap-3 rounded-full bg-navy px-7 text-sm font-bold text-primary-foreground shadow-[var(--shadow-cta)] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-blue">
-                Conte sua ideia
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </button>
-            </ContactDialog>
-            <a
-              href="#frentes"
-              className="inline-flex h-14 items-center gap-2 rounded-full border border-navy/15 bg-white/70 px-7 text-sm font-bold text-navy backdrop-blur-md transition-colors hover:border-blue hover:text-blue"
+      {/* ==== Conteúdo ==== */}
+      <div className="fohat-shell relative z-10 flex flex-1 items-center py-10 lg:py-16">
+        <div className="grid w-full items-center gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
+          {/* Copy */}
+          <div>
+            <motion.div
+              initial={reduce ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 backdrop-blur-md"
             >
-              Conheça nossas frentes
-            </a>
-          </div>
-        </div>
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan opacity-70" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan" />
+              </span>
+              <span
+                className="fohat-mono text-[10px] font-bold uppercase tracking-[0.22em]"
+                style={{ color: "var(--color-cyan)" }}
+              >
+                Tecnologia aplicada · do conceito à operação
+              </span>
+            </motion.div>
 
-        {/* Coluna direita — três camadas */}
-        <div className="relative">
-          {/* Contorno geométrico decorativo */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-10 -top-6 h-72 w-72 rotate-[26deg] border border-blue/20 lg:h-[360px] lg:w-[360px]"
-            style={{ borderRadius: "40% 60% 50% 45%" }}
-          />
-
-          {/* Placa de mídia — recebe a camada ativa */}
-          <div className="fohat-image-frame relative aspect-[4/5] w-full max-w-[520px] overflow-hidden lg:ml-auto">
-            <AnimatePresence mode="popLayout" initial={false}>
-              <motion.img
-                key={activeLayer.slug}
-                src={activeLayer.media.src}
-                alt={activeLayer.media.alt}
-                className="absolute inset-0 h-full w-full object-cover"
-                style={{ filter: "saturate(0.82) contrast(1.06)" }}
-                initial={reduce ? { opacity: 1 } : { opacity: 0, scale: 1.06 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 1.02 }}
-                transition={{
-                  duration: reduce ? 0 : 0.6,
-                  ease: [0.16, 1, 0.3, 1],
+            <motion.h1
+              initial={reduce ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="fohat-h1 mt-7 max-w-[820px] text-white [font-size:clamp(2.6rem,5.4vw,5.5rem)] [line-height:0.95]"
+            >
+              Tecnologia para criar{" "}
+              <span
+                className="italic"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(180deg, #ffffff 0%, oklch(0.85 0.055 245) 60%, oklch(0.65 0.09 240 / 0.65) 100%)",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  color: "transparent",
                 }}
-                loading="eager"
-                fetchPriority="high"
-              />
-            </AnimatePresence>
+              >
+                presença
+              </span>
+              , desenvolver soluções e colocar operações em funcionamento.
+            </motion.h1>
+
+            <motion.p
+              initial={reduce ? false : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-7 max-w-[560px] text-lg text-white/60 lg:text-xl"
+            >
+              Três frentes de contratação, uma única lógica de engenharia. A FOHAT integra
+              experiências, software e infraestrutura em projetos que acontecem de verdade — diante
+              do público.
+            </motion.p>
+
+            <motion.div
+              initial={reduce ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-10 flex flex-wrap items-center gap-3"
+            >
+              <ContactDialog>
+                <button className="group relative inline-flex h-14 items-center gap-3 overflow-hidden rounded-full bg-white px-7 text-sm font-bold text-navy shadow-[0_14px_44px_oklch(0.78_0.11_220_/_0.35)] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-cyan">
+                  Conte sua ideia
+                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </button>
+              </ContactDialog>
+              <a
+                href="#frentes"
+                className="inline-flex h-14 items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-7 text-sm font-bold text-white backdrop-blur-md transition-colors hover:border-cyan hover:text-cyan"
+              >
+                Conheça nossas frentes
+              </a>
+            </motion.div>
+          </div>
+
+          {/* Palco — "produto flutuante" */}
+          <div className="relative mx-auto flex h-[520px] w-full max-w-[520px] items-center justify-center lg:h-[600px]">
+            {/* halo de fundo */}
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0"
               style={{
                 background:
-                  "linear-gradient(180deg, transparent 45%, oklch(0.22 0.023 250 / 0.78))",
+                  "radial-gradient(ellipse at 50% 50%, oklch(0.78 0.11 220 / 0.35), transparent 65%)",
+                filter: "blur(40px)",
               }}
             />
-            <div aria-hidden className="fohat-scanline" style={{ top: "10%" }} />
+            {/* placa traseira inclinada */}
+            <div
+              aria-hidden
+              className="absolute h-[420px] w-[280px] rotate-[10deg] rounded-[40px] border border-white/10 backdrop-blur-2xl lg:h-[500px] lg:w-[320px]"
+              style={{
+                background:
+                  "linear-gradient(155deg, oklch(0.46 0.055 253 / 0.28), oklch(0.85 0.11 220 / 0.05))",
+              }}
+            />
 
-            {/* Legenda da camada ativa */}
-            <div className="absolute inset-x-6 bottom-6 text-white">
-              <span
-                className="fohat-mono text-[10px] uppercase tracking-[0.22em]"
-                style={{ color: activeLayer.accent }}
+            {/* painel principal (glass) */}
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={front.slug}
+                initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={reduce ? { opacity: 0 } : { opacity: 0, y: -8, scale: 0.98 }}
+                transition={{ duration: reduce ? 0 : 0.55, ease: [0.16, 1, 0.3, 1] }}
+                className="relative flex h-[440px] w-[290px] flex-col overflow-hidden rounded-[32px] border border-white/15 p-6 shadow-[0_40px_120px_oklch(0.85_0.11_220_/_0.28)] backdrop-blur-2xl lg:h-[520px] lg:w-[340px]"
+                style={{
+                  background:
+                    "linear-gradient(180deg, oklch(0.22 0.03 250 / 0.85), oklch(0.16 0.03 250 / 0.9))",
+                }}
               >
-                Frente {String(activeLayer.index).padStart(2, "0")} · {activeLayer.eyebrow}
-              </span>
-              <div className="mt-2 text-2xl font-bold leading-tight tracking-tight">
-                {activeLayer.title}
-              </div>
-              <p className="mt-2 max-w-[380px] text-sm text-[oklch(0.9_0.015_250)]">
-                {activeLayer.short}
-              </p>
-              <Link
-                to={activeCta.to}
-                hash={activeCta.hash}
-                className="group mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-white/90 hover:text-cyan"
-              >
-                {activeCta.label}
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Tabs de camadas — acessível */}
-          <div
-            role="tablist"
-            aria-label="Frentes FOHAT"
-            aria-orientation="horizontal"
-            onKeyDown={onKeyDown}
-            className="mt-5 grid grid-cols-3 gap-2 lg:absolute lg:-left-6 lg:top-1/2 lg:mt-0 lg:w-14 lg:-translate-y-1/2 lg:grid-cols-1 lg:gap-3"
-          >
-            {LAYERS.map((l, i) => {
-              const isActive = i === active;
-              return (
-                <button
-                  key={l.slug}
-                  role="tab"
-                  id={`hero-tab-${l.slug}`}
-                  aria-selected={isActive}
-                  aria-controls="hero-panel"
-                  tabIndex={isActive ? 0 : -1}
-                  onClick={() => setActive(i)}
-                  className={cn(
-                    "group relative flex min-h-[52px] items-center gap-2 rounded-full border px-3 py-2 text-left backdrop-blur-md transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-mist",
-                    isActive
-                      ? "border-navy/30 bg-white text-navy shadow-[var(--shadow-card)]"
-                      : "border-navy/12 bg-white/60 text-steel hover:border-navy/25 hover:text-navy",
-                  )}
-                >
+                {/* topo — chip da frente */}
+                <div className="flex items-center justify-between">
                   <span
-                    className={cn(
-                      "fohat-mono grid h-8 w-8 shrink-0 place-items-center rounded-full text-[10px] font-bold tabular-nums transition-colors",
-                      isActive ? "bg-navy text-white" : "bg-mist text-steel group-hover:bg-ice",
-                    )}
+                    className="fohat-mono text-[10px] font-bold uppercase tracking-[0.24em]"
+                    style={{ color: "var(--color-cyan)" }}
                   >
-                    {String(l.index).padStart(2, "0")}
+                    {String(front.index).padStart(2, "0")} / {String(FRONTS.length).padStart(2, "0")}
                   </span>
-                  <span className="fohat-mono truncate text-[10px] uppercase tracking-[0.16em] lg:hidden">
-                    {l.title.split(" ")[0]}
+                  <span className="fohat-mono text-[10px] uppercase tracking-[0.24em] text-white/40">
+                    {front.eyebrow}
                   </span>
-                </button>
-              );
-            })}
+                </div>
+
+                {/* visor com pulso */}
+                <div className="relative mt-5 h-40 w-full overflow-hidden rounded-2xl border border-cyan/20 bg-white/[0.03]">
+                  <div
+                    aria-hidden
+                    className="absolute inset-0"
+                    style={{
+                      background:
+                        "radial-gradient(circle at 50% 55%, oklch(0.85 0.11 220 / 0.35), transparent 65%)",
+                    }}
+                  />
+                  <div className="absolute inset-0 grid place-items-center">
+                    <div className="grid h-16 w-16 place-items-center rounded-2xl border border-white/20 bg-white/[0.06] backdrop-blur-xl">
+                      <Icon className="h-7 w-7 text-cyan" strokeWidth={1.4} aria-hidden />
+                    </div>
+                  </div>
+                  {/* varreduras finas */}
+                  <div
+                    aria-hidden
+                    className="absolute inset-x-0 top-[30%] h-px"
+                    style={{
+                      background:
+                        "linear-gradient(90deg, transparent, oklch(0.85 0.11 220 / 0.6), transparent)",
+                    }}
+                  />
+                  <div
+                    aria-hidden
+                    className="absolute inset-x-0 top-[70%] h-px opacity-60"
+                    style={{
+                      background:
+                        "linear-gradient(90deg, transparent, oklch(0.85 0.055 245 / 0.5), transparent)",
+                    }}
+                  />
+                </div>
+
+                {/* título e descrição */}
+                <h2 className="mt-5 text-xl font-bold leading-tight tracking-tight text-white lg:text-2xl">
+                  {front.title}
+                </h2>
+                <p className="mt-2 text-sm text-white/55">{front.short}</p>
+
+                {/* métricas */}
+                <div className="mt-5 space-y-2">
+                  {front.metrics.map((m) => (
+                    <div
+                      key={m.label}
+                      className="flex items-center justify-between border-t border-white/8 pt-2 first:border-t-0 first:pt-0"
+                    >
+                      <span className="fohat-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
+                        {m.label}
+                      </span>
+                      <span className="text-[11px] font-semibold text-white/85">{m.value}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTA da frente */}
+                <div className="mt-auto pt-6">
+                  <Link
+                    to={activeCta.to}
+                    hash={activeCta.hash}
+                    className="group flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-cyan/30 bg-cyan/10 text-sm font-bold text-cyan transition-colors hover:bg-cyan/20"
+                  >
+                    {activeCta.label}
+                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </Link>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* card lateral flutuante */}
+            <div
+              aria-hidden
+              className="absolute -right-4 top-16 hidden h-24 w-24 rotate-[-8deg] items-center justify-center rounded-2xl border border-white/25 bg-white/[0.06] shadow-2xl backdrop-blur-xl lg:flex"
+            >
+              <div className="h-2 w-8 rounded-full bg-cyan/70" />
+            </div>
+            <div
+              aria-hidden
+              className="absolute -left-6 bottom-16 hidden h-16 w-16 rotate-[12deg] items-center justify-center rounded-xl border border-white/20 bg-white/[0.04] backdrop-blur-xl lg:flex"
+            >
+              <div className="h-1.5 w-6 rounded-full bg-white/60" />
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="fohat-mono absolute bottom-6 left-1/2 -translate-x-1/2 text-[11px] uppercase tracking-[0.24em] text-steel">
-        Conheça as três frentes ↓
+      {/* ==== Rodapé da hero — tablist de frentes ==== */}
+      <div className="fohat-shell relative z-10 pb-10">
+        <div
+          role="tablist"
+          aria-label="Frentes FOHAT"
+          aria-orientation="horizontal"
+          onKeyDown={onKeyDown}
+          className="grid gap-3 border-t border-white/10 pt-6 md:grid-cols-3"
+        >
+          {FRONTS.map((f, i) => {
+            const isActive = i === active;
+            return (
+              <button
+                key={f.slug}
+                role="tab"
+                id={`hero-tab-${f.slug}`}
+                aria-selected={isActive}
+                aria-controls="hero-panel"
+                tabIndex={isActive ? 0 : -1}
+                onClick={() => setActive(i)}
+                onMouseEnter={() => setActive(i)}
+                className={cn(
+                  "group relative flex items-start gap-4 rounded-2xl border px-4 py-3 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-navy",
+                  isActive
+                    ? "border-cyan/40 bg-white/[0.06] backdrop-blur-md"
+                    : "border-white/8 bg-transparent hover:border-white/20 hover:bg-white/[0.03]",
+                )}
+              >
+                <span
+                  className={cn(
+                    "fohat-mono mt-0.5 text-[10px] font-bold uppercase tracking-[0.22em] transition-colors",
+                    isActive ? "text-cyan" : "text-white/40 group-hover:text-white/70",
+                  )}
+                >
+                  {String(f.index).padStart(2, "0")}
+                </span>
+                <span className="flex-1">
+                  <span
+                    className={cn(
+                      "block text-sm font-bold tracking-tight transition-colors",
+                      isActive ? "text-white" : "text-white/70 group-hover:text-white",
+                    )}
+                  >
+                    {f.title}
+                  </span>
+                  <span className="mt-0.5 block text-xs text-white/45">{f.eyebrow}</span>
+                </span>
+                <span
+                  aria-hidden
+                  className={cn(
+                    "mt-1 h-1.5 w-1.5 rounded-full transition-all",
+                    isActive ? "bg-cyan shadow-[0_0_12px_var(--color-cyan)]" : "bg-white/20",
+                  )}
+                />
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="fohat-mono mt-6 flex items-center justify-center gap-2 text-[10px] uppercase tracking-[0.28em] text-white/40">
+          <span>Role para explorar</span>
+          <span aria-hidden className="inline-block h-4 w-px animate-pulse bg-white/40" />
+        </div>
       </div>
+
+      {/* Transição suave para a seção clara seguinte */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-32"
+        style={{
+          background:
+            "linear-gradient(180deg, transparent, oklch(0.22 0.023 250 / 0.6) 40%, var(--color-mist))",
+        }}
+      />
     </section>
   );
 }
