@@ -181,7 +181,7 @@ export function CinematicHero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.75 }}
         transition={{ duration: 0.8, delay: 1.4 }}
-        className="fohat-mono absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 text-[10px] uppercase tracking-[0.28em] text-white/50"
+        className="fohat-mono absolute bottom-16 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 text-[10px] uppercase tracking-[0.28em] text-white/50 sm:bottom-20"
         style={{ opacity: reduce ? 0.5 : contentOpacity }}
       >
         <span>Role para começar</span>
@@ -192,13 +192,13 @@ export function CinematicHero() {
         />
       </motion.div>
 
-      {/* Bottom gradient handoff to the next (lighter) chapter */}
+      {/* Bottom gradient handoff to the next (lighter) chapter — soft, below the scroll hint */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-40"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-10"
         style={{
           background:
-            "linear-gradient(180deg, transparent, oklch(0.22 0.023 250 / 0.6) 40%, var(--color-mist))",
+            "linear-gradient(180deg, transparent 0%, var(--color-mist) 100%)",
         }}
       />
     </section>

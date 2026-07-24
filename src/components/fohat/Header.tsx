@@ -1,7 +1,8 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
-import logoAsset from "@/assets/logo-fohat.png.asset.json";
+import logoLight from "@/assets/logo-fohat-light-bg.png.asset.json";
+import logoDark from "@/assets/logo-fohat-dark-bg.png.asset.json";
 import { ContactDialog } from "./ContactDialog";
 import { cn } from "@/lib/utils";
 
@@ -110,8 +111,9 @@ export function Header() {
   return (
     <header
       data-scrolled={scrolled ? "true" : "false"}
+      data-theme={scrolled ? "light" : "dark"}
       className={cn(
-        "fohat-header fixed inset-x-0 top-0 z-50 transition-[padding,background-color,border-color,backdrop-filter] duration-[var(--motion-base)] ease-[var(--ease-fohat)]",
+        "fohat-header group/header fixed inset-x-0 top-0 z-50 transition-[padding,background-color,border-color,backdrop-filter] duration-[var(--motion-base)] ease-[var(--ease-fohat)]",
         scrolled
           ? "border-b border-line/70 bg-mist/80 py-2 backdrop-blur-xl"
           : "border-b border-transparent bg-transparent py-4",
@@ -121,7 +123,7 @@ export function Header() {
         <nav aria-label="Navegação principal" className="flex items-center justify-between gap-6">
           <Link to="/" aria-label="FOHAT — início" className="shrink-0">
             <img
-              src={logoAsset.url}
+              src={scrolled ? logoLight.url : logoDark.url}
               alt="FOHAT — Tecnologia Aplicada, Serviços e Eventos"
               className="h-10 w-auto max-w-[40vw] object-contain md:h-11"
             />
@@ -129,7 +131,10 @@ export function Header() {
 
           <div
             ref={desktopNavRef}
-            className="hidden items-center gap-1 text-sm font-semibold lg:flex"
+            className={cn(
+              "hidden items-center gap-1 text-sm font-semibold lg:flex",
+              scrolled ? "text-navy" : "text-white",
+            )}
             onMouseLeave={() => setOpenMega(null)}
           >
             {NAV.map((item) => {
