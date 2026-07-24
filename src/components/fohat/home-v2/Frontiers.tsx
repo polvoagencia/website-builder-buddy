@@ -62,7 +62,7 @@ export function Frontiers() {
         <div
           ref={stageRef}
           className="relative"
-          style={{ height: `${total * 120}vh` }}
+          style={{ height: `${total * 95}vh` }}
         >
           <div className="sticky top-0 flex h-[100svh] items-center overflow-hidden">
             <StageBackground
@@ -98,7 +98,16 @@ export function Frontiers() {
 
 function SectionHeader() {
   return (
-    <section className="bg-navy pb-24 pt-24 text-white lg:pt-32">
+    <section className="relative bg-navy pb-16 pt-20 text-white lg:pb-20 lg:pt-24">
+      {/* Soft top bridge from mist (Numbers) into navy */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-24 -translate-y-full"
+        style={{
+          background:
+            "linear-gradient(180deg, transparent 0%, color-mix(in oklab, var(--color-navy) 45%, transparent) 60%, var(--color-navy) 100%)",
+        }}
+      />
       <div className="fohat-shell">
         <div className="max-w-[860px]">
           <span className="fohat-eyebrow" style={{ color: "var(--color-cyan)" }}>

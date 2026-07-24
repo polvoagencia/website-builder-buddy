@@ -49,7 +49,7 @@ export function Belief() {
     <motion.section
       id="crenca"
       ref={ref}
-      className="relative flex min-h-[130vh] flex-col justify-center overflow-hidden px-6 py-32"
+      className="relative flex min-h-[105vh] flex-col justify-center overflow-hidden px-6 py-24 lg:py-28"
       style={{ backgroundColor: reduce ? "var(--color-mist)" : bg }}
     >
       {/* Subtle noise/lines behind the type */}

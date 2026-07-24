@@ -128,12 +128,12 @@ export function FinalCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-15%" }}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-12 flex flex-wrap items-center justify-center gap-4"
+            className="mt-12 flex flex-col items-center gap-8"
           >
             <MagneticCTA />
             <a
               href="#inicio"
-              className="fohat-mono inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.28em] text-white/50 transition-colors hover:text-cyan"
+              className="fohat-mono inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.28em] text-white/40 transition-colors hover:text-cyan"
             >
               ↑ Voltar ao topo
             </a>

@@ -43,11 +43,20 @@ export function Partners() {
     <section
       id="parceiros"
       ref={ref}
-      className="relative overflow-hidden bg-mist py-24 lg:py-32"
+      className="relative overflow-hidden bg-mist py-20 lg:py-24"
     >
       <div
         aria-hidden
         className="fohat-grid-bg pointer-events-none absolute inset-0 opacity-60"
+      />
+      {/* Bottom bridge — soft mist→navy handoff into FinalCTA */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-24 translate-y-1/2"
+        style={{
+          background:
+            "linear-gradient(180deg, transparent 0%, color-mix(in oklab, var(--color-navy) 55%, transparent) 55%, var(--color-navy) 100%)",
+        }}
       />
 
       <div className="fohat-shell relative grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center">

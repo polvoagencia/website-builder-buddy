@@ -41,7 +41,7 @@ export function Vitrine() {
   return (
     <section id="locacao" className="relative bg-mist">
       {/* Header block */}
-      <div className="fohat-shell pb-14 pt-24 lg:pt-32">
+      <div className="fohat-shell pb-10 pt-16 lg:pb-12 lg:pt-20">
         <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <span className="fohat-eyebrow">Frente 03 · Vitrine</span>
@@ -60,7 +60,7 @@ export function Vitrine() {
       <div
         ref={wrapperRef}
         className="relative hidden lg:block"
-        style={{ height: `${total * 55}vh` }}
+        style={{ height: `${total * 42}vh` }}
       >
         <div className="sticky top-0 flex h-[100svh] items-center overflow-hidden">
           <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-mist to-transparent" />
