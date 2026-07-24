@@ -5,6 +5,9 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { ContactDialog } from "@/components/fohat/ContactDialog";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { Magnetic } from "@/components/fohat/home-v2/primitives/Magnetic";
+import { MatrixRain } from "@/components/fohat/home-v2/primitives/MatrixRain";
+
+
 
 
 /**
