@@ -35,12 +35,13 @@ export function Belief() {
   );
   const textColor = useTransform(
     scrollYProgress,
-    [0, 0.4, 0.55, 1],
+    [0, 0.38, 0.48, 0.58, 1],
     [
       "oklch(0.98 0 0)",
-      "oklch(0.96 0 0)",
-      "oklch(0.22 0.023 250)",
-      "oklch(0.22 0.023 250)",
+      "oklch(0.96 0.006 250)",
+      "oklch(0.52 0.055 247)",
+      "oklch(0.24 0.035 250)",
+      "oklch(0.24 0.035 250)",
     ],
   );
 
