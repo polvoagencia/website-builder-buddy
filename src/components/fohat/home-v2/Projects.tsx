@@ -177,19 +177,24 @@ export function Projects() {
 
         {/* CTAs */}
         <div className="mt-12 flex flex-wrap gap-3">
-          <Link
-            to="/engenharia-de-presenca/projetos"
-            className="group inline-flex h-13 items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-navy transition-transform hover:-translate-y-0.5 hover:bg-cyan"
-          >
-            Conheça nossos projetos
-            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </Link>
-          <ContactDialog>
-            <button className="group inline-flex h-13 items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-6 py-3 text-sm font-bold text-white backdrop-blur-md transition-colors hover:border-cyan hover:text-cyan">
-              Conte sua ideia
+          <Magnetic radius={80} strength={0.3}>
+            <Link
+              to="/engenharia-de-presenca/projetos"
+              className="group inline-flex h-13 items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-navy transition-colors hover:bg-cyan"
+            >
+              Conheça nossos projetos
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </button>
-          </ContactDialog>
+            </Link>
+          </Magnetic>
+          <Magnetic radius={70} strength={0.25} glow={false}>
+            <ContactDialog>
+              <button className="group inline-flex h-13 items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-6 py-3 text-sm font-bold text-white backdrop-blur-md transition-colors hover:border-cyan hover:text-cyan">
+                Conte sua ideia
+                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </button>
+            </ContactDialog>
+          </Magnetic>
+
         </div>
       </div>
     </section>
