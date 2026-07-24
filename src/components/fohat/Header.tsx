@@ -131,7 +131,10 @@ export function Header() {
 
           <div
             ref={desktopNavRef}
-            className="hidden items-center gap-1 text-sm font-semibold lg:flex"
+            className={cn(
+              "hidden items-center gap-1 text-sm font-semibold lg:flex",
+              scrolled ? "text-navy" : "text-white",
+            )}
             onMouseLeave={() => setOpenMega(null)}
           >
             {NAV.map((item) => {
