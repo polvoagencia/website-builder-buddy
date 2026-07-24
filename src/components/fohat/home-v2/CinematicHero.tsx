@@ -4,6 +4,8 @@ import { motion, useScroll, useTransform } from "motion/react";
 
 import { ContactDialog } from "@/components/fohat/ContactDialog";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { Magnetic } from "@/components/fohat/home-v2/primitives/Magnetic";
+
 
 /**
  * Chapter 1 — Cold open.
@@ -160,18 +162,23 @@ export function CinematicHero() {
           transition={{ duration: 0.8, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-wrap items-center justify-center gap-3"
         >
-          <ContactDialog>
-            <button className="group relative inline-flex h-14 items-center gap-3 overflow-hidden rounded-full bg-white px-8 text-sm font-bold text-navy shadow-[0_18px_48px_oklch(0.78_0.11_220_/_0.35)] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-cyan">
-              Conte sua ideia
-              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </button>
-          </ContactDialog>
-          <a
-            href="#frentes"
-            className="inline-flex h-14 items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-8 text-sm font-bold text-white backdrop-blur-md transition-colors hover:border-cyan hover:text-cyan"
-          >
-            Conheça as frentes
-          </a>
+          <Magnetic radius={80} strength={0.3}>
+            <ContactDialog>
+              <button className="group relative inline-flex h-14 items-center gap-3 overflow-hidden rounded-full bg-white px-8 text-sm font-bold text-navy shadow-[0_18px_48px_oklch(0.78_0.11_220_/_0.35)] transition-colors hover:bg-cyan">
+                Conte sua ideia
+                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </button>
+            </ContactDialog>
+          </Magnetic>
+          <Magnetic radius={70} strength={0.25} glow={false}>
+            <a
+              href="#frentes"
+              className="inline-flex h-14 items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-8 text-sm font-bold text-white backdrop-blur-md transition-colors hover:border-cyan hover:text-cyan"
+            >
+              Conheça as frentes
+            </a>
+          </Magnetic>
+
         </motion.div>
       </motion.div>
 
