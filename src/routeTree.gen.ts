@@ -9,49 +9,29 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as EngenhariaDePresencaRouteImport } from './routes/engenharia-de-presenca'
-import { Route as ExperienciasRouteImport } from './routes/experiencias'
-import { Route as LocacaoDeEquipamentosRouteImport } from './routes/locacao-de-equipamentos'
-import { Route as ParceirosRouteImport } from './routes/parceiros'
-import { Route as SistemasEAplicativosRouteImport } from './routes/sistemas-e-aplicativos'
 import { Route as TecnologiaRouteImport } from './routes/tecnologia'
-import { Route as EngenhariaDePresencaIndexRouteImport } from './routes/engenharia-de-presenca.index'
-import { Route as EngenhariaDePresencaCulturaRouteImport } from './routes/engenharia-de-presenca.cultura'
-import { Route as EngenhariaDePresencaEventosEEspacosRouteImport } from './routes/engenharia-de-presenca.eventos-e-espacos'
-import { Route as EngenhariaDePresencaMarcasRouteImport } from './routes/engenharia-de-presenca.marcas'
-import { Route as ExperienciasIndexRouteImport } from './routes/experiencias.index'
-import { Route as ExperienciasCulturaRouteImport } from './routes/experiencias.cultura'
-import { Route as ExperienciasEventosRouteImport } from './routes/experiencias.eventos'
-import { Route as ExperienciasMarcasRouteImport } from './routes/experiencias.marcas'
+import { Route as SistemasEAplicativosRouteImport } from './routes/sistemas-e-aplicativos'
+import { Route as ParceirosRouteImport } from './routes/parceiros'
+import { Route as LocacaoDeEquipamentosRouteImport } from './routes/locacao-de-equipamentos'
+import { Route as ExperienciasRouteImport } from './routes/experiencias'
+import { Route as EngenhariaDePresencaRouteImport } from './routes/engenharia-de-presenca'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProjetosIndexRouteImport } from './routes/projetos.index'
+import { Route as ExperienciasIndexRouteImport } from './routes/experiencias.index'
+import { Route as EngenhariaDePresencaIndexRouteImport } from './routes/engenharia-de-presenca.index'
 import { Route as ProjetosSlugRouteImport } from './routes/projetos.$slug'
+import { Route as ExperienciasMarcasRouteImport } from './routes/experiencias.marcas'
+import { Route as ExperienciasEventosRouteImport } from './routes/experiencias.eventos'
+import { Route as ExperienciasCulturaRouteImport } from './routes/experiencias.cultura'
+import { Route as EngenhariaDePresencaMarcasRouteImport } from './routes/engenharia-de-presenca.marcas'
+import { Route as EngenhariaDePresencaEventosEEspacosRouteImport } from './routes/engenharia-de-presenca.eventos-e-espacos'
+import { Route as EngenhariaDePresencaCulturaRouteImport } from './routes/engenharia-de-presenca.cultura'
 import { Route as EngenhariaDePresencaProjetosIndexRouteImport } from './routes/engenharia-de-presenca.projetos.index'
 import { Route as EngenhariaDePresencaProjetosSlugRouteImport } from './routes/engenharia-de-presenca.projetos.$slug'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EngenhariaDePresencaRoute = EngenhariaDePresencaRouteImport.update({
-  id: '/engenharia-de-presenca',
-  path: '/engenharia-de-presenca',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ExperienciasRoute = ExperienciasRouteImport.update({
-  id: '/experiencias',
-  path: '/experiencias',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LocacaoDeEquipamentosRoute = LocacaoDeEquipamentosRouteImport.update({
-  id: '/locacao-de-equipamentos',
-  path: '/locacao-de-equipamentos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ParceirosRoute = ParceirosRouteImport.update({
-  id: '/parceiros',
-  path: '/parceiros',
+const TecnologiaRoute = TecnologiaRouteImport.update({
+  id: '/tecnologia',
+  path: '/tecnologia',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SistemasEAplicativosRoute = SistemasEAplicativosRouteImport.update({
@@ -59,10 +39,40 @@ const SistemasEAplicativosRoute = SistemasEAplicativosRouteImport.update({
   path: '/sistemas-e-aplicativos',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TecnologiaRoute = TecnologiaRouteImport.update({
-  id: '/tecnologia',
-  path: '/tecnologia',
+const ParceirosRoute = ParceirosRouteImport.update({
+  id: '/parceiros',
+  path: '/parceiros',
   getParentRoute: () => rootRouteImport,
+} as any)
+const LocacaoDeEquipamentosRoute = LocacaoDeEquipamentosRouteImport.update({
+  id: '/locacao-de-equipamentos',
+  path: '/locacao-de-equipamentos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExperienciasRoute = ExperienciasRouteImport.update({
+  id: '/experiencias',
+  path: '/experiencias',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EngenhariaDePresencaRoute = EngenhariaDePresencaRouteImport.update({
+  id: '/engenharia-de-presenca',
+  path: '/engenharia-de-presenca',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjetosIndexRoute = ProjetosIndexRouteImport.update({
+  id: '/projetos/',
+  path: '/projetos/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExperienciasIndexRoute = ExperienciasIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ExperienciasRoute,
 } as any)
 const EngenhariaDePresencaIndexRoute =
   EngenhariaDePresencaIndexRouteImport.update({
@@ -70,10 +80,30 @@ const EngenhariaDePresencaIndexRoute =
     path: '/',
     getParentRoute: () => EngenhariaDePresencaRoute,
   } as any)
-const EngenhariaDePresencaCulturaRoute =
-  EngenhariaDePresencaCulturaRouteImport.update({
-    id: '/cultura',
-    path: '/cultura',
+const ProjetosSlugRoute = ProjetosSlugRouteImport.update({
+  id: '/projetos/$slug',
+  path: '/projetos/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExperienciasMarcasRoute = ExperienciasMarcasRouteImport.update({
+  id: '/marcas',
+  path: '/marcas',
+  getParentRoute: () => ExperienciasRoute,
+} as any)
+const ExperienciasEventosRoute = ExperienciasEventosRouteImport.update({
+  id: '/eventos',
+  path: '/eventos',
+  getParentRoute: () => ExperienciasRoute,
+} as any)
+const ExperienciasCulturaRoute = ExperienciasCulturaRouteImport.update({
+  id: '/cultura',
+  path: '/cultura',
+  getParentRoute: () => ExperienciasRoute,
+} as any)
+const EngenhariaDePresencaMarcasRoute =
+  EngenhariaDePresencaMarcasRouteImport.update({
+    id: '/marcas',
+    path: '/marcas',
     getParentRoute: () => EngenhariaDePresencaRoute,
   } as any)
 const EngenhariaDePresencaEventosEEspacosRoute =
@@ -82,42 +112,12 @@ const EngenhariaDePresencaEventosEEspacosRoute =
     path: '/eventos-e-espacos',
     getParentRoute: () => EngenhariaDePresencaRoute,
   } as any)
-const EngenhariaDePresencaMarcasRoute =
-  EngenhariaDePresencaMarcasRouteImport.update({
-    id: '/marcas',
-    path: '/marcas',
+const EngenhariaDePresencaCulturaRoute =
+  EngenhariaDePresencaCulturaRouteImport.update({
+    id: '/cultura',
+    path: '/cultura',
     getParentRoute: () => EngenhariaDePresencaRoute,
   } as any)
-const ExperienciasIndexRoute = ExperienciasIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => ExperienciasRoute,
-} as any)
-const ExperienciasCulturaRoute = ExperienciasCulturaRouteImport.update({
-  id: '/cultura',
-  path: '/cultura',
-  getParentRoute: () => ExperienciasRoute,
-} as any)
-const ExperienciasEventosRoute = ExperienciasEventosRouteImport.update({
-  id: '/eventos',
-  path: '/eventos',
-  getParentRoute: () => ExperienciasRoute,
-} as any)
-const ExperienciasMarcasRoute = ExperienciasMarcasRouteImport.update({
-  id: '/marcas',
-  path: '/marcas',
-  getParentRoute: () => ExperienciasRoute,
-} as any)
-const ProjetosIndexRoute = ProjetosIndexRouteImport.update({
-  id: '/projetos/',
-  path: '/projetos/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProjetosSlugRoute = ProjetosSlugRouteImport.update({
-  id: '/projetos/$slug',
-  path: '/projetos/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const EngenhariaDePresencaProjetosIndexRoute =
   EngenhariaDePresencaProjetosIndexRouteImport.update({
     id: '/projetos/',
@@ -271,39 +271,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/engenharia-de-presenca': {
-      id: '/engenharia-de-presenca'
-      path: '/engenharia-de-presenca'
-      fullPath: '/engenharia-de-presenca'
-      preLoaderRoute: typeof EngenhariaDePresencaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/experiencias': {
-      id: '/experiencias'
-      path: '/experiencias'
-      fullPath: '/experiencias'
-      preLoaderRoute: typeof ExperienciasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/locacao-de-equipamentos': {
-      id: '/locacao-de-equipamentos'
-      path: '/locacao-de-equipamentos'
-      fullPath: '/locacao-de-equipamentos'
-      preLoaderRoute: typeof LocacaoDeEquipamentosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/parceiros': {
-      id: '/parceiros'
-      path: '/parceiros'
-      fullPath: '/parceiros'
-      preLoaderRoute: typeof ParceirosRouteImport
+    '/tecnologia': {
+      id: '/tecnologia'
+      path: '/tecnologia'
+      fullPath: '/tecnologia'
+      preLoaderRoute: typeof TecnologiaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sistemas-e-aplicativos': {
@@ -313,40 +285,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SistemasEAplicativosRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/tecnologia': {
-      id: '/tecnologia'
-      path: '/tecnologia'
-      fullPath: '/tecnologia'
-      preLoaderRoute: typeof TecnologiaRouteImport
+    '/parceiros': {
+      id: '/parceiros'
+      path: '/parceiros'
+      fullPath: '/parceiros'
+      preLoaderRoute: typeof ParceirosRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/engenharia-de-presenca/': {
-      id: '/engenharia-de-presenca/'
+    '/locacao-de-equipamentos': {
+      id: '/locacao-de-equipamentos'
+      path: '/locacao-de-equipamentos'
+      fullPath: '/locacao-de-equipamentos'
+      preLoaderRoute: typeof LocacaoDeEquipamentosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/experiencias': {
+      id: '/experiencias'
+      path: '/experiencias'
+      fullPath: '/experiencias'
+      preLoaderRoute: typeof ExperienciasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/engenharia-de-presenca': {
+      id: '/engenharia-de-presenca'
+      path: '/engenharia-de-presenca'
+      fullPath: '/engenharia-de-presenca'
+      preLoaderRoute: typeof EngenhariaDePresencaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
       path: '/'
-      fullPath: '/engenharia-de-presenca/'
-      preLoaderRoute: typeof EngenhariaDePresencaIndexRouteImport
-      parentRoute: typeof EngenhariaDePresencaRoute
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/engenharia-de-presenca/cultura': {
-      id: '/engenharia-de-presenca/cultura'
-      path: '/cultura'
-      fullPath: '/engenharia-de-presenca/cultura'
-      preLoaderRoute: typeof EngenhariaDePresencaCulturaRouteImport
-      parentRoute: typeof EngenhariaDePresencaRoute
-    }
-    '/engenharia-de-presenca/eventos-e-espacos': {
-      id: '/engenharia-de-presenca/eventos-e-espacos'
-      path: '/eventos-e-espacos'
-      fullPath: '/engenharia-de-presenca/eventos-e-espacos'
-      preLoaderRoute: typeof EngenhariaDePresencaEventosEEspacosRouteImport
-      parentRoute: typeof EngenhariaDePresencaRoute
-    }
-    '/engenharia-de-presenca/marcas': {
-      id: '/engenharia-de-presenca/marcas'
-      path: '/marcas'
-      fullPath: '/engenharia-de-presenca/marcas'
-      preLoaderRoute: typeof EngenhariaDePresencaMarcasRouteImport
-      parentRoute: typeof EngenhariaDePresencaRoute
+    '/projetos/': {
+      id: '/projetos/'
+      path: '/projetos'
+      fullPath: '/projetos/'
+      preLoaderRoute: typeof ProjetosIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/experiencias/': {
       id: '/experiencias/'
@@ -355,11 +334,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExperienciasIndexRouteImport
       parentRoute: typeof ExperienciasRoute
     }
-    '/experiencias/cultura': {
-      id: '/experiencias/cultura'
-      path: '/cultura'
-      fullPath: '/experiencias/cultura'
-      preLoaderRoute: typeof ExperienciasCulturaRouteImport
+    '/engenharia-de-presenca/': {
+      id: '/engenharia-de-presenca/'
+      path: '/'
+      fullPath: '/engenharia-de-presenca/'
+      preLoaderRoute: typeof EngenhariaDePresencaIndexRouteImport
+      parentRoute: typeof EngenhariaDePresencaRoute
+    }
+    '/projetos/$slug': {
+      id: '/projetos/$slug'
+      path: '/projetos/$slug'
+      fullPath: '/projetos/$slug'
+      preLoaderRoute: typeof ProjetosSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/experiencias/marcas': {
+      id: '/experiencias/marcas'
+      path: '/marcas'
+      fullPath: '/experiencias/marcas'
+      preLoaderRoute: typeof ExperienciasMarcasRouteImport
       parentRoute: typeof ExperienciasRoute
     }
     '/experiencias/eventos': {
@@ -369,26 +362,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExperienciasEventosRouteImport
       parentRoute: typeof ExperienciasRoute
     }
-    '/experiencias/marcas': {
-      id: '/experiencias/marcas'
-      path: '/marcas'
-      fullPath: '/experiencias/marcas'
-      preLoaderRoute: typeof ExperienciasMarcasRouteImport
+    '/experiencias/cultura': {
+      id: '/experiencias/cultura'
+      path: '/cultura'
+      fullPath: '/experiencias/cultura'
+      preLoaderRoute: typeof ExperienciasCulturaRouteImport
       parentRoute: typeof ExperienciasRoute
     }
-    '/projetos/': {
-      id: '/projetos/'
-      path: '/projetos'
-      fullPath: '/projetos/'
-      preLoaderRoute: typeof ProjetosIndexRouteImport
-      parentRoute: typeof rootRouteImport
+    '/engenharia-de-presenca/marcas': {
+      id: '/engenharia-de-presenca/marcas'
+      path: '/marcas'
+      fullPath: '/engenharia-de-presenca/marcas'
+      preLoaderRoute: typeof EngenhariaDePresencaMarcasRouteImport
+      parentRoute: typeof EngenhariaDePresencaRoute
     }
-    '/projetos/$slug': {
-      id: '/projetos/$slug'
-      path: '/projetos/$slug'
-      fullPath: '/projetos/$slug'
-      preLoaderRoute: typeof ProjetosSlugRouteImport
-      parentRoute: typeof rootRouteImport
+    '/engenharia-de-presenca/eventos-e-espacos': {
+      id: '/engenharia-de-presenca/eventos-e-espacos'
+      path: '/eventos-e-espacos'
+      fullPath: '/engenharia-de-presenca/eventos-e-espacos'
+      preLoaderRoute: typeof EngenhariaDePresencaEventosEEspacosRouteImport
+      parentRoute: typeof EngenhariaDePresencaRoute
+    }
+    '/engenharia-de-presenca/cultura': {
+      id: '/engenharia-de-presenca/cultura'
+      path: '/cultura'
+      fullPath: '/engenharia-de-presenca/cultura'
+      preLoaderRoute: typeof EngenhariaDePresencaCulturaRouteImport
+      parentRoute: typeof EngenhariaDePresencaRoute
     }
     '/engenharia-de-presenca/projetos/': {
       id: '/engenharia-de-presenca/projetos/'
@@ -462,3 +462,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
