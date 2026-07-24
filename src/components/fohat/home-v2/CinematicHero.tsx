@@ -5,6 +5,9 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { ContactDialog } from "@/components/fohat/ContactDialog";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { Magnetic } from "@/components/fohat/home-v2/primitives/Magnetic";
+import { MatrixRain } from "@/components/fohat/home-v2/primitives/MatrixRain";
+
+
 
 
 /**
@@ -43,6 +46,12 @@ export function CinematicHero() {
     >
       {/* ============ AMBIENT BACKGROUND ============ */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        {/* Matrix code rain — the "something being built" layer */}
+        <MatrixRain
+          className="absolute inset-0 h-full w-full opacity-[0.28]"
+          color="oklch(0.85 0.11 220)"
+          density={0.9}
+        />
         {/* Central orb — the "sun" of the composition */}
         <motion.div
           className="absolute left-1/2 top-1/2 h-[95vmin] w-[95vmin] -translate-x-1/2 -translate-y-1/2 rounded-full"
@@ -50,8 +59,8 @@ export function CinematicHero() {
             scale: reduce ? 1 : orbScale,
             opacity: reduce ? 1 : orbOpacity,
             background:
-              "radial-gradient(circle, oklch(0.46 0.09 253 / 0.65) 0%, oklch(0.30 0.06 250 / 0.35) 30%, transparent 62%)",
-            filter: "blur(50px)",
+              "radial-gradient(circle, oklch(0.46 0.09 253 / 0.55) 0%, oklch(0.30 0.06 250 / 0.28) 30%, transparent 62%)",
+            filter: "blur(60px)",
           }}
         />
         {/* Cyan halo */}
@@ -60,8 +69,8 @@ export function CinematicHero() {
           style={{
             opacity: reduce ? 0.6 : orbOpacity,
             background:
-              "radial-gradient(circle, oklch(0.85 0.11 220 / 0.5), transparent 65%)",
-            filter: "blur(70px)",
+              "radial-gradient(circle, oklch(0.85 0.11 220 / 0.4), transparent 65%)",
+            filter: "blur(80px)",
           }}
           animate={
             reduce
@@ -74,7 +83,7 @@ export function CinematicHero() {
         />
         {/* Mesh grid — the "blueprint" layer */}
         <div
-          className="absolute inset-0 opacity-[0.08]"
+          className="absolute inset-0 opacity-[0.06]"
           style={{
             backgroundImage:
               "linear-gradient(oklch(0.85 0.055 245) 1px, transparent 1px), linear-gradient(90deg, oklch(0.85 0.055 245) 1px, transparent 1px)",
@@ -95,6 +104,7 @@ export function CinematicHero() {
           }}
         />
       </div>
+
 
       {/* ============ CENTER STAGE ============ */}
       <motion.div
@@ -149,11 +159,12 @@ export function CinematicHero() {
           initial={reduce ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-[640px] text-balance text-lg leading-relaxed text-white/60 lg:text-xl"
+          className="max-w-[560px] text-balance text-base leading-relaxed text-white/60 lg:text-lg"
         >
           Três frentes. Uma engenharia. A FOHAT integra experiências, software e
           infraestrutura em projetos que acontecem diante do público.
         </motion.p>
+
 
         {/* CTA row */}
         <motion.div
@@ -183,15 +194,16 @@ export function CinematicHero() {
       </motion.div>
 
 
-      {/* Bottom handoff to the next (lighter) chapter — long, subtle blend that starts well below the scroll hint */}
+      {/* Bottom handoff to the next (lighter) chapter — long, smooth blend */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-40"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[45vh]"
         style={{
           background:
-            "linear-gradient(180deg, transparent 0%, transparent 55%, color-mix(in oklab, var(--color-mist) 55%, transparent) 82%, var(--color-mist) 100%)",
+            "linear-gradient(180deg, transparent 0%, color-mix(in oklab, var(--color-navy) 92%, var(--color-mist)) 32%, color-mix(in oklab, var(--color-navy) 65%, var(--color-mist)) 55%, color-mix(in oklab, var(--color-navy) 30%, var(--color-mist)) 78%, var(--color-mist) 100%)",
         }}
       />
+
     </section>
   );
 }
@@ -219,10 +231,11 @@ function MaskLine({
         transition={{ duration: 1.05, delay, ease: [0.16, 1, 0.3, 1] }}
         className="fohat-h1 inline-block text-white"
         style={{
-          fontSize: "clamp(3rem, 8.4vw, 8rem)",
-          letterSpacing: "-0.05em",
-          lineHeight: 0.92,
+          fontSize: "clamp(2.25rem, 6.4vw, 6rem)",
+          letterSpacing: "-0.045em",
+          lineHeight: 0.94,
         }}
+
       >
         {children}
       </motion.span>
