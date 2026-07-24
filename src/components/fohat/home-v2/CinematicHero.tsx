@@ -46,6 +46,12 @@ export function CinematicHero() {
     >
       {/* ============ AMBIENT BACKGROUND ============ */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        {/* Matrix code rain — the "something being built" layer */}
+        <MatrixRain
+          className="absolute inset-0 h-full w-full opacity-[0.28]"
+          color="oklch(0.85 0.11 220)"
+          density={0.9}
+        />
         {/* Central orb — the "sun" of the composition */}
         <motion.div
           className="absolute left-1/2 top-1/2 h-[95vmin] w-[95vmin] -translate-x-1/2 -translate-y-1/2 rounded-full"
@@ -53,8 +59,8 @@ export function CinematicHero() {
             scale: reduce ? 1 : orbScale,
             opacity: reduce ? 1 : orbOpacity,
             background:
-              "radial-gradient(circle, oklch(0.46 0.09 253 / 0.65) 0%, oklch(0.30 0.06 250 / 0.35) 30%, transparent 62%)",
-            filter: "blur(50px)",
+              "radial-gradient(circle, oklch(0.46 0.09 253 / 0.55) 0%, oklch(0.30 0.06 250 / 0.28) 30%, transparent 62%)",
+            filter: "blur(60px)",
           }}
         />
         {/* Cyan halo */}
@@ -63,8 +69,8 @@ export function CinematicHero() {
           style={{
             opacity: reduce ? 0.6 : orbOpacity,
             background:
-              "radial-gradient(circle, oklch(0.85 0.11 220 / 0.5), transparent 65%)",
-            filter: "blur(70px)",
+              "radial-gradient(circle, oklch(0.85 0.11 220 / 0.4), transparent 65%)",
+            filter: "blur(80px)",
           }}
           animate={
             reduce
@@ -77,7 +83,7 @@ export function CinematicHero() {
         />
         {/* Mesh grid — the "blueprint" layer */}
         <div
-          className="absolute inset-0 opacity-[0.08]"
+          className="absolute inset-0 opacity-[0.06]"
           style={{
             backgroundImage:
               "linear-gradient(oklch(0.85 0.055 245) 1px, transparent 1px), linear-gradient(90deg, oklch(0.85 0.055 245) 1px, transparent 1px)",
@@ -98,6 +104,7 @@ export function CinematicHero() {
           }}
         />
       </div>
+
 
       {/* ============ CENTER STAGE ============ */}
       <motion.div
