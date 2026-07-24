@@ -111,8 +111,9 @@ export function Header() {
   return (
     <header
       data-scrolled={scrolled ? "true" : "false"}
+      data-theme={scrolled ? "light" : "dark"}
       className={cn(
-        "fohat-header fixed inset-x-0 top-0 z-50 transition-[padding,background-color,border-color,backdrop-filter] duration-[var(--motion-base)] ease-[var(--ease-fohat)]",
+        "fohat-header group/header fixed inset-x-0 top-0 z-50 transition-[padding,background-color,border-color,backdrop-filter] duration-[var(--motion-base)] ease-[var(--ease-fohat)]",
         scrolled
           ? "border-b border-line/70 bg-mist/80 py-2 backdrop-blur-xl"
           : "border-b border-transparent bg-transparent py-4",
@@ -122,7 +123,7 @@ export function Header() {
         <nav aria-label="Navegação principal" className="flex items-center justify-between gap-6">
           <Link to="/" aria-label="FOHAT — início" className="shrink-0">
             <img
-              src={logoAsset.url}
+              src={scrolled ? logoLight.url : logoDark.url}
               alt="FOHAT — Tecnologia Aplicada, Serviços e Eventos"
               className="h-10 w-auto max-w-[40vw] object-contain md:h-11"
             />
