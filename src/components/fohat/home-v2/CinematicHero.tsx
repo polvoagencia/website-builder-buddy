@@ -194,15 +194,16 @@ export function CinematicHero() {
       </motion.div>
 
 
-      {/* Bottom handoff to the next (lighter) chapter — long, subtle blend that starts well below the scroll hint */}
+      {/* Bottom handoff to the next (lighter) chapter — long, smooth blend */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-40"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[45vh]"
         style={{
           background:
-            "linear-gradient(180deg, transparent 0%, transparent 55%, color-mix(in oklab, var(--color-mist) 55%, transparent) 82%, var(--color-mist) 100%)",
+            "linear-gradient(180deg, transparent 0%, color-mix(in oklab, var(--color-navy) 92%, var(--color-mist)) 32%, color-mix(in oklab, var(--color-navy) 65%, var(--color-mist)) 55%, color-mix(in oklab, var(--color-navy) 30%, var(--color-mist)) 78%, var(--color-mist) 100%)",
         }}
       />
+
     </section>
   );
 }
