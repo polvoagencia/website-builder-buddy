@@ -78,13 +78,16 @@ export function Partners() {
             Engenharia de Presença · Sistemas · Locação — combinados ou
             independentes
           </p>
-          <Link
-            to="/parceiros"
-            className="group mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-navy px-6 text-sm font-bold text-primary-foreground transition-transform hover:-translate-y-0.5 hover:bg-blue"
-          >
-            Conheça o modelo de parceria
-            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </Link>
+          <Magnetic radius={80} strength={0.3} glowColor="oklch(0.46 0.09 253 / 0.35)" className="mt-8">
+            <Link
+              to="/parceiros"
+              className="group inline-flex h-12 items-center gap-2 rounded-full bg-navy px-6 text-sm font-bold text-primary-foreground transition-colors hover:bg-blue"
+            >
+              Conheça o modelo de parceria
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </Link>
+          </Magnetic>
+
         </div>
 
         {/* Radial graph */}
