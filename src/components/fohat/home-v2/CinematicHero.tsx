@@ -175,22 +175,6 @@ export function CinematicHero() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll hint at the bottom */}
-      <motion.div
-        aria-hidden
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.75 }}
-        transition={{ duration: 0.8, delay: 1.4 }}
-        className="fohat-mono absolute bottom-16 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 text-[10px] uppercase tracking-[0.28em] text-white/50 sm:bottom-20"
-        style={{ opacity: reduce ? 0.5 : contentOpacity }}
-      >
-        <span>Role para começar</span>
-        <motion.span
-          className="inline-block h-4 w-px bg-white/50"
-          animate={reduce ? undefined : { opacity: [0.3, 1, 0.3] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </motion.div>
 
       {/* Bottom handoff to the next (lighter) chapter — long, subtle blend that starts well below the scroll hint */}
       <div

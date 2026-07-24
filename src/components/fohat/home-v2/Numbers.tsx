@@ -131,9 +131,6 @@ export function Numbers() {
           ))}
         </div>
 
-        <p className="fohat-mono mt-8 text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-          → Substitua os valores marcados como <span className="text-orange-600">EDITAR</span> pelos números reais da agência antes de publicar.
-        </p>
       </div>
     </section>
   );
