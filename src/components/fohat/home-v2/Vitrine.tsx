@@ -134,14 +134,17 @@ export function Vitrine() {
           ))}
         </div>
         <div className="fohat-shell pb-16">
-          <Link
-            to="/locacao-de-equipamentos"
-            hash="catalogo"
-            className="group inline-flex h-12 items-center gap-2 rounded-full bg-navy px-6 text-sm font-bold text-primary-foreground shadow-[var(--shadow-cta)] transition-transform hover:-translate-y-0.5 hover:bg-blue"
-          >
-            Ver catálogo completo
-            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </Link>
+          <Magnetic radius={70} strength={0.28} glowColor="oklch(0.46 0.09 253 / 0.35)">
+            <Link
+              to="/locacao-de-equipamentos"
+              hash="catalogo"
+              className="group inline-flex h-12 items-center gap-2 rounded-full bg-navy px-6 text-sm font-bold text-primary-foreground shadow-[var(--shadow-cta)] transition-colors hover:bg-blue"
+            >
+              Ver catálogo completo
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </Link>
+          </Magnetic>
+
         </div>
       </div>
     </section>
