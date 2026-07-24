@@ -1,10 +1,11 @@
-import { useRef, useState } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 
 import markAsset from "@/assets/mark-fohat.png.asset.json";
 import { ContactDialog } from "@/components/fohat/ContactDialog";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { Magnetic } from "@/components/fohat/home-v2/primitives/Magnetic";
+
 
 /**
  * Chapter 8 — Final CTA.
