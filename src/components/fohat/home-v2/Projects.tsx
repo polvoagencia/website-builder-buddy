@@ -5,6 +5,8 @@ import { motion, useScroll, useTransform, type MotionValue } from "motion/react"
 
 import { ContactDialog } from "@/components/fohat/ContactDialog";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { Magnetic } from "@/components/fohat/home-v2/primitives/Magnetic";
+
 
 /**
  * Chapter 6 — Projects gateway.
