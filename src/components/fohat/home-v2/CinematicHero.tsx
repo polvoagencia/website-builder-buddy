@@ -231,10 +231,11 @@ function MaskLine({
         transition={{ duration: 1.05, delay, ease: [0.16, 1, 0.3, 1] }}
         className="fohat-h1 inline-block text-white"
         style={{
-          fontSize: "clamp(3rem, 8.4vw, 8rem)",
-          letterSpacing: "-0.05em",
-          lineHeight: 0.92,
+          fontSize: "clamp(2.25rem, 6.4vw, 6rem)",
+          letterSpacing: "-0.045em",
+          lineHeight: 0.94,
         }}
+
       >
         {children}
       </motion.span>
