@@ -6,6 +6,8 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { RentalEquipmentCard } from "@/components/fohat/RentalEquipmentCard";
 import { RENTAL_CATALOG_ITEMS } from "@/data/rental-equipment";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { Magnetic } from "@/components/fohat/home-v2/primitives/Magnetic";
+
 
 /**
  * Chapter 5 — The Vitrine (horizontal scroll).
