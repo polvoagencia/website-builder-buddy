@@ -1,7 +1,8 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
-import logoAsset from "@/assets/logo-fohat.png.asset.json";
+import logoLight from "@/assets/logo-fohat-light-bg.png.asset.json";
+import logoDark from "@/assets/logo-fohat-dark-bg.png.asset.json";
 import { ContactDialog } from "./ContactDialog";
 import { cn } from "@/lib/utils";
 
