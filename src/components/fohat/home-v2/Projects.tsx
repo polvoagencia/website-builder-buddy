@@ -84,8 +84,17 @@ export function Projects() {
     <section
       id="projetos"
       ref={ref}
-      className="relative overflow-hidden bg-navy py-24 text-white lg:py-32"
+      className="relative overflow-hidden bg-navy py-24 text-white lg:py-28"
     >
+      {/* Top bridge — soft mist→navy handoff from Vitrine */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 z-0 h-24 -translate-y-1/2"
+        style={{
+          background:
+            "linear-gradient(180deg, transparent 0%, color-mix(in oklab, var(--color-navy) 55%, transparent) 55%, var(--color-navy) 100%)",
+        }}
+      />
       {/* Backdrop glows */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
         <div

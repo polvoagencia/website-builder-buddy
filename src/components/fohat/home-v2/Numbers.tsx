@@ -43,7 +43,7 @@ export function Numbers() {
   return (
     <section
       id="numeros"
-      className="relative overflow-hidden bg-mist py-24 lg:py-32"
+      className="relative overflow-hidden bg-mist py-20 lg:py-24"
     >
       <div
         aria-hidden
