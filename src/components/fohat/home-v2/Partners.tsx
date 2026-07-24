@@ -5,6 +5,8 @@ import { motion, useScroll, useTransform, type MotionValue } from "motion/react"
 
 import markAsset from "@/assets/mark-fohat.png.asset.json";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { Magnetic } from "@/components/fohat/home-v2/primitives/Magnetic";
+
 
 /**
  * Chapter 7 — Partners network.
