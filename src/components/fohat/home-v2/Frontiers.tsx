@@ -102,12 +102,13 @@ function SectionHeader() {
       {/* Soft top bridge from mist (Numbers) into navy */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-24 -translate-y-full"
+        className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[40vh] -translate-y-full"
         style={{
           background:
-            "linear-gradient(180deg, transparent 0%, color-mix(in oklab, var(--color-navy) 45%, transparent) 60%, var(--color-navy) 100%)",
+            "linear-gradient(180deg, var(--color-mist) 0%, color-mix(in oklab, var(--color-navy) 25%, var(--color-mist)) 30%, color-mix(in oklab, var(--color-navy) 60%, var(--color-mist)) 60%, color-mix(in oklab, var(--color-navy) 88%, var(--color-mist)) 85%, var(--color-navy) 100%)",
         }}
       />
+
       <div className="fohat-shell">
         <div className="max-w-[860px]">
           <span className="fohat-eyebrow" style={{ color: "var(--color-cyan)" }}>
