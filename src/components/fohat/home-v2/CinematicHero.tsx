@@ -159,11 +159,12 @@ export function CinematicHero() {
           initial={reduce ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-[640px] text-balance text-lg leading-relaxed text-white/60 lg:text-xl"
+          className="max-w-[560px] text-balance text-base leading-relaxed text-white/60 lg:text-lg"
         >
           Três frentes. Uma engenharia. A FOHAT integra experiências, software e
           infraestrutura em projetos que acontecem diante do público.
         </motion.p>
+
 
         {/* CTA row */}
         <motion.div
